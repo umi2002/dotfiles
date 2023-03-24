@@ -1,0 +1,8 @@
+*
+/*/
+./Desktop/*
+!**/.config/picom.conf
+!.gitignore
+!.bashrc
+!.bash_profile
+!.xinitrc
