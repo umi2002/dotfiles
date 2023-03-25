@@ -9,8 +9,6 @@ return require('packer').startup(function(use)
 
     use {'nvim-tree/nvim-web-devicons'}
 
-    use {'folke/tokyonight.nvim'}
-
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 
     use('nvim-lua/plenary.nvim')
@@ -109,5 +107,9 @@ return require('packer').startup(function(use)
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
+
+    use ("zbirenbaum/copilot.lua")
+
+    use 'navarasu/onedark.nvim'
 
 end)

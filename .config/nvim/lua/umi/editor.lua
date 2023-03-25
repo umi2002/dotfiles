@@ -1,6 +1,8 @@
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+vim.opt.fileencoding = "utf-8"
+
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
@@ -35,3 +37,6 @@ vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
 vim.keymap.set("n", "<leader>rp", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+vim.keymap.set('n', '<C-d>', '<C-d>zz')
+vim.keymap.set('n', '<C-u>', '<C-u>zz')

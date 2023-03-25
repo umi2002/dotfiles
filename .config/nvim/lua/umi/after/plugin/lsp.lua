@@ -9,8 +9,8 @@ local lsp = require('lsp-zero').preset({
 vim.keymap.set('n', '<leader>d', '<CMD>lua vim.diagnostic.open_float()<CR>')
 vim.keymap.set('n', '<leader>kd', '<CMD>lua vim.diagnostic.goto_prev()<CR>')
 vim.keymap.set('n', '<leader>jd', '<CMD>lua vim.diagnostic.goto_next()<CR>')
-vim.keymap.set('n', '<leader>gd', '<CMD>lua vim.buf.definition<CR>')
-vim.keymap.set('n', '<leader>gD', '<CMD>lua vim.buf.declaration<CR>')
+vim.keymap.set('n', '<leader>gd', '<CMD>lua vim.buf.definition()<CR>')
+vim.keymap.set('n', '<leader>gD', '<CMD>lua vim.buf.declaration()<CR>')
 
 -- (Optional) Configure lua language server for neovim
 
@@ -82,8 +82,6 @@ cmp.setup {
         end,
     },
     mapping = {
-        ["<C-k>"] = cmp.mapping.select_prev_item(),
-        ["<C-j>"] = cmp.mapping.select_next_item(),
         ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
         ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -95,6 +93,34 @@ cmp.setup {
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
         ["<TAB>"] = cmp.mapping.confirm { select = true },
+        ["<C-j>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expandable() then
+                luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif check_backspace() then
+                fallback()
+            else
+                fallback()
+            end
+        end, {
+        "i",
+        "s",
+    }),
+    ["<C-k>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+        else
+            fallback()
+        end
+    end, {
+    "i",
+    "s",
+}),
   },
   formatting = {
       fields = { "kind", "abbr", "menu" },

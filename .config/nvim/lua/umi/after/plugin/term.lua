@@ -68,3 +68,5 @@ local python = Terminal:new({ cmd = "python", hidden = true })
 function _PYTHON_TOGGLE()
     python:toggle()
 end
+
+vim.g.toggleterm_working_dir = "cwd"
