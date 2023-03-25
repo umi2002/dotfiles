@@ -3,7 +3,6 @@ require('mason').setup()
 local lsp = require('lsp-zero').preset({
     name = 'minimal',
     set_lsp_keymaps = true,
-    manage_nvim_cmp = true,
     suggest_lsp_servers = false,
 })
 
@@ -40,6 +39,11 @@ if not snip_status_ok then
 end
 
 require("luasnip/loaders/from_vscode").lazy_load()
+
+local check_backspace = function()
+    local col = vim.fn.col "." - 1
+    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
 
 --   פּ ﯟ   some other good icons
 local kind_icons = {
@@ -88,6 +92,9 @@ cmp.setup {
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
         },
+        -- Accept currently selected item. If none selected, `select` first item.
+        -- Set `select` to `false` to only confirm explicitly selected items.
+        ["<TAB>"] = cmp.mapping.confirm { select = true },
   },
   formatting = {
       fields = { "kind", "abbr", "menu" },
