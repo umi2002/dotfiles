@@ -1,7 +1,13 @@
 *
 /*/
-./Desktop/*
-!**/.config/picom.conf
+!/.config/
+!/.config/*/
+!/.config/picom.conf
+!/.config/i3/**
+!/.config/nvim/*/
+!/.config/nvim/lua/**
+!/.config/nvim/plugin/**
+!/.config/nvim/init.lua
 !.gitignore
 !.bashrc
 !.bash_profile
