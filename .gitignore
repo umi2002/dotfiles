@@ -8,6 +8,10 @@
 !/.config/nvim/lua/**
 !/.config/nvim/plugin/**
 !/.config/nvim/init.lua
+!/.config/alacritty/**
+!/.config/nitrogen/**
+!/.config/gtk-3.0/**
+!/.config/polybar/**
 !.gitignore
 !.bashrc
 !.bash_profile
