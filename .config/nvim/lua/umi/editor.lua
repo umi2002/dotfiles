@@ -27,7 +27,7 @@ vim.opt.updatetime = 50
 
 vim.g.mapleader = " "
 vim.keymap.set('n', '<leader>e', vim.cmd.Ex)
-vim.keymap.set('i', '<C-H>', '<C-W>', {})
+vim.keymap.set('i', '<C-H>', '<C-W>')
 
 vim.keymap.set('n', '<leader>wj', vim.cmd.Hex)
 vim.keymap.set('n', '<leader>wl', vim.cmd.Vex)

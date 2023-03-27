@@ -6,20 +6,13 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
     -- Packer can manage itself
     use {'wbthomason/packer.nvim'}
-
     use {'nvim-tree/nvim-web-devicons'}
-
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-
     use('nvim-lua/plenary.nvim')
-
     use('ThePrimeagen/harpoon')
-
     use('mbbill/undotree')
-
     use('tpope/vim-fugitive')
     use('tpope/vim-rhubarb')
-
     use
     {
         'VonHeikemen/lsp-zero.nvim',
@@ -44,7 +37,6 @@ return require('packer').startup(function(use)
             {'rafamadriz/friendly-snippets'}, -- Optional
         }
     }
-
     use({
         "jose-elias-alvarez/null-ls.nvim",
         config = function()
@@ -52,18 +44,11 @@ return require('packer').startup(function(use)
         end,
         requires = { "nvim-lua/plenary.nvim" },
     })
-
-
     use {'folke/neodev.nvim'}
-
     use {'mfussenegger/nvim-dap'}
-
     use {'folke/which-key.nvim'}
-
     use {'nvim-lualine/lualine.nvim'}
-
     use {"lukas-reineke/indent-blankline.nvim"}
-
     use
     { -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -78,7 +63,6 @@ return require('packer').startup(function(use)
             },
         },
     }
-
     use
     {
         'numToStr/Comment.nvim',
@@ -86,30 +70,23 @@ return require('packer').startup(function(use)
             require('Comment').setup()
         end
     }
-
     use {"ahmedkhalf/project.nvim"}
-
     use
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         -- or                            , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} }
     }
-
     use
     {"akinsho/toggleterm.nvim", tag = '*', config = function()
         require("toggleterm").setup()
     end
     }
-
     use
     {
         "windwp/nvim-autopairs",
         config = function() require("nvim-autopairs").setup {} end
     }
-
     use ("zbirenbaum/copilot.lua")
-
     use 'navarasu/onedark.nvim'
-
 end)

@@ -50,3 +50,4 @@ fi
 
 syndaemon -i 0.5 -t -d
 exec i3
+xset r rate 150 70
