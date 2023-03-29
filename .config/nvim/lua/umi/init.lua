@@ -1,5 +1,6 @@
 require("umi.editor")
 require("umi.packer")
+require("umi.netrw")
 require("umi.after.plugin.fugitive")
 require("umi.after.plugin.harpoon")
 require("umi.after.plugin.lsp")
