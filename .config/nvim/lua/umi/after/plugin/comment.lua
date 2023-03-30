@@ -1,1 +1,1 @@
-require('Comment').setup({ignore = '^$'})
+require( "Comment" ).setup( { ignore = "^$" } )
