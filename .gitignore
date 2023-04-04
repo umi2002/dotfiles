@@ -12,6 +12,7 @@
 !/.config/nitrogen/**
 !/.config/gtk-3.0/**
 !/.config/polybar/**
+!/.config/awesome/**
 !.gitignore
 !.bashrc
 !.bash_profile

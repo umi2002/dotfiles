@@ -120,6 +120,10 @@ cmp.setup(
             { name = "buffer", entry_filter = filterText },
             { name = "path", entry_filter = filterText },
         },
+        filetypes =
+        {
+            "c", "cpp", "tpp", "lua",
+        },
         confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false },
         window = {
             documentation = {

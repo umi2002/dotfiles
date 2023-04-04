@@ -54,12 +54,7 @@ globalkeys = gears.table.join(
                      { modkey, "Control" }, "l", function()
             awful.screen.focus_relative( 1 )
         end, { description = "focus the next screen", group = "screen" }
-                  ),
-    -- awful.key({ modkey, "Control" }, "h", function() awful.screen.focus_relative(-1) end,
-    --     { description = "focus the previous screen", group = "screen" }),
-    -- awful.key({ modkey, }, "u", awful.client.urgent.jumpto,
-    --     { description = "jump to urgent client", group = "client" }),
-                 awful.key(
+                  ), awful.key(
                      { modkey }, "Tab", function()
             awful.client.focus.history.previous()
             if client.focus then
@@ -80,39 +75,20 @@ globalkeys = gears.table.join(
                   ), awful.key(
                      { modkey }, "n", function()
             awful.spawn( "librewolf" )
-        end, { description = "open a browser", group = "launcher" }
+        end, { description = "open a browser", group = "application" }
                   ), awful.key(
                      { modkey }, "e", function()
             awful.spawn( "nemo" )
-        end, { description = "open a file manager", group = "launcher" }
+        end, { description = "open a file manager", group = "application" }
                   ), awful.key(
                      { modkey }, "m", function()
             awful.spawn( "spotify" )
-        end, { description = "open a music player", group = "launcher" }
+        end, { description = "open a music player", group = "application" }
                   ), awful.key(
                      { modkey, "Shift" }, "p", function()
             awful.spawn( "flameshot gui" )
-        end, { description = "take a screenshot", group = "launcher" }
-                  ),
-
-    -- awful.key({ modkey,  }, "l",     function () awful.tag.incmwfact( 0.05)          end,
-    --           {description = "increase master width factor", group = "layout"}),
-    -- awful.key({ modkey,  }, "h",     function () awful.tag.incmwfact(-0.05)          end,
-    --           {description = "decrease master width factor", group = "layout"}),
-    -- awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
-    --           {description = "increase the number of master clients", group = "layout"}),
-    -- awful.key({ modkey, "Shift"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
-    --           {description = "decrease the number of master clients", group = "layout"}),
-    -- awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
-    --           {description = "increase the number of columns", group = "layout"}),
-    -- awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
-    --           {description = "decrease the number of columns", group = "layout"}),
-    -- awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
-    --           {description = "select next", group = "layout"}),
-    -- awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
-    --           {description = "select previous", group = "layout"}),
-
-                 awful.key(
+        end, { description = "take a screenshot", group = "application" }
+                  ), awful.key(
                      { modkey, "Control" }, "n", function()
             local c = awful.client.restore()
             -- Focus restored client
@@ -164,12 +140,6 @@ clientkeys = gears.table.join(
             c.ontop = not c.ontop
         end, { description = "toggle keep on top", group = "client" }
                   ), -- awful.key({ modkey, }, "n",
-    --     function(c)
-    --         -- The client currently has the input focus, so it cannot be
-    --         -- minimized, since minimized clients can't have the focus.
-    --         c.minimized = true
-    --     end,
-    --     { description = "minimize", group = "client" }),
     awful.key(
                      { modkey, "Shift" }, "m", function( c )
             c.maximized = not c.maximized
@@ -242,18 +212,15 @@ for i = 1, 9 do
                       )
                   )
     awful.key(
-        {"F3"}, "XF86AudioLowerVolume",
-        function()
-            awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%")
-        end,
-        {description = "lower volume", group = "system"})
+        { "F3" }, "XF86AudioLowerVolume", function()
+            awful.spawn( "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
+        end, { description = "lower volume", group = "system" }
+     )
     awful.key(
-        {"F4"}, "XF86AudioRaiseVolume",
-        function()
-            awful.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%")
-        end,
-        {description = "increase volume", group = "system"})
-
+        { "F4" }, "XF86AudioRaiseVolume", function()
+            awful.spawn( "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
+        end, { description = "increase volume", group = "system" }
+     )
 end
 
 -- Set keys
@@ -290,4 +257,3 @@ clientbuttons = gears.table.join(
         end
                      )
                  )
-

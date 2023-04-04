@@ -1,7 +1,9 @@
-vim.keymap.set( "n", "h", "h", {} )
-vim.keymap.set( "n", "j", "j", {} )
-vim.keymap.set( "n", "k", "k", {} )
-vim.keymap.set( "n", "l", "l", {} )
+local set = vim.keymap.set
+
+set( "n", "h", "h", {} )
+set( "n", "j", "j", {} )
+set( "n", "k", "k", {} )
+set( "n", "l", "l", {} )
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -28,21 +30,26 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
 vim.opt.isfname:append( "@-@" )
 
-vim.opt.updatetime = 50
+vim.opt.updatetime = 750
 
 vim.g.mapleader = " "
-vim.keymap.set( "n", "<leader>e", vim.cmd.Ex )
-vim.keymap.set( "i", "<C-H>", "<C-W>" )
+set( "n", "<leader>e", vim.cmd.Ex )
+set( "i", "<C-H>", "<C-W>" )
 
-vim.keymap.set( "n", "<leader>wj", vim.cmd.Hex )
-vim.keymap.set( "n", "<leader>wl", vim.cmd.Vex )
-vim.keymap.set( "n", "<C-k>", "<C-w>k" )
-vim.keymap.set( "n", "<C-j>", "<C-w>j" )
-vim.keymap.set( "n", "<C-h>", "<C-w>h" )
-vim.keymap.set( "n", "<C-l>", "<C-w>l" )
+set( "n", "<leader>wj", vim.cmd.Hex )
+set( "n", "<leader>wl", vim.cmd.Vex )
+set( "n", "<C-k>", "<C-w>k", { silent = true } )
+set( "n", "<C-j>", "<C-w>j", { silent = true } )
+set( "n", "<C-h>", "<C-w>h", { silent = true } )
+set( "n", "<C-l>", "<C-w>l", { silent = true } )
 
-vim.keymap.set( "n", "<leader>rp",
-                [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]] )
+set( "n", "<leader>rp", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]] )
 
-vim.keymap.set( "n", "<C-d>", "<C-d>zz" )
-vim.keymap.set( "n", "<C-u>", "<C-u>zz" )
+set( "n", "<S-j>", "<C-d>zz", { noremap = true, silent = true } )
+set( "n", "<S-K>", "<C-u>zz", { noremap = true, silent = true } )
+
+vim.cmd('autocmd BufRead,BufNewFile *.tpp set filetype=cpp')
+
+set( "n", "<leader>bf", ":buffers<CR>:buffer<Space>", { silent = true })
+set( "n", "<leader>bh", ":bp<CR>", { silent = true })
+set( "n", "<leader>bl", ":bn<CR>", { silent = true })
