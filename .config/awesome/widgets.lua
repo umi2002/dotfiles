@@ -15,6 +15,7 @@ local weather_widget = require( "awesome-wm-widgets.weather-widget.weather" )
 local brightness_widget = require(
                               "awesome-wm-widgets.brightness-widget.brightness"
                            )
+require( "battery" )
 
 -- {{{ Wibar
 
@@ -134,6 +135,8 @@ awful.screen.connect_for_each_screen(
                 layout = wibox.layout.fixed.horizontal,
                 spacing = 5,
                 logout_menu_widget(),
+                batteryicon,
+                batterywidget,
                 ram_widget(),
                 cpu_widget( { step_spacing = 0, color = theme.border_normal } ),
             },
@@ -150,7 +153,12 @@ awful.screen.connect_for_each_screen(
                         pause_icon = "",
                     }
                  ),
-                volume_widget(),
+                volume_widget({
+                    font = theme.font,
+                    show_current_level = true,
+                    display_notification = true,
+                    notification_position = "bottom_left",
+                }),
             },
             { layout = wibox.layout.fixed.horizontal, spacing = 5, keyboard },
         }
