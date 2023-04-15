@@ -1,46 +1,54 @@
-require( "mason" ).setup()
+require("mason").setup()
 
-local lsp = require( "lsp-zero" ).preset(
-                {
-        name = "minimal",
-        set_lsp_keymaps = true,
-        manage_nvim_cmp = false,
-        suggest_lsp_servers = false,
-    }
-             )
+require("mason-lspconfig").setup(
+    { ensure_installed = { "clangd", "lua_ls" } })
 
-require( "lspconfig" ).clangd.setup(
+local lsp = require("lspconfig")
+
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+local lsp_attach = function()
+    local opts = { noremap = true, silent = true, buffer = 0 }
+    vim.keymap.set(
+        "n", "<leader>d", "<CMD> Lspsaga show_line_diagnostics ++unfocus<CR>",
+        opts
+    )
+    vim.keymap.set(
+        "n", "<leader>kd", "<CMD> Lspsaga diagnostic_jump_prev <CR>", opts
+    )
+    vim.keymap.set(
+        "n", "<leader>jd", "<CMD> Lspsaga diagnostic_jump_next <CR>", opts
+    )
+    vim.keymap
+        .set("n", "<leader>fd", "<CMD> Telescope diagnostics <CR>", opts)
+    vim.keymap.set("n", "<leader>fo", "<CMD> Lspsaga outline <CR>", opts)
+    vim.keymap.set("n", "<leader>gd", "<CMD> Lspsaga goto_definition <CR>",
+        opts)
+    vim.keymap.set("n", "<leader>gD", "<CMD> Lspsaga lsp_finder <CR>", opts)
+    vim.keymap.set("n", "<leader>H", "<CMD> Lspsaga hover_doc <CR>", opts)
+    vim.keymap.set("n", "<leader>pf", vim.lsp.buf.format, opts)
+    vim.keymap.set("n", "<leader>ca", "<CMD> Lspsaga code_action <CR>", opts)
+    vim.keymap.set(
+        "n", "<leader>rpo", "<CMD> Lspsaga rename ++project <CR>", opts
+    )
+    vim.keymap.set("n", "<leader>rpa", "<CMD> Lspsaga rename <CR>", opts)
+end
+
+lsp.clangd.setup(
     {
-        cmd = { "clangd " },
-        on_attach = function ()
-            print("clangd lsp")
-        end,
-        init_options = {
-            clangd = {
-                command = {
-                    "clangd",
-                    "--background-index",
-                    "--header-insertion = never",
-                },
-            },
-        },
+        cmd = { "clangd", "--background-index", "--header-insertion", "never" },
+        on_attach = lsp_attach,
+        capabilities = lsp_capabilities,
+        settings = { clangd = { semanticHighlighting = true } },
     }
- )
+)
 
-lsp.nvim_workspace()
+lsp.lua_ls.setup(
+    {
+        on_attach = lsp_attach,
+        capabilities = lsp_capabilities,
+        filetypes = { "lua" },
+        diagnostics = { globals = { "vim" } },
+    }
+)
 
-lsp.setup()
-
-vim.keymap.set( "n", "<leader>d", "<CMD>lua vim.diagnostic.open_float()<CR>" )
-vim.keymap.set( "n", "<leader>kd", "<CMD>lua vim.diagnostic.goto_prev()<CR>" )
-vim.keymap.set( "n", "<leader>jd", "<CMD>lua vim.diagnostic.goto_next()<CR>" )
-vim.keymap.set( "n", "<leader>gd", "<CMD>lua vim.lsp.buf.definition()<CR>" )
-vim.keymap.set( "n", "<leader>gD", "<CMD>lua vim.lsp.buf.declaration()<CR>" )
-vim.api.nvim_set_keymap(
-    "n", "<leader>h", "<CMD>lua vim.lsp.buf.hover()<CR>",
-    { noremap = true, silent = true }
- )
-vim.api.nvim_set_keymap(
-    "n", "<leader>pf", "<cmd>lua vim.lsp.buf.format()<CR>",
-    { noremap = true, silent = true }
- )
+require("lspsaga").setup({ ui = { border = "rounded" } })

@@ -46,10 +46,21 @@ set( "n", "<C-l>", "<C-w>l", { silent = true } )
 set( "n", "<leader>rp", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]] )
 
 set( "n", "<S-j>", "<C-d>zz", { noremap = true, silent = true } )
-set( "n", "<S-K>", "<C-u>zz", { noremap = true, silent = true } )
+set( "n", "<S-k>", "<C-u>zz", { noremap = true, silent = true } )
+set( "v", "<S-j>", "<C-d>zz", { noremap = true, silent = true } )
+set( "v", "<S-k>", "<C-u>zz", { noremap = true, silent = true } )
 
 vim.cmd('autocmd BufRead,BufNewFile *.tpp set filetype=cpp')
 
 set( "n", "<leader>bf", ":buffers<CR>:buffer<Space>", { silent = true })
 set( "n", "<leader>bh", ":bp<CR>", { silent = true })
 set( "n", "<leader>bl", ":bn<CR>", { silent = true })
+
+local notify = vim.notify
+vim.notify = function(msg, ...)
+    if msg:match("warning: multiple different client offset_encodings") then
+        return
+    end
+
+    notify(msg, ...)
+end

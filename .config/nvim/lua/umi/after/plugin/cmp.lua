@@ -119,6 +119,7 @@ cmp.setup(
             { name = "luasnip", entry_filter = filterText },
             { name = "buffer", entry_filter = filterText },
             { name = "path", entry_filter = filterText },
+            { name = "nvim_lua", entry_filter = filterText },
         },
         filetypes =
         {

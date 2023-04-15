@@ -1,0 +1,12 @@
+{
+    "language": [
+        "en",
+        "fr",
+    ],
+    "allowCompoundWords": true,
+    "dictionaries": [
+        "en_US",
+        "cpp",
+    ],
+    "caseSensitive": true,
+}
