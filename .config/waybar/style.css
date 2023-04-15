@@ -1,0 +1,398 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: FontAwesome, MapleMono, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 20px;
+}
+
+window#waybar.top {
+    margin-top: 10;
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    border-left: 3px solid #DAECF5;
+    border-right: 3px solid #DAECF5;
+    color: #021352;
+    transition-property: background-color;
+    transition-duration: .5s;
+    opacity: 0.7;
+    border-radius: 25px;
+}
+
+window#waybar.bottom {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    border-left: 3px solid #DAECF5;
+    border-right: 3px solid #DAECF5;
+    color: #021352;
+    transition-property: background-color;
+    transition-duration: .5s;
+    opacity: 0.7;
+    border-radius: 25px;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background-color: #42ADDB;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+}
+
+#workspaces button {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#workspaces button:hover {
+    background-color: #42ADDB;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+}
+
+#workspaces button.active {
+    background-color: #42ADDB;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+}
+
+#workspaces button.urgent {
+    background-color: #42ADDB;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+}
+
+#mode {
+    background-color: #42ADDB;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+    padding: 0 10px;
+    color: #ffffff;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 20;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 20;
+}
+
+#clock {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+    margin-right: 20;
+}
+
+#battery {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#battery.charging, #battery.plugged {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#cpu {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#memory {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#disk {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#backlight {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#network {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#network.disconnected {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#pulseaudio {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#pulseaudio.muted {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#wireplumber {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#wireplumber.muted {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#custom-media {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#custom-media.custom-spotify {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#custom-media.custom-vlc {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#image {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#temperature {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#temperature.critical {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#tray {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#tray > .passive {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#tray > .needs-attention {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#idle_inhibitor {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#idle_inhibitor.activated {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#mpd {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#mpd.disconnected {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#mpd.stopped {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#mpd.paused {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#mpris {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#mpris.playing {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#mpris.paused {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+    opacity: 0.5;
+}
+
+#language {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#keyboard-state {
+    background-color: #129DD6;
+    color: #021352;
+}
+
+#keyboard-state > label {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#keyboard-state > label.locked {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#scratchpad {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
+
+#scratchpad.empty {
+    background-color: #129DD6;
+    border-top: 3px solid #DAECF5;
+    border-bottom: 3px solid #DAECF5;
+    color: #021352;
+}
