@@ -18,7 +18,5 @@ export PATH=/home/umi/Desktop/serieViaUSB:$PATH
 export FZF_DEFAULT_COMMAND='find .'
 export FZF_ALT_C_COMMAND='command find .'
 export FZF_CTRL_T_COMMAND='command find .'
-export GBM_BACKEND=nvidia-drm
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
 export EDITOR="neovim"
 export VISUAL="neovim"
