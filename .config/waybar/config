@@ -4,12 +4,11 @@
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
     "height": 35, // Waybar height (to be removed for auto height)
-    "width": 1536, // Waybar width
     "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["wlr/workspaces", "tray", ],
+    "modules-left": ["wlr/workspaces", ],
     "modules-center": [ ],
-    "modules-right": ["idle_inhibitor", "clock", ],
+    "modules-right": ["idle_inhibitor", "clock", "tray", ],
     // Modules configuration
     "wlr/workspaces": {
         "on-click": "activate",
@@ -18,10 +17,6 @@
         "format": "{name}. {icon}",
         "format-icons": {
             "1":"󰙯 ",
-            "2":"  ",
-            "3":"  ",
-            "4":"  ",
-            "5":"  ",
             "8":"󰇮 ",
             "9":" ",
             "10":"",
@@ -53,11 +48,10 @@
     "layer": "top", // Waybar at top layer
     "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 35, // Waybar height (to be removed for auto height)
-    "width": 1536, // Waybar width
     "spacing": 0, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": ["disk", "memory", "cpu", "network", ],
-    "modules-center": ["image/album-art", "mpris", ],
+    "modules-center": ["image/album-art", "custom/spotify", ],
     "modules-right": ["pulseaudio", "keyboard-state", "hyprland/language", ],
     // Modules configuration
     "disk": {
@@ -85,18 +79,22 @@
          "size": 32,
          "interval": 30,  
     },
-    "mpris": {
-        "format": "{player_icon} {artist} 󰎈 {title} [{length}] {status_icon}",
-        "format-paused": "{player_icon} <i>{artist} 󰎈 {title} [{length}] </i> {status_icon}",
-        "player-icons": {
-            "default": "",
+    "custom/spotify": {
+        "format": "{icon} {}",
+        "format-icons": {
             "spotify": "",
-            },
-        "status-icons": {
-            "playing": "",
-            "paused": ""
-            },
-        // "ignored-players": ["firefox"]
+        },
+        "escape": true,
+        "return-type": "json",
+        "max-length": 40,
+        "on-click": "playerctl -p spotify play-pause",
+        "on-click-middle": "playerctl -p spotify previous",
+        "on-click-right": "playerctl -p spotify next",
+        "smooth-scrolling-threshold": 5, // This value was tested using a trackpad, it should be lowered if using a mouse.
+        "on-scroll-up" : "playerctl -p spotify previous",
+        "on-scroll-down" : "playerctl -p spotify next",
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+        "exec-if": "pgrep spotify"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

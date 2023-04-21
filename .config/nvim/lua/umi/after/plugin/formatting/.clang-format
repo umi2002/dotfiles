@@ -2,7 +2,6 @@
 Language : Cpp
 AccessModifierOffset : -4
 AlignAfterOpenBracket : Align
-AlignArrayOfStructures : Left
 AlignConsecutiveAssignments :
     Enabled : true
     AcrossEmptyLines : false
@@ -118,7 +117,7 @@ SpaceBeforeSquareBrackets : false
 SpaceInEmptyBlock : true
 SpaceInEmptyParentheses : false
 SpacesBeforeTrailingComments : 2
-SpacesInAngles : false
+SpacesInAngles : true
 SpacesInCStyleCastParentheses : false
 SpacesInContainerLiterals : true
 SpacesInLineCommentPrefix :
@@ -127,6 +126,6 @@ SpacesInLineCommentPrefix :
 SpacesInParentheses : false
 SpacesInSquareBrackets : false
 Standard : Latest
-TabWidth : 4
 UseTab : AlignWithSpaces
+TabWidth: 0
 ...

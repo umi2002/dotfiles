@@ -278,6 +278,7 @@ label:focus {
     border-top: 3px solid #DAECF5;
     border-bottom: 3px solid #DAECF5;
     color: #021352;
+    margin-right: 20;
 }
 
 #tray > .passive {
@@ -285,6 +286,7 @@ label:focus {
     border-top: 3px solid #DAECF5;
     border-bottom: 3px solid #DAECF5;
     color: #021352;
+    margin-right: 20;
 }
 
 #tray > .needs-attention {
@@ -292,6 +294,7 @@ label:focus {
     border-top: 3px solid #DAECF5;
     border-bottom: 3px solid #DAECF5;
     color: #021352;
+    margin-right: 20;
 }
 
 #idle_inhibitor {

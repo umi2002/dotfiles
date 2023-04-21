@@ -52,7 +52,6 @@ set( "v", "<S-k>", "<C-u>zz", { noremap = true, silent = true } )
 
 vim.cmd('autocmd BufRead,BufNewFile *.tpp set filetype=cpp')
 
-set( "n", "<leader>bf", ":buffers<CR>:buffer<Space>", { silent = true })
 set( "n", "<leader>bh", ":bp<CR>", { silent = true })
 set( "n", "<leader>bl", ":bn<CR>", { silent = true })
 

@@ -29,6 +29,8 @@ require( "copilot" ).setup(
             },
         },
         filetypes = {
+            cpp = true,
+            c = true,
             yaml = false,
             markdown = false,
             help = false,
