@@ -37,6 +37,7 @@ return require( "packer" ).startup(
         use( { "jose-elias-alvarez/null-ls.nvim" } )
         use( { "folke/neodev.nvim" } )
         use( { "mfussenegger/nvim-dap" } )
+        use( { "theHamsta/nvim-dap-virtual-text" } )
         use( { "folke/which-key.nvim" } )
         use( { "nvim-lualine/lualine.nvim" } )
         use( { "lukas-reineke/indent-blankline.nvim" } )
@@ -71,5 +72,8 @@ return require( "packer" ).startup(
         use( { "navarasu/onedark.nvim" } )
         use( { "akinsho/toggleterm.nvim" } )
         use( { "akinsho/bufferline.nvim" } )
+        use( { "lervag/vimtex" } )
+        use( { "nvim-orgmode/orgmode" } )
+        use( { "vimwiki/vimwiki" } )
     end
         )

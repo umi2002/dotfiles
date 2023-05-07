@@ -185,6 +185,11 @@ _G.packer_plugins = {
     path = "/home/umi/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
   },
+  ["nvim-dap-virtual-text"] = {
+    loaded = true,
+    path = "/home/umi/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
+    url = "https://github.com/theHamsta/nvim-dap-virtual-text"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/umi/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -204,6 +209,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/umi/.local/share/nvim/site/pack/packer/start/onedark.nvim",
     url = "https://github.com/navarasu/onedark.nvim"
+  },
+  orgmode = {
+    loaded = true,
+    path = "/home/umi/.local/share/nvim/site/pack/packer/start/orgmode",
+    url = "https://github.com/nvim-orgmode/orgmode"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -244,6 +254,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/umi/.local/share/nvim/site/pack/packer/start/vim-rhubarb",
     url = "https://github.com/tpope/vim-rhubarb"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/home/umi/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
+  },
+  vimwiki = {
+    loaded = true,
+    path = "/home/umi/.local/share/nvim/site/pack/packer/start/vimwiki",
+    url = "https://github.com/vimwiki/vimwiki"
   },
   ["which-key.nvim"] = {
     loaded = true,
