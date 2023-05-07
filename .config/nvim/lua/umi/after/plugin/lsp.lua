@@ -51,4 +51,12 @@ lsp.lua_ls.setup(
     }
  )
 
+lsp.marksman.setup(
+    {
+        on_attach = lsp_attach,
+        capabilities = lsp_capabilities,
+        filetypes = { "markdown" },
+    }
+ )
+
 require( "lspsaga" ).setup( { ui = { border = "rounded" } } )

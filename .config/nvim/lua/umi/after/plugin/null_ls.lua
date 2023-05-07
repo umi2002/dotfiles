@@ -8,6 +8,8 @@ null_ls.setup(
     {
         sources = {
             diagnostics.clang_check,
+            diagnostics.markdownlint,
+
             code_action.cspell.with(
                 {
                     filetypes = { "cpp" },
@@ -26,6 +28,7 @@ null_ls.setup(
                     },
                 }
             ),
+
             formatting.lua_format.with(
                 {
                     filetypes = { "lua" },
@@ -34,6 +37,8 @@ null_ls.setup(
                     },
                 }
             ),
+
+            formatting.mdformat.with({ filetypes = { "markdown" } }),
         },
     }
 )

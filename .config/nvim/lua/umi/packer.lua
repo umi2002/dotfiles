@@ -74,6 +74,5 @@ return require( "packer" ).startup(
         use( { "akinsho/bufferline.nvim" } )
         use( { "lervag/vimtex" } )
         use( { "nvim-orgmode/orgmode" } )
-        use( { "vimwiki/vimwiki" } )
     end
         )
