@@ -12,6 +12,8 @@
 !/.config/hypr/**
 !/.config/waybar/**
 !/.config/dunst/**
+!/org/
+!/org/*/
 !/org/**
 !.gitignore
 !.bashrc
