@@ -1,0 +1,53 @@
+(defwindow bottom-left
+           :monitor 0
+           :geometry (geometry :x "20px"
+                               :y "10px"
+                               :height "30px"
+                               :anchor "bottom left")
+           :stacking "fg"
+           (box :orientation "h"
+                :space-evenly false
+                (box :orientation "h"
+                     (battery)
+                     (battery-text)
+                )
+                (box :orientation "h"
+                     (separator)
+                )
+                (box :class "wifi"
+                     :orientation "h"
+                     (wifi)
+                )
+           )
+)
+
+(defwidget separator []
+  (label :text "|"
+         :width 30
+  )
+)
+
+(defvar battery-status false)
+
+(defpoll battery :interval "1s"
+         "bash ~/.config/eww/scripts/get-battery.sh")
+(defwidget battery []
+  (box :class { battery-status ? "charging" : "discharging" }
+       :orientation "h"
+       (circular-progress :value battery
+                          :start-at 76
+                          :thickness 5
+                          :clockwise false
+       )
+  )
+)
+
+(defwidget battery-text []
+  (label :text "${battery}%")
+)
+
+(defpoll wifi :interval "1s"
+         "bash ~/.config/eww/scripts/get-wifi.sh")
+(defwidget wifi []
+  (label :text "${wifi}")
+)

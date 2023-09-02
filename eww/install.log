@@ -1,0 +1,12 @@
+[00:21:49 2023-05-16] FETCHING Version 2.18.1
+[00:21:49 2023-05-16] CREATING /home/umi/.spicetify
+[00:21:49 2023-05-16] DOWNLOADING https://github.com/spicetify/spicetify-cli/releases/download/v2.18.1/spicetify-2.18.1-linux-amd64.tar.gz
+[00:21:50 2023-05-16] EXTRACTING /home/umi/.spicetify/spicetify.tar.gz
+[00:21:50 2023-05-16] SETTING EXECUTABLE PERMISSIONS TO /home/umi/.spicetify/spicetify
+[00:21:50 2023-05-16] REMOVING /home/umi/.spicetify/spicetify.tar.gz
+[00:21:50 2023-05-16] APPENDING /home/umi/.spicetify to PATH in /home/umi/.bashrc
+[00:21:50 2023-05-16] Restart your shell to have spicetify in your PATH.
+[00:21:50 2023-05-16] APPENDING /home/umi/.spicetify to PATH in /home/umi/.bash_profile
+[00:21:50 2023-05-16] Restart your shell to have spicetify in your PATH.
+[00:21:50 2023-05-16] spicetify v2.18.1 was installed successfully to /home/umi/.spicetify
+[00:21:50 2023-05-16] Run 'spicetify --help' to get started
