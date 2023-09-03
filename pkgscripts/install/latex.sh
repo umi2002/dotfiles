@@ -19,11 +19,11 @@ echo "Extracting installer..."
 tar -xzf install-tl-unx.tar.gz
 
 # Navigate into the installer directory
-cd install-tl-* || { echo "Failed to enter installer directory."; exit 1; }
+cd install-tl-*/ || { echo "Failed to enter installer directory."; exit 1; }
 
 # Run the installer
 echo "Starting TeX Live installation..."
-sudo ./install-tl
+sudo perl ./install-tl
 
 # Clean up
 cd "$temp_dir" || { echo "Failed to return to temporary directory."; exit 1; }
