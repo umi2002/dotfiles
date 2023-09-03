@@ -1,0 +1,7 @@
+require("leap").add_default_mappings()
+vim.api.nvim_del_keymap("n", "s")
+vim.api.nvim_del_keymap("x", "S")
+vim.api.nvim_del_keymap("o", "gs")
+vim.keymap.set({ "n", "x", "o" }, "f", "<Plug>(leap-forward-to)")
+vim.keymap.set({ "n", "x", "o" }, "F", "<Plug>(leap-backward-to)")
+vim.keymap.set({ "n", "x", "o" }, "gf", "<Plug>(leap-from-window)")

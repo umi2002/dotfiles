@@ -1,0 +1,92 @@
+(defwindow top-center 
+           :monitor 0
+           :geometry (geometry :x "0px"
+                               :y "10px"
+                               :width "30%"
+                               :height "30px"
+                               :anchor "top center")
+           :stacking "fg"
+           (box :orientation "h"
+                :halign "center"
+                 (title);
+           )
+)
+
+(deflisten title :initial "..." "bash ~/.config/eww/scripts/get-window-title.sh")
+
+(defwidget title []
+    (label :text "${title}"
+           :limit-width 40
+    )
+)
+
+(defwindow top-left 
+           :monitor 0
+           :geometry (geometry :x "20px"
+                               :y "10px"
+                               :width "15%"
+                               :height "30px"
+                               :anchor "top left")
+           :stacking "fg"
+           (box :orientation "h"
+                :halign "center"
+                (workspaces);
+           )
+)
+
+(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces.sh")
+
+(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace.sh")
+
+(defwidget workspaces []
+  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace.sh {} ${current_workspace}" :class "workspaces-widget"
+    (box :space-evenly true
+         :spacing 2
+      (for workspace in workspaces
+        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (label :class "icon" :text {workspace.id != current_workspace ? "${workspace.windows > 0 ? "  " : "  "}" : "  "})
+            )
+          )
+        )
+      )
+    )
+
+(defwindow top-right
+           :monitor 0
+           :geometry (geometry :x "20px"
+                               :y "10px"
+                               :width "20%"
+                               :height "30px"
+                               :anchor "top right")
+           :stacking "fg"
+           (box :orientation "h"
+                :halign "center"
+                (clock);
+           )
+)
+
+(defvar calendar-visible false)
+                
+(defpoll clock :interval "1s"
+  `date +"%a %d/%m/%y    %H:%M:%S"`
+)
+
+(defwidget clock []
+  (eventbox :onclick "bash ~/.config/eww/scripts/set-calendar.sh"
+    (label :text "${clock}"
+    )
+  )
+)
+
+(defwindow calendar
+           :monitor 0
+           :geometry (geometry :x "20px"
+                               :y "50px"
+                               :width "20%"
+                               :anchor "top right")
+           :stacking "overlay"
+           (box :orientation "h"
+                :halign "fill"
+                (calendar);
+           )
+)

@@ -1,0 +1,3 @@
+(include "/home/umi/.config/eww/top.yuck")
+(include "/home/umi/.config/eww/bottom.yuck")
+(include "/home/umi/.config/eww/laptop.yuck")

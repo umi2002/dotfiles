@@ -1,0 +1,15 @@
+Default host: x86_64-unknown-linux-gnu
+rustup home:  /home/umi/.rustup
+
+installed toolchains
+--------------------
+
+stable-x86_64-unknown-linux-gnu (default)
+nightly-2022-08-27-x86_64-unknown-linux-gnu
+
+active toolchain
+----------------
+
+stable-x86_64-unknown-linux-gnu (default)
+rustc 1.70.0 (90c541806 2023-05-31)
+
