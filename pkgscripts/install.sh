@@ -41,11 +41,8 @@ echo "yay installation complete."
 yay -S --needed - < aur_pkglist.txt
 echo "AUR packages installed."
 
-pip install -r py_pkglist.txt
-echo "Python packages installed."
-
-cat .txt | xargs -I {} cargo install {}
-echo "Cargo packages installed."
+cargo install --git https://github.com/loichyan/nerdfix.git
+cargo install --git https://github.com/vivekmalneedi/veridian.git --all-features
 
 cat rustup_toolchains.txt | xargs -I {} rustup install {}
 echo "Rustup toolchains installed."
