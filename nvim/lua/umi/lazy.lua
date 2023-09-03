@@ -85,12 +85,9 @@ require("lazy").setup({
 			require("mason").setup()
 		end,
 	},
-	{
-		"williamboman/mason-lspconfig.nvim", -- Optional
-		config = function()
-			require("mason-lspconfig").setup()
-		end,
-	},
+	"williamboman/mason-lspconfig.nvim", -- Optional
+	"WhoIsSethDaniel/mason-tool-installer.nvim",
+	"creativenull/efmls-configs-nvim",
 	{
 		"j-hui/fidget.nvim",
 		commit = "legacy",

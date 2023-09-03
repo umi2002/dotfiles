@@ -1,6 +1,5 @@
 local lsp = require("lspconfig")
 
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 local lsp_attach = function()
 	local opts = { noremap = true, silent = true, buffer = 0 }
 	vim.keymap.set("n", "<leader>tt", function()
@@ -24,6 +23,7 @@ local lsp_attach = function()
 	vim.keymap.set("n", "<leader>df", "<CMD> Telescope lsp_definitions  <CR>", opts)
 	vim.keymap.set("n", "<leader>rf", "<CMD> Telescope lsp_references  <CR>", opts)
 end
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 lsp.lua_ls.setup({
 	on_attach = lsp_attach,
@@ -55,6 +55,12 @@ lsp.html.setup({
 	filetypes = { "html" },
 })
 
+lsp.tsserver.setup({
+	on_attach = lsp_attach,
+	capabilities = lsp_capabilities,
+	filetypes = { "javascript" },
+})
+
 lsp.jsonls.setup({
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
@@ -65,6 +71,12 @@ lsp.bashls.setup({
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
 	filetypes = { "sh", "zsh" },
+})
+
+lsp.clangd.setup({
+	on_attach = lsp_attach,
+	capabilities = lsp_capabilities,
+	filetypes = { "c", "cpp" },
 })
 
 lsp.rust_analyzer.setup({
@@ -114,3 +126,48 @@ lsp.pyright.setup({
 	capabilities = lsp_capabilities,
 	filetypes = { "python" },
 })
+
+local stylua = require("efmls-configs.formatters.stylua")
+local prettier = require("efmls-configs.formatters.prettier")
+local beautysh = require("efmls-configs.formatters.beautysh")
+local clang_format = require("efmls-configs.formatters.clang_format")
+local rustfmt = require("efmls-configs.formatters.rustfmt")
+local verible = { formatCommand = "verible-verilog-format -", formatStdin = true }
+local latexindent = require("efmls-configs.formatters.latexindent")
+local autopep8 = require("efmls-configs.formatters.autopep8")
+
+local languages = {
+	lua = { stylua },
+	markdown = { prettier },
+	css = { prettier },
+	html = { prettier },
+	javascript = { prettier },
+	json = { prettier },
+	bash = { beautysh },
+	c = { clang_format },
+	cpp = { clang_format },
+	tpp = { clang_format },
+	rust = { rustfmt },
+	csharp = { clang_format },
+	verilog = { verible },
+	systemverilog = { verible },
+	tex = { latexindent },
+	bib = { latexindent },
+	python = { autopep8 },
+}
+
+local emfls_config = {
+	filetypes = vim.tbl_keys(languages),
+	settings = {
+		languages = languages,
+	},
+	init_options = {
+		documentFormatting = true,
+		documentRangeFormatting = true,
+	},
+}
+
+lsp.efm.setup(vim.tbl_extend("force", emfls_config, {
+	on_attach = lsp_attach,
+	capabilities = lsp_capabilities,
+}))

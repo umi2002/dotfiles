@@ -64,10 +64,7 @@ set("n", "<leader><CR>", "gf", { silent = true })
 
 vim.opt.conceallevel = 2
 
-vim.cmd([[augroup fmt
-  autocmd!
-  au BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
-augroup END]])
+vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
 
 local notify = vim.notify
 vim.notify = function(msg, ...)
