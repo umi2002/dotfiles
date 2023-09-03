@@ -119,6 +119,7 @@ cmp.setup({
 		"html",
 		"javascript",
 		"python",
+		"sh",
 	},
 
 	formatting = {
