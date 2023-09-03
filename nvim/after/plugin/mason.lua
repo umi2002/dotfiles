@@ -24,6 +24,7 @@ require("mason-tool-installer").setup({
 		"latexindent",
 		"verible",
 		"autopep8",
+		"js-debug-adapter",
 	},
 
 	auto_update = true,
