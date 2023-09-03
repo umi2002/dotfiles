@@ -130,7 +130,7 @@ lsp.pyright.setup({
 local stylua = require("efmls-configs.formatters.stylua")
 local prettier = require("efmls-configs.formatters.prettier")
 local beautysh = require("efmls-configs.formatters.beautysh")
-local clang_format = require("efmls-configs.formatters.clang_format")
+local clang_format = { 'formatCommand = clang-format -style="{IndentWidth: 4}"' }
 local rustfmt = require("efmls-configs.formatters.rustfmt")
 local verible = { formatCommand = "verible-verilog-format -", formatStdin = true }
 local latexindent = require("efmls-configs.formatters.latexindent")
@@ -156,7 +156,7 @@ local languages = {
 	python = { autopep8 },
 }
 
-local emfls_config = {
+local efmls_config = {
 	filetypes = vim.tbl_keys(languages),
 	settings = {
 		languages = languages,
@@ -167,7 +167,7 @@ local emfls_config = {
 	},
 }
 
-lsp.efm.setup(vim.tbl_extend("force", emfls_config, {
+lsp.efm.setup(vim.tbl_extend("force", efmls_config, {
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
 }))
