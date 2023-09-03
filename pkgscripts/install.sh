@@ -41,7 +41,7 @@ echo "yay installation complete."
 yay -S --needed - < aur_pkglist.txt
 echo "AUR packages installed."
 
-pipx install -r py_pkglist.txt
+pip install -r py_pkglist.txt
 echo "Python packages installed."
 
 cat .txt | xargs -I {} cargo install {}
@@ -52,6 +52,8 @@ echo "Rustup toolchains installed."
 
 cat npm_packages.txt | xargs -I {} npm install -g {}
 echo "NPM packages installed."
+
+#!/bin/bash
 
 # Check if TeX Live is already installed
 if command -v pdflatex &> /dev/null; then
