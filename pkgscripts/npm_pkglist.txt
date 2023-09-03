@@ -1,9 +1,0 @@
-browser-sync
-corepack
-local-lua-debugger-vscode
-neovim
-node-gyp
-nopt
-npm
-semver
-vscode-langservers-extracted
