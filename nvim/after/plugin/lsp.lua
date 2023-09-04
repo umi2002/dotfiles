@@ -140,6 +140,7 @@ local languages = {
     lua = { stylua },
     markdown = { prettier },
     css = { prettier },
+    scss = { prettier },
     html = { prettier },
     javascript = { prettier },
     json = { prettier },
