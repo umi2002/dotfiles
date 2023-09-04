@@ -64,4 +64,26 @@ set("n", "<leader><CR>", "gf", { silent = true })
 
 vim.opt.conceallevel = 2
 
-vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
+vim.cmd([[
+augroup FormatOnSave
+  autocmd BufWritePre *.lua lua vim.lsp.buf.format()
+  autocmd BufWritePre *.md lua vim.lsp.buf.format()
+  autocmd BufWritePre *.css lua vim.lsp.buf.format()
+  autocmd BufWritePre *.scss lua vim.lsp.buf.format()
+  autocmd BufWritePre *.html lua vim.lsp.buf.format()
+  autocmd BufWritePre *.js lua vim.lsp.buf.format()
+  autocmd BufWritePre *.json lua vim.lsp.buf.format()
+  autocmd BufWritePre *.sh lua vim.lsp.buf.format()
+  autocmd BufWritePre *.zsh lua vim.lsp.buf.format()
+  autocmd BufWritePre *.zsh lua vim.lsp.buf.format()
+  autocmd BufWritePre *.c lua vim.lsp.buf.format()
+  autocmd BufWritePre *.cpp lua vim.lsp.buf.format()
+  autocmd BufWritePre *.rs lua vim.lsp.buf.format()
+  autocmd BufWritePre *.cs lua vim.lsp.buf.format()
+  autocmd BufWritePre *.verilog lua vim.lsp.buf.format()
+  autocmd BufWritePre *.systemverilog lua vim.lsp.buf.format()
+  autocmd BufWritePre *.tex lua vim.lsp.buf.format()
+  autocmd BufWritePre *.bib lua vim.lsp.buf.format()
+  autocmd BufWritePre *.py lua vim.lsp.buf.format()
+augroup END
+]])

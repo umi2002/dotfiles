@@ -46,7 +46,7 @@ lsp.marksman.setup({
 lsp.cssls.setup({
     on_attach = lsp_attach,
     capabilities = lsp_capabilities,
-    filetypes = { "css", "scss", "less" },
+    filetypes = { "css", "scss" },
 })
 
 lsp.html.setup({
