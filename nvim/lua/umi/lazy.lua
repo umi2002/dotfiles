@@ -55,6 +55,12 @@ require("lazy").setup({
     "numToStr/Comment.nvim",
     "ahmedkhalf/project.nvim",
     "nvim-telescope/telescope.nvim",
+    {
+        "ibhagwan/fzf-lua",
+        config = function()
+            require("fzf-lua").setup()
+        end,
+    },
     "akinsho/toggleterm.nvim",
     "akinsho/bufferline.nvim",
     "nvim-orgmode/orgmode",
