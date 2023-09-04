@@ -65,12 +65,3 @@ set("n", "<leader><CR>", "gf", { silent = true })
 vim.opt.conceallevel = 2
 
 vim.cmd([[autocmd BufWritePre * lua vim.lsp.buf.format()]])
-
-local notify = vim.notify
-vim.notify = function(msg, ...)
-	if msg:match("warning: multiple different client offset_encodings") then
-		return
-	end
-
-	notify(msg, ...)
-end
