@@ -88,12 +88,6 @@ require("lazy").setup({
     "williamboman/mason-lspconfig.nvim", -- Optional
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     "creativenull/efmls-configs-nvim",
-    {
-        "linrongbin16/lsp-progress.nvim",
-        config = function()
-            require("lsp-progress").setup()
-        end,
-    },
     "hrsh7th/nvim-cmp",         -- Required
     "hrsh7th/cmp-nvim-lsp",     -- Required
     "hrsh7th/cmp-buffer",       -- Optional
@@ -131,5 +125,5 @@ require("lazy").setup({
             require("notify").setup()
             vim.notify = require("notify")
         end,
-    }
+    },
 })
