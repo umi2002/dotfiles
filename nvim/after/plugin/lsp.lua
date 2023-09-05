@@ -23,6 +23,7 @@ local lsp_attach = function()
     vim.keymap.set("n", "<leader>df", require("fzf-lua").lsp_definitions, opts)
     vim.keymap.set("n", "<leader>rf", require("fzf-lua").lsp_references, opts)
 end
+
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 lsp.lua_ls.setup({
