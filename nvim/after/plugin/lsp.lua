@@ -129,7 +129,7 @@ lsp.pyright.setup({
 })
 
 local stylua = require("efmls-configs.formatters.stylua")
-local prettier = require("efmls-configs.formatters.prettier")
+local prettierd = require("efmls-configs.formatters.prettier_d")
 local beautysh = require("efmls-configs.formatters.beautysh")
 local clang_format = { 'formatCommand = clang-format -style="{IndentWidth: 4}"' }
 local rustfmt = require("efmls-configs.formatters.rustfmt")
@@ -139,12 +139,12 @@ local autopep8 = require("efmls-configs.formatters.autopep8")
 
 local languages = {
     lua = { stylua },
-    markdown = { prettier },
-    css = { prettier },
-    scss = { prettier },
-    html = { prettier },
-    javascript = { prettier },
-    json = { prettier },
+    markdown = { prettierd },
+    css = { prettierd },
+    scss = { prettierd },
+    html = { prettierd },
+    javascript = { prettierd },
+    json = { prettierd },
     sh = { beautysh },
     c = { clang_format },
     cpp = { clang_format },

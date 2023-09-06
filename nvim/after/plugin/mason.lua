@@ -1,31 +1,31 @@
 require("mason-lspconfig").setup({
-	ensure_installed = {
-		"lua_ls",
-		"marksman",
-		"cssls",
-		"html",
-		"tsserver",
-		"jsonls",
-		"bashls",
-		"rust_analyzer",
-		"csharp_ls",
-		"texlab",
-		"pyright",
-	},
+    ensure_installed = {
+        "lua_ls",
+        "marksman",
+        "cssls",
+        "html",
+        "tsserver",
+        "jsonls",
+        "bashls",
+        "rust_analyzer",
+        "csharp_ls",
+        "texlab",
+        "pyright",
+    },
 })
 
 require("mason-tool-installer").setup({
-	ensure_installed = {
-		"stylua",
-		"prettier",
-		"beautysh",
-		"clang-format",
-		"beautysh",
-		"latexindent",
-		"verible",
-		"autopep8",
-		"js-debug-adapter",
-	},
+    ensure_installed = {
+        "stylua",
+        "prettierd",
+        "beautysh",
+        "clang-format",
+        "beautysh",
+        "latexindent",
+        "verible",
+        "autopep8",
+        "js-debug-adapter",
+    },
 
-	auto_update = true,
+    auto_update = true,
 })
