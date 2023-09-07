@@ -16,4 +16,4 @@
 !alacritty/**
 !dunst/**
 !pkgscripts/**
-!/tmux/**
+!tmux/**
