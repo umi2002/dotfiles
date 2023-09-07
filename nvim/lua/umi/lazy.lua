@@ -125,4 +125,5 @@ require("lazy").setup({
     "folke/trouble.nvim",
     "lewis6991/hover.nvim",
     "rcarriga/nvim-notify",
+    "christoomey/vim-tmux-navigator",
 })
