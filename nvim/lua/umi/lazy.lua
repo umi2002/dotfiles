@@ -122,7 +122,6 @@ require("lazy").setup({
             end, { expr = true })
         end,
     },
-    "sbdchd/neoformat",
     "folke/trouble.nvim",
     "lewis6991/hover.nvim",
     "rcarriga/nvim-notify",
