@@ -37,7 +37,7 @@ vim.opt.conceallevel = 2
 
 local filetypes = {
     'lua', 'md', 'css', 'scss', 'html', 'js', 'json', 'sh', 'zsh',
-    'c', 'cpp', 'rs', 'cs', 'verilog', 'systemverilog', 'tex', 'bib', 'py'
+    'c', 'cpp', 'rs', 'cs', 'verilog', 'systemverilog', 'tex', 'bib', 'py', 'java',
 }
 
 vim.cmd('augroup FormatOnSave')

@@ -11,6 +11,7 @@ require("mason-lspconfig").setup({
         "csharp_ls",
         "texlab",
         "pyright",
+        "jdtls",
     },
 })
 
@@ -25,6 +26,8 @@ require("mason-tool-installer").setup({
         "verible",
         "autopep8",
         "js-debug-adapter",
+        "java-debug-adapter",
+        "java-test"
     },
 
     auto_update = true,

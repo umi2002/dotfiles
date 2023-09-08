@@ -156,6 +156,7 @@ local languages = {
     tex = { latexindent },
     bib = { latexindent },
     python = { autopep8 },
+    java = { clang_format },
 }
 
 local efmls_config = {
