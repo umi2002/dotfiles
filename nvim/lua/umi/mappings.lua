@@ -4,7 +4,6 @@ local opts = { noremap = true, silent = true }
 set("n", "<leader>e", ":Ex<CR>", opts)
 set("i", "<C-BS>", "<C-W>", opts)
 
-
 set("n", "<leader>wj", ":Hex<CR>", opts)
 set("n", "<leader>wl", ":Vex!<CR>", opts)
 set("n", "<C-k>", "<C-w>k", opts)
@@ -22,6 +21,3 @@ set("n", "<leader>coa", "zR", opts)
 set("n", "<leader>cca", "zM", opts)
 
 set("n", "<leader><CR>", "gf", opts)
-
-set("v", "<C-S-C>", '"+y', opts)
-set({ "i", "n", "v" }, "<C-S-V>", '<C-R>+', opts)
