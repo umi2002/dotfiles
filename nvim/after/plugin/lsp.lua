@@ -129,9 +129,7 @@ lsp.pyright.setup({
 })
 
 local stylua = require("efmls-configs.formatters.stylua")
-local prettier = {
-	formatCommand = "prettier --config /home/umi/formatting/.prettierrc.json",
-}
+local prettierd = require("efmls-configs.formatters.prettier_d")
 local beautysh = require("efmls-configs.formatters.beautysh")
 local clang_format = {
 	formatCommand = "clang-format -style='file:/home/umi/formatting/.clang-format'",
@@ -144,12 +142,12 @@ local autopep8 = require("efmls-configs.formatters.autopep8")
 
 local languages = {
 	lua = { stylua },
-	markdown = { prettier },
-	css = { prettier },
-	scss = { prettier },
-	html = { prettier },
-	javascript = { prettier },
-	json = { prettier },
+	markdown = { prettierd },
+	css = { prettierd },
+	scss = { prettierd },
+	html = { prettierd },
+	javascript = { prettierd },
+	json = { prettierd },
 	sh = { beautysh },
 	c = { clang_format },
 	cpp = { clang_format },

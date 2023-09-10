@@ -17,8 +17,10 @@ require("mason-lspconfig").setup({
 
 require("mason-tool-installer").setup({
     ensure_installed = {
+        "efm",
         "stylua",
         "prettier",
+        "prettierd",
         "beautysh",
         "clang-format",
         "beautysh",
@@ -27,7 +29,7 @@ require("mason-tool-installer").setup({
         "autopep8",
         "js-debug-adapter",
         "java-debug-adapter",
-        "java-test"
+        "java-test",
     },
 
     auto_update = true,
