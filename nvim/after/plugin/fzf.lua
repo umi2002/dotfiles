@@ -4,7 +4,7 @@ local opts = { noremap = true, silent = true }
 
 vim.keymap.set("n", "<leader>f", fzf.files, opts)
 vim.keymap.set("n", "<leader>gf", fzf.git_files, opts)
-vim.keymap.set("n", "<leader>wf", fzf.live_grep, opts)
+vim.keymap.set("n", "<leader>wf", fzf.grep_project, opts)
 vim.keymap.set("n", "<leader>bf", fzf.buffers, opts)
 
 fzf.setup(
