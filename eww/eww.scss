@@ -3,13 +3,13 @@
 }
 
 @mixin default {
-  font-family: "FiraCode Nerd Font Mono";
-  font-size: 18px;
-  color: #e0def4;
-  background-color: #232136;
-  border: 2px solid #569fba;
-  border-radius: 10px;
-  opacity: 0.9;
+    font-family: "FiraCode Nerd Font Mono";
+    font-size: 18px;
+    color: #e0def4;
+    background-color: #232136;
+    border: 2px solid #569fba;
+    border-radius: 10px;
+    opacity: 0.9;
 }
 
 window {
@@ -48,15 +48,15 @@ calendar {
 }
 
 .song-progress scale trough highlight {
-	background-color: #e0def4;
-	border-radius: 8px;
+    background-color: #e0def4;
+    border-radius: 8px;
 }
 .song-progress scale trough {
-	background-color: #569fba;
-	border-radius: 8px;
-	min-height: 10px;
-	min-width: 200px;
-	margin : 10px 10px 10px 10px;
+    background-color: #569fba;
+    border-radius: 8px;
+    min-height: 10px;
+    min-width: 200px;
+    margin: 10px 10px 10px 10px;
 }
 .music-player {
     @include default;
