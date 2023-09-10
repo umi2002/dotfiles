@@ -1,29 +1,27 @@
 local set = vim.keymap.set
+local opts = { noremap = true, silent = true }
 
-set("n", "h", "h", {})
-set("n", "j", "j", {})
-set("n", "k", "k", {})
-set("n", "l", "l", {})
+set("n", "<leader>e", ":Ex<CR>", opts)
+set("i", "<C-BS>", "<C-W>", opts)
 
-set("n", "<leader>e", vim.cmd.Ex)
-set("i", "<C-H>", "<C-W>")
 
-set("n", "<leader>wj", "<CMD> Hex <CR>")
-set("n", "<leader>wl", "<CMD> Vex! <CR>")
-set("n", "<C-k>", "<C-w>k", { silent = true })
-set("n", "<C-j>", "<C-w>j", { silent = true })
-set("n", "<C-h>", "<C-w>h", { silent = true })
-set("n", "<C-l>", "<C-w>l", { silent = true })
+set("n", "<leader>wj", ":Hex<CR>", opts)
+set("n", "<leader>wl", ":Vex!<CR>", opts)
+set("n", "<C-k>", "<C-w>k", opts)
+set("n", "<C-j>", "<C-w>j", opts)
+set("n", "<C-h>", "<C-w>h", opts)
+set("n", "<C-l>", "<C-w>l", opts)
 
-set("n", "<leader>rpo", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+set("n", "<S-j>", "<C-d>zz", opts)
+set("n", "<S-k>", "<C-u>zz", opts)
+set("v", "<S-j>", "<C-d>zz", opts)
+set("v", "<S-k>", "<C-u>zz", opts)
 
-set("n", "<S-j>", "<C-d>zz", { noremap = true, silent = true })
-set("n", "<S-k>", "<C-u>zz", { noremap = true, silent = true })
-set("v", "<S-j>", "<C-d>zz", { noremap = true, silent = true })
-set("v", "<S-k>", "<C-u>zz", { noremap = true, silent = true })
+set("n", "<leader>ct", "za", opts)
+set("n", "<leader>coa", "zR", opts)
+set("n", "<leader>cca", "zM", opts)
 
-set("n", "<leader>ct", "za", { silent = true })
-set("n", "<leader>coa", "zR", { silent = true })
-set("n", "<leader>cca", "zM", { silent = true })
+set("n", "<leader><CR>", "gf", opts)
 
-set("n", "<leader><CR>", "gf", { silent = true })
+set("v", "<C-S-C>", '"+y', opts)
+set({ "i", "n", "v" }, "<C-S-V>", '<C-R>+', opts)
