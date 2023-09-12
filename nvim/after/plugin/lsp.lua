@@ -107,15 +107,6 @@ lsp.ghdl_ls.setup({
 	filetypes = { "vhdl" },
 })
 
-lsp.veridian.setup({
-	on_attach = lsp_attach,
-	capabilities = lsp_capabilities,
-	filetypes = { "verilog", "systemverilog" },
-	root_dir = function(fname)
-		return require("lspconfig").util.root_pattern(".git", ".xpr")(fname) or vim.fn.getcwd()
-	end,
-})
-
 lsp.texlab.setup({
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
@@ -136,7 +127,6 @@ local clang_format = {
 	formatStdin = true,
 }
 local rustfmt = require("efmls-configs.formatters.rustfmt")
-local verible = { formatCommand = "verible-verilog-format -", formatStdin = true }
 local latexindent = require("efmls-configs.formatters.latexindent")
 local autopep8 = require("efmls-configs.formatters.autopep8")
 
@@ -154,8 +144,6 @@ local languages = {
 	tpp = { clang_format },
 	rust = { rustfmt },
 	csharp = { clang_format },
-	verilog = { verible },
-	systemverilog = { verible },
 	tex = { latexindent },
 	bib = { latexindent },
 	python = { autopep8 },
