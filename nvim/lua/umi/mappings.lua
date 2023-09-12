@@ -2,7 +2,7 @@ local set = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 set("n", "<leader>e", ":Ex<CR>", opts)
-set("i", "<C-BS>", "<C-W>", opts)
+set("i", "<C-H>", "<C-W>", opts)
 
 set("n", "<leader>wj", ":Hex<CR>", opts)
 set("n", "<leader>wl", ":Vex!<CR>", opts)
