@@ -36,15 +36,37 @@ vim.api.nvim_command([[
 vim.opt.conceallevel = 2
 
 local filetypes = {
-    'lua', 'md', 'css', 'scss', 'html', 'js', 'json', 'sh', 'zsh',
-    'c', 'cpp', 'rs', 'cs', 'verilog', 'systemverilog', 'tex', 'bib', 'py', 'java',
+	"lua",
+	"md",
+	"css",
+	"scss",
+	"html",
+	"js",
+	"json",
+	"sh",
+	"zsh",
+	"c",
+	"cpp",
+	"rs",
+	"cs",
+	"verilog",
+	"systemverilog",
+	"tex",
+	"bib",
+	"py",
+	"java",
 }
 
-vim.cmd('augroup FormatOnSave')
-vim.cmd('autocmd!')
+vim.cmd("augroup FormatOnSave")
+vim.cmd("autocmd!")
 
 for _, filetype in ipairs(filetypes) do
-    vim.cmd(string.format("autocmd BufWritePre *.%s lua vim.lsp.buf.format()", filetype))
+	vim.cmd(string.format("autocmd BufWritePre *.%s lua vim.lsp.buf.format()", filetype))
 end
 
-vim.cmd('augroup END')
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
+
+vim.cmd("augroup END")
+
