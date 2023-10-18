@@ -110,13 +110,6 @@ require("lazy").setup({
 	-- Snippets
 	"L3MON4D3/LuaSnip", -- Required
 	{
-		"nvimdev/guard.nvim",
-		-- Builtin configuration, optional
-		dependencies = {
-			"nvimdev/guard-collection",
-		},
-	},
-	{
 
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
