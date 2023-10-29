@@ -11,6 +11,7 @@ PS1='[\u@\h \W]\$ '
 
 alias n="nvim"
 alias intellij="intellij-idea-ultimate-edition"
+alias cdroot='cd "$(git rev-parse --show-toplevel)"'
 
 source /usr/share/fzf/key-bindings.bash
 export FZF_DEFAULT_COMMAND="sudo fd --type f --hidden --follow"
