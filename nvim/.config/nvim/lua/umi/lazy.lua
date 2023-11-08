@@ -118,12 +118,17 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"Exafunction/codeium.vim",
+		"zbirenbaum/copilot.lua",
 		config = function()
-			vim.g.codeium_no_map_tab = true
-			vim.keymap.set("i", "<C-l>", function()
-				return vim.fn["codeium#Accept"]()
-			end, { expr = true })
+			require("copilot").setup({
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+					keymap = {
+						accept = "<C-l>",
+					},
+				},
+			})
 		end,
 	},
 	"folke/trouble.nvim",

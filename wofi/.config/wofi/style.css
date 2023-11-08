@@ -1,0 +1,66 @@
+/* Wofi - Duskfox Theme */
+window {
+    background: #232136;
+    color: #e0def4;
+    border: 2px solid #569fba; /* Using the 'blue' from your scheme */
+}
+
+/* Border of the Wofi window */
+#border {
+    border-color: #569fba; /* Blue color */
+}
+
+/* Box styling */
+#inner-box {
+    background-color: #393552; /* Using 'black' from normal colors */
+    color: #e0def4; /* Foreground color */
+}
+
+/* Text Entry styling */
+input {
+    border-color: #c4a7e7; /* Magenta color */
+    color: #e0def4; /* Foreground color */
+}
+
+/* Selected item styling */
+#scroll {
+    background-color: #47407d; /* Using 'black' from bright colors */
+}
+
+/* Hovered item styling */
+#entry {
+    background-color: rgba(
+        69,
+        65,
+        125,
+        0.3
+    ); /* Slightly transparent version of bright black */
+}
+
+/* Category headers or non-selectable entries */
+#text {
+    color: #e0def4; /* Foreground color */
+}
+
+/* scrollbar */
+#scrollbar {
+    background-color: #c4a7e7; /* Magenta color */
+}
+
+/* buttons */
+button {
+    background-color: #393552; /* Normal black */
+    color: #e0def4; /* Foreground color */
+    border-color: #569fba; /* Normal blue */
+}
+
+/* button:hover */
+button:hover {
+    background-color: #47407d; /* Bright black */
+    color: #e2e0f7; /* Bright white */
+}
+
+/* button:active */
+button:active {
+    background-color: #eb6f92; /* Normal red */
+}

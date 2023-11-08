@@ -10,7 +10,6 @@ alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
 alias n="nvim"
-alias intellij="intellij-idea-ultimate-edition"
 alias cdroot='cd "$(git rev-parse --show-toplevel)"'
 
 source /usr/share/fzf/key-bindings.bash
