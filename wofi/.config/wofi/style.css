@@ -1,66 +1,50 @@
-/* Wofi - Duskfox Theme */
 window {
-    background: #232136;
-    color: #e0def4;
-    border: 2px solid #569fba; /* Using the 'blue' from your scheme */
+    margin: 5px;
+    border: 2px solid #569fba; /* blue from your scheme */
+    background-color: #232136; /* background from your scheme */
+    color: #e0def4; /* foreground from your scheme for contrast */
 }
 
-/* Border of the Wofi window */
-#border {
-    border-color: #569fba; /* Blue color */
+#input {
+    margin: 5px;
+    border: 2px solid #eb6f92; /* red from your scheme */
+    background-color: #393552; /* black from normal colors */
+    color: #e0def4; /* foreground from your scheme for contrast */
 }
 
-/* Box styling */
 #inner-box {
-    background-color: #393552; /* Using 'black' from normal colors */
-    color: #e0def4; /* Foreground color */
+    margin: 5px;
+    border: 2px solid #a3be8c; /* green from your scheme */
+    background-color: #232136; /* primary background for contrast */
+    color: #e0def4; /* brighter text color for contrast */
 }
 
-/* Text Entry styling */
-input {
-    border-color: #c4a7e7; /* Magenta color */
-    color: #e0def4; /* Foreground color */
+#outer-box {
+    margin: 5px;
+    border: 2px solid #c4a7e7; /* magenta from your scheme */
+    background-color: #232136; /* primary background for contrast */
+    color: #e0def4; /* brighter text color for contrast */
 }
 
-/* Selected item styling */
 #scroll {
-    background-color: #47407d; /* Using 'black' from bright colors */
+    margin: 5px;
+    border: 2px solid #f6c177; /* yellow from your scheme */
+    background-color: #393552; /* black from normal colors */
+    color: #e0def4; /* foreground from your scheme for contrast */
 }
 
-/* Hovered item styling */
-#entry {
-    background-color: rgba(
-        69,
-        65,
-        125,
-        0.3
-    ); /* Slightly transparent version of bright black */
-}
-
-/* Category headers or non-selectable entries */
 #text {
-    color: #e0def4; /* Foreground color */
+    margin: 5px;
+    background-color: #232136; /* primary background for contrast */
+    color: #e0def4; /* brighter text color for contrast */
 }
 
-/* scrollbar */
-#scrollbar {
-    background-color: #c4a7e7; /* Magenta color */
+#entry:selected {
+    background-color: #47407d; /* bright black from your scheme for contrast */
+    color: #e0def4; /* foreground color for readability */
 }
 
-/* buttons */
-button {
-    background-color: #393552; /* Normal black */
-    color: #e0def4; /* Foreground color */
-    border-color: #569fba; /* Normal blue */
-}
-
-/* button:hover */
-button:hover {
-    background-color: #47407d; /* Bright black */
-    color: #e2e0f7; /* Bright white */
-}
-
-/* button:active */
-button:active {
-    background-color: #eb6f92; /* Normal red */
+#text:selected {
+    background-color: #47407d; /* bright black from your scheme for contrast */
+    color: #e0def4; /* foreground color for readability */
 }
