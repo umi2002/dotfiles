@@ -5,5 +5,5 @@ hold = ["KEY_LEFTCTRL"]
 tap = ["KEY_ESC"]
 
 [[remap]]
-input = "KEY_ESC"
+input = ["KEY_ESC"]
 output = ["KEY_CAPSLOCK"]
