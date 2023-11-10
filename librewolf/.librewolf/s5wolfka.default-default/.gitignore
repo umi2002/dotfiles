@@ -14,3 +14,6 @@ cookies.sqlite.wal
 SiteSecurityServiceState.bin
 AlternateServices.bin
 content-prefs.sqlite
+datareporting/**
+prefs.js
+sessionCheckpoints.json
