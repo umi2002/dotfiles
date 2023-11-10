@@ -10,7 +10,7 @@ protections.sqlite
 sessionstore-backups/**
 storage/**
 cookies.sqlite
-cookies.sqlite.wal
+cookies.sqlite-wal
 SiteSecurityServiceState.bin
 AlternateServices.bin
 content-prefs.sqlite
