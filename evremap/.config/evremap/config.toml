@@ -1,4 +1,5 @@
-device_name = "AT Translated Set 2 keyboard"
+device_name = "Razer Razer BlackWidow V3"
+#device_name = "AT Translated Set 2 keyboard"
 [[dual_role]]
 input = "KEY_CAPSLOCK"
 hold = ["KEY_LEFTCTRL"]
