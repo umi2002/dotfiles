@@ -5,3 +5,9 @@ places.sqlite-wal
 key4.db
 lock
 protections.sqlite
+sessionstore-backups/**
+storage/**
+cookies.sqlite
+cookies.sqlite.wal
+SiteSecurityServiceState.bin
+AlternateServices.bin
