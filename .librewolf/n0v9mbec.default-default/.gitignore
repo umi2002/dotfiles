@@ -1,0 +1,57 @@
+# Temporary and state files
+.sessionstore-backups/
+.bookmarkbackups/
+.serviceworker.txt
+.sessionCheckpoints.json
+.compatibility.ini
+.xulstore.json
+
+# Cache and frequently changing files
+.storage/
+.storage.sqlite
+.storage-sync-v2.sqlite*
+.addonStartup.json.lz4
+.search.json.mozlz4
+
+# Personal and sensitive data
+.cookies.sqlite
+.cookies.sqlite-wal
+.webappsstore.sqlite
+.webappsstore.sqlite-wal
+.formhistory.sqlite
+.key4.db
+.cert9.db
+.cert_override.txt
+.ClientAuthRememberList.bin
+.ClientAuthRememberList.txt
+.pkcs11.txt
+.protections.sqlite
+
+# History and bookmarks
+.places.sqlite-wal
+.favicons.sqlite
+.favicons.sqlite-wal
+
+# Extension and add-on data
+.extensions/
+.extensions.json
+.extension-settings.json
+.extension-store/
+.addons.json
+.extension-preferences.json
+
+# Various config and state files
+.broadcast-listeners.json
+.content-prefs.sqlite
+.enumerate_devices.txt
+.handlers.json
+.notificationstore.json
+.permissions.sqlite
+.containers.json
+.datareporting/
+.times.json
+.gmp-widevinecdm/
+
+# Lock files
+.lock
+.parentlock
