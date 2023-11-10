@@ -6,4 +6,3 @@ key4.db
 lock
 permissions.sqlite
 protections.sqlite
-sessionstore-backups/**
