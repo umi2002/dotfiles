@@ -8,5 +8,3 @@ permissions.sqlite
 protections.sqlite
 sessionstore-backups/**
 storage/**
-cookies.sqlite
-cookies.sqlite.wal
