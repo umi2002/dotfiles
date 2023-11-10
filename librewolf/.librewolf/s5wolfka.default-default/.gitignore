@@ -17,3 +17,4 @@ content-prefs.sqlite
 datareporting/**
 prefs.js
 sessionCheckpoints.json
+storage.sqlite
