@@ -117,7 +117,7 @@ user_pref("security.tls.enable_0rtt_data", false);
 user_pref("services.sync.engine.addresses.available", true);
 user_pref("storage.vacuum.last.index", 0);
 user_pref("storage.vacuum.last.places.sqlite", 1699642497);
-user_pref("toolkit.startup.last_success", 1699645122);
+user_pref("toolkit.startup.last_success", 1699646348);
 user_pref("toolkit.telemetry.cachedClientID", "d7ee12f4-77f7-4aad-ad35-92481129fe4f");
 user_pref("toolkit.telemetry.reportingpolicy.firstRun", false);
 user_pref("toolkit.winRegisterApplicationRestart", false);

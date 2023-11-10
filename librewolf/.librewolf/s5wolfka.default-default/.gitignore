@@ -4,10 +4,3 @@ places.sqlite
 places.sqlite-wal
 key4.db
 lock
-permissions.sqlite
-protections.sqlite
-sessionstore-backups/**
-storage/**
-cookies.sqlite
-cookies.sqlite.wal
-SiteSecurityServiceState.bin
