@@ -10,4 +10,4 @@ sessionstore-backups/**
 storage/**
 cookies.sqlite
 cookies.sqlite.wal
-AlternateServices.bin
+SiteSecurityServiceState.bin

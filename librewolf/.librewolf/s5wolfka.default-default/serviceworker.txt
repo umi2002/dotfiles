@@ -11,15 +11,3 @@ true
 1
 true
 #
-
-https://www.reddit.com/
-https://www.reddit.com/sw.1ab8087c79dd3679b0bd38e1c9ebc5de.js
-true
-{10681d3c-b7a3-46cb-9532-e00c11f729a2}
-0
-1699646225734383
-1699646225887703
-1699646225701078
-0
-true
-#
