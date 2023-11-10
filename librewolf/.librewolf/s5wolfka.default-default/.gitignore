@@ -1,3 +1,5 @@
+!.gitignore
+
 favicons.sqlite
 favicons.sqlite-wal
 places.sqlite
@@ -11,3 +13,4 @@ cookies.sqlite
 cookies.sqlite.wal
 SiteSecurityServiceState.bin
 AlternateServices.bin
+content-prefs.sqlite
