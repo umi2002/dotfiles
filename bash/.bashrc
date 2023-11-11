@@ -19,6 +19,13 @@ export FZF_CTRL_R_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="sudo fd --type d --hidden"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
+export QT_QPA_PLATFORM=wayland
+export LIBVA_DRIVER_NAME=nvidia
+export XDG_SESSION_TYPE=wayland
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export WLR_NO_HARDWARE_CURSORS=1
+
 export EDITOR=nvim
 
 export MANPATH=$MANPATH:/usr/local/texlive/2023/texmf-dist/doc/man
