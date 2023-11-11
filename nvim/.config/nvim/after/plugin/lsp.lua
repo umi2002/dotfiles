@@ -95,12 +95,6 @@ lsp.rust_analyzer.setup({
 	},
 })
 
-lsp.csharp_ls.setup({
-	on_attach = lsp_attach,
-	capabilities = lsp_capabilities,
-	filetypes = { "cs" },
-})
-
 lsp.ghdl_ls.setup({
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
