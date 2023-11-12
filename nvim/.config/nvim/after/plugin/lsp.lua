@@ -114,8 +114,6 @@ lsp.pyright.setup({
 })
 
 local stylua = require("efmls-configs.formatters.stylua")
-local prettier_eslint = require("efmls-configs.formatters.prettier_eslint")
-local eslint_d = require("efmls-configs.linters.eslint_d")
 local prettier = require("efmls-configs.formatters.prettier")
 local beautysh = require("efmls-configs.formatters.beautysh")
 local clang_format = {
@@ -129,11 +127,6 @@ local autopep8 = require("efmls-configs.formatters.autopep8")
 local languages = {
 	lua = { stylua },
 	markdown = { prettier },
-	-- css = { prettier_eslint },
-	-- scss = { prettier_eslint },
-	-- html = { prettier_eslint },
-	-- javascript = { eslint_d, prettier_eslint },
-	-- json = { prettier_eslint },
 	css = { prettier },
 	scss = { prettier },
 	html = { prettier },
