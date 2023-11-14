@@ -168,3 +168,24 @@
     (label :text {muted ? "󰝟 ${volume}%" : "󰕾 ${volume}%"})
   )
 )
+
+(defwindow bottom-right
+           :monitor 0
+           :geometry (geometry :x "20px"
+                               :y "10px"
+                               :width "80px"
+                               :height "30px"
+                               :anchor "bottom right")
+           :stacking "fg"
+           (box :orientation "h"
+                (keyboard)
+           )
+)
+
+(defpoll keyboard :interval "1s"
+  "bash ~/.config/eww/scripts/get-keyboard.sh")
+(defwidget keyboard []
+  (label :class "keyboard"
+         :text "${keyboard} 󰌌 "
+  )
+)
