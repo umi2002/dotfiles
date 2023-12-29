@@ -13,10 +13,10 @@ alias n="nvim"
 alias cdroot='cd "$(git rev-parse --show-toplevel)"'
 
 source /usr/share/fzf/key-bindings.bash
-export FZF_DEFAULT_COMMAND="sudo fd --type f --hidden --follow"
+export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_R_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="sudo fd --type d --hidden"
+export FZF_ALT_C_COMMAND="fd --type d --hidden"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 export QT_QPA_PLATFORM=wayland
