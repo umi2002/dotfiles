@@ -14,9 +14,6 @@ if [ -n "$(git status --porcelain)" ]; then
     exit 1
 fi
 
-# Checkout master branch
-git checkout master || exit 1
-
 # Merge with no commit and no fast-forward
 git merge --no-commit --no-ff "$branch_to_merge" || exit 1
 
