@@ -3,3 +3,5 @@
 	name = umi2002
 [init]
 	defaultBranch = main
+[merge "ours"]
+	driver = true
