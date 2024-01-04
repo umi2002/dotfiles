@@ -42,6 +42,7 @@ local filetypes = {
 	"scss",
 	"html",
 	"js",
+	"ts",
 	"json",
 	"sh",
 	"zsh",
@@ -69,4 +70,3 @@ vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
 
 vim.cmd("augroup END")
-
