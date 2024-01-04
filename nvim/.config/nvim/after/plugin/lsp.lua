@@ -59,7 +59,7 @@ lsp.html.setup({
 lsp.tsserver.setup({
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
-	filetypes = { "javascript", "typescript" },
+	filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 })
 
 lsp.jsonls.setup({
@@ -131,7 +131,9 @@ local languages = {
 	scss = { prettier },
 	html = { prettier },
 	javascript = { prettier },
+	javascriptreact = { prettier },
 	typescript = { prettier },
+	typescriptreact = { prettier },
 	json = { prettier },
 	sh = { beautysh },
 	c = { clang_format },
