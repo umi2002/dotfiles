@@ -59,7 +59,7 @@ lsp.html.setup({
 lsp.tsserver.setup({
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
-	filetypes = { "javascript, typescript" },
+	filetypes = { "javascript", "typescript" },
 })
 
 lsp.jsonls.setup({
