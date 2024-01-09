@@ -63,8 +63,21 @@ local filetypes = {
 vim.cmd("augroup FormatOnSave")
 vim.cmd("autocmd!")
 
+local lsp_group = vim.api.nvim_create_augroup("LspFormattingGroup", {})
 for _, filetype in ipairs(filetypes) do
-	vim.cmd(string.format("autocmd BufWritePre *.%s lua vim.lsp.buf.format()", filetype))
+	vim.api.nvim_create_autocmd("BufWritePost", {
+		group = lsp_group,
+		pattern = "*." .. filetype,
+		callback = function()
+			local efm = vim.lsp.get_active_clients({ name = "efm" })
+
+			if vim.tbl_isempty(efm) then
+				return
+			end
+
+			vim.lsp.buf.format({ name = "efm" })
+		end,
+	})
 end
 
 vim.opt.list = true

@@ -78,6 +78,7 @@ lsp.clangd.setup({
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
 	filetypes = { "c", "cpp" },
+	root_dir = lsp.util.root_pattern("compile_commands.json", ".git", "CMakeLists.txt"),
 })
 
 lsp.rust_analyzer.setup({
