@@ -116,10 +116,7 @@ lsp.pyright.setup({
 local stylua = require("efmls-configs.formatters.stylua")
 local prettier = require("efmls-configs.formatters.prettier")
 local beautysh = require("efmls-configs.formatters.beautysh")
-local clang_format = {
-	formatCommand = "clang-format -style='file:/home/umi/formatting/.clang-format'",
-	formatStdin = true,
-}
+local clang_format = require("efmls-configs.formatters.clang_format")
 local rustfmt = require("efmls-configs.formatters.rustfmt")
 local latexindent = require("efmls-configs.formatters.latexindent")
 local autopep8 = require("efmls-configs.formatters.autopep8")
