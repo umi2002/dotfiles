@@ -121,6 +121,8 @@ local rustfmt = require("efmls-configs.formatters.rustfmt")
 local latexindent = require("efmls-configs.formatters.latexindent")
 local autopep8 = require("efmls-configs.formatters.autopep8")
 
+local gcc = require("efmls-configs.linters.gcc")
+
 local languages = {
 	lua = { stylua },
 	markdown = { prettier },
@@ -133,9 +135,9 @@ local languages = {
 	typescriptreact = { prettier },
 	json = { prettier },
 	sh = { beautysh },
-	c = { clang_format },
-	cpp = { clang_format },
-	tpp = { clang_format },
+	c = { clang_format, gcc },
+	cpp = { clang_format, gcc },
+	tpp = { clang_format, gcc },
 	rust = { rustfmt },
 	csharp = { clang_format },
 	tex = { latexindent },
