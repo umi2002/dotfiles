@@ -123,6 +123,7 @@ local latexindent = require("efmls-configs.formatters.latexindent")
 local autopep8 = require("efmls-configs.formatters.autopep8")
 
 local gcc = require("efmls-configs.linters.gcc")
+local eslint_d = require("efmls-configs.linters.eslint_d")
 
 local languages = {
 	lua = { stylua },
@@ -130,10 +131,10 @@ local languages = {
 	css = { prettier },
 	scss = { prettier },
 	html = { prettier },
-	javascript = { prettier },
-	javascriptreact = { prettier },
-	typescript = { prettier },
-	typescriptreact = { prettier },
+	javascript = { prettier, eslint_d },
+	javascriptreact = { prettier, eslint_d },
+	typescript = { prettier, eslint_d },
+	typescriptreact = { prettier, eslint_d },
 	json = { prettier },
 	sh = { beautysh },
 	c = { clang_format, gcc },
