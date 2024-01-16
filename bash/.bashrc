@@ -30,6 +30,7 @@ export WLR_BACKEND=vulkan
 export MOZ_ENABLE_WAYLAND=1
 
 export EDITOR=nvim
+export CHROME_BIN=chromium
 
 export MANPATH=$MANPATH:/usr/local/texlive/2023/texmf-dist/doc/man
 export INFOPATH=$INFOPATH:/usr/local/texlive/2023/texmf-dist/doc/info
