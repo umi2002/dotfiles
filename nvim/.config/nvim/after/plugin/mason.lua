@@ -11,6 +11,7 @@ require("mason-lspconfig").setup({
 		"texlab",
 		"pyright",
 		"jdtls",
+		"cmake",
 	},
 })
 
@@ -28,6 +29,8 @@ require("mason-tool-installer").setup({
 		"java-debug-adapter",
 		"java-test",
 		"eslint_d",
+		"cmakelint",
+		"gersemi",
 	},
 
 	auto_update = true,

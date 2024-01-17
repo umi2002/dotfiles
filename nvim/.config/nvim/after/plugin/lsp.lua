@@ -81,6 +81,12 @@ lsp.clangd.setup({
 	root_dir = lsp.util.root_pattern("compile_commands.json", ".git", "CMakeLists.txt"),
 })
 
+lsp.cmake.setup({
+	on_attach = lsp_attach,
+	capabilities = lsp_capabilities,
+	filetypes = { "cmake" },
+})
+
 lsp.rust_analyzer.setup({
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
@@ -121,6 +127,8 @@ local clang_format = require("efmls-configs.formatters.clang_format")
 local rustfmt = require("efmls-configs.formatters.rustfmt")
 local latexindent = require("efmls-configs.formatters.latexindent")
 local autopep8 = require("efmls-configs.formatters.autopep8")
+local cmake = require("efmls-configs.formatters.gersemi")
+local cmake_lint = require("efmls-configs.linters.cmake_lint")
 
 local gcc = require("efmls-configs.linters.gcc")
 local eslint_d = require("efmls-configs.linters.eslint_d")
@@ -146,6 +154,7 @@ local languages = {
 	bib = { latexindent },
 	python = { autopep8 },
 	java = { clang_format },
+    cmake = { cmake, cmake_lint },
 }
 
 local efmls_config = {
