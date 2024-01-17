@@ -61,6 +61,7 @@ local filetypes = {
 	"bib",
 	"py",
 	"java",
+    "cmake",
 }
 
 vim.cmd("augroup FormatOnSave")
