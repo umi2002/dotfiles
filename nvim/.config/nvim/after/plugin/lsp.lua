@@ -120,6 +120,13 @@ lsp.pyright.setup({
 	filetypes = { "python" },
 })
 
+lsp.jdtls.setup({
+	on_attach = lsp_attach,
+	capabilities = lsp_capabilities,
+	filetypes = { "java" },
+	root_dir = lsp.util.root_pattern("pom.xml", ".git", "build.gradle", "settings.gradle", "gradlew", "mvnw"),
+})
+
 local stylua = require("efmls-configs.formatters.stylua")
 local prettier = require("efmls-configs.formatters.prettier")
 local beautysh = require("efmls-configs.formatters.beautysh")
@@ -154,7 +161,7 @@ local languages = {
 	bib = { latexindent },
 	python = { autopep8 },
 	java = { clang_format },
-    cmake = { cmake, cmake_lint },
+	cmake = { cmake, cmake_lint },
 }
 
 local efmls_config = {
