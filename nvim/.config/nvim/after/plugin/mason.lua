@@ -29,7 +29,7 @@ require("mason-tool-installer").setup({
 		"java-debug-adapter",
 		"java-test",
 		"eslint_d",
-		"cmakelint",
+		"cmakelang",
 		"gersemi",
 	},
 
