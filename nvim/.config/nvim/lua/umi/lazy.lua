@@ -71,7 +71,6 @@ require("lazy").setup({
 	"lukas-reineke/headlines.nvim",
 	"elkowar/yuck.vim",
 	"folke/flash.nvim",
-	"mfussenegger/nvim-jdtls",
 	"lervag/vimtex",
 	"echasnovski/mini.surround",
 	{
