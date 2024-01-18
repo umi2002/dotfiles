@@ -6,6 +6,7 @@ vim.keymap.set("n", "<leader>f", fzf.files, opts)
 vim.keymap.set("n", "<leader>gf", fzf.git_files, opts)
 vim.keymap.set("n", "<leader>wf", fzf.grep_project, opts)
 vim.keymap.set("n", "<leader>bf", fzf.buffers, opts)
+vim.keymap.set("n", "<leader>tf", fzf.tags, opts)
 
 fzf.setup(
     {
