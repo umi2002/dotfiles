@@ -27,12 +27,12 @@
   )
 )
 
-(defvar battery-status false)
+(deflisten battery-status :initial "0" "bash ~/.config/eww/scripts/get-battery-status.sh")
 
 (defpoll battery :interval "1s"
-         "bash ~/.config/eww/scripts/get-battery.sh")
+         "bash ~/.config/eww/scripts/get-battery-level.sh")
 (defwidget battery []
-  (box :class { battery-status ? "charging" : "discharging" }
+  (box :class { battery-status == "1" ? "charging" : "discharging" }
        :orientation "h"
        (circular-progress :value battery
                           :start-at 76
