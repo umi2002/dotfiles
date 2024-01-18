@@ -153,7 +153,8 @@
 )
 
 (defvar volume-visible false)
-(defvar muted false)
+(deflisten muted :initial "false"
+  "bash ~/.config/eww/scripts/get-mute.sh")
 
 (deflisten volume :initial "30"
   "bash ~/.config/eww/scripts/get-volume.sh")
@@ -163,9 +164,9 @@
     :class "volume-text"
     :width 100
     :height 30
-    :onclick "bash ~/.config/eww/scripts/set-mute.sh"
+    :onclick "amixer set Master toggle"
     :onmiddleclick "pavucontrol &"
-    (label :text {muted ? "󰝟 ${volume}%" : "󰕾 ${volume}%"})
+    (label :text {muted == "0" ? "󰝟 ${volume}%" : "󰕾 ${volume}%"})
   )
 )
 
