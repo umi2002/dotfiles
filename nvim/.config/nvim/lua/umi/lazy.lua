@@ -59,7 +59,6 @@ require("lazy").setup({
 	},
 	"numToStr/Comment.nvim",
 	"ahmedkhalf/project.nvim",
-	"nvim-telescope/telescope.nvim",
 	{
 		"ibhagwan/fzf-lua",
 		config = function()
