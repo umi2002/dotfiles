@@ -120,10 +120,41 @@ lsp.pyright.setup({
 	filetypes = { "python" },
 })
 
+local bundles = {
+	vim.fn.glob(
+		"/home/umi/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*"
+	),
+}
+
 lsp.jdtls.setup({
+	cmd = {
+		--
+		"java",
+		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
+		"-Dosgi.bundles.defaultStartLevel=4",
+		"-Declipse.product=org.eclipse.jdt.ls.core.product",
+		"-Dlog.protocol=true",
+		"-Dlog.level=ALL",
+		"-Xms1g",
+		"--add-modules=ALL-SYSTEM",
+		"--add-opens",
+		"java.base/java.util=ALL-UNNAMED",
+		"--add-opens",
+		"java.base/java.lang=ALL-UNNAMED",
+		--
+		"-jar",
+		"/home/umi/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.600.v20231106-1826.jar",
+		"-configuration",
+		"/home/umi/.local/share/nvim/mason/packages/jdtls/config_linux",
+		"-data",
+		"/home/umi/.local/share/nvim/mason/packages/jdtls/workspace",
+	},
 	on_attach = lsp_attach,
 	capabilities = lsp_capabilities,
 	filetypes = { "java" },
+	init_options = {
+		bundles = bundles,
+	},
 	root_dir = lsp.util.root_pattern("pom.xml", ".git", "build.gradle", "settings.gradle", "gradlew", "mvnw"),
 })
 
