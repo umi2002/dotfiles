@@ -139,15 +139,22 @@ require("lazy").setup({
 			require("fidget").setup()
 		end,
 	},
+	{
+		"folke/todo-comments.nvim",
+		opts = {},
+	},
+	{
+		"kosayoda/nvim-lightbulb",
+		config = function()
+			require("nvim-lightbulb").setup({
+				autocmd = { enabled = true },
+			})
+		end,
+	},
     {
-        "folke/todo-comments.nvim",
-        opts = {},
-    },
-{ 'kosayoda/nvim-lightbulb',
-config = function()
-require("nvim-lightbulb").setup({
-  autocmd = { enabled = true }
-})
-end
-}
+  'VidocqH/lsp-lens.nvim',
+    config = function()
+        require('lsp-lens').setup()
+        end
+    }
 })
