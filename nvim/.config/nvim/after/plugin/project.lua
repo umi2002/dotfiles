@@ -27,6 +27,7 @@ project.setup({
 		".svn",
 		"Makefile",
 		"package.json",
+        "angular.json",
 	},
 	---@ Show hidden files in telescope when searching for files in a project
 	show_hidden = false,
