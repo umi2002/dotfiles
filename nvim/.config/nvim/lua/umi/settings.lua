@@ -92,3 +92,6 @@ vim.cmd("augroup END")
 
 vim.g.neovide_refresh_rate = 60
 vim.g.neovide_profiler = true
+vim.g.neovide_cursor_vfx_mode = "railgun"
+vim.g.neovide_cursor_vfx_particle_density = 25.0
+vim.g.neovide_cursor_vfx_particle_curl = 1.0
