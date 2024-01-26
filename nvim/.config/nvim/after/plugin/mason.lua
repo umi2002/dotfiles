@@ -12,6 +12,7 @@ require("mason-lspconfig").setup({
 		"pyright",
 		"jdtls",
 		"cmake",
+		"angularls",
 	},
 })
 

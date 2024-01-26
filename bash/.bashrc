@@ -9,7 +9,7 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 
-alias n="nvim"
+alias n="neovide"
 alias cdroot='cd "$(git rev-parse --show-toplevel)"'
 
 source /usr/share/fzf/key-bindings.bash
