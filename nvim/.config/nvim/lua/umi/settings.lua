@@ -9,6 +9,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.wrap = false
 
 vim.opt.smartindent = true
 
@@ -25,7 +26,7 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 10
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 750
+vim.opt.updatetime = 500
 
 vim.g.mapleader = " "
 
@@ -87,6 +88,7 @@ end
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
+vim.opt.listchars:append("tab:| ")
 
 vim.cmd("augroup END")
 
