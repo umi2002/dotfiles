@@ -151,10 +151,27 @@ require("lazy").setup({
 			})
 		end,
 	},
+	{
+		"VidocqH/lsp-lens.nvim",
+		config = function()
+			require("lsp-lens").setup()
+		end,
+	},
+	{
+		"folke/twilight.nvim",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+	       config = function()
+	           require("twilight").setup({})
+	       end,
+	},
     {
-  'VidocqH/lsp-lens.nvim',
-    config = function()
-        require('lsp-lens').setup()
-        end
-    }
+        'NvChad/nvim-colorizer.lua',
+config = function()
+    require('colorizer').setup()
+end,
+    },
 })
