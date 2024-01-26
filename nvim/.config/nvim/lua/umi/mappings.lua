@@ -30,3 +30,5 @@ set("n", "<leader><CR>", "gf", opts)
 
 set("v", "<C-S-C>", '"+y', opts)
 set("n", "<C-S-V>", '"+p', opts)
+set("i", "<C-S-V>", '<C-O>"+p', opts)
+set("v", "<C-S-V>", '"+p', opts)
