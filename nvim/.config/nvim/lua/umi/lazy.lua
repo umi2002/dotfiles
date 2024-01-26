@@ -139,5 +139,8 @@ require("lazy").setup({
 			require("fidget").setup()
 		end,
 	},
-		"folke/todo-comments.nvim",
+    {
+        "folke/todo-comments.nvim",
+        opts = {},
+    }
 })
