@@ -164,15 +164,14 @@ require("lazy").setup({
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		},
-		config = function()
-			require("twilight").setup({})
-		end,
+	       config = function()
+	           require("twilight").setup({})
+	       end,
 	},
-	{
-		"NvChad/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup()
-		end,
-	},
-'Bekaboo/dropbar.nvim',
+    {
+        'NvChad/nvim-colorizer.lua',
+config = function()
+    require('colorizer').setup()
+end,
+    },
 })
