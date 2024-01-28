@@ -19,7 +19,6 @@ require("lazy").setup({
 		build = ":TSUpdate",
 	},
 	"nvim-lua/plenary.nvim",
-	"ThePrimeagen/harpoon",
 	"mbbill/undotree",
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
@@ -59,11 +58,10 @@ require("lazy").setup({
 	},
 	"numToStr/Comment.nvim",
 	"ahmedkhalf/project.nvim",
+	"nvim-telescope/telescope.nvim",
 	{
-		"ibhagwan/fzf-lua",
-		config = function()
-			require("fzf-lua").setup()
-		end,
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
 	"akinsho/toggleterm.nvim",
 	"akinsho/bufferline.nvim",
@@ -137,6 +135,41 @@ require("lazy").setup({
 		tag = "legacy",
 		config = function()
 			require("fidget").setup()
+		end,
+	},
+	{
+		"folke/todo-comments.nvim",
+		opts = {},
+	},
+	{
+		"kosayoda/nvim-lightbulb",
+		config = function()
+			require("nvim-lightbulb").setup({
+				autocmd = { enabled = true },
+			})
+		end,
+	},
+	{
+		"VidocqH/lsp-lens.nvim",
+		config = function()
+			require("lsp-lens").setup()
+		end,
+	},
+	{
+		"folke/twilight.nvim",
+		opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		},
+		config = function()
+			require("twilight").setup({})
+		end,
+	},
+	{
+		"NvChad/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
 		end,
 	},
 })
