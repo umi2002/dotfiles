@@ -59,7 +59,10 @@ require("lazy").setup({
 	"numToStr/Comment.nvim",
 	"ahmedkhalf/project.nvim",
 	"nvim-telescope/telescope.nvim",
-{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+	},
 	"akinsho/toggleterm.nvim",
 	"akinsho/bufferline.nvim",
 	"nvim-orgmode/orgmode",
