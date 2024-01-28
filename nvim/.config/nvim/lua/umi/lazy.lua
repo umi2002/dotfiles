@@ -58,12 +58,6 @@ require("lazy").setup({
 	},
 	"numToStr/Comment.nvim",
 	"ahmedkhalf/project.nvim",
-	{
-		"ibhagwan/fzf-lua",
-		config = function()
-			require("fzf-lua").setup()
-		end,
-	},
 	"nvim-telescope/telescope.nvim",
 { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' },
 	"akinsho/toggleterm.nvim",

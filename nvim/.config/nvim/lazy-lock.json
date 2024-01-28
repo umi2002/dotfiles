@@ -13,7 +13,6 @@
   "efmls-configs-nvim": { "branch": "main", "commit": "00f922e261519ffba7ea1c6a71adcb2319b093cb" },
   "fidget.nvim": { "branch": "main", "commit": "0ba1e16d07627532b6cae915cc992ecac249fb97" },
   "flash.nvim": { "branch": "main", "commit": "48817af25f51c0590653bbc290866e4890fe1cbe" },
-  "fzf-lua": { "branch": "main", "commit": "5474df3a722b0efbeb9f47d0b2fdbce7d2ff258e" },
   "gitsigns.nvim": { "branch": "main", "commit": "2c2463dbd82eddd7dbab881c3a62cfbfbe3c67ae" },
   "headlines.nvim": { "branch": "master", "commit": "e3d7bfdf40e41a020d966d35f8b48d75b90367d2" },
   "hover.nvim": { "branch": "main", "commit": "4d04667cf3d6b22379e02ccef6a2fdc6e8837d56" },
