@@ -1,7 +1,6 @@
 local lsp = require("lspconfig")
 
 local lsp_attach = function()
-	local opts = { noremap = true, lent = true, buffer = 0 }
 	vim.keymap.set("n", "<leader>tt", function()
 		require("trouble").open()
 	end)
@@ -20,12 +19,12 @@ local lsp_attach = function()
 	vim.keymap.set("n", "gR", function()
 		require("trouble").open("lsp_references")
 	end)
-	vim.keymap.set("n", "<leader>df", require("telescope.builtin").lsp_definitions, opts)
-	vim.keymap.set("n", "<leader>rf", require("telescope.builtin").lsp_references, opts)
-	vim.keymap.set("n", "<leader>tf", require("telescope.builtin").lsp_dynamic_workspace_symbols, opts)
-	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-	vim.keymap.set("n", "<leader>kd", vim.diagnostic.goto_prev, opts)
-	vim.keymap.set("n", "<leader>jd", vim.diagnostic.goto_next, opts)
+	vim.keymap.set("n", "<leader>df", require("telescope.builtin").lsp_definitions)
+	vim.keymap.set("n", "<leader>rf", require("telescope.builtin").lsp_references)
+	vim.keymap.set("n", "<leader>tf", require("telescope.builtin").lsp_dynamic_workspace_symbols)
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+	vim.keymap.set("n", "<leader>kd", vim.diagnostic.goto_prev)
+	vim.keymap.set("n", "<leader>jd", vim.diagnostic.goto_next)
 end
 
 local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
