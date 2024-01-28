@@ -26,9 +26,9 @@ project.setup({
 		".bzr",
 		".svn",
 		"Makefile",
-        "CMakeLists.txt",
+		"CMakeLists.txt",
 		"package.json",
-		"angular.json"
+		"angular.json",
 	},
 	---@ Show hidden files in telescope when searching for files in a project
 	show_hidden = false,
