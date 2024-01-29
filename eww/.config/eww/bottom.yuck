@@ -59,7 +59,7 @@
 
 (deflisten song-duration "bash ~/.config/eww/scripts/get-duration.sh")
 (defpoll song-progress :interval "1s"
-  `playerctl -p cider position`)
+  `playerctl -p spotify position`)
 
 (defwidget song-progress []
   (box :class "song-progress" :halign "center" :vexpand "false" :hexpand "false"
@@ -69,7 +69,7 @@
            :min 0
            :max song-duration
            :width 200
-           :onchange "playerctl -p cider position {}%"
+           :onchange "playerctl -p spotify position {}%"
     )
   )
 )
@@ -100,7 +100,7 @@
 )
 
 (defwidget prev-song []
-  (eventbox :onclick "playerctl -p cider previous"
+  (eventbox :onclick "playerctl -p spotify previous"
             :hexpand true
             :halign "start"
             (label :text " 󰙣 ")
@@ -108,7 +108,7 @@
 )
 
 (defwidget next-song []
-  (eventbox :onclick "playerctl -p cider next"
+  (eventbox :onclick "playerctl -p spotify next"
             :hexpand true
             :halign "end"
             (label :text " 󰙡 ")
