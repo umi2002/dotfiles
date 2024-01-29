@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Get the position (in seconds)
-position_seconds=`playerctl -p cider position`
+position_seconds=`playerctl -p spotify position`
 
 # Get the length (in microseconds)
-length_micros=`playerctl -p cider metadata mpris:length`
+length_micros=`playerctl -p spotify metadata mpris:length`
 
 # Convert the length to seconds
 length_seconds=$(echo "$length_micros / 1000000" | bc -l)

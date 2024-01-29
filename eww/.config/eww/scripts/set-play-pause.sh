@@ -1,8 +1,8 @@
 #!/bin/bash
 
-status=$(playerctl -p cider status)
+status=$(playerctl -p spotify status)
 if [[ "$status" == "Playing" ]] ; then
-    playerctl -p cider pause
+    playerctl -p spotify pause
 elif [[ "$status" == "Paused" ]] ; then
-    playerctl -p cider play
+    playerctl -p spotify play
 fi
