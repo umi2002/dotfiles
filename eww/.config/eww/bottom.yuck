@@ -69,7 +69,7 @@
            :min 0
            :max song-duration
            :width 200
-           :onchange "playerctl -p spotify position {}%"
+           :onchange "bash ~/.config/eww/scripts/set-progress.sh {}"
     )
   )
 )
