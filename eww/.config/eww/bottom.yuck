@@ -6,8 +6,8 @@
            :stacking "fg"
            (eventbox :orientation "h"
                      :halign "center"
-                     :onhover "bash ~/.config/eww/scripts/open-art.sh"
-                     :onhoverlost "bash ~/.config/eww/scripts/close-art.sh"
+                     :onhover `eww update art-visible=true`
+                     :onhoverlost `eww update art-visible=false`
                      (box :orientation "v"
                           :space-evenly false
                           :halign "center"
@@ -123,8 +123,8 @@
            :stacking "fg"
            (eventbox :orientation "h"
                      :halign "center"
-                     :onhover "bash ~/.config/eww/scripts/set-volume-slider.sh"
-                     :onhoverlost "bash ~/.config/eww/scripts/set-volume-slider.sh"
+                     :onhover `eww update volume-visible=true`
+                     :onhoverlost `eww update volume-visible=false`
                      (box :orientation "v"
                           :space-evenly false
                           (volume-revealer)
