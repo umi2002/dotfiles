@@ -6,8 +6,8 @@
            :stacking "fg"
            (eventbox :orientation "h"
                      :halign "center"
-                     :onhover "bash ~/.config/eww/scripts/set-art.sh"
-                     :onhoverlost "bash ~/.config/eww/scripts/set-art.sh"
+                     :onhover `eww update art-visible=true && touch /tmp/user_action_flag`
+                     :onhoverlost `eww update art-visible=false && rm /tmp/user_action_flag`
                      (box :orientation "v"
                           :space-evenly false
                           :halign "center"
@@ -69,7 +69,7 @@
            :min 0
            :max song-duration
            :width 200
-           :onchange "playerctl -p spotify position {}%"
+           :onchange "bash ~/.config/eww/scripts/set-progress.sh {}"
     )
   )
 )
@@ -90,7 +90,7 @@
 )
 
 (defvar art-visible false)
-(defvar song-path "/home/umi/.config/eww/scripts/temp.jpg")
+(defvar song-path "/tmp/spotify-art.png")
 
 (defwidget song-art []
   (image :path song-path
@@ -123,8 +123,8 @@
            :stacking "fg"
            (eventbox :orientation "h"
                      :halign "center"
-                     :onhover "bash ~/.config/eww/scripts/set-volume-slider.sh"
-                     :onhoverlost "bash ~/.config/eww/scripts/set-volume-slider.sh"
+                     :onhover `eww update volume-visible=true`
+                     :onhoverlost `eww update volume-visible=false`
                      (box :orientation "v"
                           :space-evenly false
                           (volume-revealer)
