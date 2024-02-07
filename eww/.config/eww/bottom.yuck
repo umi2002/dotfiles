@@ -6,8 +6,8 @@
            :stacking "fg"
            (eventbox :orientation "h"
                      :halign "center"
-                     :onhover "bash ~/.config/eww/scripts/set-art.sh"
-                     :onhoverlost "bash ~/.config/eww/scripts/set-art.sh"
+                     :onhover "bash ~/.config/eww/scripts/open-art.sh"
+                     :onhoverlost "bash ~/.config/eww/scripts/close-art.sh"
                      (box :orientation "v"
                           :space-evenly false
                           :halign "center"
