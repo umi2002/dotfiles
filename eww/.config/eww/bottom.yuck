@@ -90,7 +90,7 @@
 )
 
 (defvar art-visible false)
-(defvar song-path "/home/umi/.config/eww/scripts/temp.jpg")
+(defvar song-path "/tmp/spotify-art.png")
 
 (defwidget song-art []
   (image :path song-path
