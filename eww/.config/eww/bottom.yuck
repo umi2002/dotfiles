@@ -59,7 +59,7 @@
 
 (deflisten song-duration "bash ~/.config/eww/scripts/get-duration.sh")
 (defpoll song-progress :interval "1s"
-  `playerctl -p spotify position`)
+  `playerctl -p spotify position && rm /tmp/user_action_flag`)
 
 (defwidget song-progress []
   (box :class "song-progress" :halign "center" :vexpand "false" :hexpand "false"
