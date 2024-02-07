@@ -6,8 +6,8 @@
            :stacking "fg"
            (eventbox :orientation "h"
                      :halign "center"
-                     :onhover `eww update art-visible=true`
-                     :onhoverlost `eww update art-visible=false`
+                     :onhover `eww update art-visible=true && touch /tmp/user_action_flag`
+                     :onhoverlost `eww update art-visible=false && rm /tmp/user_action_flag`
                      (box :orientation "v"
                           :space-evenly false
                           :halign "center"
