@@ -150,7 +150,6 @@ return {
 
 			lsp.jdtls.setup({
 				cmd = {
-					--
 					"java",
 					"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 					"-Dosgi.bundles.defaultStartLevel=4",
@@ -241,55 +240,6 @@ return {
 			}))
 		end,
 	},
-	{
-		"williamboman/mason.nvim", -- Optional
-		config = function()
-			require("mason").setup()
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		opts = {
-			ensure_installed = {
-				"lua_ls",
-				"marksman",
-				"cssls",
-				"html",
-				"tsserver",
-				"jsonls",
-				"bashls",
-				"rust_analyzer",
-				"texlab",
-				"pyright",
-				"jdtls",
-				"cmake",
-				"angularls",
-			},
-		},
-	},
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		opts = {
-			ensure_installed = {
-				"efm",
-				"stylua",
-				"prettierd",
-				"beautysh",
-				"clang-format",
-				"beautysh",
-				"latexindent",
-				"autopep8",
-				"js-debug-adapter",
-				"java-debug-adapter",
-				"java-test",
-				"eslint_d",
-				"cmakelang",
-				"gersemi",
-			},
-
-			auto_update = true,
-		},
-	},
 	{ "creativenull/efmls-configs-nvim" },
 	{
 		"kosayoda/nvim-lightbulb",
@@ -306,8 +256,7 @@ return {
 		end,
 	},
 	{
-        "elkowar/yuck.vim",
-        config = function()
-        end,
-    },
+		"elkowar/yuck.vim",
+		config = function() end,
+	},
 }
