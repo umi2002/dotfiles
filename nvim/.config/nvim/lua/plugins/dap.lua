@@ -2,7 +2,7 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		config = function()
-			local dap = require("dap")
+			local dap, dapui = require("dap"), require("dapui")
 			dap.adapters.codelldb = {
 				type = "server",
 				port = "${port}",
@@ -149,14 +149,19 @@ return {
 			vim.keymap.set("n", "<leader>ri", function()
 				dap.step_into()
 			end)
+
+			vim.keymap.set("n", "<leader>rt", function()
+				dapui.toggle()
+			end)
 		end,
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
-		config = function() end,
+		config = true,
 	},
 	{
 		"rcarriga/nvim-dap-ui",
+		dependencies = "nvim-dap",
 		opts = {
 			controls = {
 				element = "repl",
@@ -238,9 +243,5 @@ return {
 				max_value_lines = 100,
 			},
 		},
-
-vim.keymap.set("n", "<leader>rt", function()
-	dapui.toggle()
-end)
 	},
 }

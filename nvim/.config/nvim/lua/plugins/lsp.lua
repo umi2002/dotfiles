@@ -240,23 +240,14 @@ return {
 			}))
 		end,
 	},
-	{ "creativenull/efmls-configs-nvim" },
+	{"creativenull/efmls-configs-nvim"},
 	{
 		"kosayoda/nvim-lightbulb",
-		config = function()
-			require("nvim-lightbulb").setup({
-				autocmd = { enabled = true },
-			})
-		end,
+		config = true
 	},
 	{
 		"VidocqH/lsp-lens.nvim",
-		config = function()
-			require("lsp-lens").setup()
-		end,
+		config = true,
 	},
-	{
-		"elkowar/yuck.vim",
-		config = function() end,
-	},
+	{"elkowar/yuck.vim"},
 }

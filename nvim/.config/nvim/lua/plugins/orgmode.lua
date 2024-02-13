@@ -20,13 +20,14 @@ return {
 				},
 			},
 		},
-		config = function()
+		config = function(_, opts)
+            require("orgmode").setup(opts)
 			require("orgmode").setup_ts_grammar()
-require("headlines").setup({
-	org = {
-		headline_highlights = false,
-	},
-})
+			require("headlines").setup({
+				org = {
+					headline_highlights = false,
+				},
+			})
 		end,
 	},
 }

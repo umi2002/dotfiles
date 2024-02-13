@@ -46,33 +46,36 @@ return {
 			specs = {},
 			groups = {},
 		},
-		config = function()
+		config = function(_, opts)
+			require("nightfox").setup(opts)
+
 			vim.cmd("colorscheme nightfox")
 		end,
 	},
 	{
 		"NvChad/nvim-colorizer.lua",
-		config = function() end,
+		config = true,
 	},
 	{
 		"folke/twilight.nvim",
-		config = function() end,
+		config = true,
 	},
 	{
 		"gbprod/yanky.nvim",
-		config = function() end,
+		config = true,
 	},
 	{
 		"j-hui/fidget.nvim",
 		tag = "legacy",
-		config = function() end,
+		config = true,
 	},
 	{
 		"lukas-reineke/headlines.nvim",
+        config = true,
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		config = function()
-		end,
+        main = "ibl",
+		config = true,
 	},
 }

@@ -1,10 +1,14 @@
 return {
 	{
 		"williamboman/mason.nvim",
-		config = function() end,
+        config = true,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
+        },
 		opts = {
 			ensure_installed = {
 				"lua_ls",
@@ -25,6 +29,10 @@ return {
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
+        },
 		opts = {
 			ensure_installed = {
 				"efm",

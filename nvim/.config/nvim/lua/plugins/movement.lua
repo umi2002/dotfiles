@@ -1,7 +1,8 @@
 return {
 	{
 		"folke/flash.nvim",
-		config = function() end,
+        event = "VeryLazy",
+		config = true,
 	},
 	{
 		"ggandor/leap.nvim",
