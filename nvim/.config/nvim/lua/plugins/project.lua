@@ -1,3 +1,8 @@
+return {
+    {
+	"ahmedkhalf/project.nvim",
+    config = function()
+
 local status_ok, project = pcall(require, "project_nvim")
 if not status_ok then
 	return
@@ -41,3 +46,6 @@ project.setup({
 	---@usage path to store the project history for use in telescope
 	datapath = vim.fn.stdpath("data"),
 })
+end
+    }
+}
