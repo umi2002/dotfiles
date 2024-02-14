@@ -26,8 +26,8 @@ return {
 				vim.keymap.set("n", "<leader>rf", require("telescope.builtin").lsp_references)
 				vim.keymap.set("n", "<leader>tf", require("telescope.builtin").lsp_dynamic_workspace_symbols)
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
-				vim.keymap.set("n", "<leader>kd", vim.diagnostic.goto_prev)
-				vim.keymap.set("n", "<leader>jd", vim.diagnostic.goto_next)
+				vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev)
+				vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next)
 			end
 
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
