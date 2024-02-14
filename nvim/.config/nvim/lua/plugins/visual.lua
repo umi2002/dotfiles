@@ -21,15 +21,15 @@ return {
 				},
 				styles = {
 					-- Style to be applied to different syntax groups
-					comments = "NONE", -- Value is any valid attr-list value `:help attr-list`
-					conditionals = "NONE",
-					constants = "NONE",
-					functions = "NONE",
-					keywords = "NONE",
+					comments = "italic", -- Value is any valid attr-list value `:help attr-list`
+					conditionals = "bold",
+					constants = "underline",
+					functions = "bold, italic",
+					keywords = "bold",
 					numbers = "NONE",
 					operators = "NONE",
-					strings = "NONE",
-					types = "NONE",
+					strings = "italic",
+					types = "bold, underline",
 					variables = "NONE",
 				},
 				inverse = {
@@ -49,7 +49,7 @@ return {
 		config = function(_, opts)
 			require("nightfox").setup(opts)
 
-			vim.cmd("colorscheme nightfox")
+			vim.cmd("colorscheme duskfox")
 		end,
 	},
 	{
@@ -71,11 +71,11 @@ return {
 	},
 	{
 		"lukas-reineke/headlines.nvim",
-        config = true,
+		config = true,
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
+		main = "ibl",
 		config = true,
 	},
 }
