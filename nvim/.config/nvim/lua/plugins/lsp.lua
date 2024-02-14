@@ -240,14 +240,14 @@ return {
 			}))
 		end,
 	},
-	{"creativenull/efmls-configs-nvim"},
+	{ "creativenull/efmls-configs-nvim" },
 	{
 		"kosayoda/nvim-lightbulb",
-		config = true
+		config = true,
 	},
 	{
 		"VidocqH/lsp-lens.nvim",
 		config = true,
 	},
-	{"elkowar/yuck.vim"},
+	{ "elkowar/yuck.vim" },
 }
