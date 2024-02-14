@@ -18,6 +18,7 @@ return {
 		config = function(_, opts)
 			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("projects")
+            require("telescope").load_extension("ui-select")
 
 			local builtin = require("telescope.builtin")
 			local projects = require("telescope").extensions.projects
@@ -66,4 +67,5 @@ return {
 		"nvim-telescope/telescope-fzf-native.nvim",
 		build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
 	},
+	{ "nvim-telescope/telescope-ui-select.nvim" },
 }
