@@ -19,7 +19,7 @@ git merge --no-commit --no-ff "$branch_to_merge" || exit 1
 
 # Reset the specified path
 git reset -- "$path_to_exclude" || exit 1
-git restore --staged -- "$path_to_exclude" || exit 1
+git restore -- "$path_to_exclude" || exit 1
 
 # Check if there are staged changes to commit
 if [ -z "$(git diff --cached --name-only)" ]; then
