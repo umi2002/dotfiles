@@ -29,9 +29,4 @@ return {
 			vim.keymap.set("n", "<leader>cl", "<CMD> VimtexCompile <CR>")
 		end,
 	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-	},
 }
