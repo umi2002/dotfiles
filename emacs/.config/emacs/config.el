@@ -108,6 +108,9 @@
 :height 110
 :weight 'medium)
 
+(add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
+  (load-theme 'duskfox)
+
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)

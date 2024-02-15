@@ -131,6 +131,13 @@
 #+end_src
 
 * GRAPHICAL USER INTERFACE TWEAKS
+** Theme
+
+#+begin_src emacs-lisp
+  (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
+    (load-theme 'duskfox)
+#+end_src
+
 ** Disable Menubar, Toolbars and Scrollbars
 
 #+begin_src emacs-lisp
