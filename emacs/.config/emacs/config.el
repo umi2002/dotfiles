@@ -76,3 +76,21 @@
 
     ;; Don't install anything. Defer execution of BODY
     (elpaca nil (message "deferred"))
+
+(use-package general
+  :config
+  (general-evil-setup)
+  (general-create-definer leader-keys
+  :states '(normal insert visual emacs)
+  :keymaps 'override
+  :prefix "SPC"
+  :global-prefix "M-SPC")
+
+(general-define-key
+:states '(normal visual)
+  :keyamps 'override
+"C-h" '(previous-buffer :wk "Previous buffer")
+"C-l" '(next-buffer :wk "Next buffer")
+"C-w" '(kill-this-buffer :wk "Kill this buffer"))
+
+  )
