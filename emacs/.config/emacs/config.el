@@ -87,7 +87,12 @@
   :global-prefix "M-SPC")
 
 (leader-keys
+"f" '(find-file :wk "Find file")
+"c f" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config"))
+
+(leader-keys
   "b" '(:ignore t :wk "buffer")
+  "bi" '(ibuffer :wk "Ibuffer")
   "bb" '(switch-to-buffer :wk "Switch buffer")
   "bk" '(kill-this-buffer :wk "Kill this buffer")
   "bn" '(next-buffer :wk "Next buffer")
@@ -100,6 +105,11 @@
 "vd" '(eval-defun :wk "Evaluate defun containing or after a point")
 "ve" '(eval-expression :wk "Evaluate an elips expression")
 "vr" '(eval-region :wk "Evaluate elisp region"))
+
+(leader-keys
+"x" '(:ignore t :wk "Export")
+"xm" '(org-md-export-as-markdown :wk "Export as markdown"))
+
 )
 
 (set-face-attribute 'default nil

@@ -122,6 +122,11 @@
   "vd" '(eval-defun :wk "Evaluate defun containing or after a point")
   "ve" '(eval-expression :wk "Evaluate an elips expression")
   "vr" '(eval-region :wk "Evaluate elisp region"))
+
+  (leader-keys
+  "x" '(:ignore t :wk "Export")
+  "xm" '(org-md-export-as-markdown :wk "Export as markdown"))
+
   )
 #+end_src
 
