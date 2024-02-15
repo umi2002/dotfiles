@@ -128,3 +128,20 @@
   :height 110
   :weight 'medium)
 #+end_src
+
+* GRAPHICAL USER INTERFACE TWEAKS
+** Disable Menubar, Toolbars and Scrollbars
+
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+#+end_src
+
+** Display relative line numbers and truncated lines
+
+#+begin_src emacs-lisp
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'relative)
+(global-visual-line-mode t)
+#+end_src
