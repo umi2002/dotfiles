@@ -78,39 +78,62 @@
     ;;(elpaca nil (message "deferred"))
 
 (use-package general
-  :config
-  (general-evil-setup)
-  (general-create-definer leader-keys
-  :states '(normal insert visual emacs)
+    :config
+    (general-evil-setup)
+
+    (general-create-definer leader-keys
+    :states '(normal insert visual emacs)
+    :keymaps 'override
+    :prefix "SPC"
+    :global-prefix "M-SPC")
+
+  (general-create-definer comment-leader-normal
+  :states '(normal)
   :keymaps 'override
-  :prefix "SPC"
-  :global-prefix "M-SPC")
+  :prefix "gc")
+
+  (general-create-definer comment-leader-visual
+  :states '(visual)
+  :keymaps 'override
+  :prefix "gc")
 
 (leader-keys
-"f" '(find-file :wk "Find file")
-"c f" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config"))
+"." '((lambda () (interactive) (load-file user-init-file)) :wk "Reload config"))
+
+  (leader-keys
+  "f" '(find-file :wk "Find file")
+  "c f" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config"))
+
+  (leader-keys
+    "b" '(:ignore t :wk "buffer")
+    "bi" '(ibuffer :wk "Ibuffer")
+    "bb" '(switch-to-buffer :wk "Switch buffer")
+    "bk" '(kill-this-buffer :wk "Kill this buffer")
+    "bn" '(next-buffer :wk "Next buffer")
+    "bp" '(previous-buffer :wk "Previous buffer")
+    "br" '(revert-buffer :wk "Reload buffer"))
+
+  (leader-keys
+  "v" '(:ignore t :wk "Evaluate")
+  "vb" '(eval-buffer :wk "Evaluate elisp in buffer")
+  "vd" '(eval-defun :wk "Evaluate defun containing or after a point")
+  "ve" '(eval-expression :wk "Evaluate an elips expression")
+  "vr" '(eval-region :wk "Evaluate elisp region"))
+
+  (leader-keys
+  "x" '(:ignore t :wk "Export")
+  "xm" '(org-md-export-as-markdown :wk "Export as markdown"))
 
 (leader-keys
-  "b" '(:ignore t :wk "buffer")
-  "bi" '(ibuffer :wk "Ibuffer")
-  "bb" '(switch-to-buffer :wk "Switch buffer")
-  "bk" '(kill-this-buffer :wk "Kill this buffer")
-  "bn" '(next-buffer :wk "Next buffer")
-  "bp" '(previous-buffer :wk "Previous buffer")
-  "br" '(revert-buffer :wk "Reload buffer"))
+"h" '(:ignore t :wk "Help")
+"hf" '(describe-function :wk "Describe function")
+"hv" '(describe-variable :wk "Describe variable"))
 
-(leader-keys
-"v" '(:ignore t :wk "Evaluate")
-"vb" '(eval-buffer :wk "Evaluate elisp in buffer")
-"vd" '(eval-defun :wk "Evaluate defun containing or after a point")
-"ve" '(eval-expression :wk "Evaluate an elips expression")
-"vr" '(eval-region :wk "Evaluate elisp region"))
+  (comment-leader-normal
+ "" '(:ignore t :wk "Comment")
+"c" '(comment-line :wk "Comment line"))
 
-(leader-keys
-"x" '(:ignore t :wk "Export")
-"xm" '(org-md-export-as-markdown :wk "Export as markdown"))
-
-)
+   )
 
 (set-face-attribute 'default nil
 :font "FiraMono Nerd Font"

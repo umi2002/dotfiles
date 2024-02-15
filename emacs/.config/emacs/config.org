@@ -114,6 +114,9 @@
     :keymaps 'override
     :prefix "gc")
 
+  (leader-keys
+  "." '((lambda () (interactive) (load-file user-init-file)) :wk "Reload config"))
+
     (leader-keys
     "f" '(find-file :wk "Find file")
     "c f" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config"))
