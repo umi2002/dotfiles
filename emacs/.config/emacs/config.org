@@ -105,6 +105,7 @@
 
   (leader-keys
     "b" '(:ignore t :wk "buffer")
+    "bi" '(ibuffer :wk "Ibuffer")
     "bb" '(switch-to-buffer :wk "Switch buffer")
     "bk" '(kill-this-buffer :wk "Kill this buffer")
     "bn" '(next-buffer :wk "Next buffer")
