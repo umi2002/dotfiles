@@ -140,7 +140,7 @@
 
     (comment-leader-normal
    "" '(:ignore t :wk "Comment")
-  " '(comment-line :wk "Comment line"))
+  "c" '(comment-line :wk "Comment line"))
 
      )
 #+end_src
