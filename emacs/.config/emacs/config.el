@@ -92,5 +92,17 @@
 "C-h" '(previous-buffer :wk "Previous buffer")
 "C-l" '(next-buffer :wk "Next buffer")
 "C-w" '(kill-this-buffer :wk "Kill this buffer"))
-
   )
+
+(set-face-attribute 'default nil
+:font "FiraMono Nerd Font"
+:height 110
+:weight 'medium)
+(set-face-attribute 'variable-pitch nil
+:font "Roboto"
+:height 120
+:weight 'medium)
+(set-face-attribute 'fixed-pitch nil
+:font "FiraMono Nerd Font"
+:height 110
+:weight 'medium)
