@@ -166,3 +166,20 @@
 	  which-key-allow-imprecise-window-fit t
 	  which-key-separator " → " ))
 #+end_src
+
+* ORG MODE
+** Enable Table of Contents
+
+#+begin_src emacs-lisp
+  (use-package toc-org
+  :commands toc-org-enable
+  :init (add-hook 'org-mode-hook 'toc-org-enable))
+#+end_src
+
+** Enable Org Bullets
+
+#+begin_src emacs-lisp
+(add-hook 'org-mode-hook 'org-indent-mode)
+(use-package org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode t)))
+#+end_src
