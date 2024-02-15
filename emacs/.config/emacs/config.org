@@ -94,40 +94,55 @@
 ** General Keybindings
 
 #+begin_src emacs-lisp
-    (use-package general
-    :config
-    (general-evil-setup)
-    (general-create-definer leader-keys
-    :states '(normal insert visual emacs)
+      (use-package general
+      :config
+      (general-evil-setup)
+
+      (general-create-definer leader-keys
+      :states '(normal insert visual emacs)
+      :keymaps 'override
+      :prefix "SPC"
+      :global-prefix "M-SPC")
+
+    (general-create-definer comment-leader-normal
+    :states '(normal)
     :keymaps 'override
-    :prefix "SPC"
-    :global-prefix "M-SPC")
+    :prefix "gc")
 
-  (leader-keys
-  "f" '(find-file :wk "Find file")
-  "c f" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config"))
+    (general-create-definer comment-leader-visual
+    :states '(visual)
+    :keymaps 'override
+    :prefix "gc")
 
-  (leader-keys
-    "b" '(:ignore t :wk "buffer")
-    "bi" '(ibuffer :wk "Ibuffer")
-    "bb" '(switch-to-buffer :wk "Switch buffer")
-    "bk" '(kill-this-buffer :wk "Kill this buffer")
-    "bn" '(next-buffer :wk "Next buffer")
-    "bp" '(previous-buffer :wk "Previous buffer")
-    "br" '(revert-buffer :wk "Reload buffer"))
+    (leader-keys
+    "f" '(find-file :wk "Find file")
+    "c f" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config"))
 
-  (leader-keys
-  "v" '(:ignore t :wk "Evaluate")
-  "vb" '(eval-buffer :wk "Evaluate elisp in buffer")
-  "vd" '(eval-defun :wk "Evaluate defun containing or after a point")
-  "ve" '(eval-expression :wk "Evaluate an elips expression")
-  "vr" '(eval-region :wk "Evaluate elisp region"))
+    (leader-keys
+      "b" '(:ignore t :wk "buffer")
+      "bi" '(ibuffer :wk "Ibuffer")
+      "bb" '(switch-to-buffer :wk "Switch buffer")
+      "bk" '(kill-this-buffer :wk "Kill this buffer")
+      "bn" '(next-buffer :wk "Next buffer")
+      "bp" '(previous-buffer :wk "Previous buffer")
+      "br" '(revert-buffer :wk "Reload buffer"))
 
-  (leader-keys
-  "x" '(:ignore t :wk "Export")
-  "xm" '(org-md-export-as-markdown :wk "Export as markdown"))
+    (leader-keys
+    "v" '(:ignore t :wk "Evaluate")
+    "vb" '(eval-buffer :wk "Evaluate elisp in buffer")
+    "vd" '(eval-defun :wk "Evaluate defun containing or after a point")
+    "ve" '(eval-expression :wk "Evaluate an elips expression")
+    "vr" '(eval-region :wk "Evaluate elisp region"))
 
-  )
+    (leader-keys
+    "x" '(:ignore t :wk "Export")
+    "xm" '(org-md-export-as-markdown :wk "Export as markdown"))
+
+    (comment-leader-normal
+   "" '(:ignore t :wk "Comment")
+  " '(comment-line :wk "Comment line"))
+
+     )
 #+end_src
 
 * FONTS 
