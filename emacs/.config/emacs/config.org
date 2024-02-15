@@ -142,7 +142,7 @@
 
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
-    (load-theme 'duskfox)
+    (load-theme 'duskfox t)
 #+end_src
 
 ** Disable Menubar, Toolbars and Scrollbars
