@@ -104,6 +104,10 @@
     :global-prefix "M-SPC")
 
   (leader-keys
+  "f" '(find-file :wk "Find file")
+  "c f" '((lambda () (interactive) (find-file "~/.config/emacs/config.org")) :wk "Edit emacs config"))
+
+  (leader-keys
     "b" '(:ignore t :wk "buffer")
     "bi" '(ibuffer :wk "Ibuffer")
     "bb" '(switch-to-buffer :wk "Switch buffer")
