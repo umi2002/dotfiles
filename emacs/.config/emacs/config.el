@@ -75,7 +75,7 @@
     (use-package emacs :ensure nil :config (setq ring-bell-function #'ignore))
 
     ;; Don't install anything. Defer execution of BODY
-    (elpaca nil (message "deferred"))
+    ;;(elpaca nil (message "deferred"))
 
 (use-package general
   :config
@@ -93,6 +93,13 @@
   "bn" '(next-buffer :wk "Next buffer")
   "bp" '(previous-buffer :wk "Previous buffer")
   "br" '(revert-buffer :wk "Reload buffer"))
+
+(leader-keys
+"v" '(:ignore t :wk "Evaluate")
+"vb" '(eval-buffer :wk "Evaluate elisp in buffer")
+"vd" '(eval-defun :wk "Evaluate defun containing or after a point")
+"ve" '(eval-expression :wk "Evaluate an elips expression")
+"vr" '(eval-region :wk "Evaluate elisp region"))
 )
 
 (set-face-attribute 'default nil
@@ -109,7 +116,7 @@
 :weight 'medium)
 
 (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
-  (load-theme 'duskfox)
+  (load-theme 'duskfox t)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
