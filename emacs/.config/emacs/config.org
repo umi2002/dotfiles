@@ -138,6 +138,11 @@
     "x" '(:ignore t :wk "Export")
     "xm" '(org-md-export-as-markdown :wk "Export as markdown"))
 
+  (leader-keys
+  "h" '(:ignore t :wk "Help")
+  "hf" '(describe-function :wk "Describe function")
+  "hv" '(describe-variable :wk "Describe variable"))
+
     (comment-leader-normal
    "" '(:ignore t :wk "Comment")
   "c" '(comment-line :wk "Comment line"))
