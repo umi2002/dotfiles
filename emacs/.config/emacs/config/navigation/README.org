@@ -24,7 +24,7 @@
   (define-key helm-map (kbd "C-j") 'helm-next-line)
 #+end_src
 
-* Git extension
+** Git extension
 
 #+begin_src emacs-lisp
   (use-package helm-ls-git
