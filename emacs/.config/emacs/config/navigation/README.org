@@ -2,9 +2,8 @@
 #+AUTHOR: umi
 #+STARTUP: overview
 
-* FILE NAVIGATION
-** Helm
-*** Installation
+* Helm
+** Installation
 
 #+begin_src emacs-lisp
 (use-package helm
@@ -13,19 +12,19 @@
 (elpaca-wait)
 #+end_src
 
-*** Config
+** Config
 
 #+begin_src emacs-lisp
   (setq helm-move-to-line-cycle-in-source nil)
 #+end_src
 
-*** Keybinds
+** Keybinds
 #+begin_src emacs-lisp
   (define-key helm-map (kbd "C-k") 'helm-previous-line)
   (define-key helm-map (kbd "C-j") 'helm-next-line)
 #+end_src
 
-** Git extension
+* Git extension
 
 #+begin_src emacs-lisp
   (use-package helm-ls-git
@@ -34,6 +33,7 @@
   (elpaca-wait)
 #+end_src
 
+* FILE NAVIGATION
 ** Keybinds
 
 #+begin_src emacs-lisp
