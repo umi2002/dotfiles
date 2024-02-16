@@ -1,3 +1,8 @@
+(use-package helm
+:ensure t
+:demand t)
+(elpaca-wait)
+
 (leader-key
 "f" '(find-file :wk "Find file")
 "c f" '((lambda () (interactive) (find-file "~/.config/emacs/config/README.org")) :wk "Edit emacs config"))

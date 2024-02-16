@@ -3,6 +3,16 @@
 #+STARTUP: overview
 
 * FILE NAVIGATION
+** Helm
+*** Installation
+
+#+begin_src emacs-lisp
+(use-package helm
+:ensure t
+:demand t)
+(elpaca-wait)
+#+end_src
+
 ** Keybinds
 
 #+begin_src emacs-lisp
