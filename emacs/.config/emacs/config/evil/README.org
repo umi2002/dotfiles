@@ -1,0 +1,47 @@
+#+TITLE: Evil config
+#+AUTHOR: umi
+#+STARTUP: overview
+
+* EVIL
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package evil
+  :ensure t
+  :demand t
+  :init
+      (setq evil-want-keybinding nil))
+  (elpaca-wait)
+#+end_src
+
+** Config
+*** Emacs integration
+
+#+begin_src
+      (setq evil-want-integration t)
+#+end_src
+
+*** Autostart evil mode
+
+#+begin_src emacs-lisp
+      (evil-mode)
+#+end_src
+
+* EVIL COLLECTION
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package evil-collection
+  :after evil
+  :ensure t
+  :demand t)
+  (elpaca-wait)
+#+end_src
+
+** Config
+*** Setup
+
+#+begin_src emacs-lisp
+      (setq evil-collection-mode-list '(dashboard dired ibuffer))
+      (evil-collection-init)
+#+end_src

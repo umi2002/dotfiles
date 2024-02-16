@@ -1,0 +1,95 @@
+#+TITLE: Emacs config
+#+AUTHOR: umi
+#+DESCRIPTION: My personal Emacs config
+#+STARTUP: overview
+
+* IMPORTANT PROGRAMS TO LOAD FIRST
+** Elpaca Package Manager
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/elpaca/README.org"
+    user-emacs-directory))
+#+end_src
+
+** Load Evil Mode
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/evil/README.org"
+    user-emacs-directory))
+#+end_src
+
+** General.el Keybindings
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/general-el/README.org"
+    user-emacs-directory))
+#+end_src
+
+* UTILITIES
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/utilities/README.org"
+    user-emacs-directory))
+#+end_src
+
+* NAVIGATION
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/navigation/README.org"
+    user-emacs-directory))
+#+end_src
+
+* COMMENTS
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/comments/README.org"
+    user-emacs-directory))
+#+end_src
+
+* VISUALS
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/visuals/README.org"
+    user-emacs-directory))
+#+end_src
+
+* UI
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/ui/README.org"
+    user-emacs-directory))
+#+end_src
+
+* WHICH-KEY
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/which-key/README.org"
+    user-emacs-directory))
+#+end_src
+
+* ORG MODE
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/orgmode/README.org"
+    user-emacs-directory))
+#+end_src

@@ -1,0 +1,19 @@
+#+TITLE: User interface config
+#+AUTHOR: umi
+#+STARTUP: overview
+
+* UTILITY BARS
+
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+#+end_src
+
+* LINES
+
+#+begin_src emacs-lisp
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'relative)
+(global-visual-line-mode t)
+#+end_src
