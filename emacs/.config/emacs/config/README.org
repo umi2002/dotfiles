@@ -93,3 +93,12 @@
   "config/orgmode/README.org"
     user-emacs-directory))
 #+end_src
+
+* PROJECT MANAGEMENT
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/project/README.org"
+    user-emacs-directory))
+#+end_src

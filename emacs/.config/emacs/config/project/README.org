@@ -1,0 +1,13 @@
+#+TITLE: Project management config
+#+AUTHOR: umi
+#+STARTUP: overview
+
+* PROJECTILE
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package projectile
+  :ensure t
+  :demand t)
+  (elpaca-wait)
+#+end_src

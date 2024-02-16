@@ -47,3 +47,8 @@
  (expand-file-name
 "config/orgmode/README.org"
   user-emacs-directory))
+
+(org-babel-load-file
+ (expand-file-name
+"config/project/README.org"
+  user-emacs-directory))
