@@ -3,8 +3,18 @@
 :demand t)
 (elpaca-wait)
 
+(setq helm-move-to-line-cycle-in-source nil)
+
+(define-key helm-map (kbd "C-k") 'helm-previous-line)
+(define-key helm-map (kbd "C-j") 'helm-next-line)
+
+(use-package helm-ls-git
+:ensure t
+:demand t)
+(elpaca-wait)
+
 (leader-key
-"f" '(find-file :wk "Find file")
+"f" '(helm-browse-project :wk "Find file")
 "c f" '((lambda () (interactive) (find-file "~/.config/emacs/config/README.org")) :wk "Edit emacs config"))
 
 (leader-key
