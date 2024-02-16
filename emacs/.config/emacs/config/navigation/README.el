@@ -13,8 +13,13 @@
 :demand t)
 (elpaca-wait)
 
+(use-package helm-projectile
+:ensure t
+:demand t)
+(elpaca-wait)
+
 (leader-key
-"f" '(helm-browse-project :wk "Find file")
+"f" '(helm-projectile-find-file :wk "Find file")
 "c f" '((lambda () (interactive) (find-file "~/.config/emacs/config/README.org")) :wk "Edit emacs config"))
 
 (leader-key

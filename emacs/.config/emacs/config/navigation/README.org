@@ -33,12 +33,21 @@
   (elpaca-wait)
 #+end_src
 
+** Projectile extension
+
+#+begin_src emacs-lisp
+  (use-package helm-projectile
+  :ensure t
+  :demand t)
+  (elpaca-wait)
+#+end_src
+
 * FILE NAVIGATION
 ** Keybinds
 
 #+begin_src emacs-lisp
     (leader-key
-    "f" '(helm-browse-project :wk "Find file")
+    "f" '(helm-projectile-find-file :wk "Find file")
     "c f" '((lambda () (interactive) (find-file "~/.config/emacs/config/README.org")) :wk "Edit emacs config"))
 #+end_src
 
