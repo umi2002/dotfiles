@@ -1,4 +1,4 @@
 (use-package projectile
-:ensure t
-:demand t)
-(elpaca-wait)
+  :ensure t
+:after helm)
+  (elpaca-wait)

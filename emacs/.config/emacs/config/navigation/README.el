@@ -1,22 +1,18 @@
-(use-package helm
-:ensure t
-:demand t)
+(use-package helm)
+(elpaca-wait)
+
+(use-package helm-ls-git
+:after helm)
+(elpaca-wait)
+
+(use-package helm-projectile
+:after (helm projectile))
 (elpaca-wait)
 
 (setq helm-move-to-line-cycle-in-source nil)
 
 (define-key helm-map (kbd "C-k") 'helm-previous-line)
 (define-key helm-map (kbd "C-j") 'helm-next-line)
-
-(use-package helm-ls-git
-:ensure t
-:demand t)
-(elpaca-wait)
-
-(use-package helm-projectile
-:ensure t
-:demand t)
-(elpaca-wait)
 
 (leader-key
 "f" '(helm-projectile-find-file :wk "Find file")

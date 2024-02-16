@@ -35,17 +35,9 @@
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
-;; Install use-package support
-  (elpaca elpaca-use-package
-    ;; Enable use-package :ensure support for Elpaca.
-    (elpaca-use-package-mode)
-(setq elpaca-use-package-by-default t))
-  ;; Block until current queue processed.
-  (elpaca-wait)
-
-  ;;When installing a package which modifies a form used at the top-level
-  ;;(e.g. a package which adds a use-package key word),
-  ;;use `elpaca-wait' to block until that package has been installed/configured.
-  ;;For example:
-  ;;(use-package general :ensure t :demand t)
-  ;;(elpaca-wait)
+(elpaca use-package :elpaca t)
+      (elpaca elpaca-use-package
+        (elpaca-use-package-mode)
+    (setq elpaca-use-package-by-default t)
+(setq use-package-always-ensure t))
+      (elpaca-wait)

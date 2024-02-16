@@ -6,8 +6,8 @@
 ** Installation
 
 #+begin_src emacs-lisp
-  (use-package projectile
-  :ensure t
-  :demand t)
-  (elpaca-wait)
+    (use-package projectile
+    :ensure t
+  :after helm)
+    (elpaca-wait)
 #+end_src

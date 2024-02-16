@@ -6,42 +6,43 @@
 ** Installation
 
 #+begin_src emacs-lisp
-  (use-package evil
-  :ensure t
-  :demand t
-  :init
-      (setq evil-want-keybinding nil))
-  (elpaca-wait)
-#+end_src
+        (use-package evil
+        :init (setq evil-want-keybinding nil)
+      :config
+  (integrate-evil)
+    (start-evil-mode))
+      #+end_src
 
-** Config
+** Config functions
 *** Emacs integration
 
-#+begin_src
-      (setq evil-want-integration t)
+#+begin_src emacs-lisp
+  (defun integrate-evil ()
+      (setq evil-want-integration t))
 #+end_src
 
 *** Autostart evil mode
 
 #+begin_src emacs-lisp
-      (evil-mode)
+  (defun start-evil-mode ()
+  (evil-mode))
 #+end_src
 
 * EVIL COLLECTION
 ** Installation
 
 #+begin_src emacs-lisp
-  (use-package evil-collection
-  :after evil
-  :ensure t
-  :demand t)
-  (elpaca-wait)
+      (use-package evil-collection
+      :ensure t
+      :after evil
+  :config (setup-evil-collection))
 #+end_src
 
-** Config
+** Config functions
 *** Setup
 
 #+begin_src emacs-lisp
-      (setq evil-collection-mode-list '(dashboard dired ibuffer))
-      (evil-collection-init)
+  (defun setup-evil-collection ()
+  (setq evil-collection-mode-list '(dashboard dired ibuffer))
+  (evil-collection-init))
 #+end_src

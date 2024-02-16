@@ -6,10 +6,24 @@
 ** Installation
 
 #+begin_src emacs-lisp
-(use-package helm
-:ensure t
-:demand t)
-(elpaca-wait)
+  (use-package helm)
+  (elpaca-wait)
+#+end_src
+
+** Git extension
+
+#+begin_src emacs-lisp
+  (use-package helm-ls-git
+  :after helm)
+  (elpaca-wait)
+#+end_src
+
+** Projectile extension
+
+#+begin_src emacs-lisp
+  (use-package helm-projectile
+  :after (helm projectile))
+  (elpaca-wait)
 #+end_src
 
 ** Config
@@ -22,24 +36,6 @@
 #+begin_src emacs-lisp
   (define-key helm-map (kbd "C-k") 'helm-previous-line)
   (define-key helm-map (kbd "C-j") 'helm-next-line)
-#+end_src
-
-** Git extension
-
-#+begin_src emacs-lisp
-  (use-package helm-ls-git
-  :ensure t
-  :demand t)
-  (elpaca-wait)
-#+end_src
-
-** Projectile extension
-
-#+begin_src emacs-lisp
-  (use-package helm-projectile
-  :ensure t
-  :demand t)
-  (elpaca-wait)
 #+end_src
 
 * FILE NAVIGATION

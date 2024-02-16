@@ -1,9 +1,8 @@
-(use-package general
-:ensure t
-:demand t)
+(use-package general)
 (elpaca-wait)
 
-(general-evil-setup)
+(defun setup-general-evil ()
+(general-evil-setup))
 
 (general-create-definer leader-key
 :states '(normal insert visual emacs)

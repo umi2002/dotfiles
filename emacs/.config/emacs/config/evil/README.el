@@ -1,17 +1,20 @@
 (use-package evil
-:ensure t
-:demand t
-:init
-    (setq evil-want-keybinding nil))
-(elpaca-wait)
+      :init (setq evil-want-keybinding nil)
+    :config
+(integrate-evil)
+  (start-evil-mode))
 
-(evil-mode)
+(defun integrate-evil ()
+    (setq evil-want-integration t))
+
+(defun start-evil-mode ()
+(evil-mode))
 
 (use-package evil-collection
-:after evil
-:ensure t
-:demand t)
-(elpaca-wait)
+    :ensure t
+    :after evil
+:config (setup-evil-collection))
 
+(defun setup-evil-collection ()
 (setq evil-collection-mode-list '(dashboard dired ibuffer))
-(evil-collection-init)
+(evil-collection-init))

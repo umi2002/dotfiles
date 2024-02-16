@@ -11,6 +11,7 @@
    (expand-file-name
   "config/elpaca/README.org"
     user-emacs-directory))
+  (elpaca-wait)
 #+end_src
 
 ** Load Evil Mode

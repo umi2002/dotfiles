@@ -2,6 +2,7 @@
  (expand-file-name
 "config/elpaca/README.org"
   user-emacs-directory))
+(elpaca-wait)
 
 (org-babel-load-file
  (expand-file-name

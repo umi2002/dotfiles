@@ -6,9 +6,7 @@
 ** Installation
 
 #+begin_src emacs-lisp
-  (use-package general
-  :ensure t
-  :demand t)
+  (use-package general)
   (elpaca-wait)
   #+end_src
 
@@ -16,15 +14,16 @@
 ** Setup
 
 #+begin_src emacs-lisp
-  (general-evil-setup)
+  (defun setup-general-evil ()
+  (general-evil-setup))
 #+end_src
 
 ** Set leader key
 
 #+begin_src emacs-lisp
-      (general-create-definer leader-key
-      :states '(normal insert visual emacs)
-      :keymaps 'override
-      :prefix "SPC"
-      :global-prefix "M-SPC")
+  (general-create-definer leader-key
+  :states '(normal insert visual emacs)
+  :keymaps 'override
+  :prefix "SPC"
+  :global-prefix "M-SPC")
 #+end_src
