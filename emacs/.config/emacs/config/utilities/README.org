@@ -2,7 +2,7 @@
 #+AUTHOR: umi
 #+STARTUP: overview
 
-* CONFIG RELATED
+* Emacs settings
 ** Keybinds
 
 #+begin_src emacs-lisp
