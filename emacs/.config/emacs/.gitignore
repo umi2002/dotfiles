@@ -9,4 +9,5 @@ tramp
 elpaca
 transient
 .lsp-session-*
+projectile*
 !config/elpaca
