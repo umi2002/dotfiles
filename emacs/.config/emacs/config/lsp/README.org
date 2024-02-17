@@ -16,3 +16,10 @@
   (use-package helm-lsp
   :after helm)
 #+end_src
+
+* FLYCHECK
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package flycheck)
+#+end_src

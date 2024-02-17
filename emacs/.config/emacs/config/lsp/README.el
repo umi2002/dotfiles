@@ -2,3 +2,5 @@
 
 (use-package helm-lsp
 :after helm)
+
+(use-package flycheck)
