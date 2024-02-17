@@ -18,20 +18,6 @@
       lsp-idle-delay 0.1)
 #+end_src
 
-*** C
-
-#+begin_src emacs-lisp
-(with-eval-after-load 'lsp-mode
-(add-hook 'c-mode-hook 'lsp))
-#+end_src emacs-lisp
-
-*** C++
-
-#+begin_src emacs-lisp
-(with-eval-after-load 'lsp-mode
-(add-hook 'c++-mode-hook 'lsp))
-#+end_src
-
 * HELM-LSP
 ** Installation
 
@@ -53,4 +39,21 @@
 
 #+begin_src emacs-lisp
   (use-package flycheck)
+#+end_src
+
+* LANGUAGES
+** C
+*** Lsp-mode
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'lsp-mode
+(add-hook 'c-mode-hook 'lsp))
+#+end_src emacs-lisp
+
+** C++
+*** Lsp-mode
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'lsp-mode
+(add-hook 'c++-mode-hook 'lsp))
 #+end_src
