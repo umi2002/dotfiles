@@ -129,3 +129,12 @@
   "config/completion/README.org"
     user-emacs-directory))
 #+end_src
+
+* MOVEMENT
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/movement/README.org"
+    user-emacs-directory))
+#+end_src

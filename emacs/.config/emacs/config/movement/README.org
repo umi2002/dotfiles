@@ -1,0 +1,10 @@
+#+TITLE: Movement config
+#+AUTHOR: umi
+#+STARTUP: overview
+
+* AVY
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package avy)
+#+end_src
