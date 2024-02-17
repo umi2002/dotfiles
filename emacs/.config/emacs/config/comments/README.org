@@ -6,21 +6,23 @@
 ** Leader keys
 
 #+begin_src emacs-lisp
-    (general-create-definer comment-leader-normal
-    :states '(normal)
-    :keymaps 'override
-    :prefix "gc")
+(with-eval-after-load 'general
+  (general-create-definer comment-leader-normal
+  :states '(normal)
+  :keymaps 'override
+  :prefix "gc")
 
-    (general-create-definer comment-leader-visual
-    :states '(visual)
-    :keymaps 'override
-    :prefix "gc")
+  (general-create-definer comment-leader-visual
+  :states '(visual)
+  :keymaps 'override
+  :prefix "gc"))
 #+end_src
 
 ** Suffix keys
 
 #+begin_src emacs-lisp
+  (with-eval-after-load 'general
     (comment-leader-normal
    "" '(:ignore t :wk "Comment")
-  "c" '(comment-line :wk "Comment line"))
+  "c" '(comment-line :wk "Comment line")))
 #+end_src

@@ -47,7 +47,6 @@
 * SET DEFAULT PACKAGE MANAGER
 
 #+begin_src emacs-lisp
-    (elpaca use-package :elpaca t)
         (elpaca elpaca-use-package
           (elpaca-use-package-mode)
       (setq elpaca-use-package-by-default t)
