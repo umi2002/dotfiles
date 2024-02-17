@@ -8,3 +8,6 @@
 (use-package yasnippet)
 (use-package yasnippet-snippets
 :after yasnippet)
+
+(with-eval-after-load 'lsp-mode
+  (yas-global-mode))
