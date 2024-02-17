@@ -120,3 +120,12 @@
   "config/lsp/README.org"
     user-emacs-directory))
 #+end_src
+
+* COMPLETION
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/completion/README.org"
+    user-emacs-directory))
+#+end_src
