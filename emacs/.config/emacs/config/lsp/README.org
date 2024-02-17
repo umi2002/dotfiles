@@ -1,0 +1,10 @@
+#+TITLE: Lsp config
+#+AUTHOR: umi
+#+STARTUP: overview
+
+* LSP-MODE
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package lsp-mode)
+#+end_src

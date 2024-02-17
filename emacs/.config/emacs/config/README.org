@@ -111,3 +111,12 @@
   "config/git/README.org"
     user-emacs-directory))
 #+end_src
+
+* LSP
+
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+  "config/lsp/README.org"
+    user-emacs-directory))
+#+end_src
