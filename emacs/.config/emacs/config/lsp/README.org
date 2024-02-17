@@ -10,11 +10,26 @@
 #+end_src
 
 ** Config
+*** Setup
 
 #+begin_src emacs-lisp
 (setq gc-cons-threshold (* 100 1024 1024)
       read-process-output-max (* 1024 1024)
       lsp-idle-delay 0.1)
+#+end_src
+
+*** C
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'lsp-mode
+(add-hook 'c-mode-hook 'lsp))
+#+end_src emacs-lisp
+
+*** C++
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'lsp-mode
+(add-hook 'c++-mode-hook 'lsp))
 #+end_src
 
 * HELM-LSP

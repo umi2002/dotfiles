@@ -4,6 +4,9 @@
       read-process-output-max (* 1024 1024)
       lsp-idle-delay 0.1)
 
+(with-eval-after-load 'lsp-mode
+(add-hook 'c++-mode-hook 'lsp))
+
 (use-package helm-lsp
 :after helm)
 
