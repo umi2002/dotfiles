@@ -8,3 +8,12 @@
 #+begin_src emacs-lisp
   (use-package company)
 #+end_src
+
+* YASNIPPET
+** Installation
+
+#+begin_src emacs-lisp
+(use-package yasnippet)
+(use-package yasnippet-snippets
+:after yasnippet)
+#+end_src
