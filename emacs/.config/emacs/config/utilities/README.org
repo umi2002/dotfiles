@@ -3,6 +3,12 @@
 #+STARTUP: overview
 
 * Emacs settings
+** Settings
+
+#+begin_src emacs-lisp
+(global-auto-revert-mode t)
+#+end_src
+
 ** Keybinds
 
 #+begin_src emacs-lisp

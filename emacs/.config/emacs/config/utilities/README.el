@@ -1,3 +1,5 @@
+(global-auto-revert-mode t)
+
 (with-eval-after-load 'general
 (leader-key
 "." '((lambda () (interactive) (load-file user-init-file)) :wk "Reload config")))
