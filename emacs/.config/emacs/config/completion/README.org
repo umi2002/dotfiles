@@ -1,3 +1,10 @@
 #+TITLE: Completion config
 #+AUTHOR: umi
 #+STARTUP: overview
+
+* COMPANY
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package company)
+#+end_src
