@@ -7,4 +7,5 @@ auto-save-list
 tramp
 .\#*
 elpaca
+transient
 !config/elpaca
