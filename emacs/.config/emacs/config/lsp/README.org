@@ -41,6 +41,15 @@
   (use-package flycheck)
 #+end_src
 
+* AUTO-FORMATTING FUNCITON
+
+#+begin_src emacs-lisp
+      (defun format-on-save (format-function)
+  (add-hook 'before-save-hook
+  (lambda ()
+  (funcall format-function))) nil t)
+#+end_src
+
 * LANGUAGES
 ** C
 *** Lsp-mode
@@ -49,6 +58,16 @@
 (with-eval-after-load 'lsp-mode
 (add-hook 'c-mode-hook 'lsp))
 #+end_src emacs-lisp
+
+*** Formattting
+
+#+begin_src emacs-lisp
+    (use-package clang-format)
+
+    (with-eval-after-load 'clang-format
+    (setq clang-format-fallback-style "Google")
+  (add-hook 'c-mode-hook (lambda () (format-on-save 'clang-format-buffer))))
+#+end_src
 
 ** C++
 *** Lsp-mode

@@ -12,5 +12,16 @@
 
 (use-package flycheck)
 
+(defun format-on-save (format-function)
+(add-hook 'before-save-hook
+(lambda ()
+(funcall format-function))) nil t)
+
+(use-package clang-format)
+
+  (with-eval-after-load 'clang-format
+  (setq clang-format-fallback-style "Google")
+(add-hook 'c-mode-hook (lambda () (format-on-save 'clang-format-buffer))))
+
 (with-eval-after-load 'lsp-mode
 (add-hook 'c++-mode-hook 'lsp))
