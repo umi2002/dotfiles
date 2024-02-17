@@ -1,3 +1,10 @@
 #+TITLE: DAP config
 #+AUTHOR: umi
 #+STARTUP: overview
+
+* DAP-MODE
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package dap-mode)
+#+end_src
