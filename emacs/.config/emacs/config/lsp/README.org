@@ -17,6 +17,14 @@
   :after helm)
 #+end_src
 
+* HELP-XREF
+** Installation
+
+#+begin_src emacs-lisp
+(use-package helm-xref
+:after helm)
+#+end_src
+
 * FLYCHECK
 ** Installation
 
