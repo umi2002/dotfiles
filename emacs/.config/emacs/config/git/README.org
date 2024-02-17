@@ -1,0 +1,10 @@
+#+TITLE: Git config
+#+AUTHOR: umi
+#+STARTUP: overview
+
+* MAGIT
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src

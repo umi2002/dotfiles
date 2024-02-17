@@ -11,5 +11,5 @@
 :after evil)
 
 (with-eval-after-load 'evil-collection
-(setq evil-collection-mode-list '(dashboard dired ibuffer))
+(setq evil-collection-mode-list '(dashboard dired ibuffer magit))
 (evil-collection-init))
