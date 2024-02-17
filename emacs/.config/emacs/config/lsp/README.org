@@ -8,3 +8,11 @@
 #+begin_src emacs-lisp
   (use-package lsp-mode)
 #+end_src
+
+* HELM-LSP
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package helm-lsp
+  :after helm)
+#+end_src
