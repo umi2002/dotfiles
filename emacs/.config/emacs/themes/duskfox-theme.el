@@ -44,6 +44,6 @@
  '(match ((t (:background "#65b1cd"))))
  '(next-error ((t (:inherit (region)))))
  '(query-replace ((t (:inherit (isearch)))))
-)
+ )
 
 (provide-theme 'duskfox)

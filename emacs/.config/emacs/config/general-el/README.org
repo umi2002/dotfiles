@@ -7,14 +7,14 @@
 
 #+begin_src emacs-lisp
   (use-package general)
-  #+end_src
+#+end_src
 
 * EVIL
 ** Setup
 
 #+begin_src emacs-lisp
   (with-eval-after-load 'general
-  (general-evil-setup))
+    (general-evil-setup))
 #+end_src
 
 ** Set leader key

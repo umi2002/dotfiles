@@ -6,8 +6,8 @@
 ** Installation
 
 #+begin_src emacs-lisp
-        (use-package evil
-        :init (setq evil-want-keybinding nil))
+  (use-package evil
+    :init (setq evil-want-keybinding nil))
 #+end_src
 
 ** Config
@@ -15,22 +15,22 @@
 
 #+begin_src emacs-lisp
   (with-eval-after-load 'evil
-  (setq evil-want-integration t))
+    (setq evil-want-integration t))
 #+end_src
 
 *** Autostart evil mode
 
 #+begin_src emacs-lisp
   (with-eval-after-load 'evil
-  (evil-mode))
+    (evil-mode))
 #+end_src
 
 * EVIL COLLECTION
 ** Installation
 
 #+begin_src emacs-lisp
-      (use-package evil-collection
-      :after evil)
+  (use-package evil-collection
+    :after evil)
 #+end_src
 
 ** Config
@@ -38,6 +38,6 @@
 
 #+begin_src emacs-lisp
   (with-eval-after-load 'evil-collection
-  (setq evil-collection-mode-list '(dashboard dired ibuffer magit))
-  (evil-collection-init))
+    (setq evil-collection-mode-list '(dashboard dired ibuffer magit))
+    (evil-collection-init))
 #+end_src

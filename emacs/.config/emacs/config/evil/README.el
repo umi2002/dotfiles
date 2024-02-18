@@ -1,15 +1,15 @@
 (use-package evil
-:init (setq evil-want-keybinding nil))
+  :init (setq evil-want-keybinding nil))
 
 (with-eval-after-load 'evil
-(setq evil-want-integration t))
+  (setq evil-want-integration t))
 
 (with-eval-after-load 'evil
-(evil-mode))
+  (evil-mode))
 
 (use-package evil-collection
-:after evil)
+  :after evil)
 
 (with-eval-after-load 'evil-collection
-(setq evil-collection-mode-list '(dashboard dired ibuffer magit))
-(evil-collection-init))
+  (setq evil-collection-mode-list '(dashboard dired ibuffer magit))
+  (evil-collection-init))

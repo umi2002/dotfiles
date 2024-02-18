@@ -1,7 +1,7 @@
 (use-package general)
 
 (with-eval-after-load 'general
-(general-evil-setup))
+  (general-evil-setup))
 
 (with-eval-after-load 'general
   (general-create-definer leader-key
