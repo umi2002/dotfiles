@@ -1,5 +1,6 @@
 (global-auto-revert-mode t)
 (setq-default tab-width 4)
+(electric-pair-mode 1)
 
 (with-eval-after-load 'general
   (leader-key

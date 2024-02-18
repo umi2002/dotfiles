@@ -8,6 +8,7 @@
 #+begin_src emacs-lisp
   (global-auto-revert-mode t)
   (setq-default tab-width 4)
+  (electric-pair-mode 1)
 #+end_src
 
 ** Keybinds
