@@ -12,10 +12,12 @@
 (use-package git-gutter)
 
 (with-eval-after-load 'git-gutter
+  (global-git-gutter-mode +1)
   (setq git-gutter:modified-sign "│")
   (set-face-background 'git-gutter:modified "blue")
   (setq git-gutter:added-sign "│")
   (set-face-background 'git-gutter:added "green")
   (setq git-gutter:deleted-sign "│")
   (set-face-background 'git-gutter:deleted "red")
-  (global-git-gutter-mode +1))
+  (add-hook 'magit-post-refresh-hook
+            #'git-gutter:update-all-windows))
