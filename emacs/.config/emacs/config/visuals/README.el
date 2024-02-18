@@ -23,3 +23,11 @@
    '(company-scrollbar-fg ((t (:background "#569fba"))))
    '(company-scrollbar-bg ((t (:background "#393552"))))
    '(company-preview-common ((t (:foreground "#a6dae3" :background "#232136"))))))
+
+(with-eval-after-load 'git-gutter
+  (set-face-foreground 'git-gutter:modified "yellow")
+  (set-face-background 'git-gutter:modified "#232136")
+  (set-face-foreground 'git-gutter:added "green")
+  (set-face-background 'git-gutter:added "#232136")
+  (set-face-foreground 'git-gutter:deleted "red")
+  (set-face-background 'git-gutter:deleted "#232136"))
