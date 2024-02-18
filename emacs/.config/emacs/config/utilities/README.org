@@ -1,0 +1,54 @@
+#+TITLE: Utilities config
+#+AUTHOR: umi
+#+STARTUP: overview
+
+* Emacs settings
+** Settings
+
+#+begin_src emacs-lisp
+  (global-auto-revert-mode t)
+  (setq-default tab-width 4)
+  (electric-pair-mode 1)
+#+end_src
+
+** Keybinds
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'general
+    (leader-key
+      "." '((lambda () (interactive) (load-file user-init-file)) :wk "Reload config")))
+#+end_src
+
+* CODE EVALUATION
+** Keybinds
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'general
+    (leader-key
+      "v" '(:ignore t :wk "Evaluate")
+      "vb" '(eval-buffer :wk "Evaluate elisp in buffer")
+      "vd" '(eval-defun :wk "Evaluate defun containing or after a point")
+      "ve" '(eval-expression :wk "Evaluate an elips expression")
+      "vr" '(eval-region :wk "Evaluate elisp region")))
+#+end_src
+
+* EXPORTING
+** Keybinds
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'general
+    (leader-key
+      "x" '(:ignore t :wk "Export")
+      "xm" '(org-md-export-as-markdown :wk "Export as markdown")))
+#+end_src
+
+* DESCRIBE HELP
+** Keybinds
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'general
+    (leader-key
+      "h" '(:ignore t :wk "Help")
+      "hf" '(describe-function :wk "Describe function")
+      "hv" '(describe-variable :wk "Describe variable")))
+#+end_src

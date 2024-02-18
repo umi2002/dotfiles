@@ -1,0 +1,13 @@
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+elpaca
+transient
+.lsp-session-*
+projectile*
+!config/elpaca

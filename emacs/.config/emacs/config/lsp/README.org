@@ -1,0 +1,104 @@
+#+ TITLE : Lsp config
+#+ AUTHOR : umi
+#+ STARTUP : overview
+
+* LSP-MODE
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package lsp-mode)
+#+end_src
+
+** Config
+*** Setup
+
+#+begin_src emacs-lisp
+  (setq gc-cons-threshold (* 100 1024 1024)
+        read-process-output-max (* 1024 1024)
+        lsp-idle-delay 0.1)
+#+end_src
+
+* HELM-LSP
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package helm-lsp
+    :after helm)
+#+end_src
+
+* HELP-XREF
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package helm-xref
+    :after helm)
+#+end_src
+
+* FLYCHECK
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package flycheck)
+#+end_src
+
+* CLANG-FORMAT
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package clang-format)
+#+end_src
+
+* AUTO-FORMATTING FUNCITON
+
+#+begin_src emacs-lisp
+  (defun format-on-save (format-function)
+    (make-local-variable 'before-save-hook)
+    (add-hook 'before-save-hook
+              format-function nil t))
+#+end_src
+
+* CLANG-FORMAT FUNCTION
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'clang-format
+    (defun my-clang-format-buffer ()
+      (interactive)
+      (let ((has-dot-clang-format (locate-dominating-file "." ".clang-format")))
+        (if has-dot-clang-format
+            (clang-format-buffer)
+          (clang-format-buffer-clangify "Google"))))
+
+    (defun clang-format-buffer-clangify (style)
+      (let ((clang-format-style style))
+        (clang-format-buffer))))
+#+end_src
+
+* LANGUAGES
+** C
+*** Lsp-mode
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'c-mode-hook 'lsp))
+#+end_src
+
+*** Formattting
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'clang-format
+    (add-hook 'c-mode-hook (lambda () (format-on-save 'clang-format-buffer))))
+#+end_src
+** C++
+*** Lsp-mode
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'c++-mode-hook 'lsp))
+#+end_src
+
+*** Formattting
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'clang-format
+    (add-hook 'c++-mode-hook (lambda () (format-on-save 'my-clang-format-buffer))))
+#+end_src
