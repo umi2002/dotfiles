@@ -54,7 +54,7 @@
   (use-package clang-format)
 #+end_src
 
-* AUTO-FORMATTING FUNCITON
+* AUTO-FORMATTING FUNCTION
 
 #+begin_src emacs-lisp
   (defun format-on-save (format-function)
