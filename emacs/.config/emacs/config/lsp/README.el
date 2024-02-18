@@ -53,3 +53,11 @@
 (with-eval-after-load 'tide
   (add-hook 'typescript-mode-hook (lambda () (tide-setup)
                                     (tide-hl-identifier-mode +1))))
+
+(use-package web-mode)
+
+(with-eval-after-load 'web-mode
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (setq web-mode-engines-alist '(("angular" . "\\.component.html\\'")))
+  (setq web-mode-enable-auto-closing t)
+  (setq web-mode-enable-auto-quoting t))

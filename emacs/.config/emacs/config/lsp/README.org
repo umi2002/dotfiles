@@ -131,3 +131,20 @@
     (add-hook 'typescript-mode-hook (lambda () (tide-setup)
                                       (tide-hl-identifier-mode +1))))
 #+end_src
+
+** HTML
+*** Major mode
+
+#+begin_src emacs-lisp
+  (use-package web-mode)
+#+end_src
+
+*** Web-mode
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'web-mode
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+    (setq web-mode-engines-alist '(("angular" . "\\.component.html\\'")))
+    (setq web-mode-enable-auto-closing t)
+    (setq web-mode-enable-auto-quoting t))
+#+end_src
