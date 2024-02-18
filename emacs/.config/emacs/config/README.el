@@ -77,3 +77,8 @@
  (expand-file-name
   "config/dap/README.org"
   user-emacs-directory))
+
+(org-babel-load-file
+ (expand-file-name
+  "config/terminal/README.org"
+  user-emacs-directory))

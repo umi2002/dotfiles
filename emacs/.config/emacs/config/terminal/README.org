@@ -1,0 +1,40 @@
+#+TITLE: Terminal config
+#+AUTHOR: umi
+#+STARTUP: overview
+
+* VTERM
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package vterm)
+#+end_src
+
+** Set vterm window location
+
+#+begin_src emacs-lisp
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*vterm\\*\\(?:<[[:digit:]]+>\\)?\\'"
+                 (display-buffer-in-side-window (side . bottom))))
+#+end_src
+
+** Toggle function
+
+#+begin_src emacs-lisp
+  (defun toggle-vterm ()
+    "Toggle a vterm window."
+    (interactive)
+    (let ((vterm-buffer-name "*vterm*"))
+      (if (get-buffer vterm-buffer-name)
+          (if (get-buffer-window vterm-buffer-name)
+              (delete-window (get-buffer-window vterm-buffer-name))
+            (switch-to-buffer-other-window vterm-buffer-name))
+        (vterm))))
+#+end_src
+
+** Keybinds
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'general
+    (leader-key
+      "`" '(toggle-vterm :wk "Toggle vterm")))
+#+end_src
