@@ -57,7 +57,8 @@
 (use-package web-mode)
 
 (with-eval-after-load 'web-mode
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.component.html\\'" . web-mode))
   (setq web-mode-engines-alist '(("angular" . "\\.component.html\\'")))
   (setq web-mode-enable-auto-closing t)
   (setq web-mode-enable-auto-quoting t))
