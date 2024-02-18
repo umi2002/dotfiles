@@ -7,7 +7,7 @@
 
 (with-eval-after-load 'projectile
   (projectile-mode +1)
-  (setq projectile-project-search-path '(("~/code/") "~/dotfiles/")))
+  (setq projectile-project-search-path '("~/code/" "~/dotfiles/")))
 
 (with-eval-after-load 'projectile
   (setq projectile-project-root-functions
