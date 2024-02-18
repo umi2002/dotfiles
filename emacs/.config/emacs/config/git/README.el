@@ -13,7 +13,7 @@
 
 (with-eval-after-load 'git-gutter
 (setq git-gutter:modified-sign "│")
-  (set-face-foreground 'git-gutter:modified "blue")
+  (set-face-background 'git-gutter:modified "blue")
 (setq git-gutter:added-sign "│")
   (set-face-background 'git-gutter:added "green")
 (setq git-gutter:deleted-sign "│")
