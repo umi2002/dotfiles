@@ -1,10 +1,11 @@
 (use-package company)
 
+(with-eval-after-load 'company
 (add-hook 'after-init-hook 'global-company-mode)
 (setq gc-cons-threshold (* 100 1024 1024)
       read-process-output-max (* 1024 1024)
       company-idle-delay 0.0
-      company-minimum-prefix-length 1)
+      company-minimum-prefix-length 1))
 
 (with-eval-after-load 'company
   (general-define-key
