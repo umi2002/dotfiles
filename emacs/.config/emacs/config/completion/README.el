@@ -12,7 +12,7 @@
    :keymaps 'company-active-map
    "C-j" 'company-select-next
    "C-k" 'company-select-previous
-   "<tab>" 'company-complete
+   "<tab>" 'company-complete-selection
    "<ESC>" 'company-abort))
 
 (use-package yasnippet)
