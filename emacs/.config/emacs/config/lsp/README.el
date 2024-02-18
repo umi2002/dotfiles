@@ -12,16 +12,33 @@
 
 (use-package flycheck)
 
-(defun format-on-save (format-function)
-(add-hook 'before-save-hook
-(lambda ()
-(funcall format-function))) nil t)
-
 (use-package clang-format)
 
-  (with-eval-after-load 'clang-format
-  (setq clang-format-fallback-style "Google")
+(defun format-on-save (format-function)
+(make-local-variable 'before-save-hook)
+  (add-hook 'before-save-hook
+  format-function nil t))
+
+(with-eval-after-load 'clang-format
+(defun my-clang-format-buffer ()
+  (interactive)
+  (let ((has-dot-clang-format (locate-dominating-file "." ".clang-format")))
+    (if has-dot-clang-format
+        (clang-format-buffer)
+      (clang-format-buffer-clangify "Google"))))
+
+(defun clang-format-buffer-clangify (style)
+  (let ((clang-format-style style))
+    (clang-format-buffer))))
+
+(with-eval-after-load 'lsp-mode
+(add-hook 'c-mode-hook 'lsp))
+
+(with-eval-after-load 'clang-format
 (add-hook 'c-mode-hook (lambda () (format-on-save 'clang-format-buffer))))
 
 (with-eval-after-load 'lsp-mode
 (add-hook 'c++-mode-hook 'lsp))
+
+(with-eval-after-load 'clang-format
+(add-hook 'c++-mode-hook (lambda () (format-on-save 'my-clang-format-buffer))))

@@ -1,6 +1,6 @@
-#+TITLE: Lsp config
-#+AUTHOR: umi
-#+STARTUP: overview
+#+ TITLE : Lsp config
+#+ AUTHOR : umi
+#+ STARTUP : overview
 
 * LSP-MODE
 ** Installation
@@ -38,16 +38,39 @@
 ** Installation
 
 #+begin_src emacs-lisp
-  (use-package flycheck)
+ (use-package flycheck)
+#+end_src
+
+* CLANG-FORMAT
+** Installation
+
+#+begin_src emacs-lisp
+    (use-package clang-format)
 #+end_src
 
 * AUTO-FORMATTING FUNCITON
 
 #+begin_src emacs-lisp
       (defun format-on-save (format-function)
+(make-local-variable 'before-save-hook)
   (add-hook 'before-save-hook
-  (lambda ()
-  (funcall format-function))) nil t)
+  format-function nil t))
+#+end_src
+
+* CLANG-FORMAT FUNCTION
+
+#+begin_src emacs-lisp
+    (with-eval-after-load 'clang-format
+  (defun my-clang-format-buffer ()
+    (interactive)
+    (let ((has-dot-clang-format (locate-dominating-file "." ".clang-format")))
+      (if has-dot-clang-format
+          (clang-format-buffer)
+        (clang-format-buffer-clangify "Google"))))
+
+  (defun clang-format-buffer-clangify (style)
+    (let ((clang-format-style style))
+      (clang-format-buffer))))
 #+end_src
 
 * LANGUAGES
@@ -57,22 +80,25 @@
 #+begin_src emacs-lisp
 (with-eval-after-load 'lsp-mode
 (add-hook 'c-mode-hook 'lsp))
-#+end_src emacs-lisp
+#+end_src
 
 *** Formattting
 
 #+begin_src emacs-lisp
-    (use-package clang-format)
-
-    (with-eval-after-load 'clang-format
-    (setq clang-format-fallback-style "Google")
+  (with-eval-after-load 'clang-format
   (add-hook 'c-mode-hook (lambda () (format-on-save 'clang-format-buffer))))
 #+end_src
-
 ** C++
 *** Lsp-mode
 
 #+begin_src emacs-lisp
 (with-eval-after-load 'lsp-mode
 (add-hook 'c++-mode-hook 'lsp))
+#+end_src
+
+*** Formattting
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'clang-format
+ (add-hook 'c++-mode-hook (lambda () (format-on-save 'my-clang-format-buffer))))
 #+end_src
