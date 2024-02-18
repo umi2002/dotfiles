@@ -44,7 +44,8 @@
 ** Config
 
 #+begin_src emacs-lisp
-  (global-flycheck-mode)
+  (with-eval-after-load 'flycheck
+  (global-flycheck-mode))
 #+end_src
 
 * CLANG-FORMAT
@@ -79,6 +80,13 @@
         (clang-format-buffer))))
 #+end_src
 
+* TIDE
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package tide)
+#+end_src
+
 * LANGUAGES
 ** C
 *** Lsp-mode
@@ -107,4 +115,19 @@
 #+begin_src emacs-lisp
   (with-eval-after-load 'clang-format
     (add-hook 'c++-mode-hook (lambda () (format-on-save 'my-clang-format-buffer))))
+#+end_src
+
+** Typescript
+*** Major mode
+
+#+begin_src emacs-lisp
+  (use-package typescript-mode)
+#+end_src
+
+*** Tide
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'tide
+    (add-hook 'typescript-mode-hook (lambda () (tide-setup)
+                                      (tide-hl-identifier-mode +1))))
 #+end_src

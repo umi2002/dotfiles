@@ -12,7 +12,8 @@
 
 (use-package flycheck)
 
-(global-flycheck-mode)
+(with-eval-after-load 'flycheck
+(global-flycheck-mode))
 
 (use-package clang-format)
 
@@ -33,6 +34,8 @@
     (let ((clang-format-style style))
       (clang-format-buffer))))
 
+(use-package tide)
+
 (with-eval-after-load 'lsp-mode
   (add-hook 'c-mode-hook 'lsp))
 
@@ -45,6 +48,8 @@
 (with-eval-after-load 'clang-format
   (add-hook 'c++-mode-hook (lambda () (format-on-save 'my-clang-format-buffer))))
 
-(with-eval-after-load 'lsp-mode
-  (add-hook 'typescript-mode-hook 'lsp)
-  (add-hook 'html-mode-hook 'lsp))
+(use-package typescript-mode)
+
+(with-eval-after-load 'tide
+  (add-hook 'typescript-mode-hook (lambda () (tide-setup)
+                                    (tide-hl-identifier-mode +1))))
