@@ -21,3 +21,20 @@
     "gp" '(magit-push :wk "Git push")
   "gb" '(magit-branch :wk "Git branch"))))
 #+end_src
+
+* GIT GUTTER
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package git-gutter)
+#+end_src
+
+** Config
+
+#+begin_src emacs-lisp
+      (with-eval-after-load 'git-gutter
+(setq git-gutter:modified-sign "│")
+(setq git-gutter:added-sign "│")
+(setq git-gutter:deleted-sign "│")
+  (global-git-gutter-mode +1))
+#+end_src
