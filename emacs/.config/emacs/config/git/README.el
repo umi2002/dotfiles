@@ -13,11 +13,13 @@
 
 (with-eval-after-load 'git-gutter
   (global-git-gutter-mode +1)
-  (setq git-gutter:modified-sign "│")
-  (set-face-background 'git-gutter:modified "blue")
-  (setq git-gutter:added-sign "│")
-  (set-face-background 'git-gutter:added "green")
-  (setq git-gutter:deleted-sign "│")
-  (set-face-background 'git-gutter:deleted "red")
-  (add-hook 'magit-post-refresh-hook
-            #'git-gutter:update-all-windows))
+  (setq git-gutter:modified-sign "│|")
+  (set-face-foreground 'git-gutter:modified "yellow")
+  (set-face-background 'git-gutter:modified "#232136")
+  (setq git-gutter:added-sign "│|")
+  (set-face-foreground 'git-gutter:added "green")
+  (set-face-background 'git-gutter:added "#232136")
+  (setq git-gutter:deleted-sign "│|")
+  (set-face-foreground 'git-gutter:deleted "red")
+  (set-face-background 'git-gutter:deleted "#232136")
+  (add-hook 'magit-post-refresh-hook #'git-gutter:update-all-windows))
