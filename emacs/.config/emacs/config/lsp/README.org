@@ -41,6 +41,12 @@
   (use-package flycheck)
 #+end_src
 
+** Config
+
+#+begin_src emacs-lisp
+  (global-flycheck-mode)
+#+end_src
+
 * CLANG-FORMAT
 ** Installation
 

@@ -12,6 +12,8 @@
 
 (use-package flycheck)
 
+(global-flycheck-mode)
+
 (use-package clang-format)
 
 (defun format-on-save (format-function)
@@ -42,3 +44,7 @@
 
 (with-eval-after-load 'clang-format
   (add-hook 'c++-mode-hook (lambda () (format-on-save 'my-clang-format-buffer))))
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'typescript-mode-hook 'lsp)
+  (add-hook 'html-mode-hook 'lsp))
