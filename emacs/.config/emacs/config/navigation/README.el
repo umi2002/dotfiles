@@ -28,15 +28,15 @@
     "bp" '(previous-buffer :wk "Previous buffer")
     "br" '(revert-buffer :wk "Reload buffer")))
 
-(global-set-key (kbd "C-h")  'windmove-left)
-(global-set-key (kbd "C-l") 'windmove-right)
-(global-set-key (kbd "C-k")    'windmove-up)
-(global-set-key (kbd "C-j")  'windmove-down)
-
 (with-eval-after-load 'general
+  (general-define-key
+   :states '(normal insert visual motion)
+   "C-h" 'windmove-left
+   "C-l" 'windmove-right
+   "C-k" 'windmove-up
+   "C-j" 'windmove-down)
+
   (leader-key
     "w" '(:ignore t :wk "Window")
-    "wh" '(split-window-left :wk "Window split left")
     "wl" '(split-window-right :wk "Window split right")
-    "wj" '(split-window-below :wk "Window split below")
-    "wk" '(split-window-right)))
+    "wj" '(split-window-below :wk "Window split below")))
