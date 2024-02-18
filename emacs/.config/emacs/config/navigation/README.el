@@ -30,7 +30,7 @@
 
 (with-eval-after-load 'general
   (general-define-key
-   :states '(normal insert visual motion)
+   :states '(normal visual motion)
    "C-h" 'windmove-left
    "C-l" 'windmove-right
    "C-k" 'windmove-up
