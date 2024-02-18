@@ -14,6 +14,13 @@
           (switch-to-buffer-other-window vterm-buffer-name))
       (vterm))))
 
+(defun set-no-process-query-on-exit ()
+  (let ((proc (get-buffer-process (current-buffer))))
+    (when (processp proc)
+      (set-process-query-on-exit-flag proc nil))))
+
+(add-hook 'vterm-mode-hook 'set-no-process-query-on-exit)
+
 (with-eval-after-load 'general
   (leader-key
     "`" '(toggle-vterm :wk "Toggle vterm")))

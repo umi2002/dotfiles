@@ -31,6 +31,17 @@
         (vterm))))
 #+end_src
 
+** Disable kill confirmation
+
+#+begin_src emacs-lisp
+  (defun set-no-process-query-on-exit ()
+    (let ((proc (get-buffer-process (current-buffer))))
+      (when (processp proc)
+        (set-process-query-on-exit-flag proc nil))))
+
+  (add-hook 'vterm-mode-hook 'set-no-process-query-on-exit)
+#+end_src
+
 ** Keybinds
 
 #+begin_src emacs-lisp
