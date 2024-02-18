@@ -25,3 +25,17 @@
   (add-to-list 'custom-theme-load-path "~/.config/emacs/themes")
   (load-theme 'duskfox t)
 #+end_src
+
+* COMPANY
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'company
+    (custom-set-faces
+     '(company-tooltip ((t (:background "#232136" :foreground "#e0def4"))))
+     '(company-tooltip-selection ((t (:background "#47407d" :foreground "#e2e0f7"))))
+     '(company-tooltip-common ((t (:foreground "#f083a2"))))
+     '(company-tooltip-common-selection ((t (:foreground "#f083a2"))))
+     '(company-scrollbar-fg ((t (:background "#569fba"))))
+     '(company-scrollbar-bg ((t (:background "#393552"))))
+     '(company-preview-common ((t (:foreground "#a6dae3" :background "#232136"))))))
+#+end_src
