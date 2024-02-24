@@ -49,7 +49,7 @@ return {
 				"eslint_d",
 				"cmakelang",
 				"gersemi",
-                "cpplint",
+				"cpplint",
 				"csharpier",
 			},
 
