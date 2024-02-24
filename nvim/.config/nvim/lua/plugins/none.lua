@@ -42,7 +42,7 @@ return {
 						filetypes = { "bash" },
 					}),
 					formatting.clang_format.with({
-						filetypes = { "c", "cpp", "tpp", "java" },
+						filetypes = { "c", "cpp", "tpp", "cs", "java" },
 					}),
 					formatting.rustfmt.with({
 						filetypes = { "rust" },
@@ -55,9 +55,6 @@ return {
 					}),
 					formatting.gersemi.with({
 						filetypes = { "cmake" },
-					}),
-					formatting.csharpier.with({
-						filetypes = { "cs" },
 					}),
 					diagnostics.cpplint.with({
 						filetypes = { "c", "cpp", "tpp" },
