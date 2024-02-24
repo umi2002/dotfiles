@@ -42,6 +42,8 @@ export PATH=/opt/Xilinx/Vivado/2023.1/bin:$PATH
 # Created by `pipx` o/ 2023-06-29 22:01:34
 export PATH="$PATH:/home/umi/.local/bin"
 
+export PATH="$PATH:/home/umi/.dotnet/tools"
+
 PATH="/home/umi/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/umi/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/umi/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
