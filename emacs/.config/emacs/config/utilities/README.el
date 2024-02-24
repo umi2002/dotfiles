@@ -24,3 +24,7 @@
     "h" '(:ignore t :wk "Help")
     "hf" '(describe-function :wk "Describe function")
     "hv" '(describe-variable :wk "Describe variable")))
+
+(use-package editorconfig)
+
+(use-package jsonrpc)

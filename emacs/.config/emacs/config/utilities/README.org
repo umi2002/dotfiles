@@ -52,3 +52,17 @@
       "hf" '(describe-function :wk "Describe function")
       "hv" '(describe-variable :wk "Describe variable")))
 #+end_src
+
+* EDITORCONFIG
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package editorconfig)
+#+end_src
+
+* JSONRPC
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package jsonrpc)
+#+end_src

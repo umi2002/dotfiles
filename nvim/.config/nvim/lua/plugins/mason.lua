@@ -1,14 +1,14 @@
 return {
 	{
 		"williamboman/mason.nvim",
-        config = true,
+		config = true,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-        dependencies = {
-            "williamboman/mason.nvim",
-            "neovim/nvim-lspconfig",
-        },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+		},
 		opts = {
 			ensure_installed = {
 				"lua_ls",
@@ -24,18 +24,18 @@ return {
 				"jdtls",
 				"cmake",
 				"angularls",
+				"omnisharp",
 			},
 		},
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-        dependencies = {
-            "williamboman/mason.nvim",
-            "neovim/nvim-lspconfig",
-        },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"neovim/nvim-lspconfig",
+		},
 		opts = {
 			ensure_installed = {
-				"efm",
 				"stylua",
 				"prettierd",
 				"beautysh",
@@ -49,6 +49,8 @@ return {
 				"eslint_d",
 				"cmakelang",
 				"gersemi",
+                "cpplint",
+				"csharpier",
 			},
 
 			auto_update = true,

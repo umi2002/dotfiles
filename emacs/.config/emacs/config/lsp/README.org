@@ -41,6 +41,13 @@
   (use-package flycheck)
 #+end_src
 
+** Config
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'flycheck
+  (global-flycheck-mode))
+#+end_src
+
 * CLANG-FORMAT
 ** Installation
 
@@ -48,7 +55,7 @@
   (use-package clang-format)
 #+end_src
 
-* AUTO-FORMATTING FUNCITON
+* AUTO-FORMATTING FUNCTION
 
 #+begin_src emacs-lisp
   (defun format-on-save (format-function)
@@ -71,6 +78,13 @@
     (defun clang-format-buffer-clangify (style)
       (let ((clang-format-style style))
         (clang-format-buffer))))
+#+end_src
+
+* TIDE
+** Installation
+
+#+begin_src emacs-lisp
+  (use-package tide)
 #+end_src
 
 * LANGUAGES
@@ -101,4 +115,37 @@
 #+begin_src emacs-lisp
   (with-eval-after-load 'clang-format
     (add-hook 'c++-mode-hook (lambda () (format-on-save 'my-clang-format-buffer))))
+#+end_src
+
+** Typescript
+*** Major mode
+
+#+begin_src emacs-lisp
+  (use-package typescript-mode)
+#+end_src
+
+*** Tide
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'tide
+    (add-hook 'typescript-mode-hook (lambda () (tide-setup)
+                                      (tide-hl-identifier-mode +1))))
+#+end_src
+
+** HTML
+*** Major mode
+
+#+begin_src emacs-lisp
+  (use-package web-mode)
+#+end_src
+
+*** Web-mode
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'web-mode
+    (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+    (add-to-list 'auto-mode-alist '("\\.component.html\\'" . web-mode))
+    (setq web-mode-engines-alist '(("angular" . "\\.component.html\\'")))
+    (setq web-mode-enable-auto-closing t)
+    (setq web-mode-enable-auto-quoting t))
 #+end_src

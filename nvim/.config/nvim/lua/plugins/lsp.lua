@@ -142,6 +142,12 @@ return {
 				filetypes = { "python" },
 			})
 
+			lsp.omnisharp.setup({
+				on_attach = lsp_attach,
+				capabilities = lsp_capabilities,
+				filetypes = { "csharp" },
+			})
+
 			local bundles = {
 				vim.fn.glob(
 					"/home/umi/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*"
@@ -185,62 +191,8 @@ return {
 					"mvnw"
 				),
 			})
-
-			local stylua = require("efmls-configs.formatters.stylua")
-			local prettier = require("efmls-configs.formatters.prettier")
-			local beautysh = require("efmls-configs.formatters.beautysh")
-			local clang_format = require("efmls-configs.formatters.clang_format")
-			local rustfmt = require("efmls-configs.formatters.rustfmt")
-			local latexindent = require("efmls-configs.formatters.latexindent")
-			local autopep8 = require("efmls-configs.formatters.autopep8")
-			local cmake = require("efmls-configs.formatters.gersemi")
-			local cmake_lint = require("efmls-configs.linters.cmake_lint")
-
-			local gcc = require("efmls-configs.linters.gcc")
-			local eslint_d = require("efmls-configs.linters.eslint_d")
-
-			local languages = {
-				lua = { stylua },
-				markdown = { prettier },
-				css = { prettier },
-				scss = { prettier },
-				html = { prettier },
-				javascript = { prettier, eslint_d },
-				javascriptreact = { prettier, eslint_d },
-				typescript = { prettier, eslint_d },
-				typescriptreact = { prettier, eslint_d },
-				json = { prettier },
-				sh = { beautysh },
-				c = { clang_format, gcc },
-				cpp = { clang_format, gcc },
-				tpp = { clang_format, gcc },
-				rust = { rustfmt },
-				csharp = { clang_format },
-				tex = { latexindent },
-				bib = { latexindent },
-				python = { autopep8 },
-				java = { clang_format },
-				cmake = { cmake, cmake_lint },
-			}
-
-			local efmls_config = {
-				filetypes = vim.tbl_keys(languages),
-				settings = {
-					languages = languages,
-				},
-				init_options = {
-					documentFormatting = true,
-					documentRangeFormatting = true,
-				},
-			}
-
-			lsp.efm.setup(vim.tbl_extend("force", efmls_config, {
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-			}))
 		end,
 	},
-	{ "creativenull/efmls-configs-nvim" },
 	{
 		"kosayoda/nvim-lightbulb",
 		config = true,
