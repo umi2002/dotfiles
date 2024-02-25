@@ -38,29 +38,14 @@ return {
 							"json",
 						},
 					}),
-					formatting.beautysh.with({
+					formatting.shfmt.with({
 						filetypes = { "bash" },
 					}),
 					formatting.clang_format.with({
 						filetypes = { "c", "cpp", "tpp", "cs", "java" },
 					}),
-					formatting.rustfmt.with({
-						filetypes = { "rust" },
-					}),
-					formatting.latexindent.with({
-						filetypes = { "tex", "bib" },
-					}),
-					formatting.autopep8.with({
-						filetypes = { "python" },
-					}),
 					formatting.gersemi.with({
 						filetypes = { "cmake" },
-					}),
-					diagnostics.cpplint.with({
-						filetypes = { "c", "cpp", "tpp" },
-					}),
-					diagnostics.eslint_d.with({
-						filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 					}),
 					diagnostics.cmake_lint.with({
 						filetypes = { "cmake" },

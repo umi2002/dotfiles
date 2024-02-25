@@ -68,6 +68,12 @@ return {
 				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
 			})
 
+			lsp.eslint.setup({
+				on_attach = lsp.util.add_hook_after(lsp_attach, format_on_save),
+				capabilities = lsp_capabilities,
+				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			})
+
 			local angular_path =
 				"/home/umi/.local/share/nvim/mason/packages/angular-language-server/node_modules/@angular/language-server/bin/"
 			local tsserver_path =
@@ -110,7 +116,7 @@ return {
 			})
 
 			lsp.rust_analyzer.setup({
-				on_attach = lsp_attach,
+				on_attach = lsp.util.add_hook_after(lsp_attach, format_on_save),
 				capabilities = lsp_capabilities,
 				filetypes = { "rust" },
 				root_dir = function(fname)
@@ -131,7 +137,7 @@ return {
 			})
 
 			lsp.texlab.setup({
-				on_attach = lsp_attach,
+				on_attach = lsp.util.add_hook_after(lsp_attach, format_on_save),
 				capabilities = lsp_capabilities,
 				filetypes = { "tex", "bib" },
 			})
