@@ -18,7 +18,7 @@ return {
 		config = function(_, opts)
 			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("projects")
-            require("telescope").load_extension("ui-select")
+			require("telescope").load_extension("ui-select")
 
 			local builtin = require("telescope.builtin")
 			local projects = require("telescope").extensions.projects
@@ -55,7 +55,14 @@ return {
 			table.insert(vimgrep_arguments, "!**/.git/*")
 
 			require("telescope").setup(opts)
+			local function search_conflicts()
+				require("telescope.builtin").git_files({
+					prompt_title = "< Merge Conflicts >",
+					git_command = { "git", "diff", "--name-only", "--diff-filter=U" },
+				})
+			end
 
+			vim.keymap.set("n", "<leader>cf", search_conflicts, options)
 			vim.keymap.set("n", "<leader>f", config.project_files, options)
 			vim.keymap.set("n", "<leader>pf", projects.projects, options)
 			vim.keymap.set("n", "<leader>gf", builtin.git_files, options)
