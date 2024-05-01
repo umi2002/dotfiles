@@ -21,8 +21,7 @@ return {
 			},
 		},
 		config = function(_, opts)
-            require("orgmode").setup(opts)
-			require("orgmode").setup_ts_grammar()
+			require("orgmode").setup(opts)
 			require("headlines").setup({
 				org = {
 					headline_highlights = false,
