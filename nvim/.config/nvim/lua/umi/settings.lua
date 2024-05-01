@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -26,8 +29,6 @@ vim.opt.scrolloff = 10
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 500
-
-vim.g.mapleader = " "
 
 vim.api.nvim_command([[
   autocmd BufRead,BufNewFile *.tpp set filetype=cpp
