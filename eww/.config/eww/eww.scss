@@ -1,114 +1,117 @@
 * {
-    all: unset;
+  all: unset;
 }
 
 @mixin default {
-    font-family: "Fira Mono Nerd Font";
-    font-size: 18px;
-    color: #e0def4;
-    background-color: #232136;
-    border: 2px solid #569fba;
-    border-radius: 10px;
-    opacity: 0.9;
+  font-family: "Fira Mono Nerd Font";
+  font-size: 18px;
+  color: #e0def4;
+  background-color: #232136;
+  border: 2px solid #569fba;
+  border-radius: 10px;
+  opacity: 0.9;
 }
 
 window {
-    @include default;
+  @include default;
 }
 
 calendar {
-    @include default;
+  @include default;
 }
 
 .bottom-center {
-    background: rgba(0, 0, 0, 0);
-    border: none;
+  background: rgba(0, 0, 0, 0);
+  border: none;
 }
 
 .song-info {
-    @include default;
-    opacity: 1;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    margin-bottom: 10px;
+  @include default;
+  opacity: 1;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
 }
 
 .album {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .song-position {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .song-progress {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 .song-progress scale trough highlight {
-    background-color: #e0def4;
-    border-radius: 8px;
+  background-color: #e0def4;
+  border-radius: 8px;
 }
+
 .song-progress scale trough {
-    background-color: #569fba;
-    border-radius: 8px;
-    min-height: 10px;
-    min-width: 200px;
-    margin: 10px 10px 10px 10px;
+  background-color: #569fba;
+  border-radius: 8px;
+  min-height: 10px;
+  min-width: 200px;
+  margin: 10px 10px 10px 10px;
 }
+
 .music-player {
-    @include default;
-    padding-left: 5px;
+  @include default;
+  padding-left: 5px;
 }
 
 .volume {
-    background: rgba(0, 0, 0, 0);
-    border: none;
+  background: rgba(0, 0, 0, 0);
+  border: none;
 }
 
 .volume-text {
-    @include default;
+  @include default;
 }
 
 .volume-slider {
-    @include default;
-    opacity: 1;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    margin-bottom: 10px;
+  @include default;
+  opacity: 1;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
 }
 
 .volume-slider scale trough highlight {
-    background-color: #e0def4;
-    border-radius: 8px;
+  background-color: #e0def4;
+  border-radius: 8px;
 }
+
 .volume-slider scale trough {
-    background-color: #569fba;
-    border-radius: 8px;
-    min-height: 180px;
-    min-width: 10px;
+  background-color: #569fba;
+  border-radius: 8px;
+  min-height: 180px;
+  min-width: 10px;
 }
 
 .charging {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    color: #e0def4;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: #e0def4;
 }
 
 .discharging {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    color: #569fba;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: #569fba;
 }
 
 .wifi {
-    margin-right: 5px;
+  margin-right: 5px;
 }

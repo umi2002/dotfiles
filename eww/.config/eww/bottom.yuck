@@ -1,61 +1,61 @@
 (defwindow bottom-center
-           :monitor 0
-           :geometry (geometry :x "0px"
-                               :y "10px"
-                               :anchor "bottom center")
-           :stacking "fg"
-           (eventbox :orientation "h"
-                     :halign "center"
-                     :onhover `eww update art-visible=true && touch /tmp/user_action_flag`
-                     :onhoverlost `eww update art-visible=false && rm /tmp/user_action_flag`
-                     (box :orientation "v"
-                          :space-evenly false
-                          :halign "center"
-                          (revealer :orientation "h"
-                                    :reveal art-visible
-                                    :duration "100ms"
-                                    :transition "slideup"
-                                    (box :class "song-info"
-                                         :orientation "h"
-                                         :space-evenly false
-                                         :halign "center"
-                                         :width 400
-                                         (song-art)
-                                         (box :orientation "v"
-                                              (album)
-                                              (song-position)
-                                              (song-progress)
-                                         )
-                                    )
-                          )
-                          (box :class "music-player"
-                               :orientation "h"
-                               :valign "start"
-                               :space-evenly false
-                               :width 500
-                               :height 30
-                               (prev-song);
-                               (music);
-                               (next-song);
-                          )
-                     )
-           )
-)
+  :monitor 0
+  :geometry (geometry :x "0px"
+  :y "10px"
+  :anchor "bottom center")
+  :stacking "fg"
+  (eventbox :orientation "h"
+            :halign "center"
+            :onhover `eww update art-visible=true && touch /tmp/user_action_flag`
+            :onhoverlost `eww update art-visible=false && rm /tmp/user_action_flag`
+    (box :orientation "v"
+         :space-evenly false
+         :halign "center"
+      (revealer :orientation "h"
+                :reveal art-visible
+                :duration "100ms"
+                :transition "slideup"
+        (box :class "song-info"
+             :orientation "h"
+             :space-evenly false
+             :halign "center"
+             :width 400
+          (song-art)
+          (box :orientation "v"
+            (album)
+            (song-position)
+            (song-progress)
+            )
+          )
+        )
+      (box :class "music-player"
+           :orientation "h"
+           :valign "start"
+           :space-evenly false
+           :width 500
+           :height 30
+        (prev-song);
+        (music);
+        (next-song);
+        )
+      )
+    )
+  )
 
 (deflisten album :initial "No song playing" "bash ~/.config/eww/scripts/get-album.sh")
 (defwidget album []
   (label :class "album"
          :text "${album}"
+    )
   )
-)
 
 (defpoll song-position :interval "1s"
   "bash ~/.config/eww/scripts/get-progress.sh")
 (defwidget song-position []
   (label :class "song-position"
          :text "${song-position}"
+    )
   )
-)
 
 (deflisten song-duration "bash ~/.config/eww/scripts/get-duration.sh")
 (defpoll song-progress :interval "1s"
@@ -70,9 +70,9 @@
            :max song-duration
            :width 200
            :onchange "bash ~/.config/eww/scripts/set-progress.sh {}"
+      )
     )
   )
-)
 
 (deflisten music :initial "No song playing" "bash ~/.config/eww/scripts/get-song.sh")
 
@@ -82,12 +82,12 @@
   (eventbox :onclick "bash ~/.config/eww/scripts/set-play-pause.sh"
             :hexpand true
             :halign "center"
-            (label :text "${play-pause} ${music}"
-                   :limit-width 30
-                   :width 30
-            )
+    (label :text "${play-pause} ${music}"
+           :limit-width 30
+           :width 30
+      )
+    )
   )
-)
 
 (defvar art-visible false)
 (defvar song-path "/tmp/spotify-art.png")
@@ -96,61 +96,61 @@
   (image :path song-path
          :image-width 100
          :image-height 100
+    )
   )
-)
 
 (defwidget prev-song []
   (eventbox :onclick "playerctl -p spotify previous"
             :hexpand true
             :halign "start"
-            (label :text " 󰙣 ")
+    (label :text " 󰙣 ")
+    )
   )
-)
 
 (defwidget next-song []
   (eventbox :onclick "playerctl -p spotify next"
             :hexpand true
             :halign "end"
-            (label :text " 󰙡 ")
+    (label :text " 󰙡 ")
+    )
   )
-)
 
 (defwindow volume
-           :monitor 0
-           :geometry (geometry :x "550px"
-                               :y "10px"
-                               :anchor "bottom right")
-           :stacking "fg"
-           (eventbox :orientation "h"
-                     :halign "center"
-                     :onhover `eww update volume-visible=true`
-                     :onhoverlost `eww update volume-visible=false`
-                     (box :orientation "v"
-                          :space-evenly false
-                          (volume-revealer)
-                          (volume)
-                     )
-           )
-)
+  :monitor 0
+  :geometry (geometry :x "550px"
+  :y "10px"
+  :anchor "bottom right")
+  :stacking "fg"
+  (eventbox :orientation "h"
+            :halign "center"
+            :onhover `eww update volume-visible=true`
+            :onhoverlost `eww update volume-visible=false`
+    (box :orientation "v"
+         :space-evenly false
+      (volume-revealer)
+      (volume)
+      )
+    )
+  )
 
 (defwidget volume-revealer []
   (revealer :transition "slideup"
             :reveal volume-visible
             :duration "100ms"
-            (box :class "volume-slider" :halign "center" :vexpand "false" :hexpand "false"
-                 (scale :orientation "v"
-                        :flipped true
-                        :value volume
-                        :min 0
-                        :max 100
-                        :width 30
-                        :height 200
-                        :halign "center"
-                        :onchange "amixer -q -D pulse sset Master {}%"
-                )
-            )
+    (box :class "volume-slider" :halign "center" :vexpand "false" :hexpand "false"
+      (scale :orientation "v"
+             :flipped true
+             :value volume
+             :min 0
+             :max 100
+             :width 30
+             :height 200
+             :halign "center"
+             :onchange "amixer -q -D pulse sset Master {}%"
+        )
+      )
+    )
   )
-)
 
 (defvar volume-visible false)
 (deflisten muted :initial "false"
@@ -167,26 +167,26 @@
     :onclick "amixer set Master toggle"
     :onmiddleclick "pavucontrol &"
     (label :text {muted == "0" ? "󰝟 ${volume}%" : "󰕾 ${volume}%"})
+    )
   )
-)
 
 (defwindow bottom-right
-           :monitor 0
-           :geometry (geometry :x "20px"
-                               :y "10px"
-                               :width "80px"
-                               :height "30px"
-                               :anchor "bottom right")
-           :stacking "fg"
-           (box :orientation "h"
-                (keyboard)
-           )
-)
+  :monitor 0
+  :geometry (geometry :x "20px"
+  :y "10px"
+  :width "80px"
+  :height "30px"
+  :anchor "bottom right")
+  :stacking "fg"
+  (box :orientation "h"
+    (keyboard)
+    )
+  )
 
 (defpoll keyboard :interval "1s"
   "bash ~/.config/eww/scripts/get-keyboard.sh")
 (defwidget keyboard []
   (label :class "keyboard"
          :text "${keyboard} 󰌌 "
+    )
   )
-)

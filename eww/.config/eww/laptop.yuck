@@ -1,53 +1,53 @@
 (defwindow bottom-left
-           :monitor 0
-           :geometry (geometry :x "20px"
-                               :y "10px"
-                               :height "30px"
-                               :anchor "bottom left")
-           :stacking "fg"
-           (box :orientation "h"
-                :space-evenly false
-                (box :orientation "h"
-                     (battery)
-                     (battery-text)
-                )
-                (box :orientation "h"
-                     (separator)
-                )
-                (box :class "wifi"
-                     :orientation "h"
-                     (wifi)
-                )
-           )
-)
+  :monitor 0
+  :geometry (geometry :x "20px"
+  :y "10px"
+  :height "30px"
+  :anchor "bottom left")
+  :stacking "fg"
+  (box :orientation "h"
+       :space-evenly false
+    (box :orientation "h"
+      (battery)
+      (battery-text)
+      )
+    (box :orientation "h"
+      (separator)
+      )
+    (box :class "wifi"
+         :orientation "h"
+      (wifi)
+      )
+    )
+  )
 
 (defwidget separator []
   (label :text "|"
          :width 30
+    )
   )
-)
 
 (deflisten battery-status :initial "0" "bash ~/.config/eww/scripts/get-battery-status.sh")
 
 (defpoll battery :interval "1s"
-         "bash ~/.config/eww/scripts/get-battery-level.sh")
+  "bash ~/.config/eww/scripts/get-battery-level.sh")
 (defwidget battery []
   (box :class { battery-status == "1" ? "charging" : "discharging" }
        :orientation "h"
-       (circular-progress :value battery
-                          :start-at 76
-                          :thickness 5
-                          :clockwise false
-       )
+    (circular-progress :value battery
+                       :start-at 76
+                       :thickness 5
+                       :clockwise false
+      )
+    )
   )
-)
 
 (defwidget battery-text []
   (label :text "${battery}%")
-)
+  )
 
 (defpoll wifi :interval "1s"
-         "bash ~/.config/eww/scripts/get-wifi.sh")
+  "bash ~/.config/eww/scripts/get-wifi.sh")
 (defwidget wifi []
   (label :text "${wifi}")
-)
+  )
