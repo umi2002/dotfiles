@@ -27,10 +27,6 @@ return {
                     }),
                     formatting.prettierd.with({
                         filetypes = {
-                            "javascript",
-                            "typescript",
-                            "javascriptreact",
-                            "typescriptreact",
                             "markdown",
                             "css",
                             "scss",
