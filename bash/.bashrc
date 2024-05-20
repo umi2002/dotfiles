@@ -39,6 +39,10 @@ export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 export PATH=/home/umi/.cargo/bin:$PATH
 export PATH=/opt/Xilinx/Vivado/2023.1/bin:$PATH
 
+export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt/plugins/platforms
+export QT_PLUGIN_PATH=/usr/lib/qt/plugins
+export QML2_IMPORT_PATH=/usr/lib/qt/qml
+
 # Created by `pipx` o/ 2023-06-29 22:01:34
 export PATH="$PATH:/home/umi/.local/bin"
 
