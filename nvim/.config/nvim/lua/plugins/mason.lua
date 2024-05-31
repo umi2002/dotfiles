@@ -51,6 +51,7 @@ return {
 				"cmakelang",
 				"gersemi",
 				"cpplint",
+				"sonarlint-language-server",
 			},
 
 			auto_update = true,
