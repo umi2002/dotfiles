@@ -213,4 +213,5 @@ return {
 		config = true,
 	},
 	{ "elkowar/yuck.vim" },
+	{ "gpanders/nvim-parinfer" },
 }

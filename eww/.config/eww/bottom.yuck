@@ -1,8 +1,8 @@
 (defwindow bottom-center
   :monitor 0
   :geometry (geometry :x "0px"
-  :y "10px"
-  :anchor "bottom center")
+             :y "10px"
+             :anchor "bottom center")
   :stacking "fg"
   (eventbox :orientation "h"
             :halign "center"
@@ -24,10 +24,10 @@
           (box :orientation "v"
             (album)
             (song-position)
-            (song-progress)
-            )
-          )
-        )
+            (song-progress))))
+            
+          
+        
       (box :class "music-player"
            :orientation "h"
            :valign "start"
@@ -36,26 +36,26 @@
            :height 30
         (prev-song);
         (music);
-        (next-song);
-        )
-      )
-    )
-  )
+        (next-song)))));
+        
+      
+    
+  
 
 (deflisten album :initial "No song playing" "bash ~/.config/eww/scripts/get-album.sh")
 (defwidget album []
   (label :class "album"
-         :text "${album}"
-    )
-  )
+         :text "${album}"))
+    
+  
 
 (defpoll song-position :interval "1s"
   "bash ~/.config/eww/scripts/get-progress.sh")
 (defwidget song-position []
   (label :class "song-position"
-         :text "${song-position}"
-    )
-  )
+         :text "${song-position}"))
+    
+  
 
 (deflisten song-duration "bash ~/.config/eww/scripts/get-duration.sh")
 (defpoll song-progress :interval "1s"
@@ -69,10 +69,10 @@
            :min 0
            :max song-duration
            :width 200
-           :onchange "bash ~/.config/eww/scripts/set-progress.sh {}"
-      )
-    )
-  )
+           :onchange "bash ~/.config/eww/scripts/set-progress.sh {}")))
+      
+    
+  
 
 (deflisten music :initial "No song playing" "bash ~/.config/eww/scripts/get-song.sh")
 
@@ -84,10 +84,10 @@
             :halign "center"
     (label :text "${play-pause} ${music}"
            :limit-width 30
-           :width 30
-      )
-    )
-  )
+           :width 30)))
+      
+    
+  
 
 (defvar art-visible false)
 (defvar song-path "/tmp/spotify-art.png")
@@ -95,31 +95,31 @@
 (defwidget song-art []
   (image :path song-path
          :image-width 100
-         :image-height 100
-    )
-  )
+         :image-height 100))
+    
+  
 
 (defwidget prev-song []
   (eventbox :onclick "playerctl -p spotify previous"
             :hexpand true
             :halign "start"
-    (label :text " 󰙣 ")
-    )
-  )
+    (label :text " 󰙣 ")))
+    
+  
 
 (defwidget next-song []
   (eventbox :onclick "playerctl -p spotify next"
             :hexpand true
             :halign "end"
-    (label :text " 󰙡 ")
-    )
-  )
+    (label :text " 󰙡 ")))
+    
+  
 
 (defwindow volume
   :monitor 0
   :geometry (geometry :x "550px"
-  :y "10px"
-  :anchor "bottom right")
+             :y "10px"
+             :anchor "bottom right")
   :stacking "fg"
   (eventbox :orientation "h"
             :halign "center"
@@ -128,10 +128,10 @@
     (box :orientation "v"
          :space-evenly false
       (volume-revealer)
-      (volume)
-      )
-    )
-  )
+      (volume))))
+      
+    
+  
 
 (defwidget volume-revealer []
   (revealer :transition "slideup"
@@ -146,11 +146,11 @@
              :width 30
              :height 200
              :halign "center"
-             :onchange "amixer -q -D pulse sset Master {}%"
-        )
-      )
-    )
-  )
+             :onchange "amixer -q -D pulse sset Master {}%"))))
+        
+      
+    
+  
 
 (defvar volume-visible false)
 (deflisten muted :initial "false"
@@ -166,27 +166,27 @@
     :height 30
     :onclick "amixer set Master toggle"
     :onmiddleclick "pavucontrol &"
-    (label :text {muted == "0" ? "󰝟 ${volume}%" : "󰕾 ${volume}%"})
-    )
-  )
+    (label :text {muted == "0" ? "󰝟 ${volume}%" : "󰕾 ${volume}%"})))
+    
+  
 
 (defwindow bottom-right
   :monitor 0
   :geometry (geometry :x "20px"
-  :y "10px"
-  :width "80px"
-  :height "30px"
-  :anchor "bottom right")
+             :y "10px"
+             :width "80px"
+             :height "30px"
+             :anchor "bottom right")
   :stacking "fg"
   (box :orientation "h"
-    (keyboard)
-    )
-  )
+    (keyboard)))
+    
+  
 
 (defpoll keyboard :interval "1s"
   "bash ~/.config/eww/scripts/get-keyboard.sh")
 (defwidget keyboard []
   (label :class "keyboard"
-         :text "${keyboard} 󰌌 "
-    )
-  )
+         :text "${keyboard} 󰌌 "))
+    
+  
