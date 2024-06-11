@@ -28,6 +28,7 @@ return {
 				"angularls",
 				"eslint",
 				"csharp_ls",
+				"tailwindcss",
 			},
 		},
 	},

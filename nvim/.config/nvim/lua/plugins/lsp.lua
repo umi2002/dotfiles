@@ -101,6 +101,12 @@ return {
 				filetypes = { "json" },
 			})
 
+			lsp.tailwindcss.setup({
+				on_attach = lsp_attach,
+				capabilities = lsp_capabilities,
+				filetypes = { "html", "css", "scss", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+			})
+
 			lsp.bashls.setup({
 				on_attach = lsp_attach,
 				capabilities = lsp_capabilities,
