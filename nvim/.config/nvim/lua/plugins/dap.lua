@@ -58,7 +58,7 @@ return {
 				else
 					cb({
 						type = "executable",
-						command = "/home/umi/.local/share/nvim/mason/packages/debugpy/venv/bin/python",
+						command = "/usr/bin/python",
 						args = { "-m", "debugpy.adapter" },
 						options = {
 							source_filetype = "python",
@@ -119,10 +119,10 @@ return {
 						-- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
 						-- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
 						local cwd = vim.fn.getcwd()
-						if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-							return cwd .. "/venv/bin/python"
+						if vim.fn.executable(cwd .. "/usr/bin/python") == 1 then
+							return cwd .. "/usr/bin/python"
 						elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-							return cwd .. "/.venv/bin/python"
+							return cwd .. "/usr/bin/python"
 						else
 							return "/usr/bin/python"
 						end
