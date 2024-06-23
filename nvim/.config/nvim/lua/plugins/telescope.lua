@@ -29,22 +29,6 @@ return {
 			-- Process creation is expensive in Windows, so this reduces latency
 			local is_inside_work_tree = {}
 
-			config.project_files = function()
-				local options = {} -- define here if you want to define something
-
-				local cwd = vim.fn.getcwd()
-				if is_inside_work_tree[cwd] == nil then
-					vim.fn.system("git rev-parse --is-inside-work-tree")
-					is_inside_work_tree[cwd] = vim.v.shell_error == 0
-				end
-
-				if is_inside_work_tree[cwd] then
-					builtin.git_files(options)
-				else
-					builtin.find_files(options)
-				end
-			end
-
 			local telescopeConfig = require("telescope.config")
 			local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
 
@@ -62,12 +46,12 @@ return {
 				})
 			end
 
-			vim.keymap.set("n", "<leader>cf", search_conflicts, options)
-			vim.keymap.set("n", "<leader>f", config.project_files, options)
+			vim.keymap.set("n", "<leader>f", builtin.find_files, options)
 			vim.keymap.set("n", "<leader>pf", projects.projects, options)
 			vim.keymap.set("n", "<leader>gf", builtin.git_files, options)
 			vim.keymap.set("n", "<leader>wf", builtin.live_grep, options)
 			vim.keymap.set("n", "<leader>bf", builtin.buffers, options)
+			vim.keymap.set("n", "<leader>cf", search_conflicts, options)
 		end,
 	},
 	{
