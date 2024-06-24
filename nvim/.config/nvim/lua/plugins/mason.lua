@@ -52,6 +52,7 @@ return {
 				"cmakelang",
 				"gersemi",
 				"cpplint",
+				"csharpier",
 			},
 
 			auto_update = true,
