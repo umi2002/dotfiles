@@ -1,8 +1,8 @@
 #!/bin/bash
 
-status=$(playerctl -p spotify status)
+status=$(playerctl -p chromium status)
 if [[ "$status" == "Playing" ]] ; then
-    playerctl -p spotify pause
+    playerctl -p chromium pause
 elif [[ "$status" == "Paused" ]] ; then
-    playerctl -p spotify play
+    playerctl -p chromium play
 fi
