@@ -5,4 +5,4 @@ zscroll -l 25 \
     --match-command "playerctl -p chromium status" \
     --match-text "Playing" "--scroll 1" \
     --match-text "Paused" "--scroll 0" \
-    --update-check true 'playerctl -p chromium metadata --format "{{ title }}   {{ artist }}"'
+    --update-check true 'playerctl -p chromium metadata --format "{{ title }} 󰎇  {{ artist }}"'

@@ -1,151 +1,131 @@
-(defwindow bottom-center
+(defwindow bottom
   :monitor 0
   :geometry (geometry :x "0px"
-             :y "10px"
-             :anchor "bottom center")
+                      :y "0px"
+                      :width "100%"
+                      :height "20px"
+                      :anchor "bottom center")
   :stacking "fg"
-  (eventbox :orientation "h"
-            :halign "center"
-            :onhover `eww update art-visible=true && touch /tmp/user_action_flag`
-            :onhoverlost `eww update art-visible=false && rm /tmp/user_action_flag`
-    (box :orientation "v"
+  (box :class "bottom-bar"
+    :orientation "h"
+    (box :halign "start"
          :space-evenly false
-         :halign "center"
-      (revealer :orientation "h"
-                :reveal art-visible
-                :duration "100ms"
-                :transition "slideup"
-        (box :class "song-info"
-             :orientation "h"
-             :space-evenly false
-             :halign "center"
-             :width 400
-          (song-art)
-          (box :orientation "v"
-            (album)
-            (song-position)
-            (song-progress))))
-            
-          
-        
-      (box :class "music-player"
-           :orientation "h"
-           :valign "start"
+      (bottom-left)
+      (music))
+    (box :halign "end"
+         :space-evenly false
+      (volume-widget)
+      (bottom-right))))
+
+(defwidget bottom-left []
+  (box :class "left-section"
+       :orientation "h"
+       :space-evenly false
+       :halign "start"
+    (box :orientation "h"
+      (battery)
+      (battery-text))
+    (box :orientation "h"
+      (separator))
+    (box :class "wifi"
+         :orientation "h"
+      (wifi))))
+    
+  
+
+(defwidget separator []
+  (label :class "separator"
+         :text "|"
+         :width 30))
+    
+  
+
+(deflisten battery-status :initial "0" "bash ~/.config/eww/scripts/get-battery-status.sh")
+
+(defpoll battery :interval "1s"
+  "bash ~/.config/eww/scripts/get-battery-level.sh")
+(defwidget battery []
+  (box :class { battery-status == "1" ? "charging" : "discharging"}
+       :orientation "h"
+    (circular-progress :class "battery-progress"
+                       :value battery
+                       :start-at 0
+                       :thickness 3
+                       :clockwise false)))
+      
+    
+  
+
+(defwidget battery-text []
+  (label :class "${battery-status == "1" ? "charging" : "discharging"}"
+         :text "${battery}%"))
+  
+
+(defpoll wifi :interval "1s"
+  "bash ~/.config/eww/scripts/get-wifi.sh")
+(defwidget wifi []
+  (label :text "${wifi}"))
+
+(defwidget music []
+  (eventbox :orientation "h"
+            :class "music"
+      (box :orientation "h"
            :space-evenly false
-           :width 500
-           :height 30
-        (prev-song);
-        (music);
-        (next-song)))));
+        (song)
+        (prev-song)
+        (next-song))))
         
       
     
   
-
-(deflisten album :initial "No song playing" "bash ~/.config/eww/scripts/get-album.sh")
-(defwidget album []
-  (label :class "album"
-         :text "${album}"))
-    
-  
-
-(defpoll song-position :interval "1s"
-  "bash ~/.config/eww/scripts/get-progress.sh")
-(defwidget song-position []
-  (label :class "song-position"
-         :text "${song-position}"))
-    
-  
-
-(deflisten song-duration "bash ~/.config/eww/scripts/get-duration.sh")
-(defpoll song-progress :interval "1s"
-  `playerctl -p spotify position`)
-
-(defwidget song-progress []
-  (box :class "song-progress" :halign "center" :vexpand "false" :hexpand "false"
-    (scale :orientation "h"
-           :flipped false
-           :value song-progress
-           :min 0
-           :max song-duration
-           :width 200
-           :onchange "bash ~/.config/eww/scripts/set-progress.sh {}")))
-      
-    
-  
-
-(deflisten music :initial "No song playing" "bash ~/.config/eww/scripts/get-song.sh")
+(deflisten song :initial "No song playing" "bash ~/.config/eww/scripts/get-song.sh")
 
 (deflisten play-pause :initial " " "bash ~/.config/eww/scripts/get-play-pause.sh")
 
-(defwidget music []
+(defwidget song []
   (eventbox :onclick "bash ~/.config/eww/scripts/set-play-pause.sh"
-            :hexpand true
-            :halign "center"
-    (label :text "${play-pause} ${music}"
+    (label :text "${play-pause} ${song} "
            :limit-width 30
            :width 30)))
       
     
   
-
-(defvar art-visible false)
-(defvar song-path "/tmp/spotify-art.png")
-
-(defwidget song-art []
-  (image :path song-path
-         :image-width 100
-         :image-height 100))
-    
-  
-
 (defwidget prev-song []
-  (eventbox :onclick "playerctl -p spotify previous"
-            :hexpand true
-            :halign "start"
-    (label :text " 󰙣 ")))
+  (eventbox :onclick "playerctl -p chromium previous"
+            :halign "end"
+    (label :text "󰙣 ")))
     
   
 
 (defwidget next-song []
-  (eventbox :onclick "playerctl -p spotify next"
-            :hexpand true
+  (eventbox :onclick "playerctl -p chromium next"
             :halign "end"
-    (label :text " 󰙡 ")))
+    (label :text "󰙡 ")))
     
   
 
-(defwindow volume
-  :monitor 0
-  :geometry (geometry :x "550px"
-             :y "10px"
-             :anchor "bottom right")
-  :stacking "fg"
-  (eventbox :orientation "h"
-            :halign "center"
+(defwidget volume-widget []
+  (eventbox :class "volume-widget"
+            :orientation "h"
+            :valign "center"
             :onhover `eww update volume-visible=true`
             :onhoverlost `eww update volume-visible=false`
-    (box :orientation "v"
+    (box :orientation "h"
          :space-evenly false
-      (volume-revealer)
-      (volume))))
+      (volume)
+      (volume-revealer))))
       
-    
-  
 
 (defwidget volume-revealer []
-  (revealer :transition "slideup"
+  (revealer :transition "slideleft"
             :reveal volume-visible
             :duration "100ms"
-    (box :class "volume-slider" :halign "center" :vexpand "false" :hexpand "false"
-      (scale :orientation "v"
-             :flipped true
+    (box :class "volume-slider" :valign "center"
+      (scale :orientation "h"
+             :flipped false
              :value volume
              :min 0
              :max 100
-             :width 30
-             :height 200
-             :halign "center"
              :onchange "amixer -q -D pulse sset Master {}%"))))
         
       
@@ -156,37 +136,30 @@
 (deflisten muted :initial "false"
   "bash ~/.config/eww/scripts/get-mute.sh")
 
-(deflisten volume :initial "30"
+(deflisten volume :initial "0"
   "bash ~/.config/eww/scripts/get-volume.sh")
 
 (defwidget volume []
   (eventbox
     :class "volume-text"
     :width 100
-    :height 30
     :onclick "amixer set Master toggle"
     :onmiddleclick "pavucontrol &"
     (label :text {muted == "0" ? "󰝟 ${volume}%" : "󰕾 ${volume}%"})))
     
   
-
-(defwindow bottom-right
-  :monitor 0
-  :geometry (geometry :x "20px"
-             :y "10px"
-             :width "80px"
-             :height "30px"
-             :anchor "bottom right")
-  :stacking "fg"
-  (box :orientation "h"
-    (keyboard)))
-    
+(defwidget bottom-right []
+  (box :class "right-section"
+       :orientation "h"
+       :halign "end"
+       :width 80
+    (keyboard))) 
   
 
 (defpoll keyboard :interval "1s"
   "bash ~/.config/eww/scripts/get-keyboard.sh")
 (defwidget keyboard []
   (label :class "keyboard"
-         :text "${keyboard} 󰌌 "))
+       :text "${keyboard} 󰌌 "))
     
   
