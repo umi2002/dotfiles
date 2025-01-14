@@ -38,10 +38,6 @@ return {
 					formatting.shfmt.with({
 						filetypes = { "bash" },
 					}),
-					formatting.clang_format.with({
-						filetypes = { "c", "cpp", "tpp", "java" },
-						args = { "-style=Microsoft" },
-					}),
 					formatting.gersemi.with({
 						filetypes = { "cmake" },
 					}),

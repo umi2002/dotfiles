@@ -32,182 +32,136 @@ return {
 
 			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			lsp.lua_ls.setup({
+			local default_config = {
 				on_attach = lsp_attach,
 				capabilities = lsp_capabilities,
-				filetypes = { "lua" },
-				diagnostics = { globals = { "vim" } },
-				settings = {
-					workspace = {
-						checkThirdParty = false,
-					},
-				},
-			})
+			}
 
-			lsp.marksman.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "markdown" },
-			})
-
-			lsp.cssls.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "css", "scss" },
-			})
-
-			lsp.html.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "html" },
-			})
-
-			lsp.tsserver.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-			})
-
-			lsp.eslint.setup({
-				on_attach = lsp.util.add_hook_after(lsp_attach, function(client, bufnr)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						command = "EslintFixAll",
-					})
-				end),
-				capabilities = lsp_capabilities,
-				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-			})
-
+			-- For angularls
 			local angular_path =
 				"/home/umi/.local/share/nvim/mason/packages/angular-language-server/node_modules/@angular/language-server/bin/"
 			local tsserver_path =
 				"/home/umi/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/bin/"
 			local cmd =
 				{ "ngserver", "--stdio", "--tsProbeLocations", tsserver_path, "--ngProbeLocations", angular_path }
-			lsp.angularls.setup({
-				cmd = cmd,
-				on_new_config = function(new_config, new_root_dir)
-					new_config.cmd = cmd
-				end,
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "typescript", "typescriptreact", "html", "css" },
-			})
 
-			lsp.jsonls.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "json" },
-			})
-
-			lsp.tailwindcss.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "html", "css", "scss", "javascript", "typescript", "javascriptreact", "typescriptreact" },
-			})
-
-			lsp.bashls.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "sh", "zsh" },
-			})
-
-			lsp.clangd.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "c", "cpp" },
-				root_dir = lsp.util.root_pattern("compile_commands.json", ".git", "CMakeLists.txt"),
-			})
-
-			lsp.cmake.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "cmake" },
-			})
-
-			lsp.rust_analyzer.setup({
-				on_attach = lsp.util.add_hook_after(lsp_attach, format_on_save),
-				capabilities = lsp_capabilities,
-				filetypes = { "rust" },
-				root_dir = function(fname)
-					return require("lspconfig").util.root_pattern("Cargo.toml")(fname)
-						or require("lspconfig").util.path.dirname(fname)
-				end,
-				settings = {
-					["rust-analyzer"] = {
-						cargo = { allFeatures = true, loadOutDirsFromCheck = true },
-					},
-				},
-			})
-
-			lsp.ghdl_ls.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "vhdl" },
-			})
-
-			lsp.texlab.setup({
-				on_attach = lsp.util.add_hook_after(lsp_attach, format_on_save),
-				capabilities = lsp_capabilities,
-				filetypes = { "tex", "bib" },
-			})
-
-			lsp.pyright.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "python" },
-			})
-
-			lsp.csharp_ls.setup({
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "cs" },
-			})
-
+			-- For jdtls
 			local bundles = {
 				vim.fn.glob(
 					"/home/umi/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*"
 				),
 			}
 
-			lsp.jdtls.setup({
-				cmd = {
-					"java",
-					"-Declipse.application=org.eclipse.jdt.ls.core.id1",
-					"-Dosgi.bundles.defaultStartLevel=4",
-					"-Declipse.product=org.eclipse.jdt.ls.core.product",
-					"-Dlog.protocol=true",
-					"-Dlog.level=ALL",
-					"-Xms1g",
-					"--add-modules=ALL-SYSTEM",
-					"--add-opens",
-					"java.base/java.util=ALL-UNNAMED",
-					"--add-opens",
-					"java.base/java.lang=ALL-UNNAMED",
-					--
-					"-jar",
-					"/home/umi/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.600.v20231106-1826.jar",
-					"-configuration",
-					"/home/umi/.local/share/nvim/mason/packages/jdtls/config_linux",
-					"-data",
-					"/home/umi/.local/share/nvim/mason/packages/jdtls/workspace",
+			local custom_configs = {
+				lua_ls = {
+					diagnostics = { globals = { "vim" } },
+					settings = {
+						workspace = {
+							checkThirdParty = false,
+						},
+					},
 				},
-				on_attach = lsp_attach,
-				capabilities = lsp_capabilities,
-				filetypes = { "java" },
-				init_options = {
-					bundles = bundles,
+				eslint = {
+					on_attach = lsp.util.add_hook_after(lsp_attach, function(client, bufnr)
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							buffer = bufnr,
+							command = "EslintFixAll",
+						})
+					end),
 				},
-				root_dir = lsp.util.root_pattern(
-					"pom.xml",
-					".git",
-					"build.gradle",
-					"settings.gradle",
-					"gradlew",
-					"mvnw"
-				),
-			})
+				angularls = {
+					cmd = cmd,
+					on_new_config = function(new_config, new_root_dir)
+						new_config.cmd = cmd
+					end,
+				},
+				clangd = {
+					on_attach = lsp.util.add_hook_after(lsp_attach, function(client, bufnr)
+						if client.supports_method("textDocument/formatting") then
+							vim.api.nvim_create_autocmd("BufWritePre", {
+								buffer = bufnr,
+								callback = function()
+									vim.lsp.buf.format({ async = false })
+								end,
+							})
+						end
+					end),
+					cmd = {
+						"clangd",
+						"--fallback-style=Microsoft",
+					},
+				},
+				rust_analyzer = {
+					root_dir = function(fname)
+						return require("lspconfig").util.root_pattern("Cargo.toml")(fname)
+							or require("lspconfig").util.path.dirname(fname)
+					end,
+					settings = {
+						["rust-analyzer"] = {
+							cargo = { allFeatures = true, loadOutDirsFromCheck = true },
+						},
+					},
+				},
+				jdts = {
+					cmd = {
+						"java",
+						"-Declipse.application=org.eclipse.jdt.ls.core.id1",
+						"-Dosgi.bundles.defaultStartLevel=4",
+						"-Declipse.product=org.eclipse.jdt.ls.core.product",
+						"-Dlog.protocol=true",
+						"-Dlog.level=ALL",
+						"-Xms1g",
+						"--add-modules=ALL-SYSTEM",
+						"--add-opens",
+						"java.base/java.util=ALL-UNNAMED",
+						"--add-opens",
+						"java.base/java.lang=ALL-UNNAMED",
+						"-jar",
+						"/home/umi/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.600.v20231106-1826.jar",
+						"-configuration",
+						"/home/umi/.local/share/nvim/mason/packages/jdtls/config_linux",
+						"-data",
+						"/home/umi/.local/share/nvim/mason/packages/jdtls/workspace",
+					},
+					init_options = {
+						bundles = bundles,
+					},
+					root_dir = lsp.util.root_pattern(
+						"pom.xml",
+						".git",
+						"build.gradle",
+						"settings.gradle",
+						"gradlew",
+						"mvnw"
+					),
+				},
+			}
+
+			local servers = {
+				"lua_ls",
+				"marksman",
+				"cssls",
+				"html",
+				"ts_ls",
+				"eslint",
+				"angularls",
+				"jsonls",
+				"tailwindcss",
+				"bashls",
+				"clangd",
+				"cmake",
+				"rust_analyzer",
+				"ghdl_ls",
+				"texlab",
+				"pyright",
+				"csharp_ls",
+				"jdtls",
+			}
+
+			for _, server in ipairs(servers) do
+				local final_config = vim.tbl_deep_extend("force", default_config, custom_configs[server] or {})
+				lsp[server].setup(final_config)
+			end
 		end,
 	},
 	{

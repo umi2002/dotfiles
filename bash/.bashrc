@@ -20,11 +20,6 @@ export FZF_ALT_C_COMMAND="fd --type d --hidden"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 export QT_QPA_PLATFORM=wayland
-export LIBVA_DRIVER_NAME=nvidia
-export XDG_SESSION_TYPE=wayland
-export GBM_BACKEND=nvidia-drm
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export WLR_NO_HARDWARE_CURSORS=1
 export NVD_BACKEND=direct
 export WLR_BACKEND=vulkan
 export MOZ_ENABLE_WAYLAND=1

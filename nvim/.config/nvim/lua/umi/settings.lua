@@ -1,3 +1,5 @@
+vim.lsp.set_log_level("off")
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -36,44 +38,10 @@ vim.api.nvim_command([[
 
 vim.opt.conceallevel = 2
 
-local filetypes = {
-	"lua",
-	"md",
-	"css",
-	"scss",
-	"html",
-	"js",
-	"jsx",
-	"ts",
-	"tsx",
-	"json",
-	"sh",
-	"zsh",
-	"c",
-	"h",
-	"cpp",
-	"hpp",
-	"tpp",
-	"rs",
-	"cs",
-	"verilog",
-	"systemverilog",
-	"tex",
-	"bib",
-	"py",
-	"java",
-	"txt",
-}
-
-vim.cmd("augroup FormatOnSave")
-vim.cmd("autocmd!")
-
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
 vim.opt.listchars:append("tab:| ")
-
-vim.cmd("augroup END")
 
 vim.g.neovide_refresh_rate = 60
 vim.g.neovide_cursor_vfx_mode = "railgun"

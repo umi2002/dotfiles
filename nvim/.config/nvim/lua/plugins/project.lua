@@ -21,7 +21,7 @@ return {
 				--- order matters: if one is not detected, the other is used as fallback. You
 				--- can also delete or rearangne the detection methods.
 				-- detection_methods = { "lsp", "pattern" }, -- NOTE: lsp detection will get annoying with multiple langs in one project
-				detection_methods = { "pattern", "lsp" },
+				detection_methods = { "lsp", "pattern" },
 				---@usage patterns used to detect root dir, when **"pattern"** is in detection_methods
 				patterns = {
 					".git",
