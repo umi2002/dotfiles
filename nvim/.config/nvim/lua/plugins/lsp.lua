@@ -156,7 +156,7 @@ return {
 				"pyright",
 				"csharp_ls",
 				"jdtls",
-				"ruby_lsp",
+				"solargraph",
 			}
 
 			for _, server in ipairs(servers) do
