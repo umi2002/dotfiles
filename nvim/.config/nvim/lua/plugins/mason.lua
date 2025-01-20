@@ -30,6 +30,7 @@ return {
 				"csharp_ls",
 				"tailwindcss",
 				"arduino_language_server",
+				"ruby_lsp",
 			},
 		},
 	},
