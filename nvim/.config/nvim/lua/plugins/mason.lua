@@ -30,7 +30,7 @@ return {
 				"csharp_ls",
 				"tailwindcss",
 				"arduino_language_server",
-				"solargraph",
+				"ruby_lsp",
 			},
 		},
 	},
