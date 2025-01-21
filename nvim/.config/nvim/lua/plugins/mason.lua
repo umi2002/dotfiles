@@ -56,6 +56,7 @@ return {
 				"cpplint",
 				"csharpier",
 				"codelldb",
+				"rubocop",
 			},
 
 			auto_update = true,

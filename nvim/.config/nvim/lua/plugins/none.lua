@@ -44,8 +44,14 @@ return {
 					formatting.csharpier.with({
 						filetypes = { "cs" },
 					}),
+					formatting.rubocop.with({
+						filetypes = { "ruby" },
+					}),
 					diagnostics.cmake_lint.with({
 						filetypes = { "cmake" },
+					}),
+					diagnostics.rubocop.with({
+						filetypes = { "ruby" },
 					}),
 				},
 			})
