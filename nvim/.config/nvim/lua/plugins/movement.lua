@@ -1,18 +1,20 @@
+local misc = require("utils.misc")
+
 return {
-	{
-		"folke/flash.nvim",
+    {
+        "folke/flash.nvim",
         event = "VeryLazy",
-		config = true,
-	},
-	{
-		"ggandor/leap.nvim",
-		config = function()
-			require("leap").add_default_mappings()
-			vim.keymap.set("n", "s", "s")
-			vim.keymap.set("n", "S", "S")
-			vim.keymap.set({ "n", "x", "o" }, "<leader>l", "<Plug>(leap-forward-to)")
-			vim.keymap.set({ "n", "x", "o" }, "<leader>L", "<Plug>(leap-backward-to)")
-			vim.keymap.set({ "n", "x", "o" }, "gf", "<Plug>(leap-from-window)")
-		end,
-	},
+        ---@type Flash.Config
+        opts = {},
+        -- stylua: ignore
+        keys = {
+            { "<leader>l", mode = { "n" }, function() require("flash").jump() end, desc = "Flash" },
+            {
+                "<c-f>",
+                mode = { "n" },
+                misc.flash_search,
+                desc = "Toggle Flash Search"
+            },
+        },
+    },
 }
