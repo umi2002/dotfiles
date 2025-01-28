@@ -22,7 +22,6 @@ return {
 				"rust_analyzer",
 				"texlab",
 				"pyright",
-				"ruff_lsp",
 				"jdtls",
 				"cmake",
 				"angularls",
