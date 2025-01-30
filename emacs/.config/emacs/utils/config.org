@@ -64,8 +64,10 @@ Functions
 
 Mappings
 #+begin_src emacs-lisp
-  (leader
-    "`" 'toggle_vterm)
+  (with-eval-after-load 'vterm
+    (leader
+      "`" 'toggle_vterm)
+    )
 #+end_src
 
 #+RESULTS:

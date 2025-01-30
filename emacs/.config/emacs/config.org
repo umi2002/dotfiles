@@ -123,6 +123,14 @@ Installing Helm
   (use-package helm)
 #+end_src
 
+** Installing Helm-Rg
+#+begin_src emacs-lisp
+  (use-package helm-rg)
+#+end_src
+
+#+RESULTS:
+: [nil 26523 628 463986 nil elpaca-process-queues nil nil 36000 nil]
+
 [[file:navigation/config.org][Configuration]]
 #+begin_src emacs-lisp
   (org-babel-load-file

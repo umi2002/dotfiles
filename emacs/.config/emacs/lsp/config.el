@@ -1,3 +1,8 @@
+(with-eval-after-load 'lsp-mode
+  (setq lsp-file-watch-ignored-directories
+	(append lsp-file-watch-ignored-directories
+		projectile-globally-ignored-directories)))
+
 (add-hook 'org-mode-hook
 	  (lambda ()
 	    (add-hook 'before-save-hook

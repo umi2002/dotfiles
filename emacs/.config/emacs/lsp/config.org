@@ -1,7 +1,18 @@
 #+TITLE: Lsp config
 #+AUTHOR: umi
 
+#+RESULTS:
+: (^\.idea$ ^\.vscode$ ^\.ensime_cache$ ^\.eunit$ ^\.git$ ^\.hg$ ^\.fslckout$ ^_FOSSIL_$ ^\.bzr$ ^_darcs$ ^\.pijul$ ^\.tox$ ^\.svn$ ^\.stack-work$ ^\.ccls-cache$ ^\.cache$ ^\.clangd$ ^\.sl$ ^\.jj$)
+
 * LSP CONFIG
+Respecting gitignore
+#+begin_src emacs-lisp
+  (with-eval-after-load 'lsp-mode
+    (setq lsp-file-watch-ignored-directories
+	  (append lsp-file-watch-ignored-directories
+		  projectile-globally-ignored-directories)))
+#+end_src
+
 ** Orgmode
 Formatting
 #+begin_src emacs-lisp

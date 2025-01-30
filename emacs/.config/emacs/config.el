@@ -75,6 +75,8 @@
 
 (use-package helm)
 
+(use-package helm-rg)
+
 (org-babel-load-file
  (expand-file-name
   "navigation/config.org"
@@ -105,6 +107,8 @@
 (use-package evil-commentary)
 
 (use-package evil-goggles)
+
+(use-package vterm)
 
 (org-babel-load-file
  (expand-file-name
