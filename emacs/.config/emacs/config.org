@@ -1,8 +1,19 @@
+:PROPERTIES:
 #+TITLE: umi's config
 #+AUTHOR: umi
-#+OPTIONS: toc:2
+#+TOC: toc-org
 
-* [[file:settings.org][EDITOR SETTINGS]]
+* Umi's Config :TOC:
+  - [[#editor-settings][EDITOR SETTINGS]]
+  - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
+  - [[#navigation][NAVIGATION]]
+  - [[#project][PROJECT]]
+  - [[#lsp][LSP]]
+  - [[#utils][UTILS]]
+  - [[#git][GIT]]
+  - [[#theme][THEME]]
+
+** [[file:settings.org][EDITOR SETTINGS]]
 #+begin_src emacs-lisp
   (org-babel-load-file
    (expand-file-name
@@ -10,8 +21,8 @@
     user-emacs-directory))
 #+end_src
 
-* IMPORTANT PROGRAMS TO LOAD FIRST
-** Elpaca Package Manager
+** IMPORTANT PROGRAMS TO LOAD FIRST
+*** Elpaca Package Manager
 Installing Elpaca
   
 #+begin_src emacs-lisp
@@ -75,7 +86,7 @@ Wait for Elpaca to be installed
   (elpaca-wait)
 #+end_src
 
-** Evil
+*** Evil
 Unsetting evil-want-keybinding
 #+begin_src emacs-lisp
   (setq evil-want-keybinding nil)
@@ -102,7 +113,7 @@ Installing Evil-Collection
 #+RESULTS:
 : Loaded /home/umi/.config/emacs/evil/config.el
 
-** General
+*** General
 Installing General 
 #+begin_src emacs-lisp
   (use-package general :ensure t :demand t)
@@ -116,20 +127,25 @@ Installing General
     user-emacs-directory))
 #+end_src
 
-* NAVIGATION
-** Helm
+** NAVIGATION
+*** Helm
 Installing Helm
 #+begin_src emacs-lisp
   (use-package helm)
 #+end_src
 
-** Installing Helm-Rg
+Installing Helm-Rg
 #+begin_src emacs-lisp
   (use-package helm-rg)
 #+end_src
 
 #+RESULTS:
 : [nil 26523 628 463986 nil elpaca-process-queues nil nil 36000 nil]
+
+Installing Avy
+#+begin_src emacs-lisp
+  (use-package avy)
+#+end_src
 
 [[file:navigation/config.org][Configuration]]
 #+begin_src emacs-lisp
@@ -139,8 +155,8 @@ Installing Helm
     user-emacs-directory))
 #+end_src
 
-* PROJECT
-** Projectile
+** PROJECT
+*** Projectile
 Installing Projectile
 #+begin_src emacs-lisp
   (use-package projectile)
@@ -165,11 +181,52 @@ Installing Helm-Projectile
 #+RESULTS:
 : [nil 26522 41856 887502 nil elpaca-process-queues nil nil 924000 nil]
 
-* LSP
+** LSP
 Installing Lsp-Mode
 #+begin_src emacs-lisp
   (use-package lsp-mode)
 #+end_src
+
+Installing Company
+#+begin_src emacs-lisp
+  (use-package company)
+#+end_src
+
+#+RESULTS:
+: [nil 26523 43538 462154 nil elpaca-process-queues nil nil 556000 nil]
+
+Installing Helm-Xref
+#+begin_src emacs-lisp
+  (use-package helm-xref)
+#+end_src
+
+Installing Yasnippet
+#+begin_src emacs-lisp
+  (use-package yasnippet)
+#+end_src
+
+Installing Format-All
+#+begin_src emacs-lisp
+  (use-package format-all)
+#+end_src
+
+Installing Flycheck
+#+begin_src emacs-lisp
+  (use-package flycheck)
+#+end_src
+
+Installing Helm-Flycheck
+#+begin_src emacs-lisp
+  (use-package helm-flycheck)
+#+end_src
+
+Installing Flycheck-Inline
+#+begin_src emacs-lisp
+  (use-package flycheck-inline)
+#+end_src
+
+#+RESULTS:
+: [nil 26523 49189 675383 nil elpaca-process-queues nil nil 645000 nil]
 
 [[file:lsp/config.org][Configuration]]
 #+begin_src emacs-lisp
@@ -179,7 +236,7 @@ Installing Lsp-Mode
     user-emacs-directory))
 #+end_src
 
-* UTILS
+** UTILS
 Installing Evil-Surround
 #+begin_src emacs-lisp
   (use-package evil-surround)
@@ -213,6 +270,14 @@ Installing Vterm
 #+RESULTS:
 : [nil 26522 64228 953096 nil elpaca-process-queues nil nil 333000 nil]
 
+Installing Toc-Org
+#+begin_src emacs-lisp
+  (use-package toc-org)
+#+end_src
+
+#+RESULTS:
+: [nil 26523 47876 67211 nil elpaca-process-queues nil nil 437000 nil]
+
 [[file:utils/config.org][Configuration]]
 #+begin_src emacs-lisp
   (org-babel-load-file
@@ -221,7 +286,7 @@ Installing Vterm
     user-emacs-directory))
 #+end_src
 
-* GIT
+** GIT
 Installing Transient
 #+begin_src emacs-lisp
   (use-package transient)
@@ -243,7 +308,7 @@ Installing Magit
     user-emacs-directory))
 #+end_src
 
-* THEME
+** THEME
 #+begin_src emacs-lisp
   (use-package doom-themes
     :config (load-theme 'doom-palenight t))

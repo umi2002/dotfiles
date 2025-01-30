@@ -8,3 +8,8 @@
   (buffer
     "f" 'helm-buffers-list)
   )
+
+(with-eval-after-load 'avy
+  (leader
+    "l" 'avy-goto-char-2)
+  )

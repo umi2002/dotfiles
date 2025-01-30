@@ -42,7 +42,7 @@
 
 (with-eval-after-load 'general
   (general-create-definer leader
-    :states 'normal
+    :states '(normal visual)
     :keymaps '(global override)
     :prefix "SPC"))
 

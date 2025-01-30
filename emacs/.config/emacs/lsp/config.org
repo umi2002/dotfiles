@@ -4,14 +4,19 @@
 #+RESULTS:
 : (^\.idea$ ^\.vscode$ ^\.ensime_cache$ ^\.eunit$ ^\.git$ ^\.hg$ ^\.fslckout$ ^_FOSSIL_$ ^\.bzr$ ^_darcs$ ^\.pijul$ ^\.tox$ ^\.svn$ ^\.stack-work$ ^\.ccls-cache$ ^\.cache$ ^\.clangd$ ^\.sl$ ^\.jj$)
 
-* LSP CONFIG
-Respecting gitignore
-#+begin_src emacs-lisp
-  (with-eval-after-load 'lsp-mode
-    (setq lsp-file-watch-ignored-directories
-	  (append lsp-file-watch-ignored-directories
-		  projectile-globally-ignored-directories)))
-#+end_src
+* LSP CONFIG :TOC:
+  - [[#orgmode][Orgmode]]
+  - [[#lua][Lua]]
+  - [[#typescript][Typescript]]
+  - [[#c][C]]
+  - [[#c-1][C++]]
+- [[#completion][COMPLETION]]
+  - [[#company-mode][Company-Mode]]
+  - [[#yasnippet][Yasnippet]]
+- [[#diagnostics][DIAGNOSTICS]]
+  - [[#flycheck][Flycheck]]
+  - [[#helm-flycheck][Helm-Flycheck]]
+  - [[#flycheck-inline][Flycheck-Inline]]
 
 ** Orgmode
 Formatting
@@ -39,6 +44,14 @@ Lsp-Mode
 #+RESULTS:
 : [nil 26522 49611 203514 nil elpaca-process-queues nil nil 53000 nil]
 
+Formatting
+#+begin_src emacs-lisp
+  (with-eval-after-load 'format-all
+    (setq-default format-all-formatters
+		  (append format-all-formatters
+			  '(("Lua" (stylua))))))
+#+end_src
+
 ** Typescript
 Lsp-Mode
 #+begin_src emacs-lisp
@@ -47,3 +60,107 @@ Lsp-Mode
     :ensure t
     :hook (typescript-mode . lsp-deferred))
 #+end_src
+
+** C
+Lsp-Mode
+#+begin_src emacs-lisp
+  (add-hook 'c-mode-hook 'lsp)
+#+end_src
+
+#+RESULTS:
+| lsp | er/add-cc-mode-expansions |
+
+Formatting
+#+begin_src emacs-lisp
+  (with-eval-after-load 'format-all
+    (setq-default format-all-formatters
+		  (append format-all-formatters
+			  '(("C" (clang-format "--style=Microsoft"))))))
+#+end_src
+
+** C++
+Lsp-Mode
+#+begin_src emacs-lisp
+  (add-hook 'c++-mode-hook 'lsp)
+#+end_src
+
+#+RESULTS:
+| lsp | er/add-cc-mode-expansions |
+
+Formatting
+#+begin_src emacs-lisp
+  (with-eval-after-load 'format-all
+    (setq-default format-all-formatters
+		  (append format-all-formatters
+			  '(("C++" (clang-format "--style=Microsoft"))))))
+#+end_src
+
+* COMPLETION
+** Company-Mode
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'company
+    (setq company-minimum-prefix-length 1)
+    (global-company-mode)
+    )
+#+end_src
+
+Mappings
+#+begin_src emacs-lisp
+  (with-eval-after-load 'company
+    (general-define-key
+     :keymaps '(company-active-map)
+     "<tab>" 'company-complete-selection))
+#+end_src
+
+#+RESULTS:
+** Yasnippet
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'yasnippet
+    (yas-global-mode 1))
+#+end_src
+
+* DIAGNOSTICS
+Mappings
+#+begin_src emacs-lisp
+  (with-eval-after-load 'flycheck
+    (general-create-definer diagnostics
+      :keymaps '(global override)
+      :wrapping leader
+      :infix "d")
+
+    (diagnostics
+      "j" 'flycheck-next-error
+      "k" 'flycheck-previous-error)
+    )
+#+end_src
+
+#+RESULTS:
+
+** Flycheck
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'flycheck
+    (global-flycheck-mode +1)
+    )
+#+end_src
+
+** Helm-Flycheck
+Mappings
+#+begin_src emacs-lisp
+  (with-eval-after-load 'flycheck
+    (diagnostics
+      "f" 'helm-flycheck)
+    )
+#+end_src
+
+** Flycheck-Inline
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'flycheck
+    (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
+#+end_src
+
+#+RESULTS:
+| flycheck-inline-mode | flycheck-mode-set-explicitly |

@@ -77,6 +77,8 @@
 
 (use-package helm-rg)
 
+(use-package avy)
+
 (org-babel-load-file
  (expand-file-name
   "navigation/config.org"
@@ -92,6 +94,20 @@
   user-emacs-directory))
 
 (use-package lsp-mode)
+
+(use-package company)
+
+(use-package helm-xref)
+
+(use-package yasnippet)
+
+(use-package format-all)
+
+(use-package flycheck)
+
+(use-package helm-flycheck)
+
+(use-package flycheck-inline)
 
 (org-babel-load-file
  (expand-file-name
@@ -109,6 +125,8 @@
 (use-package evil-goggles)
 
 (use-package vterm)
+
+(use-package toc-org)
 
 (org-babel-load-file
  (expand-file-name

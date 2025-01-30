@@ -59,12 +59,13 @@ Defining leader key
 #+begin_src emacs-lisp
   (with-eval-after-load 'general
     (general-create-definer leader
-      :states 'normal
+      :states '(normal visual)
       :keymaps '(global override)
       :prefix "SPC"))
 #+end_src
 
 #+RESULTS:
+: leader
 
 Mappings
 #+begin_src emacs-lisp
