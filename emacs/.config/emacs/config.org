@@ -91,7 +91,7 @@ Installing Evil-Collection
   (use-package evil-collection)
 #+end_src
 
-[[file:evil/config.org][Configuration]]:
+[[file:evil/config.org][Configuration]]
 #+begin_src emacs-lisp
   (org-babel-load-file
    (expand-file-name
