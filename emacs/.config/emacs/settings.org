@@ -1,0 +1,13 @@
+#+TITLE: Editor settings
+#+AUTHOR: umi
+
+* SETTINGS
+#+begin_src emacs-lisp
+  (setq display-line-numbers-type 'relative)
+  (global-display-line-numbers-mode 1)
+  (scroll-bar-mode -1)
+  (electric-pair-mode t)
+#+end_src
+
+#+RESULTS:
+: t

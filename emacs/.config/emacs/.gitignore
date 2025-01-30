@@ -11,3 +11,6 @@ transient
 .lsp-session-*
 projectile*
 !config/elpaca
+.cache
+elpa
+recentf

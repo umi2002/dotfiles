@@ -1,0 +1,47 @@
+#+TITLE: Utils config
+#+AUTHOR: umi
+
+* UTILS CONFIG
+** Evil-Surround
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil-surround
+    (global-evil-surround-mode 1))
+#+end_src
+
+** Evil-Embrace
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil-embrace
+    (evil-embrace-enable-evil-surround-integration))
+#+end_src
+
+Mappings
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil-embrace
+    (general-create-definer surround
+      :keymaps '(global override)
+      :wrapping leader
+      :infix "s")
+
+    (surround
+      "r" 'evil-embrace-evil-surround-change)
+    )
+#+end_src
+
+** Evil-Commentary
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil-commentary
+    (evil-commentary-mode))
+#+end_src
+
+** Evil-Goggles
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil-goggles
+    (evil-goggles-mode)
+    (setq evil-goggles-duration 0.500)
+    )
+#+end_src
+
+#+RESULTS:
+: 0.5

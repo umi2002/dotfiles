@@ -1,0 +1,38 @@
+#+TITLE: Lsp config
+#+AUTHOR: umi
+
+* LSP CONFIG
+** Orgmode
+Formatting
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook
+	    (lambda ()
+	      (add-hook 'before-save-hook
+			(lambda ()
+			  (indent-region (point-min) (point-max)))
+			nil 'local)))
+#+end_src
+
+#+RESULTS:
+| (lambda nil (add-hook 'before-save-hook (lambda nil (indent-region (point-min) (point-max))) nil 'local)) | format-all-mode | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes |
+
+** Lua
+Lsp-Mode
+#+begin_src emacs-lisp
+  (use-package lua-mode
+    :mode "\\.lua\\'"
+    :ensure t
+    :hook (lua-mode . lsp-deferred))
+#+end_src
+
+#+RESULTS:
+: [nil 26522 49611 203514 nil elpaca-process-queues nil nil 53000 nil]
+
+** Typescript
+Lsp-Mode
+#+begin_src emacs-lisp
+  (use-package typescript-mode
+    :mode "\\.ts\\'"
+    :ensure t
+    :hook (typescript-mode . lsp-deferred))
+#+end_src

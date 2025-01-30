@@ -1,0 +1,7 @@
+#+TITLE: Git Config
+#+AUTHOR: umi
+
+* GIT CONFIG
+** Magit
+#+begin_src emacs-lisp
+#+end_src

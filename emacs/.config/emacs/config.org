@@ -1,0 +1,240 @@
+#+TITLE: umi's config
+#+AUTHOR: umi
+#+OPTIONS: toc:2
+
+* [[file:settings.org][EDITOR SETTINGS]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "settings.org"
+    user-emacs-directory))
+#+end_src
+
+* IMPORTANT PROGRAMS TO LOAD FIRST
+** Elpaca Package Manager
+Installing Elpaca
+  
+#+begin_src emacs-lisp
+  (defvar elpaca-installer-version 0.9)
+  (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+  (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+  (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+  (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+				:ref nil :depth 1 :inherit ignore
+				:files (:defaults "elpaca-test.el" (:exclude "extensions"))
+				:build (:not elpaca--activate-package)))
+  (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+	 (build (expand-file-name "elpaca/" elpaca-builds-directory))
+	 (order (cdr elpaca-order))
+	 (default-directory repo))
+    (add-to-list 'load-path (if (file-exists-p build) build repo))
+    (unless (file-exists-p repo)
+      (make-directory repo t)
+      (when (< emacs-major-version 28) (require 'subr-x))
+      (condition-case-unless-debug err
+	  (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+		    ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+						    ,@(when-let* ((depth (plist-get order :depth)))
+							(list (format "--depth=%d" depth) "--no-single-branch"))
+						    ,(plist-get order :repo) ,repo))))
+		    ((zerop (call-process "git" nil buffer t "checkout"
+					  (or (plist-get order :ref) "--"))))
+		    (emacs (concat invocation-directory invocation-name))
+		    ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+					  "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+		    ((require 'elpaca))
+		    ((elpaca-generate-autoloads "elpaca" repo)))
+	      (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+	    (error "%s" (with-current-buffer buffer (buffer-string))))
+	((error) (warn "%s" err) (delete-directory repo 'recursive))))
+    (unless (require 'elpaca-autoloads nil t)
+      (require 'elpaca)
+      (elpaca-generate-autoloads "elpaca" repo)
+      (load "./elpaca-autoloads")))
+  (add-hook 'after-init-hook #'elpaca-process-queues)
+  (elpaca `(,@elpaca-order))
+#+End_src
+
+Enable the Elpaca use-package macro
+
+#+begin_src emacs-lisp
+  ;; Install a package via the elpaca macro
+  ;; See the "recipes" section of the manual for more details.
+
+  ;; (elpaca example-package)
+
+  ;; Install use-package support
+  (elpaca elpaca-use-package
+    ;; Enable use-package :ensure support for Elpaca.
+    (elpaca-use-package-mode)
+    (setq elpaca-use-package-by-default t))
+#+end_src
+
+Wait for Elpaca to be installed
+#+begin_src emacs-lisp
+  (elpaca-wait)
+#+end_src
+
+** Evil
+Unsetting evil-want-keybinding
+#+begin_src emacs-lisp
+  (setq evil-want-keybinding nil)
+#+end_src
+
+Installing Evil
+#+begin_src emacs-lisp
+  (use-package evil)
+#+end_src
+
+Installing Evil-Collection
+#+begin_src emacs-lisp
+  (use-package evil-collection)
+#+end_src
+
+[[file:evil/config.org][Configuration]]:
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "evil/config.org"
+    user-emacs-directory))
+#+end_src
+
+#+RESULTS:
+: Loaded /home/umi/.config/emacs/evil/config.el
+
+** General
+Installing General 
+#+begin_src emacs-lisp
+  (use-package general :ensure t :demand t)
+#+end_src
+
+[[file:general/config.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "general/config.org"
+    user-emacs-directory))
+#+end_src
+
+* NAVIGATION
+** Helm
+Installing Helm
+#+begin_src emacs-lisp
+  (use-package helm)
+#+end_src
+
+[[file:navigation/config.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "navigation/config.org"
+    user-emacs-directory))
+#+end_src
+
+* PROJECT
+** Projectile
+Installing Projectile
+#+begin_src emacs-lisp
+  (use-package projectile)
+#+end_src
+
+Installing Helm-Projectile
+#+begin_src emacs-lisp
+  (use-package helm-projectile)
+#+end_src
+
+#+RESULTS:
+: [nil 26522 42526 519353 nil elpaca-process-queues nil nil 925000 nil]
+
+[[file:project/config.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "project/config.org"
+    user-emacs-directory))
+#+end_src
+
+#+RESULTS:
+: [nil 26522 41856 887502 nil elpaca-process-queues nil nil 924000 nil]
+
+* LSP
+Installing Lsp-Mode
+#+begin_src emacs-lisp
+  (use-package lsp-mode)
+#+end_src
+
+[[file:lsp/config.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "lsp/config.org"
+    user-emacs-directory))
+#+end_src
+
+* UTILS
+Installing Evil-Surround
+#+begin_src emacs-lisp
+  (use-package evil-surround)
+#+end_src
+
+Installing Embrace
+#+begin_src emacs-lisp
+  (use-package embrace)
+#+end_src
+
+Installing Evil-Embrace
+#+begin_src emacs-lisp
+  (use-package evil-embrace)
+#+end_src
+
+Intalling Evil-Commentary
+#+begin_src emacs-lisp
+  (use-package evil-commentary)
+#+end_src
+
+Installing Evil-Goggles
+#+begin_src emacs-lisp
+  (use-package evil-goggles)
+#+end_src
+
+#+RESULTS:
+: [nil 26522 58715 440937 nil elpaca-process-queues nil nil 19000 nil]
+
+[[file:utils/config.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "utils/config.org"
+    user-emacs-directory))
+#+end_src
+
+* GIT
+Installing Transient
+#+begin_src emacs-lisp
+  (use-package transient)
+#+end_src
+
+Installing Magit
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src
+
+#+RESULTS:
+: [nil 26522 59630 717244 nil elpaca-process-queues nil nil 64000 nil]
+
+[[file:git/config.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "git/config.org"
+    user-emacs-directory))
+#+end_src
+
+* THEME
+#+begin_src emacs-lisp
+  (use-package doom-themes
+    :config (load-theme 'doom-palenight t))
+#+end_src
+
+#+RESULTS:
+: [nil 26522 46287 276473 nil elpaca-process-queues nil nil 917000 nil]

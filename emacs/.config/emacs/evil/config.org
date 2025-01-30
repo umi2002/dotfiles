@@ -1,0 +1,22 @@
+#+TITLE: Evil config
+#+AUTHOR: umi
+
+* EVIL CONFIG
+** Evil
+Setup:
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil
+    (evil-mode)
+    (evil-set-undo-system 'undo-redo)
+    )
+#+end_src
+
+#+RESULTS:
+: undo-redo
+
+** Evil Collection
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil-collection
+    (evil-collection-init))
+#+end_src
