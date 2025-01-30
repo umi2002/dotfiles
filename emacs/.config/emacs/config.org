@@ -197,8 +197,13 @@ Installing Evil-Goggles
   (use-package evil-goggles)
 #+end_src
 
+Installing Vterm
+#+begin_src emacs-lisp
+  (use-package vterm)
+#+end_src
+
 #+RESULTS:
-: [nil 26522 58715 440937 nil elpaca-process-queues nil nil 19000 nil]
+: [nil 26522 64228 953096 nil elpaca-process-queues nil nil 333000 nil]
 
 [[file:utils/config.org][Configuration]]
 #+begin_src emacs-lisp

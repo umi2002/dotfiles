@@ -45,3 +45,27 @@ Setup
 
 #+RESULTS:
 : 0.5
+
+** Vterm
+Functions
+#+begin_src emacs-lisp
+  (defun toggle_vterm ()
+    "Toggle between vterm and current buffer."
+    (interactive)
+    (if (string= major-mode "vterm-mode")
+	(evil-switch-to-windows-last-buffer)
+      (if (get-buffer "vterm")
+	  (switch-to-buffer "vterm")
+	(vterm))))
+#+end_src
+
+#+RESULTS:
+: toggle_vterm
+
+Mappings
+#+begin_src emacs-lisp
+  (leader
+    "`" 'toggle_vterm)
+#+end_src
+
+#+RESULTS:
