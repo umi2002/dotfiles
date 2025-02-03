@@ -17,8 +17,6 @@ Mappings
     )
 #+end_src
 
-#+RESULTS:
-
 ** Avy
 Mappings
 #+begin_src emacs-lisp

@@ -43,8 +43,6 @@ Setup
     )
 #+end_src
 
-#+RESULTS:
-: 0.5
 
 ** Vterm
 Functions
@@ -59,8 +57,6 @@ Functions
 	(vterm))))
 #+end_src
 
-#+RESULTS:
-: toggle_vterm
 
 Mappings
 #+begin_src emacs-lisp
@@ -70,19 +66,23 @@ Mappings
     )
 #+end_src
 
-#+RESULTS:
-
-** Toc-Org
+** Undo-Tree
+Setup
 #+begin_src emacs-lisp
-  (with-eval-after-load 'toc-org
-    (if (require 'toc-org nil t)
-	(progn
-	  (add-hook 'org-mode-hook 'toc-org-mode)
+  (with-eval-after-load 'undo-tree
+    (global-undo-tree-mode)
+    )
+#+end_src
 
-	  ;; enable in markdown, too
-	  (add-hook 'markdown-mode-hook 'toc-org-mode)
-	  (define-key markdown-mode-map (kbd "\C-c\C-o") 'toc-org-markdown-follow-thing-at-point))
-      (warn "toc-org not found"))
-  
+Mappings
+#+begin_src emacs-lisp
+  (with-eval-after-load 'undo-tree
+    (general-define-key
+     :states 'normal
+     "u" 'undo-tree-undo
+     "C-r" 'undo-tree-redo)
+
+    (leader
+      "u" 'undo-tree-visualize)
     )
 #+end_src

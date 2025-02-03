@@ -29,23 +29,4 @@ return {
             })
         end,
     },
-    {
-        "chipsenkbeil/org-roam.nvim",
-        dependencies = {
-            {
-                "nvim-orgmode/orgmode",
-            },
-        },
-        config = function()
-            require("org-roam").setup({
-                directory = "~/umiwiki",
-                -- optional
-                org_files = {
-                    "~/notes/*.org",
-                    "~/notes/*/*.org",
-                    "~/notes/index.org",
-                },
-            })
-        end,
-    },
 }

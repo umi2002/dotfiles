@@ -11,9 +11,11 @@
   - [[#lsp][LSP]]
   - [[#utils][UTILS]]
   - [[#git][GIT]]
-  - [[#theme][THEME]]
+  - [[#visuals][VISUALS]]
+  - [[#org][ORG]]
 
-** [[file:settings.org][EDITOR SETTINGS]]
+** EDITOR SETTINGS
+[[file:settings.org][Configuration]]
 #+begin_src emacs-lisp
   (org-babel-load-file
    (expand-file-name
@@ -24,7 +26,6 @@
 ** IMPORTANT PROGRAMS TO LOAD FIRST
 *** Elpaca Package Manager
 Installing Elpaca
-  
 #+begin_src emacs-lisp
   (defvar elpaca-installer-version 0.9)
   (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
@@ -99,7 +100,8 @@ Installing Evil
 
 Installing Evil-Collection
 #+begin_src emacs-lisp
-  (use-package evil-collection)
+  (use-package evil-collection
+    :after evil)
 #+end_src
 
 [[file:evil/config.org][Configuration]]
@@ -110,13 +112,10 @@ Installing Evil-Collection
     user-emacs-directory))
 #+end_src
 
-#+RESULTS:
-: Loaded /home/umi/.config/emacs/evil/config.el
-
 *** General
 Installing General 
 #+begin_src emacs-lisp
-  (use-package general :ensure t :demand t)
+  (use-package general :demand t)
 #+end_src
 
 [[file:general/config.org][Configuration]]
@@ -128,7 +127,6 @@ Installing General
 #+end_src
 
 ** NAVIGATION
-*** Helm
 Installing Helm
 #+begin_src emacs-lisp
   (use-package helm)
@@ -136,11 +134,9 @@ Installing Helm
 
 Installing Helm-Rg
 #+begin_src emacs-lisp
-  (use-package helm-rg)
+  (use-package helm-rg
+    :after helm)
 #+end_src
-
-#+RESULTS:
-: [nil 26523 628 463986 nil elpaca-process-queues nil nil 36000 nil]
 
 Installing Avy
 #+begin_src emacs-lisp
@@ -156,7 +152,6 @@ Installing Avy
 #+end_src
 
 ** PROJECT
-*** Projectile
 Installing Projectile
 #+begin_src emacs-lisp
   (use-package projectile)
@@ -164,11 +159,9 @@ Installing Projectile
 
 Installing Helm-Projectile
 #+begin_src emacs-lisp
-  (use-package helm-projectile)
+  (use-package helm-projectile
+    :after (helm projectile))
 #+end_src
-
-#+RESULTS:
-: [nil 26522 42526 519353 nil elpaca-process-queues nil nil 925000 nil]
 
 [[file:project/config.org][Configuration]]
 #+begin_src emacs-lisp
@@ -178,13 +171,11 @@ Installing Helm-Projectile
     user-emacs-directory))
 #+end_src
 
-#+RESULTS:
-: [nil 26522 41856 887502 nil elpaca-process-queues nil nil 924000 nil]
-
 ** LSP
 Installing Lsp-Mode
 #+begin_src emacs-lisp
-  (use-package lsp-mode)
+  (use-package lsp-mode
+    :commands (lsp lsp-deferred))
 #+end_src
 
 Installing Company
@@ -192,12 +183,16 @@ Installing Company
   (use-package company)
 #+end_src
 
-#+RESULTS:
-: [nil 26523 43538 462154 nil elpaca-process-queues nil nil 556000 nil]
-
 Installing Helm-Xref
 #+begin_src emacs-lisp
-  (use-package helm-xref)
+  (use-package helm-xref
+    :after helm)
+#+end_src
+
+Installing Helm-Lsp
+#+begin_src emacs-lisp
+  (use-package helm-lsp
+    :after (helm lsp-mode))
 #+end_src
 
 Installing Yasnippet
@@ -217,16 +212,15 @@ Installing Flycheck
 
 Installing Helm-Flycheck
 #+begin_src emacs-lisp
-  (use-package helm-flycheck)
+  (use-package helm-flycheck
+    :after (helm flycheck))
 #+end_src
 
 Installing Flycheck-Inline
 #+begin_src emacs-lisp
-  (use-package flycheck-inline)
+  (use-package flycheck-inline
+    :after flycheck)
 #+end_src
-
-#+RESULTS:
-: [nil 26523 49189 675383 nil elpaca-process-queues nil nil 645000 nil]
 
 [[file:lsp/config.org][Configuration]]
 #+begin_src emacs-lisp
@@ -239,7 +233,8 @@ Installing Flycheck-Inline
 ** UTILS
 Installing Evil-Surround
 #+begin_src emacs-lisp
-  (use-package evil-surround)
+  (use-package evil-surround
+    :after evil)
 #+end_src
 
 Installing Embrace
@@ -249,17 +244,20 @@ Installing Embrace
 
 Installing Evil-Embrace
 #+begin_src emacs-lisp
-  (use-package evil-embrace)
+  (use-package evil-embrace
+    :after (evil-surround embrace))
 #+end_src
 
 Intalling Evil-Commentary
 #+begin_src emacs-lisp
-  (use-package evil-commentary)
+  (use-package evil-commentary
+    :after evil)
 #+end_src
 
 Installing Evil-Goggles
 #+begin_src emacs-lisp
-  (use-package evil-goggles)
+  (use-package evil-goggles
+    :after evil)
 #+end_src
 
 Installing Vterm
@@ -267,16 +265,10 @@ Installing Vterm
   (use-package vterm)
 #+end_src
 
-#+RESULTS:
-: [nil 26522 64228 953096 nil elpaca-process-queues nil nil 333000 nil]
-
-Installing Toc-Org
+Installing Undo-Tree
 #+begin_src emacs-lisp
-  (use-package toc-org)
+  (use-package undo-tree)
 #+end_src
-
-#+RESULTS:
-: [nil 26523 47876 67211 nil elpaca-process-queues nil nil 437000 nil]
 
 [[file:utils/config.org][Configuration]]
 #+begin_src emacs-lisp
@@ -297,8 +289,10 @@ Installing Magit
   (use-package magit)
 #+end_src
 
-#+RESULTS:
-: [nil 26522 59630 717244 nil elpaca-process-queues nil nil 64000 nil]
+Installing Git-Gutter
+#+begin_src emacs-lisp
+  (use-package git-gutter)
+#+end_src
 
 [[file:git/config.org][Configuration]]
 #+begin_src emacs-lisp
@@ -308,11 +302,66 @@ Installing Magit
     user-emacs-directory))
 #+end_src
 
-** THEME
+** VISUALS
+Installing Doom-Themes
 #+begin_src emacs-lisp
   (use-package doom-themes
     :config (load-theme 'doom-palenight t))
 #+end_src
 
-#+RESULTS:
-: [nil 26522 46287 276473 nil elpaca-process-queues nil nil 917000 nil]
+Installing Dimmer
+#+begin_src emacs-lisp
+  (use-package dimmer)
+#+end_src
+
+Installing Telephone Line
+#+begin_src emacs-lisp
+  (use-package telephone-line)
+#+end_src
+
+Installing Visual-Fill-Column
+#+begin_src emacs-lisp
+  (use-package visual-fill-column)
+#+end_src
+
+[[file:visuals/config.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "visuals/config.org"
+    user-emacs-directory))
+#+end_src
+
+** ORG
+Installing Toc-Org
+#+begin_src emacs-lisp
+  (use-package toc-org
+    :after org)
+#+end_src
+
+Installing Org-Modern
+#+begin_src emacs-lisp
+  (use-package org-modern
+    :after org)
+#+end_src
+
+Installing Org-Roam
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :after org)
+#+end_src
+
+Installing Org-Download
+Org-Download
+#+begin_src emacs-lisp
+  (use-package org-download)
+#+end_src
+
+[[file:org/config.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "org/config.org"
+    user-emacs-directory))
+#+end_src
+

@@ -59,14 +59,15 @@
 
 (use-package evil)
 
-(use-package evil-collection)
+(use-package evil-collection
+  :after evil)
 
 (org-babel-load-file
  (expand-file-name
   "evil/config.org"
   user-emacs-directory))
 
-(use-package general :ensure t :demand t)
+(use-package general :demand t)
 
 (org-babel-load-file
  (expand-file-name
@@ -75,7 +76,8 @@
 
 (use-package helm)
 
-(use-package helm-rg)
+(use-package helm-rg
+  :after helm)
 
 (use-package avy)
 
@@ -86,18 +88,24 @@
 
 (use-package projectile)
 
-(use-package helm-projectile)
+(use-package helm-projectile
+  :after (helm projectile))
 
 (org-babel-load-file
  (expand-file-name
   "project/config.org"
   user-emacs-directory))
 
-(use-package lsp-mode)
+(use-package lsp-mode
+  :commands (lsp lsp-deferred))
 
 (use-package company)
 
-(use-package helm-xref)
+(use-package helm-xref
+  :after helm)
+
+(use-package helm-lsp
+  :after (helm lsp-mode))
 
 (use-package yasnippet)
 
@@ -105,28 +113,34 @@
 
 (use-package flycheck)
 
-(use-package helm-flycheck)
+(use-package helm-flycheck
+  :after (helm flycheck))
 
-(use-package flycheck-inline)
+(use-package flycheck-inline
+  :after flycheck)
 
 (org-babel-load-file
  (expand-file-name
   "lsp/config.org"
   user-emacs-directory))
 
-(use-package evil-surround)
+(use-package evil-surround
+  :after evil)
 
 (use-package embrace)
 
-(use-package evil-embrace)
+(use-package evil-embrace
+  :after (evil-surround embrace))
 
-(use-package evil-commentary)
+(use-package evil-commentary
+  :after evil)
 
-(use-package evil-goggles)
+(use-package evil-goggles
+  :after evil)
 
 (use-package vterm)
 
-(use-package toc-org)
+(use-package undo-tree)
 
 (org-babel-load-file
  (expand-file-name
@@ -137,6 +151,8 @@
 
 (use-package magit)
 
+(use-package git-gutter)
+
 (org-babel-load-file
  (expand-file-name
   "git/config.org"
@@ -144,3 +160,30 @@
 
 (use-package doom-themes
   :config (load-theme 'doom-palenight t))
+
+(use-package dimmer)
+
+(use-package telephone-line)
+
+(use-package visual-fill-column)
+
+(org-babel-load-file
+ (expand-file-name
+  "visuals/config.org"
+  user-emacs-directory))
+
+(use-package toc-org
+  :after org)
+
+(use-package org-modern
+  :after org)
+
+(use-package org-roam
+  :after org)
+
+(use-package org-download)
+
+(org-babel-load-file
+ (expand-file-name
+  "org/config.org"
+  user-emacs-directory))

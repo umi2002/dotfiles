@@ -1,48 +1,96 @@
 #+TITLE: Lsp config
 #+AUTHOR: umi
 
-#+RESULTS:
-: (^\.idea$ ^\.vscode$ ^\.ensime_cache$ ^\.eunit$ ^\.git$ ^\.hg$ ^\.fslckout$ ^_FOSSIL_$ ^\.bzr$ ^_darcs$ ^\.pijul$ ^\.tox$ ^\.svn$ ^\.stack-work$ ^\.ccls-cache$ ^\.cache$ ^\.clangd$ ^\.sl$ ^\.jj$)
-
 * LSP CONFIG :TOC:
-  - [[#orgmode][Orgmode]]
+  - [[#general][General]]
   - [[#lua][Lua]]
+  - [[#html][HTML]]
+  - [[#angular][Angular]]
   - [[#typescript][Typescript]]
   - [[#c][C]]
   - [[#c-1][C++]]
+  - [[#c-2][C#]]
+  - [[#python][Python]]
 - [[#completion][COMPLETION]]
   - [[#company-mode][Company-Mode]]
-  - [[#yasnippet][Yasnippet]]
 - [[#diagnostics][DIAGNOSTICS]]
   - [[#flycheck][Flycheck]]
   - [[#helm-flycheck][Helm-Flycheck]]
   - [[#flycheck-inline][Flycheck-Inline]]
 
-** Orgmode
-Formatting
+** General
+Setup
 #+begin_src emacs-lisp
-  (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook 'before-save-hook
-			(lambda ()
-			  (indent-region (point-min) (point-max)))
-			nil 'local)))
+  (with-eval-after-load 'lsp-mode
+    (setq lsp-modeline-code-actions-mode 1))
 #+end_src
 
-#+RESULTS:
-| (lambda nil (add-hook 'before-save-hook (lambda nil (indent-region (point-min) (point-max))) nil 'local)) | format-all-mode | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes |
+
+Respecting gitignore
+#+begin_src emacs-lisp
+  (with-eval-after-load 'lsp-mode
+    (setq lsp-file-watch-ignored-directories
+	  (append lsp-file-watch-ignored-directories
+		  projectile-globally-ignored-directories)))
+#+end_src
+
+Lsp-Booster
+#+begin_src emacs-lisp
+  (defun lsp-booster--advice-json-parse (old-fn &rest args)
+    "Try to parse bytecode instead of json."
+    (or
+     (when (equal (following-char) ?#)
+       (let ((bytecode (read (current-buffer))))
+	 (when (byte-code-function-p bytecode)
+	   (funcall bytecode))))
+     (apply old-fn args)))
+  (advice-add (if (progn (require 'json)
+			 (fboundp 'json-parse-buffer))
+		  'json-parse-buffer
+		'json-read)
+	      :around
+	      #'lsp-booster--advice-json-parse)
+
+  (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
+    "Prepend emacs-lsp-booster command to lsp CMD."
+    (let ((orig-result (funcall old-fn cmd test?)))
+      (if (and (not test?)                             ;; for check lsp-server-present?
+	       (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+	       lsp-use-plists
+	       (not (functionp 'json-rpc-connection))  ;; native json-rpc
+	       (executable-find "emacs-lsp-booster"))
+	  (progn
+	    (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
+	      (setcar orig-result command-from-exec-path))
+	    (message "Using emacs-lsp-booster for %s!" orig-result)
+	    (cons "emacs-lsp-booster" orig-result))
+	orig-result)))
+  (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
+#+end_src
+
+Mappings
+#+begin_src emacs-lisp
+  (with-eval-after-load 'helm-xref
+    (leader
+      "rf" 'xref-find-references
+      "df" 'xref-find-definitions))
+
+  (with-eval-after-load 'helm-lsp
+    (leader
+      "ca" 'helm-lsp-code-actions))
+#+end_src
 
 ** Lua
 Lsp-Mode
 #+begin_src emacs-lisp
   (use-package lua-mode
+    :after lsp-mode
     :mode "\\.lua\\'"
-    :ensure t
     :hook (lua-mode . lsp-deferred))
-#+end_src
 
-#+RESULTS:
-: [nil 26522 49611 203514 nil elpaca-process-queues nil nil 53000 nil]
+  (with-eval-after-load 'lsp-mode
+    (add-to-list 'lsp-enabled-clients 'lsp-lua))
+#+end_src
 
 Formatting
 #+begin_src emacs-lisp
@@ -52,23 +100,67 @@ Formatting
 			  '(("Lua" (stylua))))))
 #+end_src
 
+** HTML
+Lsp-Mode
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :after lsp-mode
+    :mode ("\\.html\\'")
+    :hook (web-mode . lsp-deferred))
+
+  (with-eval-after-load 'lsp-mode
+    (add-to-list 'lsp-enabled-clients 'html-ls))
+#+end_src
+
+** Angular
+Lsp-Mode
+#+begin_src emacs-lisp
+  (with-eval-after-load 'lsp-mode
+    (setq lsp-clients-angular-language-server-command
+	  '("node"
+	    "/usr/lib/node_modules/@angular/language-server"
+	    "--ngProbeLocations"
+	    "/usr/lib/node_modules"
+	    "--tsProbeLocations"
+	    "/usr/lib/node_modules"
+	    "--stdio")))
+#+end_src
+
 ** Typescript
 Lsp-Mode
 #+begin_src emacs-lisp
   (use-package typescript-mode
-    :mode "\\.ts\\'"
-    :ensure t
+    :after lsp-mode
+    :mode ("\\.ts\\'" "\\.tsx\\'")
     :hook (typescript-mode . lsp-deferred))
+
+  (with-eval-after-load 'lsp-mode
+    (add-to-list 'lsp-enabled-clients 'ts-ls))
+#+end_src
+
+
+Formatting
+#+begin_src emacs-lisp
+  (with-eval-after-load 'format-all
+    (setq-default format-all-formatters
+		  (append format-all-formatters
+			  '(("TypeScript" (prettierd))))))
+#+end_src
+
+Linting
+#+begin_src emacs-lisp
+  (use-package eslintd-fix
+    :after (lsp-mode typescript-mode)
+    :config ((add-hook 'typescript-mode-hook 'eslintd-fix-mode)))
 #+end_src
 
 ** C
 Lsp-Mode
 #+begin_src emacs-lisp
-  (add-hook 'c-mode-hook 'lsp)
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'c-mode-hook #'lsp-deferred)
+    (add-to-list 'lsp-enabled-clients 'lsp-clangd))
 #+end_src
-
-#+RESULTS:
-| lsp | er/add-cc-mode-expansions |
 
 Formatting
 #+begin_src emacs-lisp
@@ -81,11 +173,10 @@ Formatting
 ** C++
 Lsp-Mode
 #+begin_src emacs-lisp
-  (add-hook 'c++-mode-hook 'lsp)
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'c++-mode-hook #'lsp-deferred)
+    (add-to-list 'lsp-enabled-clients 'lsp-clangd))
 #+end_src
-
-#+RESULTS:
-| lsp | er/add-cc-mode-expansions |
 
 Formatting
 #+begin_src emacs-lisp
@@ -95,14 +186,34 @@ Formatting
 			  '(("C++" (clang-format "--style=Microsoft"))))))
 #+end_src
 
+** C#
+Omnisharp
+#+begin_src emacs-lisp
+  (with-eval-after-load 'lsp-mode
+    (add-hook 'csharp-mode-hook #'lsp-deferred)
+    (add-to-list 'lsp-enabled-clients 'omnisharp))
+#+end_src
+
+** Python
+Lsp-Mode
+#+begin_src emacs-lisp
+  (use-package python-mode
+    :after lsp-mode
+    :hook (python-mode . lsp-deferred))
+
+  (use-package lsp-pyright
+    :after lsp-mode
+    :custom (lsp-pyright-langserver-command "pyright")
+    :config (add-to-list 'lsp-enabled-clients 'pyright))
+#+end_src
+
 * COMPLETION
 ** Company-Mode
 Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'company
     (setq company-minimum-prefix-length 1)
-    (global-company-mode)
-    )
+    (global-company-mode))
 #+end_src
 
 Mappings
@@ -110,11 +221,10 @@ Mappings
   (with-eval-after-load 'company
     (general-define-key
      :keymaps '(company-active-map)
-     "<tab>" 'company-complete-selection))
+     "<tab>" 'company-complete-selection
+     "RET" nil))
 #+end_src
 
-#+RESULTS:
-** Yasnippet
 Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'yasnippet
@@ -132,18 +242,14 @@ Mappings
 
     (diagnostics
       "j" 'flycheck-next-error
-      "k" 'flycheck-previous-error)
-    )
+      "k" 'flycheck-previous-error))
 #+end_src
-
-#+RESULTS:
 
 ** Flycheck
 Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'flycheck
-    (global-flycheck-mode +1)
-    )
+    (global-flycheck-mode +1))
 #+end_src
 
 ** Helm-Flycheck
@@ -151,8 +257,7 @@ Mappings
 #+begin_src emacs-lisp
   (with-eval-after-load 'flycheck
     (diagnostics
-      "f" 'helm-flycheck)
-    )
+      "t" 'helm-flycheck))
 #+end_src
 
 ** Flycheck-Inline
@@ -162,5 +267,3 @@ Setup
     (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
 #+end_src
 
-#+RESULTS:
-| flycheck-inline-mode | flycheck-mode-set-explicitly |

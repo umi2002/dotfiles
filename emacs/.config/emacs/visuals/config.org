@@ -1,0 +1,40 @@
+#+TITLE: Visuals Config
+#+AUTHOR: umi
+
+* VISUALS CONFIG
+** Theme
+#+begin_src emacs-lisp
+  (with-eval-after-load 'doom-themes
+    (load-theme 'doom-palenight t))
+#+end_src
+
+** Dimmer
+#+begin_src emacs-lisp
+  (with-eval-after-load 'dimmer
+    (dimmer-configure-helm)
+    (dimmer-mode t))
+#+end_src
+
+** Telephone Line
+#+begin_src emacs-lisp
+  (with-eval-after-load 'telephone-line
+    (telephone-line-mode 1))
+#+end_src
+
+
+** Visual-Fill-Column
+#+begin_src emacs-lisp
+  (with-eval-after-load 'visual-fill-column
+    (add-hook 'text-mode-hook
+	      (lambda ()
+		(visual-fill-column-mode)
+		(setq fill-column 100)))
+    (setq-default visual-fill-column-center-text t))
+#+end_src
+
+** All-The-Icons
+#+begin_src emacs-lisp
+  (add-to-list 'load-path "~/.config/emacs/all-the-icons.el/")
+  (require 'all-the-icons)
+#+end_src
+

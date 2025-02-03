@@ -8,6 +8,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(helm-minibuffer-history-key "M-p")
+ '(org-agenda-files
+   '("/home/umi/Documents/org/dailies.org" "/home/umi/Documents/org/birthdays.org"))
  '(package-selected-packages '(helm-rg)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

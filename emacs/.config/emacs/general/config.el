@@ -1,7 +1,3 @@
-(defun open_config ()
-  (interactive)
-  (find-file "~/.config/emacs/config.org"))
-
 (defun open_window_left()
   (interactive)
   (evil-window-vsplit))
@@ -59,11 +55,6 @@
    "n" 'dired-create-empty-file
    "D" 'dired-do-delete)
 
-  (general-create-definer open
-    :keymaps '(global override)
-    :wrapping leader
-    :infix "o")
-
   (general-define-key
    :states '(normal visual)
    :keymaps '(global override)
@@ -79,9 +70,6 @@
    "C-k" 'evil-window-up
    "C-l" 'evil-window-right)
 
-  (open
-    "c" 'open_config)
-
   (general-create-definer window
     :keymaps '(global override)
     :wrapping leader
@@ -95,7 +83,7 @@
 
   (general-define-key
    :states '(normal)
-   :keymaps '(global override)
+   :keymaps '(global)
    "RET" 'org-open-at-point)
 
   (general-create-definer buffer

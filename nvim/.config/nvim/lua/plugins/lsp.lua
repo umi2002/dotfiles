@@ -38,12 +38,16 @@ return {
 			}
 
 			-- For angularls
-			local angular_path =
-				"/home/umi/.local/share/nvim/mason/packages/angular-language-server/node_modules/@angular/language-server/bin/"
-			local tsserver_path =
-				"/home/umi/.local/share/nvim/mason/packages/typescript-language-server/node_modules/typescript/bin/"
-			local cmd =
-				{ "ngserver", "--stdio", "--tsProbeLocations", tsserver_path, "--ngProbeLocations", angular_path }
+			local angular_path = "/usr/lib/node_modules/@angular/language-server/bin/"
+			local tsserver_path = "/usr/lib/node_modules/typescript/bin/"
+			local cmd = {
+				"/usr/lib/node_modules/@angular/language-server/bin/ngserver",
+				"--stdio",
+				"--tsProbeLocations",
+				tsserver_path,
+				"--ngProbeLocations",
+				angular_path,
+			}
 
 			-- For jdtls
 			local bundles = {

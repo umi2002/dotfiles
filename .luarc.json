@@ -1,3 +1,6 @@
 {
-    "workspace.maxPreload": 2000
+    "workspace.maxPreload": 2000,
+    "diagnostics.globals": [
+        "vim"
+    ]
 }

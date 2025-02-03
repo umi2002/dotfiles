@@ -15,3 +15,8 @@ projectile*
 elpa
 recentf
 projects
+.org-id-locations
+.projectile-cache.eld
+bookmarks
+eln-cache
+org-roam.db

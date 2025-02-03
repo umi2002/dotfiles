@@ -4,10 +4,6 @@
 * GENERAL CONFIGURATION
 Functions
 #+begin_src emacs-lisp
-  (defun open_config ()
-    (interactive)
-    (find-file "~/.config/emacs/config.org"))
-
   (defun open_window_left()
     (interactive)
     (evil-window-vsplit))
@@ -39,8 +35,6 @@ Functions
     (evil-scroll-line-to-center nil))
 #+end_src
 
-#+RESULTS:
-: scroll_up_recenter
 
 Setup
 #+begin_src emacs-lisp
@@ -53,8 +47,6 @@ Setup
     )
 #+end_src
 
-#+RESULTS:
-
 Defining leader key
 #+begin_src emacs-lisp
   (with-eval-after-load 'general
@@ -64,8 +56,6 @@ Defining leader key
       :prefix "SPC"))
 #+end_src
 
-#+RESULTS:
-: leader
 
 Mappings
 #+begin_src emacs-lisp
@@ -82,11 +72,6 @@ Mappings
      "n" 'dired-create-empty-file
      "D" 'dired-do-delete)
 
-    (general-create-definer open
-      :keymaps '(global override)
-      :wrapping leader
-      :infix "o")
-
     (general-define-key
      :states '(normal visual)
      :keymaps '(global override)
@@ -102,9 +87,6 @@ Mappings
      "C-k" 'evil-window-up
      "C-l" 'evil-window-right)
 
-    (open
-      "c" 'open_config)
-
     (general-create-definer window
       :keymaps '(global override)
       :wrapping leader
@@ -118,7 +100,7 @@ Mappings
 
     (general-define-key
      :states '(normal)
-     :keymaps '(global override)
+     :keymaps '(global)
      "RET" 'org-open-at-point)
 
     (general-create-definer buffer
@@ -133,5 +115,3 @@ Mappings
       )
     )
 #+end_src
-
-#+RESULTS:
