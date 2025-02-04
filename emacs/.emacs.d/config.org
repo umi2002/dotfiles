@@ -132,6 +132,11 @@ Installing Helm
   (use-package helm)
 #+end_src
 
+Installing Helm-Fuzzier
+#+begin_src emacs-lisp
+  (use-package helm-fuzzier)
+#+end_src
+
 Installing Helm-Rg
 #+begin_src emacs-lisp
   (use-package helm-rg
@@ -157,11 +162,11 @@ Installing Projectile
   (use-package projectile)
 #+end_src
 
-Installing Helm-Projectile
-#+begin_src emacs-lisp
-  (use-package helm-projectile
-    :after (helm projectile))
-#+end_src
+# Installing Helm-Projectile
+# #+begin_src emacs-lisp
+#   (use-package helm-projectile
+#     :after (helm projectile))
+# #+end_src
 
 [[file:project/config.org][Configuration]]
 #+begin_src emacs-lisp
@@ -176,6 +181,11 @@ Installing Lsp-Mode
 #+begin_src emacs-lisp
   (use-package lsp-mode
     :commands (lsp lsp-deferred))
+#+end_src
+
+Installing Lsp-UI
+#+begin_src emacs-lisp
+  (use-package lsp-ui)
 #+end_src
 
 Installing Company
@@ -268,6 +278,11 @@ Installing Vterm
 Installing Undo-Tree
 #+begin_src emacs-lisp
   (use-package undo-tree)
+#+end_src
+
+Installing Exec-Path-From-Shell
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell)
 #+end_src
 
 [[file:utils/config.org][Configuration]]

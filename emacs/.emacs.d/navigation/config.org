@@ -17,6 +17,13 @@ Mappings
     )
 #+end_src
 
+** Helm-Fuzzier
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'helm-fuzzier
+    (helm-fuzzier-mode 1))
+#+end_src
+
 ** Avy
 Mappings
 #+begin_src emacs-lisp

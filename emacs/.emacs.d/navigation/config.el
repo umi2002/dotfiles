@@ -9,6 +9,9 @@
     "f" 'helm-buffers-list)
   )
 
+(with-eval-after-load 'helm-fuzzier
+  (helm-fuzzier-mode 1))
+
 (with-eval-after-load 'avy
   (leader
     "l" 'avy-goto-char-2)

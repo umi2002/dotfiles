@@ -33,7 +33,7 @@ Formatting
     (when (eq major-mode 'org-mode)
       (save-excursion
 	(goto-char (point-min))
-	(while (re-search-forward "^#\\+RESULTS:.*\n.*\n" nil t)
+	(while (re-search-forward "^#\\+RESULTS:.*\n.*\n\n" nil t)
 	  (replace-match "")))))
 
   (defun indent-whole-buffer ()

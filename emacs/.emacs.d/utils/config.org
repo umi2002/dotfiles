@@ -70,8 +70,8 @@ Mappings
 Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'undo-tree
-    (global-undo-tree-mode)
-    )
+    (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+    (global-undo-tree-mode))
 #+end_src
 
 Mappings
@@ -85,4 +85,11 @@ Mappings
     (leader
       "u" 'undo-tree-visualize)
     )
+#+end_src
+
+** Exec-Path-From-Shell
+#+begin_src emacs-lisp
+  (with-eval-after-load 'exec-path-from-shell
+    (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize)))
 #+end_src

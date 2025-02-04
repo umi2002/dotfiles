@@ -7,7 +7,7 @@ Functions
   (defun custom_project_find()
     (interactive)
     (if (projectile-project-p)
-	(helm-projectile-find-file)
+	(projectile-find-file)
       (helm-find-files nil)))
 #+end_src
 
@@ -15,13 +15,17 @@ Functions
 Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'projectile
-    (projectile-global-mode)
+    (setq projectile-switch-project-action #'projectile-dired)
     (setq projectile-indexing-method 'hybrid)
     (setq projectile-enable-caching t)
     (setq projectile-git-command "git ls-files -zco --exclude-standard")
-    (setq projectile-project-search-path '(("~/code/" . 3) "~/dotfiles/"))
-    (setq projectile-generic-command "fd . -0 --type f --color=never"))
+    (setq projectile-project-search-path '(("~/code/" . 2) "~/dotfiles/" ("~/code/projects/" . 2)))
+    (setq projectile-generic-command "fd . -0 --type f --color=never")
+    (setq projectile-completion-system 'helm)
+    (setq projectile-cache-file (expand-file-name ".cache/projectile.cache" user-emacs-directory))
+    (projectile-mode 1))
 #+end_src
+
 
 
 Mappings
@@ -33,25 +37,15 @@ Mappings
       :infix "p"))
 #+end_src
 
-
-** Helm-Projectile
-Setup
-#+begin_src emacs-lisp
-  (with-eval-after-load 'helm-projectile
-    (helm-projectile-on))
-#+end_src
-
-
-
 Mappings
 #+begin_src emacs-lisp
-  (with-eval-after-load 'helm-projectile
+  (with-eval-after-load 'projectile
     (leader
       "f" 'custom_project_find)
 
     (project
-      "f" 'helm-projectile-switch-project)
+      "f" 'projectile-switch-project)
 
     (leader
-      "wf" 'helm-projectile-rg))
+      "wf" 'projectile-rg))
 #+end_src

@@ -15,5 +15,5 @@
 	      (setq fill-column 100)))
   (setq-default visual-fill-column-center-text t))
 
-(add-to-list 'load-path "~/.config/emacs/all-the-icons.el/")
+(add-to-list 'load-path "~/.emacs.d/all-the-icons.el/")
 (require 'all-the-icons)

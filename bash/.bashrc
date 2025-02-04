@@ -191,6 +191,4 @@ source "$OSH"/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
+source /usr/share/nvm/init-nvm.sh

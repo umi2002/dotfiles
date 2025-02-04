@@ -46,13 +46,20 @@
   (leader
     "ca" 'helm-lsp-code-actions))
 
+(with-eval-after-load 'lsp-ui
+  (general-define-key
+   :states '(normal visual)
+   :keymaps 'lsp-ui-mode-map
+   [remap xref-find-definitions] #'lsp-ui-peek-find-definitions
+   [remap xref-find-references] #'lsp-ui-peek-find-references))
+
 (use-package lua-mode
   :after lsp-mode
   :mode "\\.lua\\'"
   :hook (lua-mode . lsp-deferred))
 
 (with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-enabled-clients 'lsp-lua))
+  (add-to-list 'lsp-enabled-clients 'lua-language-server))
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
@@ -66,16 +73,6 @@
 
 (with-eval-after-load 'lsp-mode
   (add-to-list 'lsp-enabled-clients 'html-ls))
-
-(with-eval-after-load 'lsp-mode
-  (setq lsp-clients-angular-language-server-command
-	'("node"
-	  "/usr/lib/node_modules/@angular/language-server"
-	  "--ngProbeLocations"
-	  "/usr/lib/node_modules"
-	  "--tsProbeLocations"
-	  "/usr/lib/node_modules"
-	  "--stdio")))
 
 (use-package typescript-mode
   :after lsp-mode
@@ -91,12 +88,15 @@
 			'(("TypeScript" (prettierd))))))
 
 (use-package eslintd-fix
-  :after (lsp-mode typescript-mode)
-  :config ((add-hook 'typescript-mode-hook 'eslintd-fix-mode)))
+  :after (lsp-mode flycheck)
+  :config
+  (setq flycheck-javascript-eslint-executable "eslint_d")
+  (add-hook 'typescript-mode-hook 'eslintd-fix-mode)
+  (setq lsp-eslint-auto-fix-on-save t))
 
 (with-eval-after-load 'lsp-mode
   (add-hook 'c-mode-hook #'lsp-deferred)
-  (add-to-list 'lsp-enabled-clients 'lsp-clangd))
+  (add-to-list 'lsp-enabled-clients 'clangd))
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
@@ -105,7 +105,7 @@
 
 (with-eval-after-load 'lsp-mode
   (add-hook 'c++-mode-hook #'lsp-deferred)
-  (add-to-list 'lsp-enabled-clients 'lsp-clangd))
+  (add-to-list 'lsp-enabled-clients 'clangd))
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
@@ -115,6 +115,11 @@
 (with-eval-after-load 'lsp-mode
   (add-hook 'csharp-mode-hook #'lsp-deferred)
   (add-to-list 'lsp-enabled-clients 'omnisharp))
+
+(with-eval-after-load 'format-all
+  (setq-default format-all-formatters
+		(append format-all-formatters
+			'(("C#" (csharpier))))))
 
 (use-package python-mode
   :after lsp-mode
@@ -149,7 +154,7 @@
     "k" 'flycheck-previous-error))
 
 (with-eval-after-load 'flycheck
-  (global-flycheck-mode +1))
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (with-eval-after-load 'flycheck
   (diagnostics
@@ -157,3 +162,6 @@
 
 (with-eval-after-load 'flycheck
   (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
+
+(with-eval-after-load 'format-all
+  (add-hook 'prog-mode-hook 'format-all-mode))

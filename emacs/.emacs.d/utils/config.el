@@ -37,8 +37,8 @@
   )
 
 (with-eval-after-load 'undo-tree
-  (global-undo-tree-mode)
-  )
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+  (global-undo-tree-mode))
 
 (with-eval-after-load 'undo-tree
   (general-define-key
@@ -49,3 +49,7 @@
   (leader
     "u" 'undo-tree-visualize)
   )
+
+(with-eval-after-load 'exec-path-from-shell
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
