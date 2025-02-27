@@ -25,7 +25,7 @@ return {
 					formatting.stylua.with({
 						filetypes = { "lua" },
 					}),
-					formatting.prettierd.with({
+					formatting.prettier.with({
 						filetypes = {
 							"markdown",
 							"css",
@@ -33,6 +33,7 @@ return {
 							"html",
 							"json",
 							"jsonc",
+							"typescript",
 						},
 					}),
 					formatting.shfmt.with({

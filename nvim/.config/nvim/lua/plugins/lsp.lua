@@ -50,13 +50,13 @@ return {
 				"--stdio",
 				"--tsProbeLocations",
 				table.concat({
-					angularls_path,
 					vim.uv.cwd(),
+					angularls_path,
 				}, ","),
 				"--ngProbeLocations",
 				table.concat({
-					angularls_path .. "/node_modules/@angular/language-server",
 					vim.uv.cwd(),
+					angularls_path .. "/node_modules/@angular/language-server",
 				}, ","),
 			}
 
