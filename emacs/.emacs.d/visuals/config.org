@@ -31,10 +31,3 @@
 		(setq fill-column 100)))
     (setq-default visual-fill-column-center-text t))
 #+end_src
-
-** All-The-Icons
-#+begin_src emacs-lisp
-  (add-to-list 'load-path "~/.emacs.d/all-the-icons.el/")
-  (require 'all-the-icons)
-#+end_src
-

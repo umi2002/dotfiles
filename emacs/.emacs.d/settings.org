@@ -12,7 +12,10 @@
   (electric-pair-mode 1)
   (tool-bar-mode -1)
   (global-hl-line-mode 1)
-  (custom-set-faces '(org-default ((t
-				    (:family "FiraMono Nerd"
-					     :height 100)))))
+  (setq vc-follow-symlinks t)
+  (setq find-file-visit-truename t)
+  (set-face-attribute 'fixed-pitch nil :family "FiraMono Nerd Font" :height 100)
+  (set-face-attribute 'variable-pitch nil :family "Linux Libertine O" :height 120)
+  (add-hook 'text-mode-hook 'variable-pitch-mode)
+  (add-hook 'prog-mode-hook 'fixed-pitch-mode)
 #+end_src

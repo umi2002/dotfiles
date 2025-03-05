@@ -1,13 +1,7 @@
 (with-eval-after-load 'org-faces
-  (custom-set-faces '(org-default ((t
-				    (:family "Linux Libertine O"
-					     :height 120)))))
-  (custom-set-faces '(org-block ((t
-				  (:family "FiraMono Nerd"
-					   :height 100)))))
-  (custom-set-faces '(org-meta-line ((t
-				      (:family "FiraMono Nerd"
-					       :height 100))))))
+  (set-face-attribute 'org-default nil :family "Linux Libertine O" :height 120)
+  (set-face-attribute 'org-block nil :family "FiraMono Nerd Font" :height 100)
+  (set-face-attribute 'org-meta-line nil :family "FiraMono Nerd Font" :height 100))
 (setq org-startup-with-inline-images t)
 
 (with-eval-after-load 'general

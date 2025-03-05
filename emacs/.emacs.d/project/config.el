@@ -1,7 +1,7 @@
 (defun custom_project_find()
   (interactive)
   (if (projectile-project-p)
-      (projectile-find-file)
+      (helm-projectile-find-file)
     (helm-find-files nil)))
 
 (with-eval-after-load 'projectile
@@ -21,12 +21,15 @@
     :wrapping leader
     :infix "p"))
 
+(with-eval-after-load 'helm-projectile
+  (helm-projectile-on))
+
 (with-eval-after-load 'projectile
   (leader
     "f" 'custom_project_find)
 
   (project
-    "f" 'projectile-switch-project)
+    "f" 'helm-projectile-switch-project)
 
   (leader
-    "wf" 'projectile-rg))
+    "wf" 'helm-projectile-rg))

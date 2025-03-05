@@ -7,7 +7,7 @@ Functions
   (defun custom_project_find()
     (interactive)
     (if (projectile-project-p)
-	(projectile-find-file)
+	(helm-projectile-find-file)
       (helm-find-files nil)))
 #+end_src
 
@@ -26,8 +26,6 @@ Setup
     (projectile-mode 1))
 #+end_src
 
-
-
 Mappings
 #+begin_src emacs-lisp
   (with-eval-after-load 'projectile
@@ -37,6 +35,13 @@ Mappings
       :infix "p"))
 #+end_src
 
+** Helm-Projectile
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'helm-projectile
+    (helm-projectile-on))
+#+end_src
+
 Mappings
 #+begin_src emacs-lisp
   (with-eval-after-load 'projectile
@@ -44,8 +49,8 @@ Mappings
       "f" 'custom_project_find)
 
     (project
-      "f" 'projectile-switch-project)
+      "f" 'helm-projectile-switch-project)
 
     (leader
-      "wf" 'projectile-rg))
+      "wf" 'helm-projectile-rg))
 #+end_src

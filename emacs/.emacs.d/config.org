@@ -162,11 +162,11 @@ Installing Projectile
   (use-package projectile)
 #+end_src
 
-# Installing Helm-Projectile
-# #+begin_src emacs-lisp
-#   (use-package helm-projectile
-#     :after (helm projectile))
-# #+end_src
+Installing Helm-Projectile
+#+begin_src emacs-lisp
+  (use-package helm-projectile
+    :after (helm projectile))
+#+end_src
 
 [[file:project/config.org][Configuration]]
 #+begin_src emacs-lisp
@@ -339,6 +339,12 @@ Installing Visual-Fill-Column
   (use-package visual-fill-column)
 #+end_src
 
+Installing All-The-Icons
+#+begin_src emacs-lisp
+  (use-package all-the-icons
+    :if (display-graphic-p))
+#+end_src
+
 [[file:visuals/config.org][Configuration]]
 #+begin_src emacs-lisp
   (org-babel-load-file
@@ -367,7 +373,6 @@ Installing Org-Roam
 #+end_src
 
 Installing Org-Download
-Org-Download
 #+begin_src emacs-lisp
   (use-package org-download)
 #+end_src
