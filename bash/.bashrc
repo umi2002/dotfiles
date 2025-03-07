@@ -49,6 +49,8 @@ PERL_LOCAL_LIB_ROOT="/home/umi/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROO
 PERL_MB_OPT="--install_base \"/home/umi/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/umi/perl5"; export PERL_MM_OPT;
 
+export PATH="$PATH:/home/umi/.local/share/gem/ruby/3.3.0/bin"
+
 # Enable the subsequent settings only in interactive sessions
 case $- in
   *i*) ;;
