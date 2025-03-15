@@ -1,0 +1,249 @@
+/**
+ *
+ * Duskfox Theme for Rofi
+ * Based on Aditya Shakya's theme
+ * Rofi Version: 1.7.3
+ **/
+
+/*****----- Configuration -----*****/
+configuration {
+	modi:                       "drun,filebrowser,window";
+    case-sensitive:             false;
+    show-icons:                 true;
+    display-drun:               "";
+    display-run:                "";
+    display-filebrowser:        "";
+    display-window:             "";
+	drun-display-format:        "{name}";
+	window-format:              "{w} · {c} · {t}";
+
+    kb-accept-entry:    "Return,KP_Enter";
+    kb-remove-to-eol:   "";
+    kb-element-prev:    "Control+k";
+    kb-element-next:    "Control+j";
+    kb-mode-next:       "Tab";
+
+    filebrowser {
+        show-hidden: true;
+    }
+}
+
+/*****----- Global Properties -----*****/
+* {
+    font: "SF Pro Display, Symbols Nerd Font Mono 10"; 
+
+    /* Duskfox Palette */
+    duskfox-base:                #232136;
+    duskfox-surface:             #393552;
+    duskfox-overlay:             #6e6a86;
+    duskfox-muted:               #908caa;
+    duskfox-text:                #e0def4;
+    duskfox-love:                #eb6f92;
+    duskfox-gold:                #f6c177;
+    duskfox-rose:                #ea9a97;
+    duskfox-pine:                #a3be8c;
+    duskfox-foam:                #9ccfd8;
+    duskfox-iris:                #c4a7e7;
+    
+    background:                  @duskfox-base;
+    background-alt:              @duskfox-surface;
+    foreground:                  @duskfox-text;
+    selected:                    @duskfox-gold;
+    active:                      @duskfox-foam;
+    alternate-normal-background: @background;
+    alternate-normal-foreground: @foreground;
+    alternate-active-background: @active-background;
+    alternate-active-foreground: @active-foreground;
+    alternate-urgent-background: @urgent-background;
+    alternate-urgent-foreground: @urgent-foreground;
+    urgent:                      @duskfox-love;
+}
+
+/*****----- Main Window -----*****/
+window {
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       700px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    /* properties for all widgets */
+    enabled:                     true;
+    border-radius:               20px;
+    cursor:                      "default";
+    background-color:            @background;
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     0px;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "inputbar", "listbox" ];
+    fixed-height:                true;
+}
+
+listbox {
+    spacing:                     0px;
+    padding:                     20px;
+    background-color:            transparent;
+    orientation:                 vertical;
+    children:                    [ "message", "listview" ];
+    fixed-height:                true;
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     80px 60px;
+    background-color:            transparent;
+    // background-image:            url("~/.config/hypr/violet.jpg", width);
+    background-size:             100% 100%;
+    text-color:                  @foreground;
+    orientation:                 horizontal;
+    children:                    [ "textbox-prompt-colon", "entry", "dummy", "mode-switcher" ];
+    fixed-height:                true;
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "";
+    padding:                     12px 15px;
+    border-radius:               100%;
+    background-color:            @background-alt;
+    text-color:                  inherit;
+}
+entry {
+    enabled:                     true;
+    expand:                      false;
+    width:                       250px;
+    padding:                     12px 16px;
+    border-radius:               100%;
+    background-color:            @background-alt;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search";
+    placeholder-color:           @duskfox-muted;
+}
+dummy {
+    expand:                      true;
+    background-color:            transparent;
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher{
+    enabled:                     true;
+    spacing:                     10px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+button {
+    width:                       45px;
+    padding:                     12px;
+    border-radius:               100%;
+    background-color:            @background-alt;
+    text-color:                  inherit;
+    cursor:                      pointer;
+}
+button selected {
+    background-color:            @selected;
+    text-color:                  @duskfox-base;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       7;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-columns:               true;
+
+    spacing:                     10px;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      "default";
+    fixed-height:                true;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     4px;
+    border-radius:               100%;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+}
+element normal.normal {
+    background-color:            inherit;
+    text-color:                  inherit;
+}
+element normal.urgent {
+    background-color:            @urgent;
+    text-color:                  @foreground;
+}
+element normal.active {
+    background-color:            @active;
+    text-color:                  @duskfox-base;
+}
+element selected.normal {
+    background-color:            @selected;
+    text-color:                  @duskfox-base;
+}
+element selected.urgent {
+    background-color:            @urgent;
+    text-color:                  @foreground;
+}
+element selected.active {
+    background-color:            @duskfox-iris;
+    text-color:                  @duskfox-base;
+}
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        32px;
+    cursor:                      inherit;
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+element-active {
+    background-color: black;
+    text-color: inherit;
+}
+
+/*****----- Message -----*****/
+message {
+    background-color:            transparent;
+    fixed-height:                true;
+}
+textbox {
+    padding:                     12px;
+    border-radius:               100%;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+error-message {
+    padding:                     12px;
+    border-radius:               20px;
+    background-color:            @background;
+    text-color:                  @foreground;
+    fixed-height:                true;
+}

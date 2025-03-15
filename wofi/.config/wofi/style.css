@@ -1,50 +1,60 @@
-window {
-    margin: 5px;
-    border: 2px solid #569fba; /* blue from your scheme */
-    background-color: #232136; /* background from your scheme */
-    color: #e0def4; /* foreground from your scheme for contrast */
+* {
+  font-family: "SF Pro Display Bold";
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#window {
+  margin: 0px;
+  border: 0px solid;
+  border-color: #ea9a97;
+  border-radius: 10px;
+  background-color: #232136;
+  color: #e0def4;
 }
 
 #input {
-    margin: 5px;
-    border: 2px solid #eb6f92; /* red from your scheme */
-    background-color: #393552; /* black from normal colors */
-    color: #e0def4; /* foreground from your scheme for contrast */
-}
-
-#inner-box {
-    margin: 5px;
-    border: 2px solid #a3be8c; /* green from your scheme */
-    background-color: #232136; /* primary background for contrast */
-    color: #e0def4; /* brighter text color for contrast */
-}
-
-#outer-box {
-    margin: 5px;
-    border: 2px solid #c4a7e7; /* magenta from your scheme */
-    background-color: #232136; /* primary background for contrast */
-    color: #e0def4; /* brighter text color for contrast */
+  margin: 15px;
+  background-color: #393552;
+  color: #e0def4;
+  border-radius: 25px;
+  border: 2px solid #6e6a86;
 }
 
 #scroll {
-    margin: 5px;
-    border: 2px solid #f6c177; /* yellow from your scheme */
-    background-color: #393552; /* black from normal colors */
-    color: #e0def4; /* foreground from your scheme for contrast */
+  margin-bottom: 15px;
 }
 
-#text {
-    margin: 5px;
-    background-color: #232136; /* primary background for contrast */
-    color: #e0def4; /* brighter text color for contrast */
+#entry {
+  margin: 0px 15px;
 }
 
 #entry:selected {
-    background-color: #47407d; /* bright black from your scheme for contrast */
-    color: #e0def4; /* foreground color for readability */
+  background-color: #f6c177;
+  border-radius: 0px;
+  border: none;
+  outline: none;
 }
 
-#text:selected {
-    background-color: #47407d; /* bright black from your scheme for contrast */
-    color: #e0def4; /* foreground color for readability */
+#entry > box {
+  margin-left: 16px;
+}
+
+#entry image {
+  padding-right: 10px;
+}
+
+/* Duskfox palette reference */
+#colors {
+  color: #232136;
+  color: #393552;
+  color: #6e6a86;
+  color: #908caa;
+  color: #e0def4;
+  color: #ea9a97;
+  color: #eb6f92;
+  color: #f6c177;
+  color: #c4a7e7;
+  color: #9ccfd8;
+  color: #a3be8c;
 }
