@@ -79,18 +79,18 @@ return {
                 },
                 clangd = {
                     on_attach = lsp.util.add_hook_after(lsp_attach, function(client, bufnr)
-                        if client.supports_method("textDocument/formatting") then
-                            vim.api.nvim_create_autocmd("BufWritePre", {
-                                buffer = bufnr,
-                                callback = function()
-                                    vim.lsp.buf.format({ async = false })
-                                end,
-                            })
-                        end
+                        client.server_capabilities.documentFormattingProvider = true
+
+                        vim.api.nvim_create_autocmd("BufWritePre", {
+                            buffer = bufnr,
+                            callback = function()
+                                vim.lsp.buf.format({ bufnr = bufnr })
+                            end,
+                        })
                     end),
                     cmd = {
                         "clangd",
-                        "--fallback-style=Microsoft",
+                        "--fallback-style=Google",
                     },
                 },
                 rust_analyzer = {

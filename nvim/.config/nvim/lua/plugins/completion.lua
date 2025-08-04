@@ -215,16 +215,16 @@ return {
 			})
 		end,
 	},
-	{
-		"zbirenbaum/copilot.lua",
-		opts = {
-			suggestion = {
-				enabled = false,
-				auto_trigger = true,
-				keymap = {
-					accept = "<C-l>",
-				},
-			},
-		},
-	},
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	opts = {
+	-- 		suggestion = {
+	-- 			enabled = false,
+	-- 			auto_trigger = true,
+	-- 			keymap = {
+	-- 				accept = "<C-l>",
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 }

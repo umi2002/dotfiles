@@ -5,3 +5,5 @@
 	defaultBranch = main
 [merge "ours"]
 	driver = true
+[includeIf "gitdir:~/code/hub/"]
+	path = ~/.gitconfig-work
