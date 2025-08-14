@@ -34,6 +34,7 @@ return {
 							"json",
 							"jsonc",
 							"typescript",
+							"javascript",
 						},
 					}),
 					formatting.shfmt.with({
