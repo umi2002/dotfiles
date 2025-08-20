@@ -31,6 +31,7 @@ return {
 							"css",
 							"scss",
 							"html",
+							"htmlangular",
 							"json",
 							"jsonc",
 							"typescript",
