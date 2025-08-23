@@ -16,7 +16,7 @@ return {
 							callback = function()
 								-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
 								-- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-								vim.lsp.buf.format()
+								vim.lsp.buf.format({ async = false })
 							end,
 						})
 					end
@@ -28,8 +28,6 @@ return {
 					formatting.prettier.with({
 						filetypes = {
 							"markdown",
-							"css",
-							"scss",
 							"html",
 							"htmlangular",
 							"json",
@@ -50,11 +48,17 @@ return {
 					formatting.rubocop.with({
 						filetypes = { "ruby" },
 					}),
+					formatting.stylelint.with({
+						filetypes = { "css", "scss" },
+					}),
 					diagnostics.cmake_lint.with({
 						filetypes = { "cmake" },
 					}),
 					diagnostics.rubocop.with({
 						filetypes = { "ruby" },
+					}),
+					diagnostics.stylelint.with({
+						filetypes = { "css", "scss" },
 					}),
 				},
 			})
