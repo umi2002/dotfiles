@@ -104,7 +104,7 @@ return {
 						},
 					},
 				},
-				jdts = {
+				jdtls = {
 					cmd = {
 						"java",
 						"-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -137,6 +137,34 @@ return {
 						"mvnw"
 					),
 				},
+				pyright = {
+					settings = {
+						pyright = {
+							-- Using Ruff's import organizer
+							disableOrganizeImports = true,
+						},
+						python = {
+							analysis = {
+								-- Ignore all files for analysis to exclusively use Ruff for linting
+								ignore = { "*" },
+							},
+						},
+					},
+				},
+				ruff = {
+					on_attach = function(client, bufnr)
+						lsp_attach()
+						-- Disable hover in favor of Pyright
+						client.server_capabilities.hoverProvider = false
+
+						vim.api.nvim_create_autocmd("BufWritePre", {
+							buffer = bufnr,
+							callback = function()
+								vim.lsp.buf.format({ bufnr = bufnr })
+							end,
+						})
+					end,
+				},
 			}
 
 			local servers = {
@@ -159,6 +187,7 @@ return {
 				"jdtls",
 				"ruby_lsp",
 				"somesass_ls",
+				"ruff",
 			}
 
 			for _, server in ipairs(servers) do

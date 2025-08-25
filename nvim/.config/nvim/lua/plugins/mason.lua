@@ -57,6 +57,7 @@ return {
 				"codelldb",
 				"rubocop",
 				"stylelint",
+				"ruff",
 			},
 
 			auto_update = true,
