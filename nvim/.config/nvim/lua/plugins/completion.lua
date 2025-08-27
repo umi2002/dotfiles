@@ -1,180 +1,116 @@
 return {
 	{
-		"hrsh7th/nvim-cmp",
-		config = function()
-			local cmp_status_ok, cmp = pcall(require, "cmp")
-			if not cmp_status_ok then
-				return
-			end
+		"saghen/blink.cmp",
+		-- optional: provides snippets for the snippet source
+		dependencies = { "L3MON4D3/LuaSnip", "onsails/lspkind.nvim", "nvim-tree/nvim-web-devicons" },
 
-			local snip_status_ok, luasnip = pcall(require, "luasnip")
-			if not snip_status_ok then
-				return
-			end
+		-- use a release tag to download pre-built binaries
+		version = "1.*",
+		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+		-- build = 'cargo build --release',
+		-- If you use nix, you can build from source using latest nightly rust with:
+		-- build = 'nix run .#build-plugin',
 
-			local check_backspace = function()
-				local col = vim.fn.col(".") - 1
-				return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-			end
-
-			-- 󰃐 󰆩 פּ ﯟ  󰅲 some other good icons
-			local kind_icons = {
-				Text = "󰉿",
-				Method = "m",
-				Function = "󰊕",
-				Constructor = "",
-				Field = "",
-				Variable = "󰆧",
-				Class = "󰌗",
-				Interface = "",
-				Module = "",
-				Property = "",
-				Unit = "",
-				Value = "󰎠",
-				Enum = "",
-				Keyword = "󰌋",
-				Snippet = "",
-				Color = "󰏘",
-				File = "󰈙",
-				Reference = "",
-				Folder = "󰉋",
-				EnumMember = "",
-				Constant = "󰇽",
-				Struct = "",
-				Event = "",
-				Operator = "󰆕",
-			}
-			-- find more here: https://www.nerdfonts.com/cheat-sheet
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
+			-- 'none' for no mappings
 			--
+			-- All presets have the following mappings:
+			-- C-space: Open menu or open docs if already open
+			-- C-n/C-p or Up/Down: Select next/previous item
+			-- C-e: Hide menu
+			-- C-k: Toggle signature help (if signature.enabled = true)
+			--
+			-- See :h blink-cmp-config-keymap for defining your own keymap
+			keymap = {
+				preset = "none",
+				["<C-k>"] = { "select_prev" },
+				["<C-j>"] = { "select_next" },
+				["<TAB>"] = { "accept" },
+			},
 
-			---@diagnostic disable-next-line: missing-fields
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body) -- For `luasnip` users.
-					end,
+			appearance = {
+				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- Adjusts spacing to ensure icons are aligned
+				nerd_font_variant = "mono",
+			},
+
+			-- (Default) Only show the documentation popup when manually triggered
+			completion = {
+				keyword = { range = "full" },
+				documentation = {
+					auto_show = true,
+					auto_show_delay_ms = 500,
+					window = { border = "single" },
 				},
+				ghost_text = { enabled = true },
+				menu = {
+					border = "single",
+					draw = {
+						components = {
+							kind_icon = {
+								text = function(ctx)
+									local icon = ctx.kind_icon
+									if vim.tbl_contains({ "Path" }, ctx.source_name) then
+										local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+										if dev_icon then
+											icon = dev_icon
+										end
+									else
+										icon = require("lspkind").symbolic(ctx.kind, {
+											mode = "symbol",
+										})
+									end
 
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				},
+									return icon .. ctx.icon_gap
+								end,
 
-				mapping = {
-					["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-					["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-					["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-					["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-					["<C-e>"] = cmp.mapping({
-						i = cmp.mapping.abort(),
-						c = cmp.mapping.close(),
-					}),
-					-- Accept currently selected item. If none selected, `select` first item.
-					-- Set `select` to `false` to only confirm explicitly selected items.
-					["<TAB>"] = cmp.mapping.confirm({ select = true }),
-					["<C-j>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expandable() then
-							luasnip.expand()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
-						elseif check_backspace() then
-							fallback()
-						else
-							fallback()
-						end
-					end, { "i", "s", "c" }),
-					["<C-k>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s", "c" }),
-				},
-
-				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "orgmode" },
-					{ name = "luasnip" },
-					{ name = "buffer" },
-					{ name = "path" },
-					{ name = "nvim_lua" },
-					{ name = "Neorg" },
-					{ name = "nvim_lsp_signature_help" },
-				},
-
-				filetypes = {
-					"c",
-					"cpp",
-					"tpp",
-					"lua",
-					"org",
-					"rust",
-					"vhdl",
-					"verilog",
-					"java",
-					"tex",
-					"bib",
-					"css",
-					"html",
-					"javascript",
-					"python",
-					"sh",
-				},
-
-				formatting = {
-					fields = { "kind", "abbr", "menu" },
-					format = function(entry, vim_item)
-						-- Kind icons
-						vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
-						-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-						vim_item.menu = ({
-							nvim_lsp = "[LSP]",
-							luasnip = "[Snippet]",
-							buffer = "[Buffer]",
-							path = "[Path]",
-						})[entry.source.name]
-						return vim_item
-					end,
-				},
-
-				confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false },
-			})
-
-			cmp.setup.cmdline("/", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = "buffer" },
-				},
-			})
-
-			-- `:` cmdline setup.
-			cmp.setup.cmdline(":", {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = "path" },
-				}, {
-					{
-						name = "cmdline",
-						option = {
-							ignore_cmds = { "Man", "!" },
+								-- Optionally, use the highlight groups from nvim-web-devicons
+								-- You can also add the same function for `kind.highlight` if you want to
+								-- keep the highlight groups in sync with the icons.
+								highlight = function(ctx)
+									local hl = ctx.kind_hl
+									if vim.tbl_contains({ "Path" }, ctx.source_name) then
+										local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+										if dev_icon then
+											hl = dev_hl
+										end
+									end
+									return hl
+								end,
+							},
 						},
 					},
-				}),
-			})
-		end,
+				},
+			},
+
+			-- Default list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer" },
+			},
+
+			snippets = { preset = "luasnip" },
+
+			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+			-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+			-- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+			--
+			-- See the fuzzy documentation for more information
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+
+			signature = { enabled = true, window = { border = "single" } },
+			cmdline = {
+				keymap = { preset = "inherit" },
+				completion = { menu = { auto_show = true } },
+			},
+		},
+		opts_extend = { "sources.default" },
 	},
-	{ "hrsh7th/cmp-nvim-lsp" },
-	{ "hrsh7th/cmp-buffer" },
-	{ "hrsh7th/cmp-path" },
-	{ "saadparwaiz1/cmp_luasnip" },
-	{ "hrsh7th/cmp-nvim-lua" },
-	{ "hrsh7th/cmp-cmdline" },
-	{ "hrsh7th/cmp-nvim-lsp-signature-help" },
 	{
 		"L3MON4D3/LuaSnip",
 		config = function()

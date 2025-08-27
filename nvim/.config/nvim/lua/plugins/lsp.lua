@@ -12,7 +12,7 @@ return {
 				vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next)
 			end
 
-			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
 
 			local default_config = {
 				on_attach = lsp_attach,
@@ -160,13 +160,13 @@ return {
 						vim.api.nvim_create_autocmd("BufWritePre", {
 							buffer = bufnr,
 							callback = function()
+								vim.lsp.buf.format({ bufnr = bufnr })
 								vim.lsp.buf.code_action({
 									context = {
 										only = { "source.fixAll.ruff" },
 									},
 									apply = true,
 								})
-								vim.lsp.buf.format({ bufnr = bufnr })
 							end,
 						})
 					end,
