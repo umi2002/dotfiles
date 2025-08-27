@@ -10,6 +10,7 @@ return {
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 				vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev)
 				vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next)
+				vim.cmd("TwilightEnable")
 			end
 
 			local lsp_capabilities = require("blink.cmp").get_lsp_capabilities()
