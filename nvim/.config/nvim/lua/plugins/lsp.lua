@@ -161,12 +161,6 @@ return {
 							buffer = bufnr,
 							callback = function()
 								vim.lsp.buf.format({ bufnr = bufnr })
-								vim.lsp.buf.code_action({
-									context = {
-										only = { "source.fixAll.ruff" },
-									},
-									apply = true,
-								})
 							end,
 						})
 					end,
