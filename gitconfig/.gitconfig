@@ -1,9 +1,0 @@
-[user]
-	email = jonathanhoang2002@gmail.com
-	name = umi2002
-[init]
-	defaultBranch = main
-[merge "ours"]
-	driver = true
-[includeIf "gitdir:~/code/hub/"]
-	path = ~/.gitconfig-work
