@@ -7,10 +7,12 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			files = {
-				fd_opts = [[--hidden]],
+				fd_opts = [[--hidden --exclude .git]],
+				no_ignore = true,
 			},
 			grep = {
-				rg_opts = [[--hidden]],
+				rg_opts = [[--hidden --exclude .git]],
+				no_ignore = true,
 			},
 		},
 		config = function(_, opts)
