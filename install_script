@@ -3,5 +3,3 @@
 for dir in *; do
     [ -d "${dir}" ] && stow "${dir}"
 done
-
-sudo ln -sf "$PWD/keyd.conf" /etc/keyd/default.conf
