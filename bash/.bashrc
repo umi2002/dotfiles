@@ -35,6 +35,7 @@ export INFOPATH=$INFOPATH:/usr/local/texlive/2023/texmf-dist/doc/info
 export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 export PATH=/home/umi/.cargo/bin:$PATH
 export PATH=/opt/Xilinx/Vivado/2023.1/bin:$PATH
+export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 
 export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt/plugins/platforms
 export QT_PLUGIN_PATH=/usr/lib/qt/plugins
