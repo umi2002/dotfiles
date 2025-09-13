@@ -19,3 +19,7 @@ AddPackage cups-pdf # PDF printer for cups
 # Fonts
 AddPackage otf-firamono-nerd # Patched font Fira (Fura) Mono from nerd fonts library
 AddPackage ttf-jetbrains-mono-nerd # Patched font JetBrains Mono from nerd fonts library
+
+# Xorg
+AddPackage xorg-xauth # X.Org authorization settings program
+AddPackage xorg-xhost # Server access control program for X
