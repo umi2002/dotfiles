@@ -14,6 +14,7 @@ AddPackage efibootmgr # Linux user-space application to modify the EFI Boot Mana
 
 # Hardware Support
 AddPackage amd-ucode # Microcode update image for AMD CPUs
+AddPackage udisks2 # Daemon, tools and libraries to access and manipulate disks, storage devices and technologies
 
 #Networking
 AddPackage networkmanager # Network connection manager and user applications
@@ -35,6 +36,7 @@ AddPackage wget # Network utility to retrieve files from the web
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign yay # Yet another yogurt. Pacman wrapper and AUR helper written in go.
 AddPackage --foreign yay-debug # Detached debugging symbols for yay
+AddPackage udiskie # Removable disk automounter using udisks
 
 # Essential Laptop Utilities
 AddPackage acpid # A daemon for delivering ACPI power management events with netlink support
