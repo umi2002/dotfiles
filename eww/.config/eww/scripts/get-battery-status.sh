@@ -2,18 +2,20 @@
 
 # Function to handle ACPI events
 handle_acpi_event() {
-    local event=$1
+    local status=$(cat /sys/class/power_supply/BAT0/status)
 
     # Check for AC plug/unplug events
-    if [[ "$event" == "ac_adapter ACPI0003:00 00000080 00000000" ]]; then
-        echo 0
-    elif [[ "$event" == "ac_adapter ACPI0003:00 00000080 00000001" ]]; then
+    if [[ "$status" == "Charging" ]]; then
         echo 1
+    else
+        echo 0
     fi
 }
 
+handle_acpi_event
+
 # Listen for ACPI events
 acpi_listen | while read -r event; do
-    handle_acpi_event "$event"
+    handle_acpi_event
 done
 
