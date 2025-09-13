@@ -7,3 +7,4 @@ CopyFile /etc/sudoers
 CopyFile /etc/vconsole.conf
 CreateDir /lost+found 700
 CopyFile /etc/keyd/default.conf '' umi umi
+CopyFile /etc/nsswitch.conf

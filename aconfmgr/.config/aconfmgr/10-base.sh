@@ -18,6 +18,8 @@ AddPackage amd-ucode # Microcode update image for AMD CPUs
 #Networking
 AddPackage networkmanager # Network connection manager and user applications
 AddPackage openssh # SSH protocol implementation for remote login, command execution and file transfer
+AddPackage nss-mdns # glibc plugin providing host name resolution via mDNS
+
 # Essential Utilities
 AddPackage git # the fast distributed version control system
 AddPackage man-db # A utility for reading man pages
