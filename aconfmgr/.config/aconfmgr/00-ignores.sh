@@ -36,5 +36,3 @@ IgnorePath '/etc/subgid-'
 IgnorePath '/etc/systemd/*'
 IgnorePath '/etc/cups/*'
 IgnorePath '/etc/printcap'
-
-IgnorePackage --foreign brother-mfc-l2750dw # LPR and CUPS driver for the Brother MFC-l2750DW
