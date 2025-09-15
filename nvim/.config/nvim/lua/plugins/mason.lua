@@ -30,6 +30,7 @@ return {
 				"arduino_language_server",
 				"ruby_lsp",
 				"somesass_ls",
+				"qmlls",
 			},
 		},
 	},
