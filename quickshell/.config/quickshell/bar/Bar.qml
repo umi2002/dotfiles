@@ -1,9 +1,8 @@
 import Quickshell
 import QtQuick
-
-import QtQuick
-import Quickshell
 import Quickshell.Io
+
+import "components"
 
 ShellRoot {
     Socket {
@@ -42,10 +41,8 @@ ShellRoot {
 
         implicitHeight: 30
 
-        Text {
+        Clock {
             anchors.centerIn: parent
-
-            text: "hello world"
         }
     }
 }
