@@ -2,7 +2,7 @@
 
 var font = {
     family: "Iosevka Nerd Font Mono",
-    size: 12,
+    size: 14,
 }
 
 var palette = {

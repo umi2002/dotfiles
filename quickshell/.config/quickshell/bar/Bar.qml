@@ -41,9 +41,21 @@ ShellRoot {
             right: true
         }
 
-        height: 40
+        height: 50
 
         color: Style.palette.background1
+
+        Image {
+            source: "../assets/arch_linux_icon.svg"
+
+            sourceSize.width: 30
+            sourceSize.height: 30
+            width: sourceSize.width
+            height: sourceSize.height
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 10
+        }
 
         Clock {
             anchors.right: parent.right
