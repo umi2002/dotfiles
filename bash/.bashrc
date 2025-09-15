@@ -25,7 +25,6 @@ export QT_QPA_PLATFORM=wayland
 export NVD_BACKEND=direct
 export WLR_BACKEND=vulkan
 export MOZ_ENABLE_WAYLAND=1
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 export EDITOR=nvim
 export CHROME_BIN=chromium
