@@ -1,8 +1,10 @@
 import Quickshell
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Io
 
 import "components"
+import "../Style.js" as Style
 
 ShellRoot {
     Socket {
@@ -39,10 +41,18 @@ ShellRoot {
             right: true
         }
 
-        implicitHeight: 30
+        height: 40
+
+        color: Style.palette.background1
 
         Clock {
-            anchors.centerIn: parent
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 10
+
+            color: Style.palette.color2
+            font.family: Style.font.family
+            font.pointSize: Style.font.size
         }
     }
 }
