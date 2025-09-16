@@ -1,5 +1,6 @@
 import Quickshell.Hyprland
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Shapes
 
@@ -39,47 +40,51 @@ Rectangle {
         Repeater {
             model: Workspaces.occupiedWorkspaces
 
-            Rectangle {
+            Button {
                 id: workspace
                 readonly property bool isActive: Hyprland.focusedWorkspace?.id === index + 1
                 readonly property string iconColor: isActive ? Style.palette.background1 : Style.palette.color1
                 Layout.preferredWidth: root.workspaceItemWidth
                 Layout.preferredHeight: root.workspaceItemWidth
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                color: "transparent"
+                onPressed: Hyprland.dispatch(`workspace ${index + 1}`)
 
-                UnoccupiedWorkspaceIcon {
-                    opacity: !modelData ? 1 : 0
-                    anchors.centerIn: parent
-                    color: workspace.iconColor
+                background: Rectangle {
+                    color: "transparent"
 
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
+                    UnoccupiedWorkspaceIcon {
+                        opacity: !modelData ? 1 : 0
+                        anchors.centerIn: parent
+                        color: workspace.iconColor
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 200
+                            }
+                        }
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: 200
+                            }
                         }
                     }
 
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 200
+                    OccupiedWorkspaceIcon {
+                        opacity: modelData ? 1 : 0
+                        anchors.centerIn: parent
+                        color: workspace.iconColor
+
+                        Behavior on color {
+                            ColorAnimation {
+                                duration: 200
+                            }
                         }
-                    }
-                }
 
-                OccupiedWorkspaceIcon {
-                    opacity: modelData ? 1 : 0
-                    anchors.centerIn: parent
-                    color: workspace.iconColor
-
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-
-                    Behavior on opacity {
-                        NumberAnimation {
-                            duration: 200
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: 200
+                            }
                         }
                     }
                 }
