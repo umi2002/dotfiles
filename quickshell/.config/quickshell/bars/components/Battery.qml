@@ -66,10 +66,17 @@ Item {
             }
         }
 
-        Image {
-            source: isCharging ? "../../assets/charging_icon.svg" : "../../assets/discharging_icon.svg"
+        ChargingIcon {
+            visible: isCharging
             anchors.centerIn: parent
+            color: root.color
+            opacity: (root.value / 2) + 0.5
+        }
 
+        DischargingIcon {
+            visible: !isCharging
+            anchors.centerIn: parent
+            color: root.color
             opacity: (root.value / 2) + 0.5
         }
     }

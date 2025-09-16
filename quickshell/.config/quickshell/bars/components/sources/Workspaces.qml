@@ -12,6 +12,7 @@ Singleton {
     }, () => {
         return false;
     })
+    readonly property int activeWorkspaceIndex: Hyprland.focusedWorkspace?.id - 1
 
     function updateOccupiedWorkspaces() {
         occupiedWorkspaces = Array.from({
