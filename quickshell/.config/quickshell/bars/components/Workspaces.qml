@@ -44,10 +44,18 @@ Rectangle {
                 id: workspace
                 readonly property bool isActive: Hyprland.focusedWorkspace?.id === index + 1
                 readonly property string iconColor: isActive ? Style.palette.background1 : Style.palette.color1
+                onPressed: Hyprland.dispatch(`workspace ${index + 1}`)
+
                 Layout.preferredWidth: root.workspaceItemWidth
                 Layout.preferredHeight: root.workspaceItemWidth
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                onPressed: Hyprland.dispatch(`workspace ${index + 1}`)
+                opacity: isActive ? 1 : 0.5
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: 200
+                    }
+                }
 
                 background: Rectangle {
                     color: "transparent"
