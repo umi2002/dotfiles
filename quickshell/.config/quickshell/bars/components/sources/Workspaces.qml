@@ -13,15 +13,19 @@ Singleton {
         return false;
     })
     readonly property int activeWorkspaceIndex: Hyprland.focusedWorkspace?.id - 1
+    property list<string> workspaceIcons: Array.from({
+        length: 10
+    }, () => {
+        return "";
+    })
 
     function updateOccupiedWorkspaces() {
-        occupiedWorkspaces = Array.from({
-            length: 10
-        }, (_, i) => {
-            return Hyprland.workspaces.values.some(workspace => {
+        for (let i = 0; i < occupiedWorkspaces.length; i++) {
+            console.log('ok');
+            occupiedWorkspaces[i] = Hyprland.workspaces.values.some(workspace => {
                 return workspace.id === i + 1;
             });
-        });
+        }
     }
 
     Component.onCompleted: updateOccupiedWorkspaces()
