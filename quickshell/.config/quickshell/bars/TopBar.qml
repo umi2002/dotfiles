@@ -1,7 +1,7 @@
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Io
 
 import "components"
 import "../Style.js" as Style
@@ -24,7 +24,7 @@ ShellRoot {
                 if (match != null) {
                     // Filter out the right screen from the list and update the panel.
                     // match[1] will always be the monitor name captured by the regex.
-                    bar.screen = Quickshell.screens.filter(screen => screen.name == match[1])[0];
+                    topBar.screen = Quickshell.screens.filter(screen => screen.name == match[1])[0];
                 }
             }
         }
@@ -34,27 +34,39 @@ ShellRoot {
     // focused one. We use this since we don't get a focusedmon event on connect.
 
     PanelWindow {
-        id: bar
+        id: topBar
         anchors {
             top: true
             left: true
             right: true
         }
 
-        height: 50
+        implicitHeight: 50
 
         color: Style.palette.background1
 
-        Image {
-            source: "../assets/arch_linux_icon.svg"
-
-            sourceSize.width: 30
-            sourceSize.height: 30
-            width: sourceSize.width
-            height: sourceSize.height
+        RowLayout {
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.leftMargin: 10
+            spacing: 20
+
+            Image {
+                source: "../assets/arch_linux_icon.svg"
+
+                sourceSize.width: 30
+                sourceSize.height: 30
+                Layout.alignment: Qt.AlignVCenter
+            }
+
+            Workspaces {
+                Layout.preferredWidth: childrenRect.width + 40
+                Layout.preferredHeight: childrenRect.height + 5
+                Layout.alignment: Qt.AlignVCenter
+                radius: Math.min(width, height) / 2
+
+                color: Style.palette.background2
+            }
         }
 
         Clock {
@@ -64,7 +76,7 @@ ShellRoot {
 
             color: Style.palette.color2
             font.family: Style.font.family
-            font.pointSize: Style.font.size
+            font.pointSize: Style.font.size1
         }
     }
 }

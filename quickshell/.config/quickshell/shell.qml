@@ -1,6 +1,7 @@
 import Quickshell
-import "bar"
+import "bars"
 
 Scope {
-    Bar {}
+    TopBar {}
+    BottomBar {}
 }
