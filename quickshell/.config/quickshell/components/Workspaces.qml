@@ -1,3 +1,4 @@
+import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Widgets
 import QtQuick
@@ -12,6 +13,7 @@ Rectangle {
     id: root
     readonly property real workspaceItemWidth: 30
     readonly property real workspaceSpacing: 5
+    readonly property int activeWorkspaceIndex: Hyprland.focusedWorkspace?.id - 1
 
     Rectangle {
         id: activeIndicator
@@ -22,7 +24,7 @@ Rectangle {
         z: 1
 
         anchors.verticalCenter: workspaceLayout.verticalCenter
-        x: workspaceLayout.x + HyprlandData.activeWorkspaceIndex * (root.workspaceItemWidth + root.workspaceSpacing)
+        x: workspaceLayout.x + activeWorkspaceIndex * (root.workspaceItemWidth + root.workspaceSpacing)
 
         Behavior on x {
             NumberAnimation {
@@ -43,7 +45,7 @@ Rectangle {
 
             Button {
                 id: workspace
-                readonly property bool isActive: Hyprland.focusedWorkspace?.id === index + 1
+                readonly property bool isActive: activeWorkspaceIndex === index
                 readonly property string iconColor: isActive ? Style.palette.background1 : Style.palette.color1
                 onPressed: Hyprland.dispatch(`workspace ${index + 1}`)
 
@@ -62,15 +64,25 @@ Rectangle {
                     color: "transparent"
 
                     IconImage {
+                        id: iconImage
+                        property string desktopIcon
                         readonly property string icon: modelData ? "../assets/occupied_workspace_icon.svg" : "../assets/unoccupied_workspace_icon.svg"
-                        source: Qt.resolvedUrl(icon)
+                        source: desktopIcon || Qt.resolvedUrl(icon)
                         anchors.centerIn: parent
                         implicitSize: 20
 
-                        layer.enabled: true
+                        layer.enabled: !desktopIcon
                         layer.effect: MultiEffect {
                             colorization: 1
                             colorizationColor: workspace.iconColor
+                        }
+
+                        Connections {
+                            target: HyprlandData
+
+                            function onWindowIconsUpdated() {
+                                iconImage.desktopIcon = HyprlandData.windowIcons[index + 1] || "";
+                            }
                         }
                     }
                 }
