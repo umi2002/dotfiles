@@ -23,9 +23,9 @@ PanelWindow {
         spacing: 20
 
         Battery {
-            property UPowerDevice displayDevice: UPower.displayDevice
-            property int chargeState: displayDevice.state
-            property bool isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
+            readonly property UPowerDevice displayDevice: UPower.displayDevice
+            readonly property int chargeState: displayDevice.state
+            readonly property bool isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
 
             Layout.alignment: Qt.AlignVCenter
             color: isCharging ? Style.palette.color2 : Style.palette.color1
@@ -33,7 +33,6 @@ PanelWindow {
             value: displayDevice.percentage
             implicitSize: 40
             lineWidth: 4
-            isIconActive: isCharging
         }
     }
 }

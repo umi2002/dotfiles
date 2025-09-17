@@ -1,6 +1,8 @@
 import Quickshell.Hyprland
+import Quickshell.Widgets
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Effects
 import QtQuick.Layouts
 
 import qs.services
@@ -59,39 +61,16 @@ Rectangle {
                 background: Rectangle {
                     color: "transparent"
 
-                    UnoccupiedWorkspaceIcon {
-                        opacity: !modelData ? 1 : 0
+                    IconImage {
+                        readonly property string icon: modelData ? "../assets/occupied_workspace_icon.svg" : "../assets/unoccupied_workspace_icon.svg"
+                        source: Qt.resolvedUrl(icon)
                         anchors.centerIn: parent
-                        color: workspace.iconColor
+                        implicitSize: 30
 
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: 200
-                            }
-                        }
-
-                        Behavior on opacity {
-                            NumberAnimation {
-                                duration: 200
-                            }
-                        }
-                    }
-
-                    OccupiedWorkspaceIcon {
-                        opacity: modelData ? 1 : 0
-                        anchors.centerIn: parent
-                        color: workspace.iconColor
-
-                        Behavior on color {
-                            ColorAnimation {
-                                duration: 200
-                            }
-                        }
-
-                        Behavior on opacity {
-                            NumberAnimation {
-                                duration: 200
-                            }
+                        layer.enabled: true
+                        layer.effect: MultiEffect {
+                            colorization: 1
+                            colorizationColor: workspace.iconColor
                         }
                     }
                 }

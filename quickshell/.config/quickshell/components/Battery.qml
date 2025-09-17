@@ -1,4 +1,6 @@
+import Quickshell.Widgets
 import QtQuick
+import QtQuick.Effects
 import QtQuick.Shapes
 
 import "../Style.js" as Style
@@ -13,7 +15,6 @@ Item {
     required property int implicitSize
     required property int lineWidth
     required property string color
-    required property bool isIconActive
 
     property real degree: value * 360
     property real centerX: width / 2
@@ -66,16 +67,17 @@ Item {
             }
         }
 
-        ChargingIcon {
-            visible: isCharging
+        IconImage {
+            readonly property string icon: isCharging ? "../assets/charging_icon.svg" : "../assets/discharging_icon.svg"
+            source: Qt.resolvedUrl(icon)
             anchors.centerIn: parent
-            color: root.color
-        }
+            implicitSize: 30
 
-        DischargingIcon {
-            visible: !isCharging
-            anchors.centerIn: parent
-            color: root.color
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                colorization: 1
+                colorizationColor: root.color
+            }
         }
     }
 }

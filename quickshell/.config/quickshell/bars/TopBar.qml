@@ -1,6 +1,6 @@
 import Quickshell
 import Quickshell.Io
-import QtQuick
+import Quickshell.Widgets
 import QtQuick.Layouts
 
 import qs.components
@@ -51,11 +51,10 @@ ShellRoot {
             anchors.leftMargin: 10
             spacing: 20
 
-            Image {
-                source: "../assets/arch_linux_icon.svg"
+            IconImage {
+                source: Qt.resolvedUrl("../assets/arch_linux_icon.svg")
 
-                sourceSize.width: 30
-                sourceSize.height: 30
+                implicitSize: 30
                 Layout.alignment: Qt.AlignVCenter
             }
 
