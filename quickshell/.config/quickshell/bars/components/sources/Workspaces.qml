@@ -13,28 +13,27 @@ Singleton {
         return false;
     })
     readonly property int activeWorkspaceIndex: Hyprland.focusedWorkspace?.id - 1
-    property list<string> workspaceIcons: Array.from({
-        length: 10
-    }, () => {
-        return "";
-    })
+    function updateWorkspaces() {
+        let workspaces = Hyprland.workspaces?.values;
 
-    function updateOccupiedWorkspaces() {
+        if (!workspaces) {
+            return;
+        }
+
         for (let i = 0; i < occupiedWorkspaces.length; i++) {
-            console.log('ok');
-            occupiedWorkspaces[i] = Hyprland.workspaces.values.some(workspace => {
+            occupiedWorkspaces[i] = workspaces.some(workspace => {
                 return workspace.id === i + 1;
             });
         }
     }
 
-    Component.onCompleted: updateOccupiedWorkspaces()
+    Component.onCompleted: updateWorkspaces()
 
     Connections {
         target: Hyprland
 
         function onFocusedWorkspaceChanged() {
-            root.updateOccupiedWorkspaces();
+            root.updateWorkspaces();
         }
     }
 
@@ -42,7 +41,7 @@ Singleton {
         target: Hyprland.workspaces
 
         function onValuesChanged() {
-            root.updateOccupiedWorkspaces();
+            root.updateWorkspaces();
         }
     }
 }
