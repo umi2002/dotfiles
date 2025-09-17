@@ -65,7 +65,7 @@ Rectangle {
                         readonly property string icon: modelData ? "../assets/occupied_workspace_icon.svg" : "../assets/unoccupied_workspace_icon.svg"
                         source: Qt.resolvedUrl(icon)
                         anchors.centerIn: parent
-                        implicitSize: 30
+                        implicitSize: 20
 
                         layer.enabled: true
                         layer.effect: MultiEffect {

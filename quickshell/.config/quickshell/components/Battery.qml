@@ -71,7 +71,7 @@ Item {
             readonly property string icon: isCharging ? "../assets/charging_icon.svg" : "../assets/discharging_icon.svg"
             source: Qt.resolvedUrl(icon)
             anchors.centerIn: parent
-            implicitSize: 30
+            implicitSize: 20
 
             layer.enabled: true
             layer.effect: MultiEffect {
