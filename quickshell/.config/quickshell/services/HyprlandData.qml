@@ -20,11 +20,9 @@ Singleton {
             return;
         }
 
-        for (let i = 0; i < occupiedWorkspaces.length; i++) {
-            occupiedWorkspaces[i] = workspaces.some(workspace => {
-                return workspace.id === i + 1;
-            });
-        }
+        workspaces.forEach(workspace => {
+            occupiedWorkspaces[workspace.id - 1] = workspace.toplevels?.values.length !== 0;
+        });
     }
 
     Component.onCompleted: updateWorkspaces()
