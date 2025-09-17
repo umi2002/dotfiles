@@ -2,10 +2,9 @@ import Quickshell.Hyprland
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import QtQuick.Shapes
 
-import "sources"
-import "../../Style.js" as Style
+import qs.services
+import "../Style.js" as Style
 
 Rectangle {
     id: root
@@ -21,7 +20,7 @@ Rectangle {
         z: 1
 
         anchors.verticalCenter: workspaceLayout.verticalCenter
-        x: workspaceLayout.x + Workspaces.activeWorkspaceIndex * (root.workspaceItemWidth + root.workspaceSpacing)
+        x: workspaceLayout.x + HyprlandData.activeWorkspaceIndex * (root.workspaceItemWidth + root.workspaceSpacing)
 
         Behavior on x {
             NumberAnimation {
@@ -38,7 +37,7 @@ Rectangle {
         z: 2
 
         Repeater {
-            model: Workspaces.occupiedWorkspaces
+            model: HyprlandData.occupiedWorkspaces
 
             Button {
                 id: workspace

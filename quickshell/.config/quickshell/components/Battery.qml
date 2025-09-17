@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
 
-import "../../Style.js" as Style
+import "../Style.js" as Style
 
 /**
  * Material 3 circular progress. See https://m3.material.io/components/progress-indicators/specs
@@ -24,7 +24,7 @@ Item {
 
     implicitWidth: implicitSize
     implicitHeight: implicitSize
-    opacity: value
+    opacity: (value / 2) + 0.5
 
     Shape {
         anchors.fill: parent
@@ -70,14 +70,12 @@ Item {
             visible: isCharging
             anchors.centerIn: parent
             color: root.color
-            opacity: (root.value / 2) + 0.5
         }
 
         DischargingIcon {
             visible: !isCharging
             anchors.centerIn: parent
             color: root.color
-            opacity: (root.value / 2) + 0.5
         }
     }
 }

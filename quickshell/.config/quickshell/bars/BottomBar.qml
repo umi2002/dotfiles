@@ -2,7 +2,7 @@ import Quickshell
 import Quickshell.Services.UPower
 import QtQuick.Layouts
 
-import "components"
+import qs.components
 import "../Style.js" as Style
 
 PanelWindow {

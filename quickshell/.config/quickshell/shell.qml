@@ -1,5 +1,6 @@
 import Quickshell
-import "bars"
+
+import qs.bars
 
 Scope {
     TopBar {}
