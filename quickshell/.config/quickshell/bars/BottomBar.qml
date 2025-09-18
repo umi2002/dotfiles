@@ -21,12 +21,13 @@ PanelWindow {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: 10
-        implicitWidth: childrenRect.width + 20
-        implicitHeight: childrenRect.height + 5
+        implicitWidth: rowLayout.width + 20
+        implicitHeight: rowLayout.height + 5
         radius: height / 2
         color: Style.palette.background2
 
         RowLayout {
+            id: rowLayout
             anchors.centerIn: parent
             spacing: 20
 
