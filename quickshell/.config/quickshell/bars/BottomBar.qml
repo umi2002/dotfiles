@@ -34,5 +34,11 @@ PanelWindow {
             implicitSize: 40
             lineWidth: 4
         }
+
+        Network {
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            Layout.preferredWidth: childrenRect.width
+            Layout.preferredHeight: childrenRect.height
+        }
     }
 }
