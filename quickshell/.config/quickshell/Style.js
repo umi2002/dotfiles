@@ -1,8 +1,8 @@
 .pragma library
 
 var font = {
-    family: "Iosevka Nerd Font Mono",
-    size1: 14,
+    family: "Lucida Sans Unicode",
+    size1: 16,
     size2: 12,
 }
 
