@@ -13,6 +13,7 @@ Singleton {
     property string networkIcon: ""
 
     signal fetchedNetwork
+    signal statusSet
 
     function setIcon() {
         if (status === "unavailable") {
@@ -48,6 +49,7 @@ Singleton {
 
                 root.status = match[1] || "unavailable";
                 root.setIcon();
+                root.statusSet();
             }
         }
     }

@@ -28,7 +28,7 @@ PanelWindow {
             isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
 
             Layout.alignment: Qt.AlignVCenter
-            color: isCharging ? Style.palette.color2 : Style.palette.color1
+            color: isCharging ? Style.palette.color2 : Style.palette.color3
 
             value: displayDevice.percentage
             implicitSize: 40

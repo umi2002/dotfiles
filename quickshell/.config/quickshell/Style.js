@@ -9,6 +9,7 @@ var font = {
 var palette = {
     color1: "#C1E0F7",
     color2: "#DEBA37",
+    color3: "#C25F13",
     background1: "#071445",
     background2: "#010B29",
     border1: "#284BC9",
