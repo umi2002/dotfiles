@@ -1,5 +1,7 @@
 import Quickshell
+import Quickshell.Hyprland
 import Quickshell.Widgets
+import QtQuick
 import QtQuick.Layouts
 
 import qs.components
@@ -40,6 +42,14 @@ PanelWindow {
         }
     }
 
+    Text {
+        text: Hyprland.activeToplevel?.title
+        anchors.centerIn: parent
+        color: Style.palette.color1
+        font.family: Style.font.family
+        font.pointSize: Style.font.size1
+    }
+
     Clock {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
@@ -47,6 +57,6 @@ PanelWindow {
 
         color: Style.palette.color2
         font.family: Style.font.family
-        font.pointSize: Style.font.size1
+        font.pointSize: Style.font.size2
     }
 }

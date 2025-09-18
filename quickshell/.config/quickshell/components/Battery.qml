@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Effects
@@ -15,6 +17,7 @@ Item {
     required property int implicitSize
     required property int lineWidth
     required property string color
+    required property bool isCharging
 
     property real degree: value * 360
     property real centerX: width / 2
@@ -68,7 +71,7 @@ Item {
         }
 
         IconImage {
-            readonly property string icon: isCharging ? "../assets/charging_icon.svg" : "../assets/discharging_icon.svg"
+            readonly property string icon: root.isCharging ? "../assets/charging_icon.svg" : "../assets/discharging_icon.svg"
             source: Qt.resolvedUrl(icon)
             anchors.centerIn: parent
             implicitSize: 20

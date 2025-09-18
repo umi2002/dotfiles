@@ -1,4 +1,5 @@
-import Quickshell
+pragma ComponentBehavior: Bound
+
 import Quickshell.Hyprland
 import Quickshell.Widgets
 import QtQuick
@@ -24,7 +25,7 @@ Rectangle {
         z: 1
 
         anchors.verticalCenter: workspaceLayout.verticalCenter
-        x: workspaceLayout.x + activeWorkspaceIndex * (root.workspaceItemWidth + root.workspaceSpacing)
+        x: workspaceLayout.x + root.activeWorkspaceIndex * (root.workspaceItemWidth + root.workspaceSpacing)
 
         Behavior on x {
             NumberAnimation {
@@ -41,13 +42,16 @@ Rectangle {
         z: 2
 
         Repeater {
+            id: repeater
             model: HyprlandData.occupiedWorkspaces
 
-            Button {
+            delegate: Button {
                 id: workspace
-                readonly property bool isActive: activeWorkspaceIndex === index
+                required property int index
+                required property var modelData
+                readonly property bool isActive: root.activeWorkspaceIndex === workspace.index
                 readonly property string iconColor: isActive ? Style.palette.background1 : Style.palette.color1
-                onPressed: Hyprland.dispatch(`workspace ${index + 1}`)
+                onPressed: Hyprland.dispatch(`workspace ${workspace.index + 1}`)
 
                 Layout.preferredWidth: root.workspaceItemWidth
                 Layout.preferredHeight: root.workspaceItemWidth
@@ -66,7 +70,7 @@ Rectangle {
                     IconImage {
                         id: iconImage
                         property string desktopIcon
-                        readonly property string icon: modelData ? "../assets/occupied_workspace_icon.svg" : "../assets/unoccupied_workspace_icon.svg"
+                        readonly property string icon: workspace.modelData ? "../assets/occupied_workspace_icon.svg" : "../assets/unoccupied_workspace_icon.svg"
                         source: desktopIcon || Qt.resolvedUrl(icon)
                         anchors.centerIn: parent
                         implicitSize: 20
@@ -81,7 +85,7 @@ Rectangle {
                             target: HyprlandData
 
                             function onWindowIconsUpdated() {
-                                iconImage.desktopIcon = HyprlandData.windowIcons[index + 1] || "";
+                                iconImage.desktopIcon = HyprlandData.windowIcons[workspace.index + 1] || "";
                             }
                         }
                     }

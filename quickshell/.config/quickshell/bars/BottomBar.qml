@@ -25,7 +25,7 @@ PanelWindow {
         Battery {
             readonly property UPowerDevice displayDevice: UPower.displayDevice
             readonly property int chargeState: displayDevice.state
-            readonly property bool isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
+            isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
 
             Layout.alignment: Qt.AlignVCenter
             color: isCharging ? Style.palette.color2 : Style.palette.color1
