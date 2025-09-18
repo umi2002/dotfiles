@@ -1,5 +1,6 @@
 import Quickshell
 import Quickshell.Services.UPower
+import QtQuick
 import QtQuick.Layouts
 
 import qs.components
@@ -16,29 +17,37 @@ PanelWindow {
 
     color: Style.palette.background1
 
-    RowLayout {
+    Rectangle {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: 10
-        spacing: 20
+        implicitWidth: childrenRect.width + 20
+        implicitHeight: childrenRect.height + 5
+        radius: height / 2
+        color: Style.palette.background2
 
-        Battery {
-            readonly property UPowerDevice displayDevice: UPower.displayDevice
-            readonly property int chargeState: displayDevice.state
-            isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
+        RowLayout {
+            anchors.centerIn: parent
+            spacing: 20
 
-            Layout.alignment: Qt.AlignVCenter
-            color: isCharging ? Style.palette.color2 : Style.palette.color3
+            Battery {
+                readonly property UPowerDevice displayDevice: UPower.displayDevice
+                readonly property int chargeState: displayDevice.state
+                isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
 
-            value: displayDevice.percentage
-            implicitSize: 40
-            lineWidth: 4
-        }
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                color: isCharging ? Style.palette.color2 : Style.palette.color3
 
-        Network {
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.preferredWidth: childrenRect.width
-            Layout.preferredHeight: childrenRect.height
+                value: displayDevice.percentage
+                implicitSize: 35
+                lineWidth: 4
+            }
+
+            Network {
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.preferredWidth: childrenRect.width
+                Layout.preferredHeight: childrenRect.height
+            }
         }
     }
 }
