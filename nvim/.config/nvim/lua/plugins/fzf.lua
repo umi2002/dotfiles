@@ -11,7 +11,7 @@ return {
 				no_ignore = true,
 			},
 			grep = {
-				rg_opts = [[--hidden --exclude .git]],
+				rg_opts = [[--hidden --glob '!.git/**' -n --column]],
 				no_ignore = true,
 			},
 		},
