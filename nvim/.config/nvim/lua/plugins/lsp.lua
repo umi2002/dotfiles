@@ -3,33 +3,6 @@ return {
         "neovim/nvim-lspconfig",
         config = function()
             local lsp = require("lspconfig")
-            vim.lsp.handlers["textDocument/codeLens"] = function(err, result, ctx)
-                if err or not result then
-                    return
-                end
-
-                local bufnr = ctx.bufnr
-                local client_id = ctx.client_id
-
-                -- Clear existing lenses
-                vim.lsp.codelens.clear(bufnr, client_id)
-
-                -- Get the namespace for this client
-                local ns = vim.lsp.codelens._get_namespace(client_id)
-
-                -- Display each lens above the line
-                for _, lens in ipairs(result) do
-                    if lens.command then
-                        local line = lens.range.start.line
-                        local text = lens.command.title
-
-                        vim.api.nvim_buf_set_extmark(bufnr, ns, line, 0, {
-                            virt_text = { { text, "LspCodeLens" } },
-                            virt_text_pos = "above",
-                        })
-                    end
-                end
-            end
             local lsp_attach = function(client, bufnr)
                 vim.keymap.set("n", "<leader>df", require("fzf-lua").lsp_definitions)
                 vim.keymap.set("n", "<leader>rf", require("fzf-lua").lsp_references)
@@ -38,7 +11,8 @@ return {
                 vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev)
                 vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next)
 
-                if client.server_capabilities.codeLensProvider then
+                if client and client:supports_method("textDocument/codeLens") then
+                    vim.lsp.codelens.refresh()
                     vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
                         buffer = bufnr,
                         callback = vim.lsp.codelens.refresh,
