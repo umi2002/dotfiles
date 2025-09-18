@@ -43,7 +43,7 @@ PanelWindow {
     }
 
     Text {
-        text: Hyprland.activeToplevel?.title
+        text: Hyprland.activeToplevel?.title || ""
         anchors.centerIn: parent
         color: Style.palette.color1
         font.family: Style.font.family
