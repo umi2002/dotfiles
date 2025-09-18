@@ -1,7 +1,5 @@
 import Quickshell
-import Quickshell.Hyprland
 import Quickshell.Widgets
-import QtQuick
 import QtQuick.Layouts
 
 import qs.components
@@ -42,8 +40,7 @@ PanelWindow {
         }
     }
 
-    Text {
-        text: Hyprland.activeToplevel?.title || ""
+    Title {
         anchors.centerIn: parent
         color: Style.palette.color1
         font.family: Style.font.family
