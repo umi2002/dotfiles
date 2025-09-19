@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 import Quickshell.Hyprland
 import Quickshell.Widgets
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Effects
 import QtQuick.Layouts
 
