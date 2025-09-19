@@ -95,6 +95,7 @@ Singleton {
 
         function onRawEvent() {
             getWorkspaces.running = true;
+            getKeyboardLanguage.running = true;
         }
     }
 
