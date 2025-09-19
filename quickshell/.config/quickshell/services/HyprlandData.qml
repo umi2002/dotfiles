@@ -17,6 +17,7 @@ Singleton {
     property var workspaces: []
     property var mainWindows: ({})
     property var windowIcons: ({})
+    property string language: ""
 
     signal mainWindowsUpdated
     signal windowIconsUpdated
@@ -71,8 +72,22 @@ Singleton {
         }
     }
 
+    Process {
+        id: getKeyboardLanguage
+        command: ["hyprctl", "devices", "-j"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let devices = JSON.parse(text);
+                let keyboards = devices.keyboards;
+                let language = keyboards[keyboards.length - 1].active_keymap;
+                root.language = language.substring(0, 2);
+            }
+        }
+    }
+
     Component.onCompleted: {
         getWorkspaces.running = true;
+        getKeyboardLanguage.running = true;
     }
 
     Connections {

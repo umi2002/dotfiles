@@ -7,6 +7,9 @@ import qs.components
 import "../Style.js" as Style
 
 PanelWindow {
+    id: root
+    property int margins: 10
+
     anchors {
         bottom: true
         left: true
@@ -20,7 +23,7 @@ PanelWindow {
     Rectangle {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: 10
+        anchors.leftMargin: root.margins
         implicitWidth: rowLayout.width + 20
         implicitHeight: rowLayout.height + 5
         radius: height / 2
@@ -50,5 +53,13 @@ PanelWindow {
                 Layout.preferredHeight: childrenRect.height
             }
         }
+    }
+
+    Language {
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.rightMargin: root.margins
+        horizontalAlignment: Text.AlignHCenter
+        verticalAlignment: Text.AlignVCenter
     }
 }
