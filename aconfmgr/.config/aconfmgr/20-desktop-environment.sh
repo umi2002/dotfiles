@@ -7,7 +7,7 @@ AddPackage flameshot # Powerful yet simple to use screenshot software
 AddPackage hyprland # a highly customizable dynamic tiling Wayland compositor
 AddPackage hyprpaper # a blazing fast wayland wallpaper utility with IPC controls
 AddPackage rofi # A window switcher, application launcher and dmenu replacement
-AddPackage spotify-launcher # Client for spotify's apt repository in Rust for Arch Linux
+AddPackage --foreign spotify # A proprietary music streaming service
 AddPackage discord # All-in-one voice and text chat for gamers
 AddPackage --foreign eww # Standalone widget system made in Rust
 AddPackage --foreign brave-bin # Web browser that blocks ads and trackers by default (binary release)
