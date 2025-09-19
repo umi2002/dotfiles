@@ -35,8 +35,8 @@ Singleton {
     }
 
     function getIcon(windowClass) {
-        const entry = DesktopEntries.heuristicLookup(windowClass);
-        return entry ? Quickshell.iconPath(entry.icon) : "";
+        const entry = DesktopEntries.byId(windowClass);
+        return entry?.icon ? Quickshell.iconPath(entry.icon) : "";
     }
 
     Process {
@@ -64,7 +64,7 @@ Singleton {
                     let id = workspace.id;
                     root.mainWindows[id] = windows.find(window => {
                         return window.workspace.id === id;
-                    }).class;
+                    })?.class;
                 });
 
                 root.mainWindowsUpdated();
