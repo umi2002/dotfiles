@@ -45,17 +45,17 @@ Rectangle {
             id: repeater
             model: HyprlandData.occupiedWorkspaces
 
-            delegate: Button {
+            delegate: Rectangle {
                 id: workspace
                 required property int index
                 required property var modelData
                 readonly property bool isActive: root.activeWorkspaceIndex === workspace.index
                 readonly property string iconColor: isActive ? Style.palette.background1 : Style.palette.color1
-                onPressed: Hyprland.dispatch(`workspace ${workspace.index + 1}`)
 
                 Layout.preferredWidth: root.workspaceItemWidth
                 Layout.preferredHeight: root.workspaceItemWidth
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                color: "transparent"
                 opacity: isActive ? 1 : 0.5
 
                 Behavior on opacity {
@@ -64,30 +64,34 @@ Rectangle {
                     }
                 }
 
-                background: Rectangle {
-                    color: "transparent"
+                IconImage {
+                    id: iconImage
+                    property string desktopIcon
+                    readonly property string icon: workspace.modelData ? "../assets/occupied_workspace_icon.svg" : "../assets/unoccupied_workspace_icon.svg"
+                    source: desktopIcon || Qt.resolvedUrl(icon)
+                    anchors.centerIn: parent
+                    implicitSize: 20
 
-                    IconImage {
-                        id: iconImage
-                        property string desktopIcon
-                        readonly property string icon: workspace.modelData ? "../assets/occupied_workspace_icon.svg" : "../assets/unoccupied_workspace_icon.svg"
-                        source: desktopIcon || Qt.resolvedUrl(icon)
-                        anchors.centerIn: parent
-                        implicitSize: 20
+                    layer.enabled: !desktopIcon
+                    layer.effect: MultiEffect {
+                        colorization: 1
+                        colorizationColor: workspace.iconColor
+                    }
 
-                        layer.enabled: !desktopIcon
-                        layer.effect: MultiEffect {
-                            colorization: 1
-                            colorizationColor: workspace.iconColor
+                    Connections {
+                        target: HyprlandData
+
+                        function onWindowIconsUpdated() {
+                            iconImage.desktopIcon = HyprlandData.windowIcons[workspace.index + 1] || "";
                         }
+                    }
+                }
 
-                        Connections {
-                            target: HyprlandData
-
-                            function onWindowIconsUpdated() {
-                                iconImage.desktopIcon = HyprlandData.windowIcons[workspace.index + 1] || "";
-                            }
-                        }
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        Hyprland.dispatch(`workspace ${workspace.index + 1}`);
                     }
                 }
             }
