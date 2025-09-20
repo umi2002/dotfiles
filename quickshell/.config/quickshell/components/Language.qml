@@ -5,7 +5,7 @@ import qs.services
 import "../Style.js" as Style
 
 Text {
-    text: HyprlandData.language
+    text: HyprlandData.keyboardLanguage
     width: implicitWidth
     height: implicitHeight
     color: Style.palette.color1

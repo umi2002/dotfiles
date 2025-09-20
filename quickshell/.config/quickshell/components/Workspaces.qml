@@ -80,8 +80,8 @@ Rectangle {
                     Connections {
                         target: HyprlandData
 
-                        function onWindowIconsUpdated() {
-                            iconImage.desktopIcon = HyprlandData.windowIcons[workspace.index + 1] || "";
+                        function onWorkspaceIconsUpdated() {
+                            iconImage.desktopIcon = HyprlandData.workspaceIcons[workspace.index + 1] || "";
                         }
                     }
                 }
