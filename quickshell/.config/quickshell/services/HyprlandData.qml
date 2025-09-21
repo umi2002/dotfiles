@@ -8,8 +8,11 @@ import QtQuick
 Singleton {
     id: root
 
+    readonly property int nWorkspaces: 10
+    readonly property var emptyWindow: "0x0"
+
     property list<bool> occupiedWorkspaces: Array.from({
-        length: 10
+        length: nWorkspaces
     }, () => {
         return false;
     })
@@ -18,13 +21,41 @@ Singleton {
     property var workspaceIcons: ({})
     property string keyboardLanguage: ""
 
+    property var workspaceRefreshQueue: []
+    property bool isRefreshingWorkspace: false
+
     signal workspacesUpdated
     signal windowsUpdated
     signal workspaceIconsUpdated
 
-    function updateWorkspace(workspaceId, lastwindow) {
-        root.workspaceLastWindows[workspaceId] = lastwindow;
-        workspacesUpdated();
+    function queueWorkspaceRefresh(workspaceIds) {
+        workspaceIds.forEach(id => {
+            if (!workspaceRefreshQueue.includes(id)) {
+                workspaceRefreshQueue.push(id);
+            }
+        });
+
+        processWorkspaceRefreshQueue();
+    }
+
+    function processWorkspaceRefreshQueue() {
+        if (isRefreshingWorkspace || workspaceRefreshQueue.length === 0) {
+            return;
+        }
+
+        isRefreshingWorkspace = true;
+        const nextWorkspaceId = workspaceRefreshQueue.shift();
+
+        refreshWorkspaceProcess.targetWorkspaceId = nextWorkspaceId;
+        refreshWorkspaceProcess.running = true;
+    }
+
+    function updateWorkspace(workspaceId, workspace) {
+        if (!workspace || workspace.lastwindow === emptyWindow) {
+            delete root.workspaceLastWindows[workspaceId];
+        } else {
+            root.workspaceLastWindows[workspaceId] = workspace.lastwindow;
+        }
     }
 
     function updateOccupiedWorkspaces() {
@@ -39,35 +70,56 @@ Singleton {
         });
     }
 
-    function addWindow(windowAddress, workspaceId, windowClass) {
-        root.windows[windowAddress] = {
-            workspaceId: workspaceId,
-            class: windowClass
-        };
-    }
-
-    function deleteWindow(windowAddress) {
-        const workspaceId = root.windows[windowAddress]?.workspaceId;
-        if (!workspaceId) {
+    function registerWindow(windowAddress, workspaceId, windowClass) {
+        if (!windowAddress || !workspaceId || !windowClass) {
             return;
         }
 
-        delete root.workspaceIcons[workspaceId];
-        delete root.windows[windowAddress];
+        windows[windowAddress] = {
+            workspaceId: workspaceId,
+            class: windowClass
+        };
+
+        root.updateWorkspaceIcon(workspaceId, windowClass);
+    }
+
+    function unregisterWindow(windowAddress) {
+        const window = windows[windowAddress];
+        if (!window) {
+            return;
+        }
+
+        const workspaceId = window.workspaceId;
+        delete workspaceIcons[workspaceId];
+        delete windows[windowAddress];
 
         refreshWorkspaceProcess.targetWorkspaceId = workspaceId;
         refreshWorkspaceProcess.running = true;
     }
 
-    function updateWorkspaceIcons(workspaceId, windowClass) {
-        workspaceIcons[workspaceId] = getIcon(windowClass);
+    function updateWorkspaceIcon(workspaceId, windowClass) {
+        if (!workspaceId || !windowClass)
+            return;
 
+        const iconPath = resolveIcon(windowClass);
+        if (!iconPath) {
+            return;
+        }
+
+        workspaceIcons[workspaceId] = iconPath;
         workspaceIconsUpdated();
     }
 
-    function getIcon(windowClass) {
+    function resolveIcon(windowClass) {
+        if (!windowClass)
+            return "";
+
         const entry = DesktopEntries.byId(windowClass);
-        return entry?.icon ? Quickshell.iconPath(entry.icon) : "";
+        if (!entry?.icon) {
+            return "";
+        }
+
+        return Quickshell.iconPath(entry.icon);
     }
 
     function handleWorkspacesData(workspaces) {
@@ -81,7 +133,7 @@ Singleton {
     function handleClientsData(clients) {
         root.windows = {};
         clients.forEach(client => {
-            root.addWindow(client.address, client.workspace.id, client.class);
+            root.registerWindow(client.address, client.workspace.id, client.class);
         });
         root.windowsUpdated();
     }
@@ -94,118 +146,160 @@ Singleton {
         }
     }
 
-    Process {
-        id: workspacesProcess
-        command: ["hyprctl", "workspaces", "-j"]
+    function refreshAllWorkspaceIcons() {
+        Object.keys(workspaceLastWindows).forEach(workspaceId => {
+            const lastWindow = workspaceLastWindows[workspaceId];
+            const window = windows[lastWindow];
+            if (!window) {
+                return;
+            }
+            updateWorkspaceIcon(workspaceId, window.class);
+        });
+    }
+
+    component HyprctlProcess: Process {
+        id: process
+        property var onData: null
+        property string errorContext: ""
+
         stdout: StdioCollector {
             onStreamFinished: {
                 const data = JSON.parse(text);
-                root.handleWorkspacesData(data);
+                if (process.onData) {
+                    process.onData(data);
+                }
             }
         }
     }
 
-    Process {
+    HyprctlProcess {
+        id: workspacesProcess
+        command: ["hyprctl", "workspaces", "-j"]
+        onData: root.handleWorkspacesData
+    }
+
+    HyprctlProcess {
         id: refreshWorkspaceProcess
         property int targetWorkspaceId: -1
         command: ["hyprctl", "workspaces", "-j"]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const workspaces = JSON.parse(text);
-                const workspaceId = refreshWorkspaceProcess.targetWorkspaceId;
-                const workspace = workspaces.find(ws => ws.id === workspaceId);
+        onData: function (workspaces) {
+            const workspaceId = refreshWorkspaceProcess.targetWorkspaceId;
+            const workspace = workspaces.find(ws => ws.id === workspaceId);
 
-                if (!workspace || workspace.lastwindow === "0x0") {
-                    delete root.workspaceLastWindows[workspaceId];
-                } else {
-                    root.updateWorkspace(workspaceId, workspace.lastwindow);
-                }
+            root.updateWorkspace(workspaceId, workspace);
+            root.workspacesUpdated();
 
-                root.workspacesUpdated();
-            }
+            root.isRefreshingWorkspace = false;
+            root.processWorkspaceRefreshQueue();
         }
     }
 
-    Process {
+    HyprctlProcess {
         id: clientsProcess
         command: ["hyprctl", "clients", "-j"]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const data = JSON.parse(text);
-                root.handleClientsData(data);
-            }
-        }
+        errorContext: "clients"
+        onData: root.handleClientsData
     }
 
-    Process {
+    HyprctlProcess {
         id: devicesProcess
         command: ["hyprctl", "devices", "-j"]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                const data = JSON.parse(text);
-                root.handleDevicesData(data);
+        errorContext: "devices"
+        onData: root.handleDevicesData
+    }
+
+    readonly property var eventHandlers: ({
+            "openwindow": args => {
+                const windowAddress = "0x" + args[0];
+                const workspaceId = parseInt(args[1]);
+                const windowClass = args[2];
+
+                registerWindow(windowAddress, workspaceId, windowClass);
+            },
+            "closewindow": args => {
+                const windowAddress = "0x" + args[0];
+                unregisterWindow(windowAddress);
+            },
+            "movewindow": args => {
+                const windowAddress = "0x" + args[0];
+                const newWorkspaceId = parseInt(args[1]);
+
+                const window = windows[windowAddress];
+                if (window) {
+                    const oldWorkspaceId = window.workspaceId;
+                    window.workspaceId = newWorkspaceId;
+
+                    delete workspaceIcons[oldWorkspaceId];
+                    updateWorkspaceIcon(newWorkspaceId, window.class);
+
+                    queueWorkspaceRefresh([oldWorkspaceId, newWorkspaceId]);
+                }
+            },
+            "activewindowv2": args => {
+                const windowAddress = "0x" + args[0];
+                const window = windows[windowAddress];
+
+                if (!window) {
+                    return;
+                }
+
+                const workspaceId = window.workspaceId;
+
+                workspaceLastWindows[workspaceId] = windowAddress;
+
+                updateWorkspaceIcon(workspaceId, window.class);
+            },
+            "activelayout": () => {
+                refresh("devices");
             }
-        }
-    }
-
-    function refreshWorkspaces() {
-        workspacesProcess.running = true;
-    }
-
-    function refreshClients() {
-        clientsProcess.running = true;
-    }
-
-    function refreshDevices() {
-        devicesProcess.running = true;
-    }
-
-    Component.onCompleted: {
-        refreshWorkspaces();
-        refreshDevices();
-    }
+        })
 
     Connections {
         target: Hyprland
 
         function onRawEvent(event) {
-            switch (event.name) {
-            case "openwindow":
-                {
-                    let arguments = event.parse(4);
-                    let windowAddress = "0x" + arguments[0];
-                    let workspaceId = arguments[1];
-                    let windowClass = arguments[2];
-                    root.addWindow(windowAddress, workspaceId, windowClass);
-                    root.updateWorkspaceIcons(workspaceId, root.windows[windowAddress].class);
-                    break;
-                }
-            case "closewindow":
-                {
-                    let windowAddress = "0x" + event.parse(1)[0];
-                    root.deleteWindow(windowAddress);
-                    break;
-                }
-            case "activelayout":
-                {
-                    root.refreshDevices();
-                    break;
-                }
-            }
+            const handler = root.eventHandlers[event.name];
+            if (!handler)
+                return;
+
+            const argCount = {
+                "openwindow": 4,
+                "closewindow": 1,
+                "movewindow": 2,
+                "activewindow": 2,
+                "activewindowv2": 1,
+                "activelayout": 0
+            }[event.name] ?? 0;
+
+            const args = argCount > 0 ? event.parse(argCount) : [];
+            handler(args);
         }
     }
 
+    function refresh(type = "all") {
+        const processes = {
+            "workspaces": workspacesProcess,
+            "clients": clientsProcess,
+            "devices": devicesProcess
+        };
+
+        if (type === "all") {
+            workspacesProcess.running = true;
+            devicesProcess.running = true;
+        } else if (processes[type]) {
+            processes[type].running = true;
+        }
+    }
+
+    Component.onCompleted: {
+        refresh("all");
+    }
+
     onWorkspacesUpdated: {
-        refreshClients();
+        refresh("clients");
     }
 
     onWindowsUpdated: {
-        let workspaceIds = Object.keys(workspaceLastWindows);
-        workspaceIds.forEach(workspaceId => {
-            let lastWindow = workspaceLastWindows[workspaceId];
-            if (windows[lastWindow]) {
-                updateWorkspaceIcons(workspaceId, windows[lastWindow].class);
-            }
-        });
+        root.refreshAllWorkspaceIcons();
     }
 }
