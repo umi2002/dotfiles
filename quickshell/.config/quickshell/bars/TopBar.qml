@@ -7,13 +7,16 @@ import "../Style.js" as Style
 
 Rectangle {
     id: root
+    readonly property int margins: 10
 
+    anchors.leftMargin: margins
+    anchors.rightMargin: margins
     color: "transparent"
 
     RowLayout {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: 10
+        anchors.leftMargin: root.margins
         spacing: 20
 
         IconImage {
@@ -43,7 +46,6 @@ Rectangle {
     Clock {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        anchors.rightMargin: 10
 
         color: Style.palette.color2
         font.family: Style.font.family
