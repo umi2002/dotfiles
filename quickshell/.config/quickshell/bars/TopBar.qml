@@ -1,21 +1,14 @@
-import Quickshell
 import Quickshell.Widgets
+import QtQuick
 import QtQuick.Layouts
 
 import qs.components
 import "../Style.js" as Style
 
-PanelWindow {
-    id: topBar
-    anchors {
-        top: true
-        left: true
-        right: true
-    }
+Rectangle {
+    id: root
 
-    implicitHeight: 50
-
-    color: Style.palette.background1
+    color: "transparent"
 
     RowLayout {
         anchors.left: parent.left

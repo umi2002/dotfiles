@@ -1,4 +1,3 @@
-import Quickshell
 import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
@@ -6,19 +5,11 @@ import QtQuick.Layouts
 import qs.components
 import "../Style.js" as Style
 
-PanelWindow {
+Rectangle {
     id: root
     property int margins: 10
 
-    anchors {
-        bottom: true
-        left: true
-        right: true
-    }
-
-    implicitHeight: 50
-
-    color: Style.palette.background1
+    color: "transparent"
 
     Rectangle {
         anchors.left: parent.left

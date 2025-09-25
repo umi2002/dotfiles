@@ -33,7 +33,6 @@ ShellRoot {
     Scope {
         id: bars
 
-        TopBar {}
-        BottomBar {}
+        Borders {}
     }
 }
