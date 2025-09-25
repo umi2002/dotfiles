@@ -135,4 +135,17 @@ return {
 			vim.fn["mkdp#util#install"]()
 		end,
 	},
+	{
+		"arnaupv/nvim-devcontainer-cli",
+		opts = {
+			-- By default, if no extra config is added, following nvim_dotfiles are
+			-- installed: "https://github.com/LazyVim/starter"
+			-- This is an example for configuring other nvim_dotfiles inside the docker container
+			nvim_dotfiles_repo = "https://github.com/umi2002/dotfiles.git",
+			nvim_dotfiles_install_command = "echo 'ok'",
+			-- In case you want to change the way the devenvironment is setup, you can also provide your own setup
+			setup_environment_repo = "https://github.com/umi2002/dotfiles.git",
+			setup_environment_install_command = "echo 'ok'",
+		},
+	},
 }
