@@ -19,9 +19,9 @@ PanelWindow {
 
     mask: Region {
         x: 0
-        y: 0
+        y: topBar.height
         width: root.width
-        height: root.height
+        height: root.height - topBar.height - bottomBar.height
         intersection: Intersection.Subtract
     }
 
