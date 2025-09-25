@@ -21,7 +21,6 @@ Rectangle {
         height: root.workspaceItemWidth
         radius: width / 2
         color: Style.palette.color1
-        z: 1
 
         anchors.verticalCenter: workspaceLayout.verticalCenter
         x: workspaceLayout.x + root.activeWorkspaceIndex * (root.workspaceItemWidth + root.workspaceSpacing)
@@ -38,7 +37,6 @@ Rectangle {
         id: workspaceLayout
         anchors.centerIn: parent
         spacing: root.workspaceSpacing
-        z: 2
 
         Repeater {
             id: repeater
