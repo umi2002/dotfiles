@@ -30,7 +30,8 @@ PanelWindow {
         layer.enabled: true
         layer.effect: MultiEffect {
             shadowEnabled: true
-            shadowColor: Style.palette.border1
+            shadowColor: Style.palette.border2
+            blurMax: 64
         }
 
         TopBar {
