@@ -140,10 +140,16 @@ Singleton {
 
     function handleDevicesData(devices) {
         let keyboards = devices.keyboards;
-        if (keyboards && keyboards.length > 0) {
-            let language = keyboards[keyboards.length - 1].active_keymap;
-            root.keyboardLanguage = language.substring(0, 2);
+        let mainKeyboard = keyboards.find(keyboard => {
+            return keyboard.main === true;
+        });
+
+        if (!mainKeyboard) {
+            return;
         }
+
+        let language = mainKeyboard.active_keymap;
+        root.keyboardLanguage = language.substring(0, 2);
     }
 
     function refreshAllWorkspaceIcons() {
