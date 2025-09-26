@@ -16,12 +16,14 @@ ShellRoot {
 
             // Sent for every line read from the socket
             onRead: msg => {
+                console.log(msg);
                 const match = regex.exec(msg);
+                console.log(match);
 
                 if (match != null) {
                     // Filter out the right screen from the list and update the panel.
                     // match[1] will always be the monitor name captured by the regex.
-                    bars.screen = Quickshell.screens.filter(screen => screen.name == match[1])[0];
+                    borders.screen = Quickshell.screens.filter(screen => screen.name == match[1])[0];
                 }
             }
         }
@@ -31,8 +33,8 @@ ShellRoot {
     // focused one. We use this since we don't get a focusedmon event on connect.
 
     Scope {
-        id: bars
-
-        Borders {}
+        Borders {
+            id: borders
+        }
     }
 }
