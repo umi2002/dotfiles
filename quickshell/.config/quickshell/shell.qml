@@ -16,9 +16,7 @@ ShellRoot {
 
             // Sent for every line read from the socket
             onRead: msg => {
-                console.log(msg);
                 const match = regex.exec(msg);
-                console.log(match);
 
                 if (match != null) {
                     // Filter out the right screen from the list and update the panel.
