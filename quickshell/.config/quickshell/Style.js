@@ -1,7 +1,7 @@
 .pragma library
 
 var font = {
-    family: "Lucida Sans Unicode",
+    family: "CaskaydiaCove Nerd Font Mono",
     size1: 16,
     size2: 12,
 }
