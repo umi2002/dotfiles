@@ -49,6 +49,10 @@ Rectangle {
         }
     }
 
+    Media {
+        anchors.centerIn: parent
+    }
+
     Rectangle {
         anchors.right: language.left
         anchors.verticalCenter: parent.verticalCenter
