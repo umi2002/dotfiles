@@ -20,9 +20,9 @@ RowLayout {
 
     Text {
         text: Audio.volume + "%"
-        horizontalAlignment: Text.AlignHCenter
+        horizontalAlignment: Text.AlignLeft
         verticalAlignment: Text.AlignVCenter
-        Layout.alignment: Qt.AlignVCenter
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
         Layout.preferredWidth: 40
         color: Style.palette.color1
         font.family: Style.font.family
