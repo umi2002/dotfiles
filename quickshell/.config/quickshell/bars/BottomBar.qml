@@ -1,5 +1,6 @@
 import Quickshell.Services.UPower
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 
 import qs.components
@@ -60,7 +61,21 @@ Rectangle {
         RowLayout {
             id: utils
             anchors.centerIn: parent
-            spacing: 20
+
+            Brightness {
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredWidth: childrenRect.width
+                Layout.preferredHeight: childrenRect.height
+            }
+
+            Rectangle {
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredWidth: 2
+                Layout.preferredHeight: parent.height - 5
+                Layout.leftMargin: 5
+                Layout.rightMargin: 5
+                color: Style.palette.color1
+            }
 
             Audio {
                 Layout.alignment: Qt.AlignVCenter
