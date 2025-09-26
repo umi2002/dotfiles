@@ -11,7 +11,6 @@ IconImage {
     id: root
     property string color
     source: Qt.resolvedUrl(Network.networkIcon)
-    implicitSize: 30
 
     layer.enabled: true
     layer.effect: MultiEffect {

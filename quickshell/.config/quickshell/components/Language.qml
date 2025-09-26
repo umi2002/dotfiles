@@ -6,8 +6,8 @@ import "../Style.js" as Style
 
 Text {
     text: HyprlandData.keyboardLanguage
-    width: implicitWidth
-    height: implicitHeight
+    horizontalAlignment: Text.AlignHCenter
+    verticalAlignment: Text.AlignVCenter
     color: Style.palette.color1
     font.family: Style.font.family
     font.pointSize: Style.font.size2

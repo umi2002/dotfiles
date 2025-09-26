@@ -7,21 +7,22 @@ import "../Style.js" as Style
 
 Rectangle {
     id: root
-    property int margins: 10
+    readonly property int margins: 10
 
+    anchors.leftMargin: margins
+    anchors.rightMargin: margins
     color: "transparent"
 
     Rectangle {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        anchors.leftMargin: root.margins
-        implicitWidth: rowLayout.width + 20
-        implicitHeight: rowLayout.height + 5
+        implicitWidth: info.width + 20
+        implicitHeight: info.height + 5
         radius: height / 2
         color: Style.palette.background2
 
         RowLayout {
-            id: rowLayout
+            id: info
             anchors.centerIn: parent
             spacing: 20
 
@@ -42,15 +43,36 @@ Rectangle {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.preferredWidth: childrenRect.width
                 Layout.preferredHeight: childrenRect.height
+                implicitSize: 30
+            }
+        }
+    }
+
+    Rectangle {
+        anchors.right: language.left
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.rightMargin: root.margins
+        implicitWidth: utils.width + 20
+        implicitHeight: utils.height + 5
+        radius: height / 2
+        color: Style.palette.background2
+
+        RowLayout {
+            id: utils
+            anchors.centerIn: parent
+            spacing: 20
+
+            Audio {
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredWidth: childrenRect.width
+                Layout.preferredHeight: childrenRect.height
             }
         }
     }
 
     Language {
+        id: language
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        anchors.rightMargin: root.margins
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
     }
 }
