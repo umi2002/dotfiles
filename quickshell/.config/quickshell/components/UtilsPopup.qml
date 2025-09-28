@@ -102,6 +102,10 @@ Rectangle {
                 root.setValueCallback(slider.value);
             }
 
+            HoverHandler {
+                cursorShape: Qt.PointingHandCursor
+            }
+
             background: Rectangle {
                 id: control
                 implicitWidth: root.width - icon.width - 20

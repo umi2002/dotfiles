@@ -47,14 +47,22 @@ Singleton {
     }
 
     function setVolume(volume) {
-        console.log(volume);
         setVolumeProcess.volume = volume;
         setVolumeProcess.running = true;
+    }
+
+    function toggleMute() {
+        toggleMuteProcess.running = true;
     }
 
     Process {
         id: setVolumeProcess
         property int volume
         command: ["wpctl", "set-volume", "@DEFAULT_SINK@", volume.toString() + "%"]
+    }
+
+    Process {
+        id: toggleMuteProcess
+        command: ["wpctl", "set-mute", "@DEFAULT_SINK@", "toggle"]
     }
 }
