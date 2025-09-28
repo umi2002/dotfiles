@@ -19,18 +19,8 @@ Item {
 
         UtilsPopup {
             id: popup
-            component: {
-                if (brightnessMouseArea.containsMouse) {
-                    return "brightness";
-                } else if (audioMouseArea.containsMouse) {
-                    return "audio";
-                } else {
-                    return component;
-                }
-            }
-
-            implicitWidth: 350
-            implicitHeight: root.isHovered ? 50 : 0
+            implicitWidth: 400
+            implicitHeight: root.isHovered ? 100 : 0
             clip: true
 
             Behavior on implicitHeight {
@@ -59,16 +49,10 @@ Item {
                 id: layout
                 anchors.centerIn: parent
 
-                WrapperMouseArea {
-                    id: brightnessMouseArea
-                    hoverEnabled: true
+                Brightness {
                     Layout.alignment: Qt.AlignVCenter
                     Layout.preferredWidth: childrenRect.width
                     Layout.preferredHeight: childrenRect.height
-
-                    Brightness {
-                        anchors.centerIn: parent
-                    }
                 }
 
                 Rectangle {
@@ -80,16 +64,10 @@ Item {
                     color: Style.palette.color1
                 }
 
-                WrapperMouseArea {
-                    id: audioMouseArea
-                    hoverEnabled: true
+                Audio {
                     Layout.alignment: Qt.AlignVCenter
                     Layout.preferredWidth: childrenRect.width
                     Layout.preferredHeight: childrenRect.height
-
-                    Audio {
-                        anchors.centerIn: parent
-                    }
                 }
             }
         }
