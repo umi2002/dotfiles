@@ -20,6 +20,11 @@ Singleton {
         }
     }
 
+    function setBrightness(brightness) {
+        setBrightnessProcess.brightness = brightness;
+        setBrightnessProcess.running = true;
+    }
+
     Process {
         id: getBrightness
         command: ["brightnessctl", "g"]
@@ -28,6 +33,12 @@ Singleton {
                 root.brightness = parseInt(text) || 0;
             }
         }
+    }
+
+    Process {
+        id: setBrightnessProcess
+        property int brightness
+        command: ["brightnessctl", "set", brightness.toString() + "%"]
     }
 
     Process {

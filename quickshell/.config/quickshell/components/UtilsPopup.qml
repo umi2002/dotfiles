@@ -3,64 +3,121 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import qs.services
 import "../Style.js" as Style
 
 Rectangle {
     id: root
-    required property real value
-    required property string icon
+    required property string component
+    readonly property int value: {
+        switch (component) {
+        case "brightness":
+            {
+                return Brightness.brightnessPercent;
+            }
+        case "audio":
+            {
+                return Audio.volume;
+            }
+        default:
+            {
+                return value || 0;
+            }
+        }
+    }
+    readonly property string icon: {
+        switch (component) {
+        case "brightness":
+            {
+                return Brightness.brightnessIcon;
+            }
+        case "audio":
+            {
+                return Audio.volumeIcon;
+            }
+        default:
+            {
+                return icon || "";
+            }
+        }
+    }
+    readonly property var setValueCallback: {
+        switch (component) {
+        case "brightness":
+            {
+                return Brightness.setBrightness;
+            }
+        case "audio":
+            {
+                return Audio.setVolume;
+            }
+        default:
+            {
+                return setValueCallback || null;
+            }
+        }
+    }
+    property bool isUserInteracting: false
 
     color: Style.palette.background1
     radius: 10
 
-    Rectangle {
+    RowLayout {
+        id: layout
         anchors.top: parent.top
         anchors.topMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
-        implicitWidth: layout.width
-        implicitHeight: layout.height
-        color: "transparent"
 
-        RowLayout {
-            id: layout
-            anchors.centerIn: parent
+        IconImage {
+            id: icon
+            source: Qt.resolvedUrl(root.icon)
+            implicitSize: 30
+        }
 
-            IconImage {
-                id: icon
-                source: Qt.resolvedUrl(root.icon)
-                implicitSize: 30
-            }
+        Slider {
+            id: slider
+            value: root.isUserInteracting ? slider.value : root.value
+            from: 0
+            to: 100
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            implicitWidth: control.implicitWidth
+            implicitHeight: control.implicitHeight
+            hoverEnabled: true
 
-            ProgressBar {
-                id: progressBar
-                value: root.value
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                implicitWidth: control.implicitWidth
-                implicitHeight: control.implicitHeight
-
-                Behavior on value {
-                    NumberAnimation {
-                        duration: 100
-                    }
-                }
-
-                background: Rectangle {
-                    id: control
-                    implicitWidth: root.width - icon.width - 20
-                    implicitHeight: 15
-                    radius: implicitHeight / 2
-                    color: Style.palette.background2
-                }
-
-                contentItem: Item {
-                    Rectangle {
-                        implicitWidth: progressBar.visualPosition * parent.width
-                        implicitHeight: parent.height
-                        radius: height / 2
-                        color: Style.palette.color1
-                    }
+            Behavior on value {
+                NumberAnimation {
+                    duration: 100
                 }
             }
+
+            onPressedChanged: {
+                root.isUserInteracting = pressed;
+            }
+
+            onMoved: {
+                if (!root.setValueCallback) {
+                    return;
+                }
+
+                root.setValueCallback(slider.value);
+            }
+
+            background: Rectangle {
+                id: control
+                implicitWidth: root.width - icon.width - 20
+                implicitHeight: 15
+                radius: implicitHeight / 2
+                color: Style.palette.background2
+
+                Rectangle {
+                    implicitWidth: slider.visualPosition * parent.width
+                    implicitHeight: parent.height
+                    radius: height / 2
+                    color: Style.palette.color1
+                }
+            }
+
+            handle: Item {}
         }
     }
 }

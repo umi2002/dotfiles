@@ -1,6 +1,7 @@
 pragma Singleton
 
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Pipewire
 
 Singleton {
@@ -43,5 +44,17 @@ Singleton {
 
     PwObjectTracker {
         objects: [...root.sinks, ...root.sources]
+    }
+
+    function setVolume(volume) {
+        console.log(volume);
+        setVolumeProcess.volume = volume;
+        setVolumeProcess.running = true;
+    }
+
+    Process {
+        id: setVolumeProcess
+        property int volume
+        command: ["wpctl", "set-volume", "@DEFAULT_SINK@", volume.toString() + "%"]
     }
 }
