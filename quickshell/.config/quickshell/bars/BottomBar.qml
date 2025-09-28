@@ -8,6 +8,7 @@ import "../Style.js" as Style
 
 Rectangle {
     id: root
+    readonly property bool hasPopup: utils.isHovered
     readonly property int margins: 10
 
     anchors.leftMargin: margins
@@ -53,40 +54,11 @@ Rectangle {
         anchors.centerIn: parent
     }
 
-    Rectangle {
+    Utils {
+        id: utils
         anchors.right: language.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.rightMargin: root.margins
-        implicitWidth: utils.width + 20
-        implicitHeight: utils.height + 5
-        radius: height / 2
-        color: Style.palette.background2
-
-        RowLayout {
-            id: utils
-            anchors.centerIn: parent
-
-            Brightness {
-                Layout.alignment: Qt.AlignVCenter
-                Layout.preferredWidth: childrenRect.width
-                Layout.preferredHeight: childrenRect.height
-            }
-
-            Rectangle {
-                Layout.alignment: Qt.AlignVCenter
-                Layout.preferredWidth: 2
-                Layout.preferredHeight: parent.height - 5
-                Layout.leftMargin: 5
-                Layout.rightMargin: 5
-                color: Style.palette.color1
-            }
-
-            Audio {
-                Layout.alignment: Qt.AlignVCenter
-                Layout.preferredWidth: childrenRect.width
-                Layout.preferredHeight: childrenRect.height
-            }
-        }
     }
 
     Language {

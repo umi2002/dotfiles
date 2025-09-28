@@ -8,6 +8,7 @@ import "../Style.js" as Style
 
 PanelWindow {
     id: root
+    readonly property bool hasPopup: bottomBar.hasPopup
 
     anchors {
         top: true
@@ -20,8 +21,8 @@ PanelWindow {
     mask: Region {
         x: 0
         y: topBar.height
-        width: root.width
-        height: root.height - topBar.height - bottomBar.height
+        width: root.hasPopup ? 0 : root.width
+        height: root.hasPopup ? 0 : root.height - topBar.height - bottomBar.height
         intersection: Intersection.Subtract
     }
 
