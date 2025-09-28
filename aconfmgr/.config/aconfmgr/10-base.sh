@@ -7,6 +7,7 @@ AddPackage base-devel # Basic tools to build Arch Linux packages
 AddPackage linux # The Linux kernel and modules
 AddPackage linux-firmware # Firmware files for Linux - Default set
 AddPackage linux-headers # Headers and scripts for building modules for the Linux kernel
+AddPackage dkms # Dynamic Kernel Modules System
 
 # Boot
 AddPackage grub # GNU GRand Unified Bootloader (2)
@@ -20,6 +21,8 @@ AddPackage udisks2 # Daemon, tools and libraries to access and manipulate disks,
 AddPackage networkmanager # Network connection manager and user applications
 AddPackage openssh # SSH protocol implementation for remote login, command execution and file transfer
 AddPackage nss-mdns # glibc plugin providing host name resolution via mDNS
+AddPackage bluez # Daemons for the bluetooth protocol stack
+AddPackage bluez-utils # Development and debugging utilities for the bluetooth protocol stack
 
 # Essential Utilities
 AddPackage git # the fast distributed version control system

@@ -16,3 +16,15 @@ AddPackage socat # Multipurpose relay
 AddPackage stow # Manage installation of multiple softwares in the same directory tree
 AddPackage jq # Command-line JSON processor
 AddPackage keyd # A key remapping daemon for linux
+AddPackage grim # Screenshot utility for Wayland
+AddPackage htop # Interactive process viewer
+AddPackage lsof # Lists open files for running Unix processes
+AddPackage nmap # Utility for network discovery and security auditing
+AddPackage upower # Abstraction for enumerating power devices, listening to device events and querying history and statistics
+AddPackage xdg-desktop-portal # Desktop integration portals for sandboxed apps
+AddPackage wireless_tools # Tools allowing to manipulate the Wireless Extensions
+AddPackage --foreign displaylink # Linux driver for DisplayLink devices
+AddPackage --foreign evdi-dkms # Kernel module to enable management of multiple screens
+AddPackage fastfetch # A feature-rich and performance oriented neofetch like system information tool
+AddPackage xdg-desktop-portal-gtk # A backend implementation for xdg-desktop-portal using GTK
+AddPackage xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
