@@ -51,10 +51,6 @@ Rectangle {
             {
                 return Audio.setVolume;
             }
-        default:
-            {
-                return setValueCallback || null;
-            }
         }
     }
     property bool isUserInteracting: false
@@ -69,7 +65,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
 
         IconImage {
-            id: icon
+            id: iconImage
             source: Qt.resolvedUrl(root.icon)
             implicitSize: 30
         }
@@ -108,7 +104,7 @@ Rectangle {
 
             background: Rectangle {
                 id: control
-                implicitWidth: root.width - icon.width - 20
+                implicitWidth: root.width - iconImage.width - 20
                 implicitHeight: 15
                 radius: implicitHeight / 2
                 color: Style.palette.background2
