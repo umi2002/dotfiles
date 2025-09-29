@@ -19,8 +19,8 @@ Item {
 
         UtilsPopup {
             id: popup
-            implicitWidth: childrenRect.width + 20
-            implicitHeight: root.isHovered ? childrenRect.height + 20 : 0
+            isHovered: root.isHovered
+            anchors.margins: 20
             clip: true
 
             Behavior on implicitHeight {
