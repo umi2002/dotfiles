@@ -15,6 +15,10 @@ Singleton {
 
         switch (chargeState) {
         case UPowerDeviceState.Charging:
+            if (flooredPercent === 100) {
+                icon = "battery-level-100-charged-symbolic.svg";
+                break;
+            }
             icon = `battery-level-${flooredPercent}-charging-symbolic.svg`;
             break;
         case UPowerDeviceState.FullyCharged:
