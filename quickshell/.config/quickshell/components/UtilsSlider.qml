@@ -52,7 +52,7 @@ RowLayout {
 
         background: Rectangle {
             id: control
-            implicitWidth: root.width - iconImage.width - 20
+            implicitWidth: 350
             implicitHeight: 10
             radius: implicitHeight / 2
             color: Style.palette.background2

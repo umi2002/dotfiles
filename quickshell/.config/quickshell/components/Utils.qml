@@ -7,7 +7,7 @@ import "../Style.js" as Style
 
 Item {
     id: root
-    property bool isHovered: popupMouseArea.containsMouse || utilsMouseArea.containsMouse
+    readonly property bool isHovered: popupMouseArea.containsMouse || utilsMouseArea.containsMouse
     implicitHeight: Math.max(popup.height, utils.height)
     implicitWidth: popup.width
 
@@ -19,8 +19,8 @@ Item {
 
         UtilsPopup {
             id: popup
-            implicitWidth: 400
-            implicitHeight: root.isHovered ? 100 : 0
+            implicitWidth: childrenRect.width + 20
+            implicitHeight: root.isHovered ? childrenRect.height + 20 : 0
             clip: true
 
             Behavior on implicitHeight {
