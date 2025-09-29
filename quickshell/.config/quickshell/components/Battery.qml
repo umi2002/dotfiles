@@ -92,7 +92,7 @@ RowLayout {
     }
 
     Text {
-        text: (root.value * 100).toString() + "%"
+        text: Math.round((root.value * 100)).toString() + "%"
         font.pointSize: Style.font.size2
         font.family: Style.font.family
         color: root.color
