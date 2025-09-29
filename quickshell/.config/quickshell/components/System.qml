@@ -62,6 +62,8 @@ Item {
                     Layout.preferredHeight: childrenRect.height
                     implicitSize: 30
                 }
+
+                Bluetooth {}
             }
         }
     }
