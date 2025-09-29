@@ -8,46 +8,31 @@ import "../Style.js" as Style
 
 Rectangle {
     id: root
-    readonly property bool hasPopup: utils.isHovered
+    readonly property bool hasPopup: system.isHovered || utils.isHovered
     readonly property int margins: 10
 
     anchors.leftMargin: margins
     anchors.rightMargin: margins
     color: "transparent"
 
-    Rectangle {
+    Battery {
+        id: battery
+        readonly property UPowerDevice displayDevice: UPower.displayDevice
+        readonly property int chargeState: displayDevice.state
+        isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
+
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        implicitWidth: info.width + 20
-        implicitHeight: info.height + 5
-        radius: height / 2
-        color: Style.palette.background2
+        color: isCharging ? Style.palette.color2 : Style.palette.color3
 
-        RowLayout {
-            id: info
-            anchors.centerIn: parent
-            spacing: 20
+        value: displayDevice.percentage
+    }
 
-            Battery {
-                readonly property UPowerDevice displayDevice: UPower.displayDevice
-                readonly property int chargeState: displayDevice.state
-                isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
-
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                color: isCharging ? Style.palette.color2 : Style.palette.color3
-
-                value: displayDevice.percentage
-                implicitSize: 35
-                lineWidth: 4
-            }
-
-            Network {
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                Layout.preferredWidth: childrenRect.width
-                Layout.preferredHeight: childrenRect.height
-                implicitSize: 30
-            }
-        }
+    System {
+        id: system
+        anchors.left: battery.right
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.leftMargin: root.margins
     }
 
     Media {
