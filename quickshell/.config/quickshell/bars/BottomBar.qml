@@ -17,15 +17,9 @@ Rectangle {
 
     Battery {
         id: battery
-        readonly property UPowerDevice displayDevice: UPower.displayDevice
-        readonly property int chargeState: displayDevice.state
-        isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
-
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         color: isCharging ? Style.palette.color2 : Style.palette.color3
-
-        value: displayDevice.percentage
     }
 
     System {

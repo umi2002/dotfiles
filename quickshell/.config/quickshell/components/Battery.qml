@@ -6,6 +6,7 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import QtQuick.Shapes
 
+import qs.services
 import "../Style.js" as Style
 
 /**
@@ -13,15 +14,15 @@ import "../Style.js" as Style
  */
 RowLayout {
     id: root
-    required property real value
+    readonly property real value: Battery.batteryPercent / 100
+    readonly property bool isCharging: Battery.isCharging
     required property string color
-    required property bool isCharging
 
     Item {
         id: icon
 
         readonly property int implicitSize: 35
-        readonly property int lineWidth: 4
+        readonly property int lineWidth: 2
 
         property real degree: root.value * 360
         property real centerX: width / 2
@@ -77,8 +78,7 @@ RowLayout {
 
             IconImage {
                 id: image
-                readonly property string icon: root.isCharging ? "../assets/charging_icon.svg" : "../assets/discharging_icon.svg"
-                source: Qt.resolvedUrl(image.icon)
+                source: Qt.resolvedUrl(Battery.batteryIcon)
                 anchors.centerIn: parent
                 implicitSize: 20
 
