@@ -8,3 +8,4 @@ CopyFile /etc/vconsole.conf
 CreateDir /lost+found 700
 CopyFile /etc/keyd/default.conf '' umi umi
 CopyFile /etc/nsswitch.conf
+CopyFile /etc/NetworkManager/dispatcher.d/90-open_captive_portal 755 umi umi

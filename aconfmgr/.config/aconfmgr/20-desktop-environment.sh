@@ -9,15 +9,14 @@ AddPackage hyprpaper # a blazing fast wayland wallpaper utility with IPC control
 AddPackage rofi # A window switcher, application launcher and dmenu replacement
 AddPackage --foreign spotify # A proprietary music streaming service
 AddPackage discord # All-in-one voice and text chat for gamers
-AddPackage --foreign brave-bin # Web browser that blocks ads and trackers by default (binary release)
 AddPackage --foreign quickshell # Flexible toolkit for making desktop shells with QtQuick
 AddPackage vlc # Free and open source cross-platform multimedia player and framework
 AddPackage --foreign pwvucontrol # Pipewire volume control for GNOME
+AddPackage --foreign zen-browser-bin # Performance oriented Firefox-based web browser
 
 # Printer
 AddPackage cups # OpenPrinting CUPS - daemon package
 AddPackage cups-pdf # PDF printer for cups
-AddPackage --foreign librewolf-bin # Community-maintained fork of Firefox, focused on privacy, security and freedom.
 
 # Fonts
 AddPackage otf-firamono-nerd # Patched font Fira (Fura) Mono from nerd fonts library

@@ -28,3 +28,4 @@ AddPackage --foreign evdi-dkms # Kernel module to enable management of multiple 
 AddPackage fastfetch # A feature-rich and performance oriented neofetch like system information tool
 AddPackage xdg-desktop-portal-gtk # A backend implementation for xdg-desktop-portal using GTK
 AddPackage xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
+AddPackage speedtest-cli # Command line interface for testing internet bandwidth using speedtest.net
