@@ -55,7 +55,7 @@ RowLayout {
             implicitWidth: 350
             implicitHeight: 10
             radius: implicitHeight / 2
-            color: Style.palette.background2
+            color: Style.palette.border1
 
             Rectangle {
                 implicitWidth: slider.visualPosition * parent.width
