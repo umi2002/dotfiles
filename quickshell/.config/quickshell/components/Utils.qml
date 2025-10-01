@@ -61,6 +61,7 @@ Item {
                     Layout.leftMargin: 5
                     Layout.rightMargin: 5
                     color: Style.palette.color1
+                    opacity: 0.4
                 }
 
                 Audio {
