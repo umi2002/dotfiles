@@ -76,9 +76,11 @@ Rectangle {
 
             Rectangle {
                 Layout.fillWidth: true
-                Layout.margins: 10
+                Layout.topMargin: 10
+                Layout.bottomMargin: 10
                 Layout.preferredHeight: 1
                 color: Style.palette.color1
+                opacity: 0.2
                 visible: layout.index < networks.count - 1
             }
         }
