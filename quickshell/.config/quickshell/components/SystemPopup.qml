@@ -19,7 +19,7 @@ Rectangle {
         anchors.margins: 30
         clip: true
 
-        NetworkPopup {
+        BluetoothPopup {
             width: scrollView.width - 20
         }
     }

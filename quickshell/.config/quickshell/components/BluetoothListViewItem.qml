@@ -14,13 +14,13 @@ ColumnLayout {
     required property int index
 
     Rectangle {
-        id: network
-        readonly property bool isConnectedNetwork: layout.modelData.ssid === Network.connectedNetwork
+        id: bluetoothDevice
+        readonly property bool isConnectedDevice: layout.modelData.address === BluetoothData.connectedDevice.address
         property bool isExpanded: false
 
         clip: true
         Layout.fillWidth: true
-        implicitHeight: networkNameContainer.implicitHeight + (isExpanded ? networkInfoLoader.implicitHeight : 0)
+        implicitHeight: bluetoothNameContainer.implicitHeight + (isExpanded ? deviceInfoLoader.implicitHeight : 0)
         Layout.alignment: Qt.AlignVCenter
         color: "transparent"
 
@@ -32,37 +32,37 @@ ColumnLayout {
         }
 
         Rectangle {
-            id: networkNameContainer
+            id: bluetoothNameContainer
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            implicitHeight: networkName.height + (network.isConnectedNetwork ? 20 : 0)
+            implicitHeight: deviceName.height + (bluetoothDevice.isConnectedDevice ? 20 : 0)
             color: "transparent"
 
             MouseArea {
-                enabled: network.isConnectedNetwork
-                visible: network.isConnectedNetwork
+                enabled: bluetoothDevice.isConnectedDevice
+                visible: bluetoothDevice.isConnectedDevice
                 cursorShape: Qt.PointingHandCursor
                 anchors.fill: parent
 
                 onClicked: {
-                    network.isExpanded = !network.isExpanded;
+                    bluetoothDevice.isExpanded = !bluetoothDevice.isExpanded;
                 }
             }
 
             Text {
-                id: networkName
-                text: layout.modelData.ssid
+                id: deviceName
+                text: layout.modelData.name
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
                 font.pointSize: Style.font.size2
                 font.family: Style.font.family3
-                color: network.isConnectedNetwork ? Style.palette.color2 : Style.palette.color1
+                color: bluetoothDevice.isConnectedDevice ? Style.palette.color2 : Style.palette.color1
             }
 
             Loader {
                 id: caretLoader
-                active: network.isConnectedNetwork
+                active: bluetoothDevice.isConnectedDevice
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
 
@@ -76,7 +76,7 @@ ColumnLayout {
                         colorizationColor: Style.palette.color2
                     }
 
-                    rotation: network.isExpanded ? 90 : 0
+                    rotation: bluetoothDevice.isExpanded ? 90 : 0
 
                     Behavior on rotation {
                         NumberAnimation {
@@ -89,20 +89,20 @@ ColumnLayout {
         }
 
         Loader {
-            id: networkInfoLoader
-            active: network.isConnectedNetwork
+            id: deviceInfoLoader
+            active: bluetoothDevice.isConnectedDevice
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: networkNameContainer.bottom
+            anchors.top: bluetoothNameContainer.bottom
 
             sourceComponent: Rectangle {
                 clip: true
-                implicitHeight: networkInfo.implicitHeight
+                implicitHeight: deviceInfo.implicitHeight
                 color: "transparent"
 
                 Text {
-                    id: networkInfo
-                    text: Network.connectedNetworkInfo
+                    id: deviceInfo
+                    text: BluetoothData.batteryPercent.toString() + "% Battery"
                     font.pointSize: Style.font.size2
                     font.family: Style.font.family3
                     color: Style.palette.color1
