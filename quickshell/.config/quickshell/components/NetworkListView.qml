@@ -1,4 +1,7 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
+import QtQuick.Layouts
 
 import "../Style.js" as Style
 
@@ -24,8 +27,9 @@ Rectangle {
 
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
+        anchors.right: parent.right
         anchors.leftMargin: 20
-        implicitWidth: contentWidth
+        anchors.rightMargin: 20
         implicitHeight: contentHeight
 
         add: Transition {
@@ -55,12 +59,28 @@ Rectangle {
             }
         }
 
-        delegate: Text {
+        delegate: ColumnLayout {
+            id: layout
             required property var modelData
-            text: modelData.ssid
-            font.pointSize: Style.font.size2
-            font.family: Style.font.family3
-            color: Style.palette.color1
+            required property int index
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            Text {
+                text: layout.modelData.ssid
+                Layout.fillWidth: true
+                font.pointSize: Style.font.size2
+                font.family: Style.font.family3
+                color: Style.palette.color1
+            }
+
+            Rectangle {
+                Layout.fillWidth: true
+                Layout.margins: 10
+                Layout.preferredHeight: 1
+                color: Style.palette.color1
+                visible: layout.index < networks.count - 1
+            }
         }
     }
 }
