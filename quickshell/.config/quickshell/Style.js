@@ -3,6 +3,7 @@
 var font = {
     family1: "Cantarell",
     family2: "CaskaydiaCove Nerd Font Mono",
+    family3: "Noto Sans Mono CJK",
     size1: 16,
     size2: 12,
 }
