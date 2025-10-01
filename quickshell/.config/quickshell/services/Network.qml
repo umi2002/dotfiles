@@ -17,6 +17,7 @@ Singleton {
     property string connectedNetworkInfo: ""
     property string networkStrength: ""
     property string networkIcon: ""
+    property string wifiDevice: ""
 
     signal fetchedNetwork
     signal statusSet
@@ -77,6 +78,12 @@ Singleton {
         toggleWiFiProcess.running = true;
     }
 
+    function refresh() {
+        getStatus.running = true;
+        getSavedConnections.running = true;
+        getConnectedNetworkInfo.running = true;
+    }
+
     Process {
         id: getStatus
         command: ["nmcli", "-g", "TYPE,STATE", "d"]
@@ -99,6 +106,7 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 root.savedNetworks = new Set(text.trim().split('\n').filter(n => n));
+                getConnections.running = true;
             }
         }
     }
@@ -169,36 +177,55 @@ Singleton {
     Process {
         id: toggleWiFiProcess
         command: ["nmcli", "r", "w", root.isWiFiOn ? "off" : "on"]
+    }
+
+    Process {
+        id: monitorNetwork
+        command: ["nmcli", "monitor"]
+        running: true
+        stdout: SplitParser {
+            onRead: line => {
+                if (line.includes('wifi') || line.includes(root.wifiDevice)) {
+                    root.refresh();
+                }
+            }
+        }
+        onExited: {
+            running = true;
+        }
+    }
+
+    Process {
+        id: getWifiDevice
+        command: ["nmcli", "-g", "DEVICE,TYPE", "d", "s"]
         stdout: StdioCollector {
             onStreamFinished: {
-                getStatus.running = true;
+                let lines = text.trim().split('\n');
+                for (let line of lines) {
+                    let parts = line.split(':');
+                    if (parts[1] === 'wifi') {
+                        root.wifiDevice = parts[0];
+                        return;
+                    }
+                }
             }
         }
     }
 
     Timer {
-        interval: 1000
+        id: getConnectionsTimer
+        interval: 10000
         running: true
         repeat: true
         onTriggered: {
-            getStatus.running = true;
-            getSavedConnections.running = true;
             getConnections.running = true;
-            getConnectedNetworkInfo.running = true;
         }
     }
 
     Component.onCompleted: {
-        getStatus.running = true;
-        getSavedConnections.running = true;
-    }
-
-    onStatusChanged: {
-        if (status === "unavailable") {
-            return;
-        }
-
-        getConnections.running = true;
+        getWifiDevice.running = true;
+        monitorNetwork.running = true;
+        refresh();
     }
 
     onFetchedNetwork: {
