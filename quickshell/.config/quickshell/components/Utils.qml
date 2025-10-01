@@ -20,7 +20,6 @@ Item {
         UtilsPopup {
             id: popup
             isHovered: root.isHovered
-            anchors.margins: 20
             clip: true
 
             Behavior on implicitHeight {

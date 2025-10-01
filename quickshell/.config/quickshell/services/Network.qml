@@ -7,6 +7,7 @@ import QtQuick
 Singleton {
     id: root
 
+    property list<var> networks: []
     property string status: ""
     property string connectedNetwork: ""
     property string networkStrength: ""
@@ -55,10 +56,28 @@ Singleton {
     }
 
     Process {
-        id: getConnection
+        id: getConnections
         command: ["nmcli", "-g", "ACTIVE,SIGNAL,SSID", "d", "w"]
         stdout: StdioCollector {
             onStreamFinished: {
+                let networks = {};
+                let lines = text.trim().split('\n');
+                lines.forEach(line => {
+                    if (line) {
+                        let parts = line.split(':');
+                        let signal = parseInt(parts[1]) || 0;
+                        let ssid = parts[2] || "";
+
+                        if (ssid && (!networks[ssid] || signal > networks[ssid].signal)) {
+                            networks[ssid] = {
+                                ssid: ssid,
+                                signal: signal
+                            };
+                        }
+                    }
+                });
+                root.networks = Object.values(networks).sort((a, b) => b.signal - a.signal);
+
                 let pattern = "^yes:(\\d+):(.*)$";
                 let regex = new RegExp(pattern, "m");
                 let match = regex.exec(text);
@@ -79,7 +98,7 @@ Singleton {
         repeat: true
         onTriggered: {
             getStatus.running = true;
-            getConnection.running = true;
+            getConnections.running = true;
         }
     }
 
@@ -92,7 +111,7 @@ Singleton {
             return;
         }
 
-        getConnection.running = true;
+        getConnections.running = true;
     }
 
     onFetchedNetwork: {

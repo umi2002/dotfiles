@@ -1,3 +1,4 @@
+import Quickshell.Widgets
 import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Controls
@@ -22,8 +23,30 @@ Rectangle {
         color: isCharging ? Style.palette.color2 : Style.palette.color3
     }
 
+    WrapperMouseArea {
+        id: popupMouseArea
+        hoverEnabled: true
+        anchors.bottom: system.top
+        width: popup.implicitWidth
+        height: popup.implicitHeight
+
+        SystemPopup {
+            id: popup
+            isHovered: system.isHovered
+            clip: true
+
+            Behavior on implicitHeight {
+                NumberAnimation {
+                    duration: 400
+                    easing.type: Easing.InOutBack
+                }
+            }
+        }
+    }
+
     System {
         id: system
+        popupIsHovered: popupMouseArea.containsMouse
         anchors.left: battery.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: root.margins

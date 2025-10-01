@@ -28,8 +28,8 @@ IconImage {
 
             if (Network.status === "disconnected") {
                 root.color = Style.palette.color1;
-                return;
             }
+            return;
 
             root.color = Style.palette.color3;
         }
