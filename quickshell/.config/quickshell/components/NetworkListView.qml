@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 
+import qs.services
 import "../Style.js" as Style
 
 Rectangle {
@@ -65,13 +66,16 @@ Rectangle {
             required property int index
             anchors.left: parent.left
             anchors.right: parent.right
+            property string connectedNetwork: Network.connectedNetwork
 
             Text {
+                readonly property bool isConnectedNetwork: layout.modelData.ssid === Network.connectedNetwork
+
                 text: layout.modelData.ssid
                 Layout.fillWidth: true
                 font.pointSize: Style.font.size2
                 font.family: Style.font.family3
-                color: Style.palette.color1
+                color: isConnectedNetwork ? Style.palette.color2 : Style.palette.color1
             }
 
             Rectangle {

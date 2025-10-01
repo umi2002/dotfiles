@@ -122,6 +122,15 @@ Singleton {
                 let allNetworks = Object.values(networks).sort((a, b) => b.signal - a.signal);
 
                 let known = allNetworks.filter(n => root.savedNetworks.has(n.ssid));
+
+                if (root.connectedNetwork) {
+                    let connectedIndex = known.findIndex(n => n.ssid === root.connectedNetwork);
+                    if (connectedIndex > 0) {
+                        let connectedNet = known.splice(connectedIndex, 1)[0];
+                        known.unshift(connectedNet);
+                    }
+                }
+
                 let unknown = allNetworks.filter(n => !root.savedNetworks.has(n.ssid));
 
                 root.updateNetworkModel(root.knownNetworks, known);
