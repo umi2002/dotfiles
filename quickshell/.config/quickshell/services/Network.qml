@@ -23,7 +23,7 @@ Singleton {
     signal statusSet
 
     function updateNetworkModel(model, newNetworks) {
-        for (let i = model.count - 1; i >= 0; i--) {
+        for (let i = 0; i < model.count; i++) {
             let existingSSID = model.get(i).ssid;
             let found = newNetworks.some(n => n.ssid === existingSSID);
             if (!found) {
