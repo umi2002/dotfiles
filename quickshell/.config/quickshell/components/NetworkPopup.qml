@@ -68,7 +68,14 @@ ColumnLayout {
     }
 
     ColumnLayout {
+        opacity: wifiToggle.checked ? 1 : 0
         spacing: 10
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
+            }
+        }
 
         Text {
             text: "Saved Networks"
@@ -86,7 +93,14 @@ ColumnLayout {
     }
 
     ColumnLayout {
+        opacity: wifiToggle.checked ? 1 : 0
         spacing: 10
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
+            }
+        }
 
         Text {
             text: "Available Networks"
