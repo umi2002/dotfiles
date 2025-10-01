@@ -12,6 +12,7 @@ Singleton {
     property ListModel unknownNetworks: ListModel {}
     property var savedNetworks: new Set()
     property string status: ""
+    readonly property bool isWiFiOn: status !== "unavailable"
     property string connectedNetwork: ""
     property string connectedNetworkInfo: ""
     property string networkStrength: ""
@@ -70,6 +71,10 @@ Singleton {
         } else {
             networkIcon = "../assets/wifi_1_bar_icon.svg";
         }
+    }
+
+    function toggleWiFi() {
+        toggleWiFiProcess.running = true;
     }
 
     Process {
@@ -157,6 +162,16 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 root.connectedNetworkInfo = text;
+            }
+        }
+    }
+
+    Process {
+        id: toggleWiFiProcess
+        command: ["nmcli", "r", "w", root.isWiFiOn ? "off" : "on"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                getStatus.running = true;
             }
         }
     }
