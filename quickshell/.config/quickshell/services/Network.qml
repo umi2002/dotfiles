@@ -8,7 +8,9 @@ import QtQml.Models
 Singleton {
     id: root
 
-    property ListModel networks: ListModel {}
+    property ListModel knownNetworks: ListModel {}
+    property ListModel unknownNetworks: ListModel {}
+    property var savedNetworks: new Set()
     property string status: ""
     property string connectedNetwork: ""
     property string networkStrength: ""
@@ -17,31 +19,31 @@ Singleton {
     signal fetchedNetwork
     signal statusSet
 
-    function updateNetworkModel(newNetworks) {
-        for (let i = networks.count - 1; i >= 0; i--) {
-            let existingSSID = networks.get(i).ssid;
+    function updateNetworkModel(model, newNetworks) {
+        for (let i = model.count - 1; i >= 0; i--) {
+            let existingSSID = model.get(i).ssid;
             let found = newNetworks.some(n => n.ssid === existingSSID);
             if (!found) {
-                networks.remove(i);
+                model.remove(i);
             }
         }
 
         newNetworks.forEach((network, index) => {
             let existingIndex = -1;
-            for (let i = 0; i < networks.count; i++) {
-                if (networks.get(i).ssid === network.ssid) {
+            for (let i = 0; i < model.count; i++) {
+                if (model.get(i).ssid === network.ssid) {
                     existingIndex = i;
                     break;
                 }
             }
 
             if (existingIndex === -1) {
-                networks.insert(index, network);
+                model.insert(index, network);
             } else if (existingIndex !== index) {
-                networks.move(existingIndex, index, 1);
-                networks.set(index, network); // Update signal strength
+                model.move(existingIndex, index, 1);
+                model.set(index, network);
             } else {
-                networks.set(index, network);
+                model.set(index, network);
             }
         });
     }
@@ -86,6 +88,16 @@ Singleton {
     }
 
     Process {
+        id: getSavedConnections
+        command: ["nmcli", "-g", "NAME", "connection", "show"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                root.savedNetworks = new Set(text.trim().split('\n').filter(n => n));
+            }
+        }
+    }
+
+    Process {
         id: getConnections
         command: ["nmcli", "-g", "ACTIVE,SIGNAL,SSID", "d", "w"]
         stdout: StdioCollector {
@@ -107,8 +119,13 @@ Singleton {
                     }
                 });
 
-                let sortedNetworks = Object.values(networks).sort((a, b) => b.signal - a.signal);
-                root.updateNetworkModel(sortedNetworks);
+                let allNetworks = Object.values(networks).sort((a, b) => b.signal - a.signal);
+
+                let known = allNetworks.filter(n => root.savedNetworks.has(n.ssid));
+                let unknown = allNetworks.filter(n => !root.savedNetworks.has(n.ssid));
+
+                root.updateNetworkModel(root.knownNetworks, known);
+                root.updateNetworkModel(root.unknownNetworks, unknown);
 
                 let pattern = "^yes:(\\d+):(.*)$";
                 let regex = new RegExp(pattern, "m");
@@ -130,12 +147,14 @@ Singleton {
         repeat: true
         onTriggered: {
             getStatus.running = true;
+            getSavedConnections.running = true;
             getConnections.running = true;
         }
     }
 
     Component.onCompleted: {
         getStatus.running = true;
+        getSavedConnections.running = true;
     }
 
     onStatusChanged: {
