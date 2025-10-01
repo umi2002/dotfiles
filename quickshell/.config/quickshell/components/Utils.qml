@@ -8,8 +8,8 @@ import "../Style.js" as Style
 Item {
     id: root
     readonly property bool isHovered: popupMouseArea.containsMouse || utilsMouseArea.containsMouse
-    implicitHeight: Math.max(popup.height, utils.height)
-    implicitWidth: popup.width
+    implicitWidth: utils.implicitWidth
+    implicitHeight: utils.implicitHeight
 
     WrapperMouseArea {
         id: popupMouseArea
