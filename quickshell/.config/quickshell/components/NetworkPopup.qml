@@ -8,8 +8,6 @@ import "../Style.js" as Style
 
 ColumnLayout {
     spacing: 30
-    Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-    Layout.fillWidth: true
 
     ColumnLayout {
         spacing: 10

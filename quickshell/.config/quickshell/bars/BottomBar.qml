@@ -33,7 +33,6 @@ Rectangle {
         SystemPopup {
             id: popup
             isHovered: system.isHovered
-            clip: true
 
             Behavior on implicitHeight {
                 NumberAnimation {

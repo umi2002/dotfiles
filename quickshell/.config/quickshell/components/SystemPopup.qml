@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 
 import qs.components
 import "../Style.js" as Style
@@ -12,15 +13,14 @@ Rectangle {
     color: Style.palette.background1
     topRightRadius: 10
 
-    NetworkPopup {
-        id: popup
-        readonly property int margins: 30
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+    ScrollView {
+        id: scrollView
+        anchors.fill: parent
+        anchors.margins: 30
+        clip: true
 
-        anchors.topMargin: margins
-        anchors.leftMargin: margins
-        anchors.rightMargin: margins
+        NetworkPopup {
+            width: scrollView.width
+        }
     }
 }
