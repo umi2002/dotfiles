@@ -47,20 +47,23 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 root.maxBrightness = parseInt(text) || 0;
+                getBrightness.running = true;
             }
         }
     }
 
-    Timer {
-        interval: 100
-        running: true
-        repeat: true
-        onTriggered: {
-            getBrightness.running = true;
+    Process {
+        id: brightnessMonitor
+        command: ["inotifywait", "-m", "-e", "modify", "/sys/class/backlight/amdgpu_bl1/brightness"]
+        stdout: SplitParser {
+            onRead: () => {
+                getBrightness.running = true;
+            }
         }
     }
 
     Component.onCompleted: {
         getMaxBrightness.running = true;
+        brightnessMonitor.running = true;
     }
 }
