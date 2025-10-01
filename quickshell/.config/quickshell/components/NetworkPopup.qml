@@ -15,7 +15,7 @@ ColumnLayout {
         Text {
             text: "Saved Networks"
             font.pointSize: Style.font.size1
-            font.family: Style.font.family3
+            font.family: Style.font.family1
             color: Style.palette.color1
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
         }
@@ -33,7 +33,7 @@ ColumnLayout {
         Text {
             text: "Available Networks"
             font.pointSize: Style.font.size1
-            font.family: Style.font.family3
+            font.family: Style.font.family1
             color: Style.palette.color1
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
         }

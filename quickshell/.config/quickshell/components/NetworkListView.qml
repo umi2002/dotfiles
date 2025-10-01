@@ -1,9 +1,8 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Layouts
 
-import qs.services
+import qs.components
 import "../Style.js" as Style
 
 Rectangle {
@@ -60,32 +59,9 @@ Rectangle {
             }
         }
 
-        delegate: ColumnLayout {
-            id: layout
-            required property var modelData
-            required property int index
+        delegate: NetworkListViewItem {
             anchors.left: parent.left
             anchors.right: parent.right
-            property string connectedNetwork: Network.connectedNetwork
-
-            Text {
-                readonly property bool isConnectedNetwork: layout.modelData.ssid === Network.connectedNetwork
-
-                text: layout.modelData.ssid
-                Layout.fillWidth: true
-                font.pointSize: Style.font.size2
-                font.family: Style.font.family3
-                color: isConnectedNetwork ? Style.palette.color2 : Style.palette.color1
-            }
-
-            Rectangle {
-                Layout.fillWidth: true
-                Layout.topMargin: 10
-                Layout.bottomMargin: 10
-                Layout.preferredHeight: 1
-                color: Style.palette.color1
-                opacity: 0.2
-            }
         }
     }
 }

@@ -13,6 +13,7 @@ Singleton {
     property var savedNetworks: new Set()
     property string status: ""
     property string connectedNetwork: ""
+    property string connectedNetworkInfo: ""
     property string networkStrength: ""
     property string networkIcon: ""
 
@@ -150,14 +151,25 @@ Singleton {
         }
     }
 
+    Process {
+        id: getConnectedNetworkInfo
+        command: ["nmcli", "d", "w", "show"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                root.connectedNetworkInfo = text;
+            }
+        }
+    }
+
     Timer {
-        interval: 500
+        interval: 1000
         running: true
         repeat: true
         onTriggered: {
             getStatus.running = true;
             getSavedConnections.running = true;
             getConnections.running = true;
+            getConnectedNetworkInfo.running = true;
         }
     }
 
