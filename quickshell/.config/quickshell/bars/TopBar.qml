@@ -39,7 +39,7 @@ Rectangle {
     Title {
         anchors.centerIn: parent
         color: Style.palette.color1
-        font.family: Style.font.family
+        font.family: Style.font.family1
         font.pointSize: Style.font.size1
     }
 
@@ -48,7 +48,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
 
         color: Style.palette.color2
-        font.family: Style.font.family
+        font.family: Style.font.family2
         font.pointSize: Style.font.size2
     }
 }

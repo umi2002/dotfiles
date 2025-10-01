@@ -33,7 +33,7 @@ WrapperMouseArea {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
             Layout.preferredWidth: 40
             color: Style.palette.color1
-            font.family: Style.font.family
+            font.family: Style.font.family2
             font.pixelSize: Style.font.size1
         }
     }

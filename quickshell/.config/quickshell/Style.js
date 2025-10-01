@@ -1,7 +1,8 @@
 .pragma library
 
 var font = {
-    family: "CaskaydiaCove Nerd Font Mono",
+    family1: "Cantarell",
+    family2: "CaskaydiaCove Nerd Font Mono",
     size1: 16,
     size2: 12,
 }

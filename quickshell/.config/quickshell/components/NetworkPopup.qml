@@ -12,7 +12,7 @@ ColumnLayout {
             required property var modelData
             text: modelData.ssid
             font.pointSize: Style.font.size2
-            font.family: Style.font.family
+            font.family: Style.font.family2
             color: Style.palette.color1
         }
     }

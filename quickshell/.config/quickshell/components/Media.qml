@@ -14,11 +14,11 @@ RowLayout {
     readonly property string artist: Media.spotifyPlayer?.trackArtist || ""
 
     Text {
-        text: root.title || ""
+        text: root.title || "No song playing"
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         color: Style.palette.color1
-        font.family: Style.font.family
+        font.family: Style.font.family1
         font.pointSize: Style.font.size1
         visible: Media.spotifyPlayer
     }
@@ -35,7 +35,7 @@ RowLayout {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         color: Style.palette.color1
-        font.family: Style.font.family
+        font.family: Style.font.family1
         font.pointSize: Style.font.size1
         visible: Media.spotifyPlayer
     }
@@ -45,7 +45,7 @@ RowLayout {
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         color: Style.palette.color1
-        font.family: Style.font.family
+        font.family: Style.font.family1
         font.pointSize: Style.font.size1
         visible: !Media.spotifyPlayer
     }

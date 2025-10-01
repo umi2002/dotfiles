@@ -9,6 +9,6 @@ Text {
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     color: Style.palette.color1
-    font.family: Style.font.family
+    font.family: Style.font.family2
     font.pointSize: Style.font.size2
 }
