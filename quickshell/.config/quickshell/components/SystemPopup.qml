@@ -8,7 +8,7 @@ Rectangle {
     id: root
     required property bool isHovered
 
-    implicitWidth: 500
+    implicitWidth: 600
     implicitHeight: root.isHovered ? 600 : 0
     color: Style.palette.background1
     topRightRadius: 10
@@ -20,7 +20,7 @@ Rectangle {
         clip: true
 
         NetworkPopup {
-            width: scrollView.width
+            width: scrollView.width - 20
         }
     }
 }
