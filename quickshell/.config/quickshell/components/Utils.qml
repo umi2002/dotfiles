@@ -34,8 +34,6 @@ Item {
     WrapperMouseArea {
         id: utilsMouseArea
         hoverEnabled: true
-        anchors.right: parent.right
-        anchors.verticalCenter: parent.verticalCenter
 
         Rectangle {
             id: utils
