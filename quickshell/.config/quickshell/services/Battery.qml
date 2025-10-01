@@ -44,4 +44,28 @@ Singleton {
 
         return `${directory}/${icon}`;
     }
+    readonly property string timeToEmpty: {
+        let totalSeconds = displayDevice.timeToEmpty;
+
+        if (!totalSeconds) {
+            return "";
+        }
+
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+        return `${hours}h ${minutes}m left`;
+    }
+    readonly property string timeToFull: {
+        let totalSeconds = displayDevice.timeToFull;
+
+        if (!totalSeconds) {
+            return "";
+        }
+
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+
+        return `${hours}h ${minutes}m until full`;
+    }
 }

@@ -20,7 +20,6 @@ Rectangle {
         id: battery
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        color: isCharging ? Style.palette.color2 : Style.palette.color3
     }
 
     WrapperMouseArea {
