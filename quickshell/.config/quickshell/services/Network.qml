@@ -3,11 +3,12 @@ pragma Singleton
 import Quickshell
 import Quickshell.Io
 import QtQuick
+import QtQml.Models
 
 Singleton {
     id: root
 
-    property list<var> networks: []
+    property ListModel networks: ListModel {}
     property string status: ""
     property string connectedNetwork: ""
     property string networkStrength: ""
@@ -15,6 +16,35 @@ Singleton {
 
     signal fetchedNetwork
     signal statusSet
+
+    function updateNetworkModel(newNetworks) {
+        for (let i = networks.count - 1; i >= 0; i--) {
+            let existingSSID = networks.get(i).ssid;
+            let found = newNetworks.some(n => n.ssid === existingSSID);
+            if (!found) {
+                networks.remove(i);
+            }
+        }
+
+        newNetworks.forEach((network, index) => {
+            let existingIndex = -1;
+            for (let i = 0; i < networks.count; i++) {
+                if (networks.get(i).ssid === network.ssid) {
+                    existingIndex = i;
+                    break;
+                }
+            }
+
+            if (existingIndex === -1) {
+                networks.insert(index, network);
+            } else if (existingIndex !== index) {
+                networks.move(existingIndex, index, 1);
+                networks.set(index, network); // Update signal strength
+            } else {
+                networks.set(index, network);
+            }
+        });
+    }
 
     function setIcon() {
         if (status === "unavailable") {
@@ -76,7 +106,9 @@ Singleton {
                         }
                     }
                 });
-                root.networks = Object.values(networks).sort((a, b) => b.signal - a.signal);
+
+                let sortedNetworks = Object.values(networks).sort((a, b) => b.signal - a.signal);
+                root.updateNetworkModel(sortedNetworks);
 
                 let pattern = "^yes:(\\d+):(.*)$";
                 let regex = new RegExp(pattern, "m");

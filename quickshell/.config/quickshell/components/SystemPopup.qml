@@ -14,7 +14,13 @@ Rectangle {
 
     NetworkPopup {
         id: popup
+        readonly property int margins: 30
         anchors.top: parent.top
-        anchors.topMargin: 10
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        anchors.topMargin: margins
+        anchors.leftMargin: margins
+        anchors.rightMargin: margins
     }
 }
