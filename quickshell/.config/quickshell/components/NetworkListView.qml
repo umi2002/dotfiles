@@ -10,7 +10,7 @@ Rectangle {
     required property var model
 
     clip: true
-    implicitHeight: networks.implicitHeight + 20
+    implicitHeight: networks.implicitHeight + 30
     radius: 20
     color: Style.palette.background2
 
@@ -81,7 +81,6 @@ Rectangle {
                 Layout.preferredHeight: 1
                 color: Style.palette.color1
                 opacity: 0.2
-                visible: layout.index < networks.count - 1
             }
         }
     }
