@@ -6,7 +6,7 @@ import Quickshell.Services.UPower
 Singleton {
     readonly property UPowerDevice displayDevice: UPower.displayDevice
     readonly property int chargeState: displayDevice.state
-    readonly property bool isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge
+    readonly property bool isCharging: chargeState == UPowerDeviceState.Charging || chargeState == UPowerDeviceState.PendingCharge || chargeState === UPowerDeviceState.FullyCharged
     readonly property int batteryPercent: displayDevice.percentage * 100
     readonly property string batteryIcon: {
         let flooredPercent = Math.floor(batteryPercent / 10) * 10;
@@ -60,7 +60,7 @@ Singleton {
         let totalSeconds = displayDevice.timeToFull;
 
         if (!totalSeconds) {
-            return "";
+            return "Fully charged";
         }
 
         const hours = Math.floor(totalSeconds / 3600);
