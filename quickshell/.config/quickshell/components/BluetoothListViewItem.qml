@@ -15,7 +15,7 @@ ColumnLayout {
 
     Rectangle {
         id: bluetoothDevice
-        readonly property bool isConnectedDevice: layout.modelData.address === BluetoothData.connectedDevice.address
+        readonly property bool isConnectedDevice: layout.modelData.address === BluetoothData.connectedDevice?.address
         property bool isExpanded: false
 
         clip: true

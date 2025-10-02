@@ -45,7 +45,7 @@ Singleton {
         }
     }
     readonly property int batteryPercent: {
-        return Math.round(connectedDevice.battery * 100);
+        return Math.round(connectedDevice?.battery * 100);
     }
 
     function updateDeviceModel() {
@@ -67,7 +67,10 @@ Singleton {
             }
 
             if (existingIndex === -1) {
-                pairedDevices.insert(index, device);
+                pairedDevices.insert(index, {
+                    "address": device.address,
+                    "name": device.name
+                });
             } else if (existingIndex !== index) {
                 pairedDevices.move(existingIndex, index, 1);
                 pairedDevices.set(index, device);
@@ -83,7 +86,7 @@ Singleton {
 
     Process {
         id: bluetoothToggleProcess
-        command: ["bluetoothctl", "power", root.adapter.enabled ? "off" : "on"]
+        command: ["bluetoothctl", "power", root.adapter?.enabled ? "off" : "on"]
     }
 
     onDevicesChanged: {
