@@ -27,7 +27,6 @@ IconImage {
     }
 
     source: Qt.resolvedUrl(BluetoothData.icon)
-    implicitSize: 30
 
     layer.enabled: true
     layer.effect: MultiEffect {

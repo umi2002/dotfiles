@@ -32,6 +32,7 @@ Rectangle {
         SystemPopup {
             id: popup
             isHovered: system.isHovered
+            hoveredComponent: system.hoveredComponent
 
             Behavior on implicitHeight {
                 NumberAnimation {

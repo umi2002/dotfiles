@@ -9,8 +9,18 @@ WrapperMouseArea {
     id: root
     required property bool popupIsHovered
     readonly property bool isHovered: popupIsHovered || containsMouse
+    readonly property string hoveredComponent: {
+        if (networkMouseArea.containsMouse) {
+            return "network";
+        }
+
+        if (bluetoothMouseArea.containsMouse) {
+            return "bluetooth";
+        }
+
+        return hoveredComponent;
+    }
     hoverEnabled: true
-    anchors.verticalCenter: parent.verticalCenter
 
     Rectangle {
         id: system
@@ -19,19 +29,54 @@ WrapperMouseArea {
         radius: height / 2
         color: Style.palette.background2
 
+        Rectangle {
+            implicitWidth: 35
+            implicitHeight: 30
+            radius: implicitHeight / 2
+
+            anchors.verticalCenter: parent.verticalCenter
+            x: {
+                if (root.hoveredComponent === "bluetooth") {
+                    return layout.x + bluetooth.x + bluetooth.width / 2 - width / 2;
+                }
+
+                return layout.x + network.x + network.width / 2 - width / 2;
+            }
+
+            Behavior on x {
+                NumberAnimation {
+                    duration: 200
+                    easing.type: Easing.InOutCubic
+                }
+            }
+        }
+
         RowLayout {
             id: layout
             anchors.centerIn: parent
             spacing: 20
 
             Network {
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                Layout.preferredWidth: childrenRect.width
-                Layout.preferredHeight: childrenRect.height
+                id: network
                 implicitSize: 30
+
+                MouseArea {
+                    id: networkMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                }
             }
 
-            Bluetooth {}
+            Bluetooth {
+                id: bluetooth
+                implicitSize: 30
+
+                MouseArea {
+                    id: bluetoothMouseArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                }
+            }
         }
     }
 }

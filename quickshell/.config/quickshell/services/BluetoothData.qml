@@ -70,9 +70,9 @@ Singleton {
                 pairedDevices.insert(index, device);
             } else if (existingIndex !== index) {
                 pairedDevices.move(existingIndex, index, 1);
-                pairedDevices.set(index, network);
+                pairedDevices.set(index, device);
             } else {
-                pairedDevices.set(index, network);
+                pairedDevices.set(index, device);
             }
         });
     }
