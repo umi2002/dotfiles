@@ -29,15 +29,25 @@ Rectangle {
         width: popup.implicitWidth
         height: popup.implicitHeight
 
-        SystemPopup {
-            id: popup
-            isHovered: system.isHovered
-            hoveredComponent: system.hoveredComponent
+        Rectangle {
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 20
+            implicitWidth: popup.implicitWidth
+            implicitHeight: popup.implicitHeight
+            color: "transparent"
 
-            Behavior on implicitHeight {
-                NumberAnimation {
-                    duration: 400
-                    easing.type: Easing.InOutBack
+            SystemPopup {
+                id: popup
+                isHovered: system.isHovered
+                hoveredComponent: system.hoveredComponent
+
+                Behavior on implicitHeight {
+                    NumberAnimation {
+                        duration: 400
+                        easing.type: Easing.InOutBack
+                    }
                 }
             }
         }

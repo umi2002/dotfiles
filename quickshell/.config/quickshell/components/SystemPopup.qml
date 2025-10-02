@@ -11,13 +11,18 @@ Rectangle {
 
     implicitWidth: 600
     implicitHeight: root.isHovered ? 600 : 0
-    color: Style.palette.background1
-    topRightRadius: 10
+    color: "#cc" + Style.palette.background1.toString().substring(1)
+    border.width: 2
+    border.color: Style.palette.border1
+    radius: 10
 
     ScrollView {
         id: scrollView
         anchors.fill: parent
-        anchors.margins: 30
+        anchors.topMargin: 30
+        anchors.bottomMargin: 30
+        anchors.leftMargin: 5
+        anchors.rightMargin: 5
         clip: true
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
         contentWidth: container.width
@@ -25,16 +30,18 @@ Rectangle {
 
         Item {
             id: container
-            width: scrollView.width - 20
-            height: root.hoveredComponent === "network" ? networkPopup.height : bluetoothPopup.height
+            implicitWidth: scrollView.width
+            implicitHeight: Math.max(networkPopupContainer.height, bluetoothPopupContainer.height)
 
             property int currentIndex: root.hoveredComponent === "network" ? 0 : 1
 
             Item {
                 id: slider
-                width: parent.width
-                height: parent.height
-                x: -container.currentIndex * container.width
+                readonly property int margins: 100
+
+                implicitWidth: parent.implicitWidth
+                implicitHeight: parent.implicitHeight
+                x: -container.currentIndex * root.implicitWidth
 
                 Behavior on x {
                     NumberAnimation {
@@ -43,33 +50,31 @@ Rectangle {
                     }
                 }
 
-                NetworkPopup {
-                    id: networkPopup
-                    width: container.width
-                    x: 0
+                Rectangle {
+                    id: networkPopupContainer
+                    height: networkPopup.implicitHeight
+                    implicitWidth: container.width - slider.margins
+                    x: slider.margins / 2
+                    color: "transparent"
+
+                    NetworkPopup {
+                        id: networkPopup
+                        anchors.fill: parent
+                    }
                 }
 
-                BluetoothPopup {
-                    id: bluetoothPopup
-                    width: container.width
-                    x: container.width
+                Rectangle {
+                    id: bluetoothPopupContainer
+                    height: bluetoothPopup.implicitHeight
+                    width: container.width - slider.margins
+                    x: root.width + slider.margins / 2
+                    color: "transparent"
+
+                    BluetoothPopup {
+                        id: bluetoothPopup
+                        anchors.fill: parent
+                    }
                 }
-            }
-
-            Rectangle {
-                id: clippingRectangleLeft
-                width: 1000
-                height: parent.height
-                x: -width
-                color: Style.palette.background1
-            }
-
-            Rectangle {
-                id: clippingRectangleRight
-                width: 1000
-                height: parent.height
-                x: parent.width
-                color: Style.palette.background1
             }
         }
     }
