@@ -10,9 +10,9 @@ Rectangle {
 
     implicitWidth: controls.implicitWidth + 20
     implicitHeight: isHovered ? controls.implicitHeight + 20 : 0
-    border.width: 2
+    border.width: 1
     border.color: Style.palette.border1
-    color: "#cc" + Style.palette.background1.toString().substring(1)
+    color: "#bf" + Style.palette.background1.toString().substring(1)
     radius: 10
 
     Rectangle {

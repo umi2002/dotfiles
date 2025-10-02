@@ -11,8 +11,8 @@ Rectangle {
 
     implicitWidth: 600
     implicitHeight: root.isHovered ? 600 : 0
-    color: "#cc" + Style.palette.background1.toString().substring(1)
-    border.width: 2
+    color: "#bf" + Style.palette.background1.toString().substring(1)
+    border.width: 1
     border.color: Style.palette.border1
     radius: 10
 
@@ -31,7 +31,7 @@ Rectangle {
         Item {
             id: container
             implicitWidth: scrollView.width
-            implicitHeight: Math.max(networkPopupContainer.height, bluetoothPopupContainer.height)
+            implicitHeight: root.hoveredComponent === "network" ? networkPopupContainer.height : bluetoothPopupContainer.height
 
             property int currentIndex: root.hoveredComponent === "network" ? 0 : 1
 
