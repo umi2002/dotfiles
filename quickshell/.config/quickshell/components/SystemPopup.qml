@@ -6,11 +6,10 @@ import "../Style.js" as Style
 
 Rectangle {
     id: root
-    required property bool isHovered
-    required property string hoveredComponent
+    required property bool isExpanded
 
     implicitWidth: 600
-    implicitHeight: root.isHovered ? 600 : 0
+    implicitHeight: root.isExpanded ? 600 : 0
     color: "#bf" + Style.palette.background1.toString().substring(1)
     border.width: 1
     border.color: Style.palette.border1

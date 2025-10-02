@@ -7,48 +7,33 @@ import "../Style.js" as Style
 
 WrapperMouseArea {
     id: root
-    required property bool popupIsHovered
-    readonly property bool isHovered: popupIsHovered || containsMouse
-    readonly property string hoveredComponent: {
-        if (networkMouseArea.containsMouse) {
-            return "network";
-        }
+    required property var backdrop
+    property bool isExpanded: false
 
-        if (bluetoothMouseArea.containsMouse) {
-            return "bluetooth";
-        }
-
-        return hoveredComponent;
-    }
     hoverEnabled: true
+    cursorShape: Qt.PointingHandCursor
+
+    onClicked: {
+        isExpanded = !isExpanded;
+    }
+
+    Connections {
+        target: backdrop
+        function onFocusLost() {
+            root.isExpanded = false;
+        }
+    }
 
     Rectangle {
         id: system
         implicitWidth: layout.width + 20
         implicitHeight: layout.height + 5
         radius: height / 2
-        color: Style.palette.background2
+        color: root.isExpanded ? Style.palette.border1 : Style.palette.background2
 
-        Rectangle {
-            implicitWidth: 35
-            implicitHeight: 30
-            radius: implicitHeight / 2
-            color: Style.palette.border1
-
-            anchors.verticalCenter: parent.verticalCenter
-            x: {
-                if (root.hoveredComponent === "bluetooth") {
-                    return layout.x + bluetooth.x + bluetooth.width / 2 - width / 2;
-                }
-
-                return layout.x + network.x + network.width / 2 - width / 2;
-            }
-
-            Behavior on x {
-                NumberAnimation {
-                    duration: 200
-                    easing.type: Easing.InOutCubic
-                }
+        Behavior on color {
+            ColorAnimation {
+                duration: 200
             }
         }
 
@@ -60,23 +45,11 @@ WrapperMouseArea {
             Network {
                 id: network
                 implicitSize: 30
-
-                MouseArea {
-                    id: networkMouseArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                }
             }
 
             Bluetooth {
                 id: bluetooth
                 implicitSize: 30
-
-                MouseArea {
-                    id: bluetoothMouseArea
-                    anchors.fill: parent
-                    hoverEnabled: true
-                }
             }
         }
     }

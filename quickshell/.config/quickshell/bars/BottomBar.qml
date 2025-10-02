@@ -9,7 +9,8 @@ import "../Style.js" as Style
 
 Rectangle {
     id: root
-    readonly property bool hasPopup: system.isHovered || utils.isHovered
+    required property var backdrop
+    readonly property bool hasPopup: system.isExpanded || utils.isHovered
     readonly property int margins: 10
 
     anchors.leftMargin: margins
@@ -20,11 +21,11 @@ Rectangle {
         id: battery
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
+        z: 1
     }
 
     WrapperMouseArea {
         id: popupMouseArea
-        hoverEnabled: true
         anchors.bottom: system.top
         width: popup.implicitWidth
         height: popup.implicitHeight
@@ -40,8 +41,7 @@ Rectangle {
 
             SystemPopup {
                 id: popup
-                isHovered: system.isHovered
-                hoveredComponent: system.hoveredComponent
+                isExpanded: system.isExpanded
 
                 Behavior on implicitHeight {
                     NumberAnimation {
@@ -55,7 +55,7 @@ Rectangle {
 
     System {
         id: system
-        popupIsHovered: popupMouseArea.containsMouse
+        backdrop: root.backdrop
         anchors.left: battery.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: root.margins

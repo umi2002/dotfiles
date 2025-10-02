@@ -27,7 +27,7 @@ Rectangle {
 
         Behavior on opacity {
             NumberAnimation {
-                duration: 400
+                duration: 200
             }
         }
     }

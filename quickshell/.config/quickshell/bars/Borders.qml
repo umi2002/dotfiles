@@ -10,6 +10,17 @@ PanelWindow {
     id: root
     readonly property bool hasPopup: bottomBar.hasPopup
 
+    MouseArea {
+        id: backdrop
+        signal focusLost
+
+        anchors.fill: parent
+        z: -1
+        onClicked: {
+            focusLost();
+        }
+    }
+
     anchors {
         top: true
         bottom: true
@@ -46,6 +57,7 @@ PanelWindow {
 
         BottomBar {
             id: bottomBar
+            backdrop: backdrop
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right
