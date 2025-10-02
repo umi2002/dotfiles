@@ -20,7 +20,6 @@ Rectangle {
         implicitWidth: layout.implicitWidth + 20
         implicitHeight: layout.implicitHeight + 20
         anchors.top: parent.top
-        anchors.bottom: parent.bottom
         anchors.topMargin: 10
         anchors.bottomMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
@@ -29,9 +28,7 @@ Rectangle {
 
         ColumnLayout {
             id: layout
-            anchors.top: parent.top
-            anchors.topMargin: 10
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.centerIn: parent
 
             UtilsSlider {
                 value: Brightness.brightnessPercent
