@@ -7,10 +7,12 @@ import "../Style.js" as Style
 Rectangle {
     id: root
     required property bool isHovered
+
     implicitWidth: controls.implicitWidth + 20
     implicitHeight: isHovered ? controls.implicitHeight + 20 : 0
-
-    color: Style.palette.background1
+    border.width: 2
+    border.color: Style.palette.border1
+    color: "#cc" + Style.palette.background1.toString().substring(1)
     radius: 10
 
     Rectangle {
@@ -18,7 +20,9 @@ Rectangle {
         implicitWidth: layout.implicitWidth + 20
         implicitHeight: layout.implicitHeight + 20
         anchors.top: parent.top
+        anchors.bottom: parent.bottom
         anchors.topMargin: 10
+        anchors.bottomMargin: 10
         anchors.horizontalCenter: parent.horizontalCenter
         radius: 10
         color: Style.palette.background2

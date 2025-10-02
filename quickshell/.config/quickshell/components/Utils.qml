@@ -17,15 +17,23 @@ Item {
         anchors.right: utilsMouseArea.right
         anchors.bottom: utilsMouseArea.top
 
-        UtilsPopup {
-            id: popup
-            isHovered: root.isHovered
-            clip: true
+        Rectangle {
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 20
+            implicitWidth: popup.implicitWidth
+            implicitHeight: popup.implicitHeight
+            color: "transparent"
 
-            Behavior on implicitHeight {
-                NumberAnimation {
-                    duration: 400
-                    easing.type: Easing.InOutBack
+            UtilsPopup {
+                id: popup
+                isHovered: root.isHovered
+                clip: true
+
+                Behavior on implicitHeight {
+                    NumberAnimation {
+                        duration: 400
+                        easing.type: Easing.InOutBack
+                    }
                 }
             }
         }
