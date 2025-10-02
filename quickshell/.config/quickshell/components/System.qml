@@ -33,6 +33,7 @@ WrapperMouseArea {
             implicitWidth: 35
             implicitHeight: 30
             radius: implicitHeight / 2
+            color: Style.palette.border1
 
             anchors.verticalCenter: parent.verticalCenter
             x: {
