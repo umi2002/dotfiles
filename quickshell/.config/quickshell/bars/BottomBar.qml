@@ -10,7 +10,7 @@ import "../Style.js" as Style
 Rectangle {
     id: root
     required property var backdrop
-    readonly property bool hasPopup: system.isExpanded || utils.isHovered
+    readonly property bool hasPopup: system.isExpanded || utils.isHovered || media.isHovered
     readonly property int margins: 10
 
     anchors.leftMargin: margins
@@ -62,6 +62,7 @@ Rectangle {
     }
 
     Media {
+        id: media
         anchors.centerIn: parent
     }
 
