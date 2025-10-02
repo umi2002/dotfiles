@@ -105,7 +105,11 @@ Singleton {
         command: ["nmcli", "-g", "NAME", "connection", "show"]
         stdout: StdioCollector {
             onStreamFinished: {
-                root.savedNetworks = new Set(text.trim().split('\n').filter(n => n));
+                let savedNetworks = text.trim().split('\n').map(n => {
+                    return n.replace(/ \[.*\]$/, '');
+                });
+                console.log(savedNetworks);
+                root.savedNetworks = new Set(savedNetworks.filter(n => n));
                 getConnections.running = true;
             }
         }

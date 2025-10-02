@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 
 import qs.components
 import "../Style.js" as Style
@@ -14,15 +15,59 @@ Rectangle {
     border.width: 1
     border.color: Style.palette.border1
     radius: 10
+    clip: true
+
+    RowLayout {
+        id: buttons
+        property int selectedIndex: 0
+
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.topMargin: 30
+        anchors.leftMargin: 30
+        anchors.rightMargin: 30
+        implicitHeight: 100
+        spacing: 20
+
+        SystemPopupButton {
+            icon: "../assets/wifi_icon.svg"
+            isSelected: buttons.selectedIndex === 0
+            onClicked: buttons.selectedIndex = 0
+        }
+
+        SystemPopupButton {
+            icon: "../assets/bluetooth_icon.svg"
+            isSelected: buttons.selectedIndex === 1
+            onClicked: buttons.selectedIndex = 1
+        }
+
+        Item {
+            Layout.fillWidth: true
+        }
+    }
+
+    Rectangle {
+        id: separator
+        anchors.top: buttons.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.topMargin: 30
+        implicitHeight: 1
+        color: Style.palette.color1
+        opacity: 0.2
+    }
 
     ScrollView {
         id: scrollView
-        anchors.fill: parent
+        anchors.top: separator.bottom
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.topMargin: 30
         anchors.bottomMargin: 30
         anchors.leftMargin: 5
         anchors.rightMargin: 5
-        clip: true
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
         contentWidth: container.width
         contentHeight: container.height
@@ -30,9 +75,9 @@ Rectangle {
         Item {
             id: container
             implicitWidth: scrollView.width
-            implicitHeight: root.hoveredComponent === "network" ? networkPopupContainer.height : bluetoothPopupContainer.height
+            implicitHeight: buttons.selectedIndex === 0 ? networkPopupContainer.height : bluetoothPopupContainer.height
 
-            property int currentIndex: root.hoveredComponent === "network" ? 0 : 1
+            property int currentIndex: buttons.selectedIndex === 0 ? 0 : 1
 
             Item {
                 id: slider
