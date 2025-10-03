@@ -1,6 +1,7 @@
 pragma Singleton
 
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.Mpris
 import QtQuick
 
@@ -14,29 +15,15 @@ Singleton {
     readonly property string artist: spotifyPlayer?.trackArtist || ""
     readonly property string album: spotifyPlayer?.trackAlbum || ""
     readonly property string art: spotifyPlayer?.trackArtUrl || ""
-    property real position: spotifyPlayer?.position || 0
-    property real length: spotifyPlayer?.length || 0
 
-    function updatePositions() {
-        position = spotifyPlayer?.position;
-        length = spotifyPlayer?.length;
+    function setVolume(volume) {
+        setVolumeProcess.volume = volume;
+        setVolumeProcess.running = true;
     }
 
-    function setPosition(position) {
-        spotifyPlayer?.seek(position - root.position);
-    }
-
-    Timer {
-        interval: 500
-        running: true
-        repeat: true
-        onTriggered: root.updatePositions()
-    }
-
-    Connections {
-        target: root.spotifyPlayer
-        function onPostTrackChanged() {
-            root.updatePositions();
-        }
+    Process {
+        id: setVolumeProcess
+        property real volume
+        command: ["playerctl", "-p", "spotify", "volume", volume.toString()]
     }
 }
