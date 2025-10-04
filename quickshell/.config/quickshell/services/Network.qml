@@ -23,30 +23,35 @@ Singleton {
     signal statusSet
 
     function updateNetworkModel(model, newNetworks) {
+        let existing = new Map();
         for (let i = 0; i < model.count; i++) {
-            let existingSSID = model.get(i).ssid;
-            let found = newNetworks.some(n => n.ssid === existingSSID);
-            if (!found) {
+            existing.set(model.get(i).ssid, i);
+        }
+
+        let toKeep = new Set(newNetworks.map(n => n.ssid));
+
+        for (let i = model.count - 1; i >= 0; i--) {
+            if (!toKeep.has(model.get(i).ssid)) {
                 model.remove(i);
             }
         }
 
-        newNetworks.forEach((network, index) => {
-            let existingIndex = -1;
+        newNetworks.forEach((network, targetIndex) => {
+            let currentIndex = -1;
             for (let i = 0; i < model.count; i++) {
                 if (model.get(i).ssid === network.ssid) {
-                    existingIndex = i;
+                    currentIndex = i;
                     break;
                 }
             }
 
-            if (existingIndex === -1) {
-                model.insert(index, network);
-            } else if (existingIndex !== index) {
-                model.move(existingIndex, index, 1);
-                model.set(index, network);
+            if (currentIndex === -1) {
+                model.insert(targetIndex, network);
             } else {
-                model.set(index, network);
+                if (currentIndex !== targetIndex) {
+                    model.move(currentIndex, targetIndex, 1);
+                }
+                model.set(targetIndex, network);
             }
         });
     }
@@ -78,12 +83,6 @@ Singleton {
         toggleWiFiProcess.running = true;
     }
 
-    function refresh() {
-        getStatus.running = true;
-        getSavedConnections.running = true;
-        getConnectedNetworkInfo.running = true;
-    }
-
     Process {
         id: getStatus
         command: ["nmcli", "-g", "TYPE,STATE", "d"]
@@ -96,6 +95,7 @@ Singleton {
                 root.status = match[1] || "unavailable";
                 root.setIcon();
                 root.statusSet();
+                getSavedConnections.running = true;
             }
         }
     }
@@ -108,8 +108,10 @@ Singleton {
                 let savedNetworks = text.trim().split('\n').map(n => {
                     return n.replace(/ \[.*\]$/, '');
                 });
-                root.savedNetworks = new Set(savedNetworks.filter(n => n));
+                root.savedNetworks.clear();
+                savedNetworks.filter(n => n).forEach(n => root.savedNetworks.add(n));
                 getConnections.running = true;
+                getConnectedNetworkInfo.running = true;
             }
         }
     }
@@ -189,7 +191,7 @@ Singleton {
         stdout: SplitParser {
             onRead: line => {
                 if (line.includes('wifi') || line.includes(root.wifiDevice)) {
-                    root.refresh();
+                    getStatus.running = true;
                 }
             }
         }
@@ -228,7 +230,7 @@ Singleton {
     Component.onCompleted: {
         getWifiDevice.running = true;
         monitorNetwork.running = true;
-        refresh();
+        getStatus.running = true;
     }
 
     onFetchedNetwork: {
