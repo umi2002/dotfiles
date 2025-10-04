@@ -32,7 +32,7 @@ Rectangle {
 
         background: Rectangle {
             implicitWidth: 10
-            implicitHeight: root.implicitHeight - 50
+            implicitHeight: root.height - 50
             radius: implicitWidth / 2
             color: Style.palette.border1
 
