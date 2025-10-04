@@ -121,48 +121,67 @@ Singleton {
         command: ["nmcli", "-g", "ACTIVE,SIGNAL,SSID", "d", "w"]
         stdout: StdioCollector {
             onStreamFinished: {
-                let networks = {};
-                let lines = text.trim().split('\n');
-                lines.forEach(line => {
-                    if (line) {
-                        let parts = line.split(':');
-                        let signal = parseInt(parts[1]) || 0;
-                        let ssid = parts[2] || "";
+                let networksMap = new Map();
+                let connectedSSID = "";
+                let connectedSignal = 0;
 
-                        if (ssid && (!networks[ssid] || signal > networks[ssid].signal)) {
-                            networks[ssid] = {
-                                ssid: ssid,
-                                signal: signal
-                            };
-                        }
+                let lines = text.trim().split('\n');
+
+                lines.forEach(line => {
+                    if (!line)
+                        return;
+
+                    let parts = line.split(':');
+                    if (parts.length < 3) {
+                        console.warn("Invalid network line:", line);
+                        return;
+                    }
+
+                    let isActive = parts[0] === 'yes';
+                    let signal = parseInt(parts[1]);
+                    let ssid = parts.slice(2).join(':');
+
+                    if (!ssid)
+                        return;
+
+                    if (isNaN(signal)) {
+                        console.warn("Invalid signal for", ssid);
+                        signal = 0;
+                    }
+
+                    if (isActive) {
+                        connectedSSID = ssid;
+                        connectedSignal = signal;
+                    }
+
+                    let existing = networksMap.get(ssid);
+                    if (!existing || signal > existing.signal) {
+                        networksMap.set(ssid, {
+                            ssid: ssid,
+                            signal: signal,
+                            isActive: isActive
+                        });
                     }
                 });
 
-                let allNetworks = Object.values(networks).sort((a, b) => b.signal - a.signal);
+                root.connectedNetwork = connectedSSID;
+                root.networkStrength = connectedSignal.toString();
+
+                let allNetworks = Array.from(networksMap.values()).sort((a, b) => b.signal - a.signal);
 
                 let known = allNetworks.filter(n => root.savedNetworks.has(n.ssid));
+                let unknown = allNetworks.filter(n => !root.savedNetworks.has(n.ssid));
 
-                if (root.connectedNetwork) {
-                    let connectedIndex = known.findIndex(n => n.ssid === root.connectedNetwork);
+                if (connectedSSID && root.savedNetworks.has(connectedSSID)) {
+                    let connectedIndex = known.findIndex(n => n.ssid === connectedSSID);
                     if (connectedIndex > 0) {
-                        let connectedNet = known.splice(connectedIndex, 1)[0];
+                        let [connectedNet] = known.splice(connectedIndex, 1);
                         known.unshift(connectedNet);
                     }
                 }
 
-                let unknown = allNetworks.filter(n => !root.savedNetworks.has(n.ssid));
-
                 root.updateNetworkModel(root.knownNetworks, known);
                 root.updateNetworkModel(root.unknownNetworks, unknown);
-
-                let pattern = "^yes:(\\d+):(.*)$";
-                let regex = new RegExp(pattern, "m");
-                let match = regex.exec(text);
-
-                if (match) {
-                    root.connectedNetwork = match[2] || "";
-                    root.networkStrength = match[1] || "";
-                }
 
                 root.fetchedNetwork();
             }
