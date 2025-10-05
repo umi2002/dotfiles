@@ -1,22 +1,30 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
-import QtQuick.Layouts
 
 import qs
 import qs.services
 
 Rectangle {
     id: root
+
     required property bool isHovered
 
-    clip: true
     implicitWidth: isHovered ? 200 : 0
     implicitHeight: 50
     color: Style.palette.background1
-    topRightRadius: 10
+    radius: 10
+    clip: true
+
+    Behavior on implicitWidth {
+        NumberAnimation {
+            duration: 400
+            easing.type: Easing.InOutBack
+        }
+    }
 
     Text {
-        id: info
-        text: Battery.timeToEmpty || Battery.timeToFull
+        text: Battery.timeRemaining
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter
         font.pointSize: Style.font.size2

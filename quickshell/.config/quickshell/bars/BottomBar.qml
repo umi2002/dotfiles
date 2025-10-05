@@ -6,6 +6,7 @@ import QtQuick.Layouts
 
 import qs
 import qs.components
+import qs.components.battery
 
 Rectangle {
     id: root
