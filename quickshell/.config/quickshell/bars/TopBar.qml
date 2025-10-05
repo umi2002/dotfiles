@@ -15,24 +15,29 @@ Rectangle {
     anchors.rightMargin: margins
     color: "transparent"
 
-    RowLayout {
+    Item {
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: root.margins
-        spacing: 20
+        implicitWidth: childrenRect.width
+        implicitHeight: childrenRect.height
 
-        IconImage {
-            source: Assets.archLinux
+        RowLayout {
+            spacing: 20
 
-            implicitSize: 30
-            Layout.alignment: Qt.AlignVCenter
-        }
+            IconImage {
+                source: Assets.archLinux
 
-        Workspaces {
-            Layout.alignment: Qt.AlignVCenter
-            radius: Math.min(width, height) / 2
+                implicitSize: 30
+                Layout.alignment: Qt.AlignVCenter
+            }
 
-            color: Style.palette.background2
+            Workspaces {
+                Layout.alignment: Qt.AlignVCenter
+                radius: Math.min(width, height) / 2
+
+                color: Style.palette.background2
+            }
         }
     }
 
