@@ -1,12 +1,8 @@
-import Quickshell.Widgets
-import Quickshell.Services.UPower
 import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
 
-import qs
 import qs.components
 import qs.components.battery
+import qs.components.system
 
 Rectangle {
     id: root
@@ -25,33 +21,14 @@ Rectangle {
         z: 1
     }
 
-    WrapperMouseArea {
-        id: popupMouseArea
+    StyledPopup {
+        id: systemPopup
+        anchors.left: parent.left
+        anchors.leftMargin: 10
         anchors.bottom: system.top
-        width: popup.implicitWidth
-        height: popup.implicitHeight
-
-        Rectangle {
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 20
-            implicitWidth: popup.implicitWidth
-            implicitHeight: popup.implicitHeight
-            color: "transparent"
-
-            SystemPopup {
-                id: popup
-                isExpanded: system.isExpanded
-
-                Behavior on implicitHeight {
-                    NumberAnimation {
-                        duration: 400
-                        easing.type: Easing.InOutBack
-                    }
-                }
-            }
-        }
+        anchors.bottomMargin: 20
+        isExpanded: system.isExpanded
+        popupContent: SystemPopup {}
     }
 
     System {
