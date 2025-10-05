@@ -18,6 +18,7 @@ Singleton {
     property string networkStrength: ""
     property string networkIcon: ""
     property string wifiDevice: ""
+    readonly property bool isConnecting: connectProcess.running
 
     signal fetchedNetwork
     signal statusSet
@@ -132,22 +133,14 @@ Singleton {
                         return;
 
                     let parts = line.split(':');
-                    if (parts.length < 3) {
-                        console.warn("Invalid network line:", line);
-                        return;
-                    }
 
                     let isActive = parts[0] === 'yes';
                     let signal = parseInt(parts[1]);
                     let ssid = parts.slice(2).join(':');
+                    let security = parts[parts.length - 1];
 
                     if (!ssid)
                         return;
-
-                    if (isNaN(signal)) {
-                        console.warn("Invalid signal for", ssid);
-                        signal = 0;
-                    }
 
                     if (isActive) {
                         connectedSSID = ssid;
@@ -159,7 +152,8 @@ Singleton {
                         networksMap.set(ssid, {
                             ssid: ssid,
                             signal: signal,
-                            isActive: isActive
+                            isActive: isActive,
+                            requiresPassword: security !== '' && security !== '--'
                         });
                     }
                 });
@@ -186,6 +180,16 @@ Singleton {
                 root.fetchedNetwork();
             }
         }
+    }
+
+    function disconnect() {
+        disconnectProcess.running = true;
+    }
+
+    function connect(ssid, password) {
+        connectProcess.ssid = ssid;
+        connectProcess.password = password;
+        connectProcess.running = true;
     }
 
     Process {
@@ -233,6 +237,27 @@ Singleton {
                     }
                 }
             }
+        }
+    }
+
+    Process {
+        id: disconnectProcess
+        command: ["nmcli", "device", "disconnect", root.wifiDevice]
+    }
+
+    Process {
+        id: connectProcess
+        property string ssid: ""
+        property string password: ""
+        command: {
+            let cmd = ["nmcli", "device", "wifi", "connect", ssid];
+            if (password) {
+                cmd.push("password", password);
+            }
+            return cmd;
+        }
+        onExited: {
+            connectProcess.password = "";
         }
     }
 

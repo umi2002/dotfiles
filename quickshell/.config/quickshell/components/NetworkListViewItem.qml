@@ -52,7 +52,7 @@ WrapperMouseArea {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
-                implicitHeight: networkName.height + (network.isConnectedNetwork ? 20 : 0)
+                implicitHeight: networkName.height
                 color: "transparent"
 
                 Text {
@@ -67,14 +67,25 @@ WrapperMouseArea {
                 }
 
                 WrapperMouseArea {
-                    opacity: root.isHovered ? 1 : 0
-                    cursorShape: Qt.PointingHandCursor
+                    enabled: !Network.isConnecting
+                    opacity: root.isHovered ? (Network.isConnecting ? 0.5 : 1) : 0
+                    cursorShape: Network.isConnecting ? Qt.BusyCursor : Qt.PointingHandCursor
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: caret.left
                     anchors.rightMargin: 10
 
                     onClicked: {
                         pulseAnimation.start();
+
+                        if (network.isConnectedNetwork) {
+                            network.isExpanded = false;
+                            Network.disconnect();
+                            return;
+                        }
+
+                        if (Network.savedNetworks.has(root.modelData.ssid)) {
+                            Network.connect(root.modelData.ssid, "");
+                        }
                     }
 
                     Behavior on opacity {
