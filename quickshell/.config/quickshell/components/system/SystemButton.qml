@@ -3,6 +3,7 @@ import QtQuick.Layouts
 
 import qs
 import qs.components
+import qs.components.bluetooth
 import qs.components.network
 
 Rectangle {

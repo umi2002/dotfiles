@@ -5,33 +5,27 @@ import QtQuick
 import QtQuick.Effects
 
 import qs
+import qs.components
 import qs.services
 
-IconImage {
+ColorizedIcon {
     id: root
-    property string color
-    source: Qt.resolvedUrl(Network.networkIcon)
-
-    layer.enabled: true
-    layer.effect: MultiEffect {
-        colorization: 1
-        colorizationColor: root.color
-    }
+    iconSource: Network.networkIcon
 
     Connections {
         target: Network
         function onStatusSet() {
             if (Network.status === "connected") {
-                root.color = Style.palette.color2;
+                root.iconColor = Style.palette.color2;
                 return;
             }
 
             if (Network.status === "disconnected") {
-                root.color = Style.palette.color1;
+                root.iconColor = Style.palette.color1;
                 return;
             }
 
-            root.color = Style.palette.color3;
+            root.iconColor = Style.palette.color3;
         }
     }
 }

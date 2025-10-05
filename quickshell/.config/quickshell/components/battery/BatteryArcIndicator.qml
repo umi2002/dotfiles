@@ -5,13 +5,15 @@ import QtQuick
 import QtQuick.Shapes
 import QtQuick.Effects
 
+import qs.components
+import qs.services
+
 Item {
     id: root
 
     property real value: 0
     property color primaryColor: "white"
     property color secondaryColor: "gray"
-    property string iconSource: ""
     property int size: 35
     property int lineWidth: 2
 
@@ -64,16 +66,11 @@ Item {
             }
         }
 
-        IconImage {
-            source: root.iconSource
+        ColorizedIcon {
+            iconSource: Battery.batteryIcon
+            iconColor: root.primaryColor
             anchors.centerIn: parent
             implicitSize: 20
-
-            layer.enabled: true
-            layer.effect: MultiEffect {
-                colorization: 1
-                colorizationColor: root.primaryColor
-            }
         }
     }
 }

@@ -15,15 +15,10 @@ WrapperMouseArea {
     }
 
     RowLayout {
-        IconImage {
-            source: Qt.resolvedUrl(Audio.volumeIcon)
+        ColorizedIcon {
+            iconSource: Audio.volumeIcon
+            iconColor: Style.palette.color1
             implicitSize: 30
-
-            layer.enabled: true
-            layer.effect: MultiEffect {
-                colorization: 1
-                colorizationColor: Style.palette.color1
-            }
         }
 
         Text {

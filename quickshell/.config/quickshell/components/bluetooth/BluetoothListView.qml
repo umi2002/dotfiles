@@ -3,14 +3,13 @@ pragma ComponentBehavior: Bound
 import QtQuick
 
 import qs
-import qs.components
 
 Rectangle {
     id: root
     required property var model
 
     clip: true
-    implicitHeight: devices.implicitHeight + 30
+    implicitHeight: devicesList.implicitHeight + 30
     radius: 20
     color: Style.palette.background2
 
@@ -22,7 +21,7 @@ Rectangle {
     }
 
     ListView {
-        id: devices
+        id: devicesList
         model: root.model
 
         anchors.verticalCenter: parent.verticalCenter
@@ -60,8 +59,7 @@ Rectangle {
         }
 
         delegate: BluetoothListViewItem {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            width: devicesList.width
         }
     }
 }

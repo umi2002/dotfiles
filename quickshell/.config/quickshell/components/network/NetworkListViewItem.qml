@@ -43,10 +43,6 @@ WrapperMouseArea {
                 }
             }
 
-            MouseArea {
-                anchors.fill: parent
-            }
-
             Rectangle {
                 id: networkNameContainer
                 anchors.left: parent.left

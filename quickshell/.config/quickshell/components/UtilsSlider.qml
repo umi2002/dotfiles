@@ -1,9 +1,9 @@
-import Quickshell.Widgets
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
 import qs
+import qs.components
 
 RowLayout {
     id: root
@@ -12,9 +12,10 @@ RowLayout {
     required property var setValueCallback
     property bool isUserInteracting: false
 
-    IconImage {
+    ColorizedIcon {
         id: iconImage
-        source: Qt.resolvedUrl(root.icon)
+        iconSource: Qt.resolvedUrl(root.icon)
+        iconColor: Style.palette.color1
         implicitSize: 30
     }
 

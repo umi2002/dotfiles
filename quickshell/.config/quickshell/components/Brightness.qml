@@ -1,21 +1,15 @@
-import Quickshell.Widgets
 import QtQuick
-import QtQuick.Effects
 import QtQuick.Layouts
 
 import qs
+import qs.components
 import qs.services
 
 RowLayout {
-    IconImage {
-        source: Qt.resolvedUrl(Brightness.brightnessIcon)
+    ColorizedIcon {
+        iconSource: Qt.resolvedUrl(Brightness.brightnessIcon)
+        iconColor: Style.palette.color1
         implicitSize: 30
-
-        layer.enabled: true
-        layer.effect: MultiEffect {
-            colorization: 1
-            colorizationColor: Style.palette.color1
-        }
     }
 
     Text {

@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 import qs.components
+import qs.components.bluetooth
 import qs.components.network
 
 ScrollView {

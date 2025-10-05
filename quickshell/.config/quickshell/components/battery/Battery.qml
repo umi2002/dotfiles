@@ -41,7 +41,6 @@ Item {
                 value: root.batteryValue
                 primaryColor: root.batteryColor
                 secondaryColor: Style.palette.background2
-                iconSource: Battery.batteryIcon
             }
 
             BatteryIndicator {

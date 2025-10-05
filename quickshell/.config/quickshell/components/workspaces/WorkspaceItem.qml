@@ -6,6 +6,7 @@ import QtQuick.Effects
 
 import qs
 import qs.assets
+import qs.components
 import qs.services
 
 Rectangle {
@@ -28,20 +29,16 @@ Rectangle {
         }
     }
 
-    IconImage {
+    ColorizedIcon {
         id: iconImage
         property string desktopIcon
         readonly property string icon: workspaceItem.modelData ? Assets.workspace.occupied : Assets.workspace.unoccupied
 
-        source: desktopIcon || Qt.resolvedUrl(icon)
+        iconSource: desktopIcon || Qt.resolvedUrl(icon)
+        iconColor: workspaceItem.iconColor
+        layer.enabled: !desktopIcon
         anchors.centerIn: parent
         implicitSize: 20
-
-        layer.enabled: !desktopIcon
-        layer.effect: MultiEffect {
-            colorization: 1
-            colorizationColor: workspaceItem.iconColor
-        }
 
         Connections {
             target: HyprlandData
