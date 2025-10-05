@@ -4,8 +4,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import qs
 import qs.services
-import "../Style.js" as Style
 
 Rectangle {
     id: root

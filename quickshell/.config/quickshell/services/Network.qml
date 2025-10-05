@@ -5,6 +5,8 @@ import Quickshell.Io
 import QtQuick
 import QtQml.Models
 
+import qs.assets
+
 Singleton {
     id: root
 
@@ -59,24 +61,24 @@ Singleton {
 
     function setIcon() {
         if (status === "unavailable") {
-            networkIcon = "../assets/wifi_off_icon.svg";
+            networkIcon = Assets.wifi.off;
             return;
         }
 
         if (status === "disconnected") {
-            networkIcon = "../assets/missing_wifi_icon.svg";
+            networkIcon = Assets.wifi.missing;
             return;
         }
 
         let intNetworkStrength = parseInt(networkStrength);
         if (intNetworkStrength > 80) {
-            networkIcon = "../assets/wifi_4_bar_icon.svg";
+            networkIcon = Assets.wifi.bar4;
         } else if (intNetworkStrength > 60) {
-            networkIcon = "../assets/wifi_3_bar_icon.svg";
+            networkIcon = Assets.wifi.bar3;
         } else if (intNetworkStrength > 40) {
-            networkIcon = "../assets/wifi_2_bar_icon.svg";
+            networkIcon = Assets.wifi.bar2;
         } else {
-            networkIcon = "../assets/wifi_1_bar_icon.svg";
+            networkIcon = Assets.wifi.bar1;
         }
     }
 

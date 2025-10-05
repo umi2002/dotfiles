@@ -4,7 +4,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Effects
 
-import "../Style.js" as Style
+import qs
 
 PanelWindow {
     id: root

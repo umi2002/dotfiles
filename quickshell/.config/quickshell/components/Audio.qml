@@ -3,7 +3,7 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 
-import "../Style.js" as Style
+import qs
 import qs.services
 
 WrapperMouseArea {

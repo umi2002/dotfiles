@@ -6,9 +6,9 @@ import QtQuick.Effects
 import QtQuick.Layouts
 import QtQuick.Shapes
 
+import qs
 import qs.components
 import qs.services
-import "../Style.js" as Style
 
 Item {
     id: root

@@ -2,8 +2,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 
+import qs
 import qs.components
-import "../Style.js" as Style
 
 Rectangle {
     id: root

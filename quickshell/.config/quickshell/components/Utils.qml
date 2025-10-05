@@ -2,8 +2,8 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 
+import qs
 import qs.components
-import "../Style.js" as Style
 
 Item {
     id: root

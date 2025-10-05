@@ -3,7 +3,7 @@ pragma ComponentBehavior: Bound
 import Quickshell.Widgets
 import QtQuick
 
-import "../Style.js" as Style
+import qs
 
 WrapperMouseArea {
     id: root

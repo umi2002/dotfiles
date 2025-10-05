@@ -1,6 +1,6 @@
 import Quickshell
 
-import "../Style.js" as Style
+import qs
 
 PanelWindow {
     anchors {

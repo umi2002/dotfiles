@@ -4,6 +4,8 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Pipewire
 
+import qs.assets
+
 Singleton {
     id: root
 
@@ -30,15 +32,15 @@ Singleton {
     readonly property int volume: Math.round(defaultSink?.audio?.volume * 100)
     readonly property string volumeIcon: {
         if (defaultSink?.audio?.muted) {
-            return "../assets/volume_off_icon.svg";
+            return Assets.volume.off;
         }
 
         if (volume > 60) {
-            return "../assets/volume_high_icon.svg";
+            return Assets.volume.high;
         } else if (volume > 20) {
-            return "../assets/volume_medium_icon.svg";
+            return Assets.volume.medium;
         } else {
-            return "../assets/volume_low_icon.svg";
+            return Assets.volume.low;
         }
     }
 

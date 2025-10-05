@@ -5,6 +5,8 @@ import Quickshell.Bluetooth
 import Quickshell.Io
 import QtQml.Models
 
+import qs.assets
+
 Singleton {
     id: root
 
@@ -32,15 +34,15 @@ Singleton {
         case 0:
         default:
             {
-                return "../assets/bluetooth_off_icon.svg";
+                return Assets.bluetooth.off;
             }
         case 1:
             {
-                return "../assets/bluetooth_connected_icon.svg";
+                return Assets.bluetooth.connected;
             }
         case 2:
             {
-                return "../assets/bluetooth_disconnected_icon.svg";
+                return Assets.bluetooth.disconnected;
             }
         }
     }

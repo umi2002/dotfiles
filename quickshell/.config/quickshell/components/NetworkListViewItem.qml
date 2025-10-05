@@ -5,8 +5,9 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 
+import qs
+import qs.assets
 import qs.services
-import "../Style.js" as Style
 
 WrapperMouseArea {
     id: root
@@ -149,7 +150,7 @@ WrapperMouseArea {
                         active: network.isConnectedNetwork
 
                         sourceComponent: IconImage {
-                            source: Qt.resolvedUrl("../assets/caret_forward_icon.svg")
+                            source: Assets.wifi.caretForward
                             implicitSize: 30
 
                             layer.enabled: true

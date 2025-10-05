@@ -3,8 +3,8 @@ pragma ComponentBehavior: Bound
 import Quickshell.Widgets
 import QtQuick.Effects
 
+import qs
 import qs.services
-import "../Style.js" as Style
 
 IconImage {
     id: root

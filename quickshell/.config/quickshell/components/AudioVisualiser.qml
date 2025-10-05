@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs.services
-import "../Style.js" as Style
+import qs
 
 Rectangle {
     implicitHeight: 100

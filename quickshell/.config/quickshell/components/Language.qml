@@ -1,8 +1,7 @@
 import QtQuick
 
+import qs
 import qs.services
-
-import "../Style.js" as Style
 
 Text {
     text: HyprlandData.keyboardLanguage

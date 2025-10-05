@@ -3,7 +3,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "../Style.js" as Style
+import qs
 
 RowLayout {
     id: root

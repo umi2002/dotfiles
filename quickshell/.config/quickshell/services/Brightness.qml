@@ -4,6 +4,8 @@ import Quickshell
 import Quickshell.Io
 import QtQuick
 
+import qs.assets
+
 Singleton {
     id: root
 
@@ -12,11 +14,11 @@ Singleton {
     readonly property int brightnessPercent: Math.round(brightness / maxBrightness * 100) || 0
     readonly property string brightnessIcon: {
         if (brightnessPercent > 80) {
-            return "../assets/brightness_high_icon.svg";
+            return Assets.brightness.high;
         } else if (brightnessPercent > 40) {
-            return "../assets/brightness_medium_icon.svg";
+            return Assets.brightness.medium;
         } else {
-            return "../assets/brightness_low_icon.svg";
+            return Assets.brightness.low;
         }
     }
 

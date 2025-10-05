@@ -2,8 +2,10 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 
+import qs
+import qs.assets
 import qs.components
-import "../Style.js" as Style
+import qs.components.workspaces
 
 Rectangle {
     id: root
@@ -20,15 +22,13 @@ Rectangle {
         spacing: 20
 
         IconImage {
-            source: Qt.resolvedUrl("../assets/arch_linux_icon.svg")
+            source: Assets.archLinux
 
             implicitSize: 30
             Layout.alignment: Qt.AlignVCenter
         }
 
         Workspaces {
-            Layout.preferredWidth: childrenRect.width + 40
-            Layout.preferredHeight: childrenRect.height + 5
             Layout.alignment: Qt.AlignVCenter
             radius: Math.min(width, height) / 2
 

@@ -2,6 +2,7 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 
+import qs.assets
 import qs.services
 
 Rectangle {
@@ -19,7 +20,7 @@ Rectangle {
             }
 
             IconImage {
-                source: Qt.resolvedUrl("../assets/skip_previous_icon.svg")
+                source: Assets.media.skipPrevious
                 implicitSize: root.height - 20
             }
         }
@@ -33,7 +34,7 @@ Rectangle {
             }
 
             IconImage {
-                source: Qt.resolvedUrl(Media.spotifyPlayer?.isPlaying ? "../assets/pause_icon.svg" : "../assets/play_icon.svg")
+                source: Media.spotifyPlayer?.isPlaying ? Assets.media.pause : Assets.media.play
                 implicitSize: root.height - 20
             }
         }
@@ -47,7 +48,7 @@ Rectangle {
             }
 
             IconImage {
-                source: Qt.resolvedUrl("../assets/skip_next_icon.svg")
+                source: Assets.media.skipNext
                 implicitSize: root.height - 20
                 Layout.alignment: Qt.AlignHCenter
             }

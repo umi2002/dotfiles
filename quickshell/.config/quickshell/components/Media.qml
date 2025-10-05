@@ -3,9 +3,9 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 
+import qs
+import qs.assets
 import qs.services
-
-import "../Style.js" as Style
 
 Item {
     id: root
@@ -62,7 +62,7 @@ Item {
             }
 
             IconImage {
-                source: Qt.resolvedUrl("../assets/spotify_logo.svg")
+                source: Assets.logos.spotify
                 Layout.leftMargin: 5
                 Layout.rightMargin: 5
                 implicitSize: 30

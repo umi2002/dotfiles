@@ -2,8 +2,8 @@ import Quickshell.Services.Mpris
 import QtQuick
 import QtQuick.Controls
 
+import qs
 import qs.services
-import "../Style.js" as Style
 
 Rectangle {
     id: root

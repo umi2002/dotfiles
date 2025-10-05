@@ -2,8 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import qs
+import qs.assets
 import qs.components
-import "../Style.js" as Style
 
 Rectangle {
     id: root
@@ -31,13 +32,13 @@ Rectangle {
         spacing: 20
 
         SystemPopupButton {
-            icon: "../assets/wifi_icon.svg"
+            icon: Assets.wifi.default_
             isSelected: buttons.selectedIndex === 0
             onClicked: buttons.selectedIndex = 0
         }
 
         SystemPopupButton {
-            icon: "../assets/bluetooth_icon.svg"
+            icon: Assets.bluetooth.default_
             isSelected: buttons.selectedIndex === 1
             onClicked: buttons.selectedIndex = 1
         }
