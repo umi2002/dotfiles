@@ -68,7 +68,7 @@ ColumnLayout {
                 anchors.verticalCenter: parent.verticalCenter
 
                 sourceComponent: IconImage {
-                    source: Assets.wifi.caretForward
+                    source: Assets.caretForward
                     implicitSize: 30
 
                     layer.enabled: true

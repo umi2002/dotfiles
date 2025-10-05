@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 import QtQuick
 
 import qs
-import qs.components
 
 Rectangle {
     id: root

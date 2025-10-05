@@ -9,6 +9,7 @@ QtObject {
     }
 
     readonly property url archLinux: resolveAsset("arch_linux_icon.svg")
+    readonly property url caretForward: assets.resolveAsset("caret_forward_icon.svg")
 
     readonly property var workspace: QtObject {
         readonly property url occupied: assets.resolveAsset("occupied_workspace_icon.svg")
@@ -30,7 +31,6 @@ QtObject {
         readonly property url bar2: assets.resolveAsset("wifi_2_bar_icon.svg")
         readonly property url bar3: assets.resolveAsset("wifi_3_bar_icon.svg")
         readonly property url bar4: assets.resolveAsset("wifi_4_bar_icon.svg")
-        readonly property url caretForward: assets.resolveAsset("caret_forward_icon.svg")
     }
 
     readonly property var volume: QtObject {

@@ -3,6 +3,7 @@ import QtQuick.Layouts
 
 import qs
 import qs.components
+import qs.components.network
 
 Rectangle {
     id: root

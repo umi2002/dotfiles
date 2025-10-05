@@ -14,16 +14,31 @@ Singleton {
     property ListModel unknownNetworks: ListModel {}
     property var savedNetworks: new Set()
     property string status: ""
-    readonly property bool isWiFiOn: status !== "unavailable"
     property string connectedNetwork: ""
     property string connectedNetworkInfo: ""
     property string networkStrength: ""
     property string networkIcon: ""
     property string wifiDevice: ""
+
+    readonly property bool isWiFiOn: status !== "unavailable"
     readonly property bool isConnecting: connectProcess.running
 
     signal fetchedNetwork
     signal statusSet
+
+    function toggleWiFi() {
+        toggleWiFiProcess.running = true;
+    }
+
+    function disconnect() {
+        disconnectProcess.running = true;
+    }
+
+    function connect(ssid, password) {
+        connectProcess.ssid = ssid;
+        connectProcess.password = password;
+        connectProcess.running = true;
+    }
 
     function updateNetworkModel(model, newNetworks) {
         let existing = new Map();
@@ -40,13 +55,7 @@ Singleton {
         }
 
         newNetworks.forEach((network, targetIndex) => {
-            let currentIndex = -1;
-            for (let i = 0; i < model.count; i++) {
-                if (model.get(i).ssid === network.ssid) {
-                    currentIndex = i;
-                    break;
-                }
-            }
+            let currentIndex = findNetworkIndex(model, network.ssid);
 
             if (currentIndex === -1) {
                 model.insert(targetIndex, network);
@@ -57,6 +66,33 @@ Singleton {
                 model.set(targetIndex, network);
             }
         });
+    }
+
+    function findNetworkIndex(model, ssid) {
+        for (let i = 0; i < model.count; i++) {
+            if (model.get(i).ssid === ssid) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    function categorizeNetworks(allNetworks, connectedSSID) {
+        let known = allNetworks.filter(n => root.savedNetworks.has(n.ssid));
+        let unknown = allNetworks.filter(n => !root.savedNetworks.has(n.ssid));
+
+        if (connectedSSID && root.savedNetworks.has(connectedSSID)) {
+            let connectedIndex = known.findIndex(n => n.ssid === connectedSSID);
+            if (connectedIndex > 0) {
+                let [connectedNet] = known.splice(connectedIndex, 1);
+                known.unshift(connectedNet);
+            }
+        }
+
+        return {
+            known,
+            unknown
+        };
     }
 
     function setIcon() {
@@ -70,20 +106,85 @@ Singleton {
             return;
         }
 
-        let intNetworkStrength = parseInt(networkStrength);
-        if (intNetworkStrength > 80) {
-            networkIcon = Assets.wifi.bar4;
-        } else if (intNetworkStrength > 60) {
-            networkIcon = Assets.wifi.bar3;
-        } else if (intNetworkStrength > 40) {
-            networkIcon = Assets.wifi.bar2;
+        networkIcon = getIconForSignalStrength(networkStrength);
+    }
+
+    function getIconForSignalStrength(strength) {
+        let intStrength = parseInt(strength);
+        if (intStrength > 80) {
+            return Assets.wifi.bar4;
+        } else if (intStrength > 60) {
+            return Assets.wifi.bar3;
+        } else if (intStrength > 40) {
+            return Assets.wifi.bar2;
         } else {
-            networkIcon = Assets.wifi.bar1;
+            return Assets.wifi.bar1;
         }
     }
 
-    function toggleWiFi() {
-        toggleWiFiProcess.running = true;
+    function parseDeviceStatus(output) {
+        let pattern = "^wifi:(.*)$";
+        let regex = new RegExp(pattern, "m");
+        let match = regex.exec(output);
+        return match ? match[1] : "unavailable";
+    }
+
+    function parseSavedConnections(output) {
+        return output.trim().split('\n').map(n => n.replace(/ \[.*\]$/, '')).filter(n => n);
+    }
+
+    function parseAvailableNetworks(output) {
+        let networksMap = new Map();
+        let connectedSSID = "";
+        let connectedSignal = 0;
+
+        let lines = output.trim().split('\n');
+
+        lines.forEach(line => {
+            if (!line)
+                return;
+
+            let parts = line.split(':');
+            let isActive = parts[0] === 'yes';
+            let signal = parseInt(parts[1]);
+            let ssid = parts.slice(2).join(':');
+            let security = parts[parts.length - 1];
+
+            if (!ssid)
+                return;
+
+            if (isActive) {
+                connectedSSID = ssid;
+                connectedSignal = signal;
+            }
+
+            let existing = networksMap.get(ssid);
+            if (!existing || signal > existing.signal) {
+                networksMap.set(ssid, {
+                    ssid: ssid,
+                    signal: signal,
+                    isActive: isActive,
+                    requiresPassword: security !== '' && security !== '--'
+                });
+            }
+        });
+
+        return {
+            networks: Array.from(networksMap.values()).sort((a, b) => b.signal - a.signal),
+            connectedSSID: connectedSSID,
+            connectedSignal: connectedSignal
+        };
+    }
+
+    function parseWiFiDevice(output) {
+        let lines = output.trim().split('\n');
+        for (let line of lines) {
+            let parts = line.split(':');
+            if (parts[1] === 'wifi') {
+                return parts[0];
+            }
+        }
+        return "";
     }
 
     Process {
@@ -91,11 +192,7 @@ Singleton {
         command: ["nmcli", "-g", "TYPE,STATE", "d"]
         stdout: StdioCollector {
             onStreamFinished: {
-                let pattern = "^wifi:(.*)$";
-                let regex = new RegExp(pattern, "m");
-                let match = regex.exec(text);
-
-                root.status = match[1] || "unavailable";
+                root.status = root.parseDeviceStatus(text);
                 root.setIcon();
                 root.statusSet();
                 getSavedConnections.running = true;
@@ -108,11 +205,9 @@ Singleton {
         command: ["nmcli", "-g", "NAME", "connection", "show"]
         stdout: StdioCollector {
             onStreamFinished: {
-                let savedNetworks = text.trim().split('\n').map(n => {
-                    return n.replace(/ \[.*\]$/, '');
-                });
+                let connections = root.parseSavedConnections(text);
                 root.savedNetworks.clear();
-                savedNetworks.filter(n => n).forEach(n => root.savedNetworks.add(n));
+                connections.forEach(n => root.savedNetworks.add(n));
                 getConnections.running = true;
                 getConnectedNetworkInfo.running = true;
             }
@@ -124,74 +219,18 @@ Singleton {
         command: ["nmcli", "-g", "ACTIVE,SIGNAL,SSID", "d", "w"]
         stdout: StdioCollector {
             onStreamFinished: {
-                let networksMap = new Map();
-                let connectedSSID = "";
-                let connectedSignal = 0;
+                let result = root.parseAvailableNetworks(text);
 
-                let lines = text.trim().split('\n');
+                root.connectedNetwork = result.connectedSSID;
+                root.networkStrength = result.connectedSignal.toString();
 
-                lines.forEach(line => {
-                    if (!line)
-                        return;
-
-                    let parts = line.split(':');
-
-                    let isActive = parts[0] === 'yes';
-                    let signal = parseInt(parts[1]);
-                    let ssid = parts.slice(2).join(':');
-                    let security = parts[parts.length - 1];
-
-                    if (!ssid)
-                        return;
-
-                    if (isActive) {
-                        connectedSSID = ssid;
-                        connectedSignal = signal;
-                    }
-
-                    let existing = networksMap.get(ssid);
-                    if (!existing || signal > existing.signal) {
-                        networksMap.set(ssid, {
-                            ssid: ssid,
-                            signal: signal,
-                            isActive: isActive,
-                            requiresPassword: security !== '' && security !== '--'
-                        });
-                    }
-                });
-
-                root.connectedNetwork = connectedSSID;
-                root.networkStrength = connectedSignal.toString();
-
-                let allNetworks = Array.from(networksMap.values()).sort((a, b) => b.signal - a.signal);
-
-                let known = allNetworks.filter(n => root.savedNetworks.has(n.ssid));
-                let unknown = allNetworks.filter(n => !root.savedNetworks.has(n.ssid));
-
-                if (connectedSSID && root.savedNetworks.has(connectedSSID)) {
-                    let connectedIndex = known.findIndex(n => n.ssid === connectedSSID);
-                    if (connectedIndex > 0) {
-                        let [connectedNet] = known.splice(connectedIndex, 1);
-                        known.unshift(connectedNet);
-                    }
-                }
-
-                root.updateNetworkModel(root.knownNetworks, known);
-                root.updateNetworkModel(root.unknownNetworks, unknown);
+                let categorized = root.categorizeNetworks(result.networks, result.connectedSSID);
+                root.updateNetworkModel(root.knownNetworks, categorized.known);
+                root.updateNetworkModel(root.unknownNetworks, categorized.unknown);
 
                 root.fetchedNetwork();
             }
         }
-    }
-
-    function disconnect() {
-        disconnectProcess.running = true;
-    }
-
-    function connect(ssid, password) {
-        connectProcess.ssid = ssid;
-        connectProcess.password = password;
-        connectProcess.running = true;
     }
 
     Process {
@@ -205,41 +244,18 @@ Singleton {
     }
 
     Process {
-        id: toggleWiFiProcess
-        command: ["nmcli", "r", "w", root.isWiFiOn ? "off" : "on"]
-    }
-
-    Process {
-        id: monitorNetwork
-        command: ["nmcli", "monitor"]
-        running: true
-        stdout: SplitParser {
-            onRead: line => {
-                if (line.includes('wifi') || line.includes(root.wifiDevice)) {
-                    getStatus.running = true;
-                }
-            }
-        }
-        onExited: {
-            running = true;
-        }
-    }
-
-    Process {
         id: getWifiDevice
         command: ["nmcli", "-g", "DEVICE,TYPE", "d", "s"]
         stdout: StdioCollector {
             onStreamFinished: {
-                let lines = text.trim().split('\n');
-                for (let line of lines) {
-                    let parts = line.split(':');
-                    if (parts[1] === 'wifi') {
-                        root.wifiDevice = parts[0];
-                        return;
-                    }
-                }
+                root.wifiDevice = root.parseWiFiDevice(text);
             }
         }
+    }
+
+    Process {
+        id: toggleWiFiProcess
+        command: ["nmcli", "r", "w", root.isWiFiOn ? "off" : "on"]
     }
 
     Process {
@@ -260,6 +276,22 @@ Singleton {
         }
         onExited: {
             connectProcess.password = "";
+        }
+    }
+
+    Process {
+        id: monitorNetwork
+        command: ["nmcli", "monitor"]
+        running: true
+        stdout: SplitParser {
+            onRead: line => {
+                if (line.includes('wifi') || line.includes(root.wifiDevice)) {
+                    getStatus.running = true;
+                }
+            }
+        }
+        onExited: {
+            running = true;
         }
     }
 
