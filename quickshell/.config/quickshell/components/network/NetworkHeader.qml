@@ -1,36 +1,57 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell.Widgets
 import QtQuick
-import QtQuick.Layouts
 
 import qs
 import qs.components
-import qs.services
 
-WrapperMouseArea {
+Rectangle {
     id: root
+    required property string networkName
+    required property bool isConnected
+    required property bool isHovered
+    required property bool isConnecting
+    property bool isExpanded
 
-    cursorShape: Qt.PointingHandCursor
+    signal actionTriggered
 
-    onClicked: {
-        Network.toggleWiFi();
+    implicitHeight: networkName.height + 10
+    color: "transparent"
+
+    Text {
+        id: networkName
+        text: root.networkName
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        font.pointSize: Style.font.size2
+        font.family: Style.font.family3
+        color: root.isConnected ? Style.palette.color2 : Style.palette.color1
     }
 
-    RowLayout {
-        Text {
-            text: "Wi-Fi"
-            font.pointSize: Style.font.size1
-            font.family: Style.font.family1
-            color: Style.palette.color1
-            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-        }
+    NetworkActionButton {
+        isConnected: root.isConnected
+        isHovered: root.isHovered
+        isConnecting: root.isConnecting
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: caret.left
+        anchors.rightMargin: 10
 
-        StyledSwitch {
-            id: wifiToggle
-            checked: Network.isWiFiOn
-            enabled: false
-            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        onActionTriggered: {
+            root.actionTriggered();
+        }
+    }
+
+    Loader {
+        id: caret
+        active: root.isConnected
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+
+        sourceComponent: ExpandCaret {
+            isExpanded: root.isExpanded
+            onToggled: {
+                root.isExpanded = !root.isExpanded;
+            }
         }
     }
 }

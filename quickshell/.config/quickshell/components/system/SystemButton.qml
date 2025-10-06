@@ -26,12 +26,12 @@ Rectangle {
         anchors.centerIn: parent
         spacing: 20
 
-        Network {
+        NetworkIcon {
             id: network
             implicitSize: 30
         }
 
-        Bluetooth {
+        BluetoothIcon {
             id: bluetooth
             implicitSize: 30
         }

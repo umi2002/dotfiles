@@ -1,31 +1,57 @@
 pragma ComponentBehavior: Bound
 
-import Quickshell.Widgets
 import QtQuick
-import QtQuick.Effects
 
-import qs
-import qs.components
 import qs.services
 
-ColorizedIcon {
+Rectangle {
     id: root
-    iconSource: Network.networkIcon
+    required property var network
+    readonly property bool isConnectedNetwork: network.ssid === Network.connectedNetwork
+    required property bool isHovered
 
-    Connections {
-        target: Network
-        function onStatusSet() {
-            if (Network.status === "connected") {
-                root.iconColor = Style.palette.color2;
-                return;
-            }
+    clip: true
+    implicitHeight: networkHeader.implicitHeight + (networkHeader.isExpanded ? networkInfoLoader.implicitHeight : 0)
+    color: "transparent"
 
-            if (Network.status === "disconnected") {
-                root.iconColor = Style.palette.color1;
-                return;
-            }
-
-            root.iconColor = Style.palette.color3;
+    Behavior on implicitHeight {
+        NumberAnimation {
+            duration: 300
+            easing.type: Easing.InOutCubic
         }
+    }
+
+    NetworkHeader {
+        id: networkHeader
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.top
+
+        networkName: root.network.ssid
+        isConnected: root.isConnectedNetwork
+        isHovered: root.isHovered
+        isConnecting: Network.isConnecting
+
+        onActionTriggered: {
+            if (root.isConnectedNetwork) {
+                isExpanded = false;
+                Network.disconnect();
+                return;
+            }
+
+            if (Network.savedNetworks.has(root.network.ssid)) {
+                Network.connect(root.network.ssid, "");
+            }
+        }
+    }
+
+    Loader {
+        id: networkInfoLoader
+        active: root.isConnectedNetwork
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: networkHeader.bottom
+
+        sourceComponent: NetworkInfo {}
     }
 }

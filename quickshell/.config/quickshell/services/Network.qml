@@ -24,7 +24,6 @@ Singleton {
     readonly property bool isConnecting: connectProcess.running
 
     signal fetchedNetwork
-    signal statusSet
 
     function toggleWiFi() {
         toggleWiFiProcess.running = true;
@@ -194,7 +193,6 @@ Singleton {
             onStreamFinished: {
                 root.status = root.parseDeviceStatus(text);
                 root.setIcon();
-                root.statusSet();
                 getSavedConnections.running = true;
             }
         }

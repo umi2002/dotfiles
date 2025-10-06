@@ -7,7 +7,7 @@ import qs.services
 ColumnLayout {
     spacing: 30
 
-    NetworkHeader {}
+    NetworkPopupHeader {}
 
     NetworkSection {
         title: "Saved Networks"

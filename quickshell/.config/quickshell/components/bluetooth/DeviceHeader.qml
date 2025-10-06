@@ -10,13 +10,12 @@ Rectangle {
     required property string deviceName
     required property bool isConnected
     property bool isExpanded
-    signal clicked
 
-    implicitHeight: nameText.height + (isConnected ? 20 : 0)
+    implicitHeight: deviceName.height + 10
     color: "transparent"
 
     Text {
-        id: nameText
+        id: deviceName
         text: root.deviceName
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter

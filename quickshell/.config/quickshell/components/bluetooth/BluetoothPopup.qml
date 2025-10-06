@@ -7,7 +7,7 @@ import qs.services
 ColumnLayout {
     spacing: 30
 
-    BluetoothHeader {
+    BluetoothPopupHeader {
         id: header
     }
 
