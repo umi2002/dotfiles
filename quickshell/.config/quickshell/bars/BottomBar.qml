@@ -5,6 +5,7 @@ import qs.components
 import qs.components.battery
 import qs.components.media
 import qs.components.system
+import qs.components.utils
 
 Rectangle {
     id: root

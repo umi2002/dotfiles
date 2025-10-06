@@ -1,5 +1,3 @@
-import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 
 import qs
@@ -7,29 +5,30 @@ import qs.components
 
 RowLayout {
     id: root
+
     required property int value
     required property string icon
     required property var setValueCallback
 
+    property int iconSize: 30
+    property int sliderWidth: 350
+    property int sliderHeight: 10
+
     ColorizedIcon {
-        id: iconImage
         iconSource: Qt.resolvedUrl(root.icon)
         iconColor: Style.palette.color1
-        implicitSize: 30
+        implicitSize: root.iconSize
     }
 
     HorizontalSlider {
-        id: slider
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        sliderWidth: 350
-        sliderHeight: 10
+        sliderWidth: root.sliderWidth
+        sliderHeight: root.sliderHeight
 
         value: root.value
         from: 0
         to: 100
 
-        onValueChange: {
-            return root.setValueCallback;
-        }
+        onValueChange: root.setValueCallback
     }
 }

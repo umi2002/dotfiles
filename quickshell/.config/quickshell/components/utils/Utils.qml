@@ -3,14 +3,12 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs
-import qs.components
 
 WrapperMouseArea {
-    id: utilsMouseArea
+    id: root
     hoverEnabled: true
 
     Rectangle {
-        id: utils
         implicitWidth: layout.width + 20
         implicitHeight: layout.height + 5
         radius: height / 2
@@ -19,6 +17,7 @@ WrapperMouseArea {
         RowLayout {
             id: layout
             anchors.centerIn: parent
+            spacing: 0
 
             Brightness {
                 Layout.alignment: Qt.AlignVCenter
@@ -26,15 +25,7 @@ WrapperMouseArea {
                 Layout.preferredHeight: childrenRect.height
             }
 
-            Rectangle {
-                Layout.alignment: Qt.AlignVCenter
-                Layout.preferredWidth: 2
-                Layout.preferredHeight: parent.height - 5
-                Layout.leftMargin: 5
-                Layout.rightMargin: 5
-                color: Style.palette.color1
-                opacity: 0.4
-            }
+            UtilsSeparator {}
 
             Audio {
                 Layout.alignment: Qt.AlignVCenter
