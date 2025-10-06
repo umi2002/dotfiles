@@ -4,12 +4,16 @@ Item {
     id: root
     required property bool isExpanded
     required property Component popupContent
+    property int topMargin: 0
+    property int bottomMargin: 0
+    property int leftMargin: 0
+    property int rightMargin: 0
 
     property int animationDuration: 400
     property var animationEasing: Easing.InOutBack
 
-    width: loader.width
-    height: loader.height
+    implicitWidth: loader.width
+    implicitHeight: loader.height
 
     Loader {
         id: loader

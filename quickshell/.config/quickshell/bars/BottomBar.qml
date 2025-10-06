@@ -1,13 +1,15 @@
+import Quickshell.Widgets
 import QtQuick
 
 import qs.components
 import qs.components.battery
+import qs.components.media
 import qs.components.system
 
 Rectangle {
     id: root
     required property var backdrop
-    readonly property bool hasPopup: system.isExpanded || utils.isHovered || media.isHovered
+    readonly property bool hasPopup: system.isExpanded || utils.isHovered || mediaPopup.isExpanded
     readonly property int margins: 10
 
     anchors.leftMargin: margins
@@ -37,6 +39,20 @@ Rectangle {
         anchors.left: battery.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.leftMargin: root.margins
+    }
+
+    WrapperMouseArea {
+        id: mediaPopupMouseArea
+        hoverEnabled: true
+        anchors.horizontalCenter: media.horizontalCenter
+        anchors.bottom: media.top
+        height: mediaPopup.implicitHeight + 20
+
+        StyledPopup {
+            id: mediaPopup
+            isExpanded: mediaPopupMouseArea.containsMouse || media.containsMouse
+            popupContent: MediaPopup {}
+        }
     }
 
     Media {
