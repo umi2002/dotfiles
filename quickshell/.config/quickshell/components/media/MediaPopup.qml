@@ -11,7 +11,7 @@ Rectangle {
     readonly property int margins: 20
 
     implicitWidth: layout.implicitWidth + margins
-    implicitHeight: root.isExpanded ? layout.implicitHeight + margins : 0
+    implicitHeight: isExpanded ? layout.implicitHeight + margins : 0
 
     color: "#bf" + Style.palette.background1.toString().substring(1)
     border.width: 1

@@ -2,7 +2,7 @@ import qs.services
 
 import qs.components
 
-Section {
+MediaSection {
     id: root
 
     CircularImage {

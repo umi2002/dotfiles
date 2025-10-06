@@ -4,7 +4,7 @@ import QtQuick
 import qs.services
 import qs.components
 
-Section {
+MediaSection {
     id: root
     property var player: Media.spotifyPlayer
 

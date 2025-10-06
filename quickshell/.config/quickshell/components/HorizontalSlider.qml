@@ -5,9 +5,27 @@ import qs
 
 Slider {
     id: root
-    property int sliderWidth: 200
-    property int sliderHeight: 10
+    required property int sliderWidth
+    required property int sliderHeight
+    property bool isUserInteracting: false
+    property var onValueChange: function (newValue) {}
+
     orientation: Qt.Horizontal
+
+    onPressedChanged: {
+        root.isUserInteracting = pressed;
+        if (pressed) {
+            root.value = root.value;
+        }
+    }
+
+    onMoved: {
+        onValueChange(value);
+    }
+
+    HoverHandler {
+        cursorShape: Qt.PointingHandCursor
+    }
 
     background: Rectangle {
         implicitWidth: root.sliderWidth

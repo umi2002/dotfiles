@@ -9,7 +9,7 @@ import qs.components.system
 Rectangle {
     id: root
     required property var backdrop
-    readonly property bool hasPopup: system.isExpanded || utils.isHovered || mediaPopup.isExpanded
+    readonly property bool hasPopup: system.isExpanded || utilsPopup.isExpanded || mediaPopup.isExpanded
     readonly property int margins: 10
 
     anchors.leftMargin: margins
@@ -58,6 +58,20 @@ Rectangle {
     Media {
         id: media
         anchors.centerIn: parent
+    }
+
+    WrapperMouseArea {
+        id: utilsPopupMouseArea
+        hoverEnabled: true
+        anchors.right: utils.right
+        anchors.bottom: utils.top
+        height: utilsPopup.implicitHeight + 20
+
+        StyledPopup {
+            id: utilsPopup
+            isExpanded: utilsPopupMouseArea.containsMouse || utils.containsMouse
+            popupContent: UtilsPopup {}
+        }
     }
 
     Utils {

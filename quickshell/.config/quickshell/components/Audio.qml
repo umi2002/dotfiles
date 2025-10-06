@@ -1,6 +1,5 @@
 import Quickshell.Widgets
 import QtQuick
-import QtQuick.Effects
 import QtQuick.Layouts
 
 import qs

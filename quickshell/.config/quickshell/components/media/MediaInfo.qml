@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import qs
 import qs.services
 
-Section {
+MediaSection {
     implicitHeight: mediaInfo.implicitHeight + 50
 
     ColumnLayout {

@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import qs.assets
 import qs.services
 
-Section {
+MediaSection {
     id: root
 
     RowLayout {

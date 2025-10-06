@@ -2,29 +2,31 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs
+import qs.components
 import qs.services
 
 Rectangle {
     id: root
-    required property bool isHovered
+    property bool isExpanded
+    readonly property int margins: 20
 
-    implicitWidth: controls.implicitWidth + 20
-    implicitHeight: isHovered ? controls.implicitHeight + 20 : 0
+    implicitWidth: container.implicitWidth + margins
+    implicitHeight: isExpanded ? container.implicitHeight + margins : 0
+
+    color: "#bf" + Style.palette.background1.toString().substring(1)
     border.width: 1
     border.color: Style.palette.border1
-    color: "#bf" + Style.palette.background1.toString().substring(1)
     radius: 10
+    clip: true
 
     Rectangle {
-        id: controls
-        implicitWidth: layout.implicitWidth + 20
-        implicitHeight: layout.implicitHeight + 20
-        anchors.top: parent.top
-        anchors.topMargin: 10
-        anchors.bottomMargin: 10
+        id: container
         anchors.horizontalCenter: parent.horizontalCenter
-        radius: 10
+        y: root.margins / 2
+        implicitWidth: layout.implicitWidth + root.margins
+        implicitHeight: layout.implicitHeight + root.margins
         color: Style.palette.background2
+        radius: 10
 
         ColumnLayout {
             id: layout

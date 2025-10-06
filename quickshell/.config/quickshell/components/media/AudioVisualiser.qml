@@ -3,7 +3,7 @@ import QtQuick.Layouts
 
 import qs.services
 
-Section {
+MediaSection {
     implicitHeight: 100
 
     RowLayout {

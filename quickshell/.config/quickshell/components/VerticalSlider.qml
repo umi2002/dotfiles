@@ -5,8 +5,11 @@ import qs
 
 Slider {
     id: root
+    required property int sliderWidth
+    required property int sliderHeight
     property bool isUserInteracting: false
     property var onValueChange: function (newValue) {}
+
     orientation: Qt.Vertical
 
     onPressedChanged: {
@@ -25,8 +28,8 @@ Slider {
     }
 
     background: Rectangle {
-        implicitWidth: 10
-        implicitHeight: root.implicitHeight
+        implicitWidth: root.sliderWidth
+        implicitHeight: root.sliderHeight
         radius: implicitWidth / 2
         color: Style.palette.border1
 
@@ -34,7 +37,7 @@ Slider {
             implicitWidth: parent.implicitWidth
             implicitHeight: (1 - root.visualPosition) * parent.implicitHeight
             y: parent.height - height
-            radius: implicitHeight / 2
+            radius: implicitWidth / 2
             color: Style.palette.color1
         }
     }

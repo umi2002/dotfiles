@@ -7,7 +7,8 @@ Rectangle {
     property bool isExpanded
 
     implicitWidth: 600
-    implicitHeight: root.isExpanded ? 600 : 0
+    implicitHeight: isExpanded ? 600 : 0
+
     color: "#bf" + Style.palette.background1.toString().substring(1)
     border.width: 1
     border.color: Style.palette.border1
@@ -22,7 +23,7 @@ Rectangle {
         anchors.topMargin: 30
         anchors.leftMargin: 30
         anchors.rightMargin: 30
-        height: header.implicitHeight
+        implicitHeight: header.implicitHeight
 
         PopupHeader {
             id: header
