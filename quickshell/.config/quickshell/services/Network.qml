@@ -236,7 +236,7 @@ Singleton {
         command: ["nmcli", "d", "w", "show"]
         stdout: StdioCollector {
             onStreamFinished: {
-                root.connectedNetworkInfo = text;
+                root.connectedNetworkInfo = text.trim();
             }
         }
     }

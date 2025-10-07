@@ -30,6 +30,7 @@ Rectangle {
         anchors.leftMargin: 20
         anchors.rightMargin: 20
         implicitHeight: contentHeight
+        interactive: false
 
         add: Transition {
             NumberAnimation {

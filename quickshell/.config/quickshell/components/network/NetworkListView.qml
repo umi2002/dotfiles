@@ -24,12 +24,10 @@ Rectangle {
         id: networks
         model: root.model
 
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: 20
-        anchors.rightMargin: 20
+        anchors.fill: parent
+        anchors.margins: 20
         implicitHeight: contentHeight
+        interactive: false
 
         add: Transition {
             NumberAnimation {

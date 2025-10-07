@@ -6,9 +6,6 @@ import qs
 import qs.services
 
 Rectangle {
-    id: root
-
-    clip: true
     implicitHeight: networkInfo.implicitHeight
     color: "transparent"
 

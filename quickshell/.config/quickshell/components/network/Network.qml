@@ -7,11 +7,11 @@ import qs.services
 Rectangle {
     id: root
     required property var network
-    readonly property bool isConnectedNetwork: network.ssid === Network.connectedNetwork
     required property bool isHovered
+    readonly property bool isConnectedNetwork: network.ssid === Network.connectedNetwork
 
     clip: true
-    implicitHeight: networkHeader.implicitHeight + (networkHeader.isExpanded ? networkInfoLoader.implicitHeight : 0)
+    implicitHeight: networkHeader.implicitHeight + (networkHeader.isExpanded ? networkInfoLoader.implicitHeight + networkAuthenticateLoader.implicitHeight + 20 : 0)
     color: "transparent"
 
     Behavior on implicitHeight {
@@ -41,6 +41,13 @@ Rectangle {
 
             if (Network.savedNetworks.has(root.network.ssid)) {
                 Network.connect(root.network.ssid, "");
+                return;
+            }
+
+            if (root.network.requiresPassword && !isExpanded) {
+                isExpanded = true;
+            } else {
+                isExpanded = false;
             }
         }
     }
@@ -51,7 +58,37 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: networkHeader.bottom
+        anchors.topMargin: 20
+        opacity: networkHeader.isExpanded ? 1 : 0
+        visible: opacity > 0
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 300
+                easing.type: Easing.InOutCubic
+            }
+        }
 
         sourceComponent: NetworkInfo {}
+    }
+
+    Loader {
+        id: networkAuthenticateLoader
+        active: !root.isConnectedNetwork
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: networkHeader.bottom
+        anchors.topMargin: 20
+        opacity: networkHeader.isExpanded ? 1 : 0
+        visible: opacity > 0
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 300
+                easing.type: Easing.InOutCubic
+            }
+        }
+
+        sourceComponent: NetworkAuthenticate {}
     }
 }

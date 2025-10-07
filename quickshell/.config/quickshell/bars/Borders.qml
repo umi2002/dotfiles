@@ -9,6 +9,7 @@ import qs
 PanelWindow {
     id: root
     readonly property bool hasPopup: bottomBar.hasPopup
+    focusable: true
 
     MouseArea {
         id: backdrop

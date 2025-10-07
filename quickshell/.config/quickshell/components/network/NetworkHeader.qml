@@ -29,12 +29,23 @@ Rectangle {
     }
 
     NetworkActionButton {
-        isConnected: root.isConnected
         isHovered: root.isHovered
         isConnecting: root.isConnecting
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: caret.left
         anchors.rightMargin: 10
+
+        text: {
+            if (root.isConnected) {
+                return "Disconnect";
+            }
+
+            if (root.isExpanded) {
+                return "Cancel";
+            } else {
+                return "Connect";
+            }
+        }
 
         onActionTriggered: {
             root.actionTriggered();
