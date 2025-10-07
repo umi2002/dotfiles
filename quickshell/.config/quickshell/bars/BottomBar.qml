@@ -75,6 +75,13 @@ Rectangle {
         }
     }
 
+    Tray {
+        anchors.right: utils.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: root.margins
+    }
+
     Utils {
         id: utils
         anchors.right: language.left
