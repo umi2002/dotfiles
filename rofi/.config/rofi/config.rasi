@@ -30,7 +30,7 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font: "SF Pro Display, Symbols Nerd Font Mono 10"; 
+    font: "Cantarell, CaskaydiaCove Nerd Font Mono 16"; 
 
     /* Duskfox Palette */
     duskfox-base:                #232136;
@@ -67,11 +67,13 @@ window {
     anchor:                      center;
     fullscreen:                  false;
     width:                       700px;
+    height:                      600px;
     x-offset:                    0px;
     y-offset:                    0px;
 
     /* properties for all widgets */
     enabled:                     true;
+    padding:                     0px;
     border-radius:               20px;
     cursor:                      "default";
     background-color:            @background;
@@ -101,9 +103,9 @@ inputbar {
     enabled:                     true;
     spacing:                     10px;
     padding:                     80px 60px;
+    border-radius:               20px 20px 0px 0px;
     background-color:            transparent;
-    // background-image:            url("~/.config/hypr/violet.jpg", width);
-    background-size:             100% 100%;
+    background-image:            url("~/.config/hypr/assets/violet.jpg", none);
     text-color:                  @foreground;
     orientation:                 horizontal;
     children:                    [ "textbox-prompt-colon", "entry", "dummy", "mode-switcher" ];
@@ -112,11 +114,14 @@ inputbar {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
+    width:                       60px;
+    padding:                     0px;
     str:                         "";
-    padding:                     12px 15px;
     border-radius:               100%;
     background-color:            @background-alt;
     text-color:                  inherit;
+    horizontal-align:            0.5;
+    vertical-align:              0.5;
 }
 entry {
     enabled:                     true;
@@ -143,12 +148,14 @@ mode-switcher{
     text-color:                  @foreground;
 }
 button {
-    width:                       45px;
-    padding:                     12px;
+    expand:                      false;
+    width:                       50px;
     border-radius:               100%;
     background-color:            @background-alt;
     text-color:                  inherit;
     cursor:                      pointer;
+    horizontal-align:            0.5;
+    vertical-align:              0.5;
 }
 button selected {
     background-color:            @selected;
@@ -168,6 +175,7 @@ listview {
     fixed-columns:               true;
 
     spacing:                     10px;
+    border:                      0px;
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      "default";
@@ -231,6 +239,7 @@ element-active {
 message {
     background-color:            transparent;
     fixed-height:                true;
+    border:                      0;
 }
 textbox {
     padding:                     12px;
