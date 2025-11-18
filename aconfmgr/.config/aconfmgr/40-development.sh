@@ -34,3 +34,5 @@ AddPackage python-dbus # Python bindings for D-Bus
 AddPackage subversion # A Modern Concurrent Version Control System
 AddPackage git-lfs # Git extension for versioning large files
 AddPackage playerctl # mpris media player controller and lib for spotify, vlc, audacious, bmp, xmms2, and others.
+AddPackage postgresql # Sophisticated object-relational DBMS
+AddPackage putty # A terminal integrated SSH/Telnet client

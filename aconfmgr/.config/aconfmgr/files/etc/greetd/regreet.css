@@ -1,0 +1,172 @@
+.card,
+.view,
+frame,
+grid {
+  background-color: #03060F;
+  color: #C1E0F7;
+}
+
+.clock-label,
+label.title,
+.title {
+  background-color: transparent;
+  color: #C1E0F7;
+}
+
+.content,
+.content-view {
+  background-color: #010B29;
+}
+
+window {
+  background-color: #010B29;
+  color: #C1E0F7;
+  font-family: "Cantarell", "CaskaydiaCove Nerd Font Mono", "Noto Sans Mono CJK";
+  font-size: 16px;
+}
+
+entry {
+  background-color: #03060F;
+  color: #C1E0F7;
+  border: 2px solid #284BC9;
+  border-radius: 6px;
+  padding: 8px 12px;
+  min-height: 32px;
+}
+
+entry:focus {
+  border-color: #DEBA37;
+  outline: none;
+}
+
+entry:disabled {
+  opacity: 0.5;
+}
+
+/* Buttons */
+button {
+  background-image: linear-gradient(to bottom, #03060F, #010B29);
+  color: #C1E0F7;
+  border: 2px solid #284BC9;
+  border-radius: 6px;
+  padding: 8px 16px;
+  min-height: 32px;
+  font-weight: bold;
+}
+
+button:hover {
+  background-image: linear-gradient(to bottom, #071445, #284BC9);
+  border-color: #DEBA37;
+}
+
+button:active {
+  background-color: #DEBA37;
+  color: #010B29;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+dropdown, 
+combobox {
+  background-color: #071445;
+  color: #C1E0F7;
+  border: 2px solid #284BC9;
+  border-radius: 6px;
+  padding: 8px;
+}
+
+dropdown:hover,
+combobox:hover {
+  border-color: #DEBA37;
+}
+
+dropdown > button,
+combobox > button {
+  background: transparent;
+  border: none;
+}
+
+popover {
+  background-color: #284BC9;
+  border-radius: 6px;
+}
+
+popover > contents {
+  padding: 4px;
+  background-color: #284BC9;
+}
+
+modelbutton {
+  color: #C1E0F7;
+  padding: 8px 12px;
+  background-color: transparent;
+}
+
+modelbutton:hover {
+  background-color: #071445;
+}
+
+modelbutton:selected {
+  background-color: #DEBA37;
+  color: #010B29;
+}
+
+label {
+  color: #C1E0F7;
+  font-size: 16px;
+}
+
+label.error {
+  color: #C25F13;
+  font-size: 12px;
+  font-family: "CaskaydiaCove Nerd Font Mono", monospace;
+}
+
+label.dim-label {
+  color: #DEBA37;
+  font-size: 12px;
+}
+
+headerbar {
+  background-color: #010B29;
+  border-bottom: 2px solid #03060F;
+}
+
+box {
+  background-color: transparent;
+}
+
+scrollbar {
+  background-color: #03060F;
+}
+
+scrollbar slider {
+  background-color: #284BC9;
+  border-radius: 4px;
+  min-width: 8px;
+  min-height: 8px;
+}
+
+scrollbar slider:hover {
+  background-color: #DEBA37;
+}
+
+checkbutton,
+radiobutton {
+  color: #C1E0F7;
+}
+
+checkbutton check,
+radiobutton radio {
+  border: 2px solid #284BC9;
+  background-color: #03060F;
+}
+
+checkbutton:checked check,
+radiobutton:checked radio {
+  background-color: #DEBA37;
+  border-color: #DEBA37;
+  color: #010B29;
+}

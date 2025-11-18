@@ -3,18 +3,18 @@
 ################################################################################
 
 # With:       reflector @/etc/xdg/reflector/reflector.conf
-# When:       2025-09-29 04:40:37 UTC
+# When:       2025-11-18 21:50:04 UTC
 # From:       https://archlinux.org/mirrors/status/json/
-# Retrieved:  2025-09-29 04:40:37 UTC
-# Last Check: 2025-09-29 04:38:41 UTC
+# Retrieved:  2025-11-18 21:50:04 UTC
+# Last Check: 2025-11-18 21:16:34 UTC
 
-Server = https://losangeles.mirror.pkgbuild.com/$repo/os/$arch
 Server = https://us.arch.niranjan.co/$repo/os/$arch
+Server = https://losangeles.mirror.pkgbuild.com/$repo/os/$arch
 Server = https://arch.mirror.constant.com/$repo/os/$arch
-Server = https://mirror.theash.xyz/arch/$repo/os/$arch
-Server = https://mirror.franscorack.com/archlinux/$repo/os/$arch
-Server = https://mirror.quantum5.ca/archlinux/$repo/os/$arch
 Server = https://mirror.givebytes.net/archlinux/$repo/os/$arch
 Server = https://mirrors.lug.mtu.edu/archlinux/$repo/os/$arch
-Server = https://mirrors.vectair.net/archlinux/$repo/os/$arch
-Server = https://mirror.csclub.uwaterloo.ca/archlinux/$repo/os/$arch
+Server = https://ca.mirrors.cicku.me/archlinux/$repo/os/$arch
+Server = https://us.mirrors.cicku.me/archlinux/$repo/os/$arch
+Server = https://yonderly.org/mirrors/archlinux/$repo/os/$arch
+Server = https://ny.us.mirrors.bjg.at/arch/$repo/os/$arch
+Server = https://mirror.quantum5.ca/archlinux/$repo/os/$arch

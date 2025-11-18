@@ -3,7 +3,6 @@
 
 # General Utilities
 AddPackage tmux # Terminal multiplexer
-AddPackage wl-clipboard # Command-line copy/paste utilities for Wayland
 AddPackage chafa # Image-to-text converter supporting a wide range of symbols and palettes, transparency, animations, etc.
 AddPackage fd # Simple, fast and user-friendly alternative to find
 AddPackage fzf # Command-line fuzzy finder
@@ -29,3 +28,8 @@ AddPackage fastfetch # A feature-rich and performance oriented neofetch like sys
 AddPackage xdg-desktop-portal-gtk # A backend implementation for xdg-desktop-portal using GTK
 AddPackage xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
 AddPackage speedtest-cli # Command line interface for testing internet bandwidth using speedtest.net
+AddPackage cava # Console-based Audio Visualizer with support for multiple backends
+AddPackage cliphist # wayland clipboard manager
+AddPackage greetd-regreet # Clean and customizable greeter for greetd
+AddPackage hyprsunset # An application to enable a blue-light filter on Hyprland
+AddPackage inotify-tools # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.

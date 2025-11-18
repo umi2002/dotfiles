@@ -1,0 +1,7 @@
+[commands]
+reboot = [ "systemctl", "reboot" ]
+poweroff = [ "systemctl", "poweroff" ]
+
+[background]
+path = "/etc/greetd/login_wallpaper.png"
+fit = "Cover"

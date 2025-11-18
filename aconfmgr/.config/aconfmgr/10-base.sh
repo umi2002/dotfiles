@@ -38,9 +38,11 @@ AddPackage pipewire-pulse # Low-latency audio/video router and processor - Pulse
 AddPackage wget # Network utility to retrieve files from the web
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign yay # Yet another yogurt. Pacman wrapper and AUR helper written in go.
-AddPackage --foreign yay-debug # Detached debugging symbols for yay
 AddPackage udiskie # Removable disk automounter using udisks
+AddPackage hyprpolkitagent # Simple polkit authentication agent for Hyprland, written in QT/QML
+AddPackage ufw # Uncomplicated and easy to use CLI tool for managing a netfilter firewall
 
 # Essential Laptop Utilities
 AddPackage acpid # A daemon for delivering ACPI power management events with netlink support
 AddPackage tlp # Linux Advanced Power Management
+AddPackage powertop # A tool to diagnose issues with power consumption and power management

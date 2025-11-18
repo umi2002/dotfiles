@@ -8,11 +8,15 @@ AddPackage hyprland # a highly customizable dynamic tiling Wayland compositor
 AddPackage hyprpaper # a blazing fast wayland wallpaper utility with IPC controls
 AddPackage rofi # A window switcher, application launcher and dmenu replacement
 AddPackage --foreign spotify # A proprietary music streaming service
-AddPackage discord # All-in-one voice and text chat for gamers
-AddPackage --foreign quickshell # Flexible toolkit for making desktop shells with QtQuick
 AddPackage vlc # Free and open source cross-platform multimedia player and framework
+AddPackage vlc-plugins-all # Free and open source cross-platform multimedia player and framework - all plugins
 AddPackage --foreign pwvucontrol # Pipewire volume control for GNOME
 AddPackage --foreign zen-browser-bin # Performance oriented Firefox-based web browser
+AddPackage obs-studio # Free, open source software for live streaming and recording
+AddPackage qbittorrent # An advanced BitTorrent client programmed in C++, based on Qt toolkit and libtorrent-rasterbar
+AddPackage quickshell # Flexible toolkit for making desktop shells with QtQuick
+AddPackage steam # Valve's digital software delivery system
+AddPackage --foreign vesktop # A standalone Electron-based Discord app with Vencord & improved Linux support
 
 # Printer
 AddPackage cups # OpenPrinting CUPS - daemon package
@@ -26,6 +30,8 @@ AddPackage ttf-iosevka-nerd # Patched font Iosevka from nerd fonts library
 AddPackage --foreign ttf-mac-fonts # Mac fonts including Lucida Grande, Apple Garamond and other fonts from Apple
 AddPackage --foreign ttf-ms-fonts # Core TTF Fonts from Microsoft
 AddPackage ttf-cascadia-code-nerd # Patched font Cascadia Code (Caskaydia) from nerd fonts library
+AddPackage cantarell-fonts # Humanist sans serif font
+AddPackage noto-fonts-cjk # Google Noto CJK fonts
 
 # Xorg
 AddPackage xorg-xauth # X.Org authorization settings program
