@@ -8,11 +8,9 @@ return {
 		opts = {
 			files = {
 				fd_opts = [[--hidden --exclude .git]],
-				no_ignore = true,
 			},
 			grep = {
 				rg_opts = [[--hidden --glob '!.git/**' -n --column]],
-				no_ignore = true,
 			},
 		},
 		config = function(_, opts)
