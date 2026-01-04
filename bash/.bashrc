@@ -158,7 +158,7 @@ aliases=(
 plugins=(
   git
 #   bashmarks
-# )
+)
 
 # Which plugins would you like to conditionally load? (plugins can be found in ~/.oh-my-bash/plugins/*)
 # Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
