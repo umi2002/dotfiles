@@ -18,7 +18,7 @@ alias dc="docker compose"
 source /usr/share/fzf/key-bindings.bash
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_R_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_CTRL_R_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --hidden"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
@@ -157,8 +157,8 @@ aliases=(
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  bashmarks
-)
+#   bashmarks
+# )
 
 # Which plugins would you like to conditionally load? (plugins can be found in ~/.oh-my-bash/plugins/*)
 # Custom plugins may be added to ~/.oh-my-bash/custom/plugins/
@@ -198,3 +198,4 @@ source "$OSH"/oh-my-bash.sh
 # alias ohmybash="mate ~/.oh-my-bash"
 
 source /usr/share/nvm/init-nvm.sh
+eval "$(zoxide init bash)"
