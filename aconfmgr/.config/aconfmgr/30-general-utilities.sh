@@ -33,3 +33,7 @@ AddPackage cliphist # wayland clipboard manager
 AddPackage greetd-regreet # Clean and customizable greeter for greetd
 AddPackage hyprsunset # An application to enable a blue-light filter on Hyprland
 AddPackage inotify-tools # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.
+AddPackage zoxide # A smarter cd command for your terminal
+AddPackage --foreign sesh-bin # Smart session manager for the terminal
+AddPackage --foreign tmux-plugin-manager # tpm - Tmux Plugin Manager
+AddPackage --foreign ventoy-bin # A new bootable USB solution

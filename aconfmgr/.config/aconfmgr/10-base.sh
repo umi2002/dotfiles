@@ -41,6 +41,8 @@ AddPackage --foreign yay # Yet another yogurt. Pacman wrapper and AUR helper wri
 AddPackage udiskie # Removable disk automounter using udisks
 AddPackage hyprpolkitagent # Simple polkit authentication agent for Hyprland, written in QT/QML
 AddPackage ufw # Uncomplicated and easy to use CLI tool for managing a netfilter firewall
+AddPackage inetutils # A collection of common network programs
+AddPackage iwd # Internet Wireless Daemon
 
 # Essential Laptop Utilities
 AddPackage acpid # A daemon for delivering ACPI power management events with netlink support

@@ -17,6 +17,7 @@ AddPackage qbittorrent # An advanced BitTorrent client programmed in C++, based 
 AddPackage quickshell # Flexible toolkit for making desktop shells with QtQuick
 AddPackage steam # Valve's digital software delivery system
 AddPackage --foreign vesktop # A standalone Electron-based Discord app with Vencord & improved Linux support
+AddPackage libreoffice-fresh # LibreOffice branch which contains new features and program enhancements
 
 # Printer
 AddPackage cups # OpenPrinting CUPS - daemon package

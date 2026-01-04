@@ -27,3 +27,4 @@ CopyFile /etc/ufw/ufw.conf
 CopyFile /etc/ufw/user.rules
 CopyFile /etc/ufw/user6.rules
 CreateDir /etc/audit/plugins.d 750
+CopyFile /etc/NetworkManager/conf.d/wifi_backend.conf
