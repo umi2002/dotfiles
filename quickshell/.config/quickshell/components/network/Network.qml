@@ -1,14 +1,28 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import Quickshell.Networking
 
 import qs.services
 
 Rectangle {
     id: root
-    required property var network
+    required property string networkName
     required property bool isHovered
-    readonly property bool isConnectedNetwork: network.ssid === Network.connectedNetwork
+
+    property var network: null
+
+    Connections {
+        target: NetworkData
+        function onNetworksChanged() {
+            let found = NetworkData.findNetwork(root.networkName);
+            if (found) root.network = found;
+        }
+    }
+
+    Component.onCompleted: {
+        root.network = NetworkData.findNetwork(root.networkName);
+    }
 
     clip: true
     implicitHeight: networkHeader.implicitHeight + (networkHeader.isExpanded ? networkInfoLoader.implicitHeight + networkAuthenticateLoader.implicitHeight + 20 : 0)
@@ -27,34 +41,28 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
 
-        networkName: root.network.ssid
-        isConnected: root.isConnectedNetwork
+        networkName: root.networkName
+        isConnected: root.network?.connected || false
         isHovered: root.isHovered
-        isConnecting: Network.isConnecting
+        isConnecting: root.network?.state === NetworkState.Connecting
 
         onActionTriggered: {
-            if (root.isConnectedNetwork) {
+            if (isConnected) {
                 isExpanded = false;
-                Network.disconnect();
+                root.network.disconnect();
                 return;
             }
 
-            if (Network.savedNetworks.has(root.network.ssid)) {
-                Network.connect(root.network.ssid, "");
+            if (root.network.known || root.network?.security === WifiSecurityType.Open) {
+                root.network.connect();
                 return;
-            }
-
-            if (root.network.requiresPassword && !isExpanded) {
-                isExpanded = true;
-            } else {
-                isExpanded = false;
             }
         }
     }
 
     Loader {
         id: networkInfoLoader
-        active: root.isConnectedNetwork
+        active: root.network?.connected || false
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: networkHeader.bottom
@@ -74,7 +82,7 @@ Rectangle {
 
     Loader {
         id: networkAuthenticateLoader
-        active: !root.isConnectedNetwork
+        active: !root.network?.connected || false
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: networkHeader.bottom

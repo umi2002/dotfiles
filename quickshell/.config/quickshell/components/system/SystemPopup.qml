@@ -1,6 +1,7 @@
 import QtQuick
 
 import qs
+import qs.services
 
 Rectangle {
     id: root
@@ -51,5 +52,13 @@ Rectangle {
 
         selectedIndex: header.selectedIndex
         popupWidth: root.implicitWidth
+    }
+
+    onIsExpandedChanged: {
+        if (!NetworkData.wifiDevice) {
+            return;
+        }
+
+        NetworkData.wifiDevice.scannerEnabled = isExpanded;
     }
 }

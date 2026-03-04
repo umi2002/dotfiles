@@ -57,8 +57,7 @@ Rectangle {
         }
 
         delegate: NetworkListViewItem {
-            anchors.left: parent.left
-            anchors.right: parent.right
+            width: ListView.view.width
         }
     }
 }

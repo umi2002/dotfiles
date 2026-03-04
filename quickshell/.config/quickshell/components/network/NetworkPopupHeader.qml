@@ -14,7 +14,7 @@ WrapperMouseArea {
     cursorShape: Qt.PointingHandCursor
 
     onClicked: {
-        Network.toggleWiFi();
+        NetworkData.toggleWiFi();
     }
 
     RowLayout {
@@ -28,7 +28,7 @@ WrapperMouseArea {
 
         StyledSwitch {
             id: wifiToggle
-            checked: Network.isWiFiOn
+            checked: NetworkData.isWiFiOn
             enabled: false
             Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
         }
