@@ -15,6 +15,8 @@ alias m-pull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull
 alias m-main="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} checkout main \;"
 alias dc="docker compose"
 
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+
 source /usr/share/fzf/key-bindings.bash
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
