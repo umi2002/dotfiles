@@ -16,7 +16,9 @@ Rectangle {
         target: NetworkData
         function onNetworksChanged() {
             let found = NetworkData.findNetwork(root.networkName);
-            if (found) root.network = found;
+            if (found) {
+                root.network = found;
+            }
         }
     }
 
