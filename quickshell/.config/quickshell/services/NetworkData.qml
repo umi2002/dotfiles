@@ -2,7 +2,6 @@ pragma Singleton
 
 import Quickshell
 import QtQuick
-import QtQml.Models
 import Quickshell.Networking
 
 import qs.assets
@@ -18,73 +17,116 @@ Singleton {
     readonly property var wifiDevice: Networking.devices.values.find(device => {
         return device.type === DeviceType.Wifi;
     })
-    readonly property var networks: wifiDevice?.networks?.values
-    readonly property var connectedNetwork: networks?.find(network => {
-        return network.connected;
-    })
+
+    readonly property var connectedNetwork: {
+        if (!wifiDevice || wifiDevice.state !== DeviceConnectionState.Connected) {
+            return null;
+        }
+
+        return wifiDevice.networks?.values.find(n => n.connected) || null;
+    }
 
     function toggleWiFi() {
         Networking.wifiEnabled = !Networking.wifiEnabled;
     }
 
-    onIsWiFiOnChanged: updateNetworksTimer.restart()
-    onWifiDeviceChanged: updateNetworksTimer.restart()
-    onNetworksChanged: updateNetworksTimer.restart()
-    onConnectedNetworkChanged: updateNetworksTimer.restart()
-
     function findNetwork(name) {
-        return networks?.find(n => n.name === name) ?? null;
+        return wifiDevice?.networks?.values.find(n => n.name === name) || null;
     }
 
-    function updateNetworkModel(model, newNetworks) {
-        let toKeep = new Set(newNetworks.map(n => n.name));
-
-        for (let i = model.count - 1; i >= 0; i--) {
-            if (!toKeep.has(model.get(i).name)) {
-                model.remove(i);
+    onWifiDeviceChanged: {
+        root.knownNetworks.clear();
+        root.unknownNetworks.clear();
+        if (root.wifiDevice) {
+            for (let network of root.wifiDevice.networks.values) {
+                root.addToModel(network);
             }
         }
+        iconTimer.restart();
+    }
 
-        newNetworks.forEach((network, targetIndex) => {
-            let currentIndex = findNetworkIndex(model, network.name);
+    Connections {
+        target: root.wifiDevice ? root.wifiDevice.networks : null
 
-            if (currentIndex === -1) {
-                model.insert(targetIndex, {
-                    name: network.name
-                });
-            } else {
-                if (currentIndex !== targetIndex) {
-                    model.move(currentIndex, targetIndex, 1);
-                }
-            }
+        function onObjectInsertedPost(object, index) {
+            root.addToModel(object);
+        }
+
+        function onObjectRemovedPost(object, index) {
+            root.removeFromModels(object.name);
+        }
+    }
+
+    function addToModel(network) {
+        let model = network.known ? root.knownNetworks : root.unknownNetworks;
+        for (let i = 0; i < model.count; i++) {
+            if (model.get(i).name === network.name)
+                return;
+        }
+        model.append({
+            name: network.name
         });
     }
 
-    function findNetworkIndex(model, name) {
-        for (let i = 0; i < model.count; i++) {
-            if (model.get(i).name === name) {
-                return i;
+    function removeFromModels(name) {
+        for (let i = 0; i < root.knownNetworks.count; i++) {
+            if (root.knownNetworks.get(i).name === name) {
+                root.knownNetworks.remove(i);
+                return;
             }
         }
-        return -1;
+        for (let i = 0; i < root.unknownNetworks.count; i++) {
+            if (root.unknownNetworks.get(i).name === name) {
+                root.unknownNetworks.remove(i);
+                return;
+            }
+        }
     }
 
-    function categorizeNetworks() {
-        if (!root.networks) {
+    onConnectedNetworkChanged: {
+        if (root.connectedNetwork)
+            resyncTimer.restart();
+        iconTimer.restart();
+    }
+
+    Timer {
+        id: resyncTimer
+        interval: 1500
+        onTriggered: root.resyncKnownStatus()
+    }
+
+    function resyncKnownStatus() {
+        if (!root.wifiDevice)
             return;
+        for (let network of root.wifiDevice.networks.values) {
+            let inKnown = false;
+            for (let i = 0; i < root.knownNetworks.count; i++) {
+                if (root.knownNetworks.get(i).name === network.name) {
+                    inKnown = true;
+                    break;
+                }
+            }
+            if (network.known && !inKnown) {
+                root.removeFromModels(network.name);
+                root.knownNetworks.append({
+                    name: network.name
+                });
+            } else if (!network.known && inKnown) {
+                root.removeFromModels(network.name);
+                root.unknownNetworks.append({
+                    name: network.name
+                });
+            }
         }
-
-        let knownNetworks = [];
-        let unknownNetworks = [];
-        for (let network of networks) {
-            (network.known ? knownNetworks : unknownNetworks).push(network);
-        }
-
-        root.updateNetworkModel(root.knownNetworks, knownNetworks);
-        root.updateNetworkModel(root.unknownNetworks, unknownNetworks);
     }
 
-    function setIcon() {
+    Timer {
+        id: iconTimer
+        interval: 200
+        onTriggered: root.updateIcon()
+    }
+
+    function updateIcon() {
         if (!root.wifiDevice) {
             networkIcon = Assets.wifi.missing;
             return;
@@ -114,15 +156,6 @@ Singleton {
             return Assets.wifi.bar2;
         } else {
             return Assets.wifi.bar1;
-        }
-    }
-
-    Timer {
-        id: updateNetworksTimer
-        interval: 100
-        onTriggered: {
-            root.categorizeNetworks();
-            root.setIcon();
         }
     }
 }
