@@ -44,6 +44,7 @@ Rectangle {
 
     WrapperMouseArea {
         id: mediaPopupMouseArea
+        enabled: mediaPopup.implicitHeight > 0
         hoverEnabled: true
         anchors.horizontalCenter: media.horizontalCenter
         anchors.bottom: media.top
@@ -63,6 +64,7 @@ Rectangle {
 
     WrapperMouseArea {
         id: utilsPopupMouseArea
+        enabled: utilsPopup.implicitHeight > 0
         hoverEnabled: true
         anchors.right: utils.right
         anchors.bottom: utils.top
