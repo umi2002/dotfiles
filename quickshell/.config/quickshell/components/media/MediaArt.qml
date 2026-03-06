@@ -17,7 +17,7 @@ MediaSection {
     Rectangle {
         id: artMask
         anchors.fill: artImage
-        radius: 10
+        radius: parent.radius
         visible: false
     }
 
