@@ -9,6 +9,8 @@ AddPackage linux-firmware # Firmware files for Linux - Default set
 AddPackage linux-firmware-qcom # Firmware files for Linux - Firmware for Qualcomm SoCs
 AddPackage linux-headers # Headers and scripts for building modules for the Linux kernel
 AddPackage dkms # Dynamic Kernel Modules System
+AddPackage linux-lts # The LTS Linux kernel and modules
+AddPackage linux-lts-headers # Headers and scripts for building modules for the LTS Linux kernel
 
 # Boot
 AddPackage grub # GNU GRand Unified Bootloader (2)
@@ -24,6 +26,8 @@ AddPackage openssh # SSH protocol implementation for remote login, command execu
 AddPackage nss-mdns # glibc plugin providing host name resolution via mDNS
 AddPackage bluez # Daemons for the bluetooth protocol stack
 AddPackage bluez-utils # Development and debugging utilities for the bluetooth protocol stack
+AddPackage bind # A complete, highly portable implementation of the DNS protocol
+AddPackage openbsd-netcat # TCP/IP swiss army knife. OpenBSD variant.
 
 # Essential Utilities
 AddPackage git # the fast distributed version control system
@@ -45,6 +49,7 @@ AddPackage udiskie # Removable disk automounter using udisks
 AddPackage hyprpolkitagent # Simple polkit authentication agent for Hyprland, written in QT/QML
 AddPackage ufw # Uncomplicated and easy to use CLI tool for managing a netfilter firewall
 AddPackage inetutils # A collection of common network programs
+AddPackage gnome-keyring # Stores passwords and encryption keys
 
 # Essential Laptop Utilities
 AddPackage acpid # A daemon for delivering ACPI power management events with netlink support
