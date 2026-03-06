@@ -3,7 +3,6 @@
 
 # Desktop Apps
 AddPackage dunst # Customizable and lightweight notification-daemon
-AddPackage flameshot # Powerful yet simple to use screenshot software
 AddPackage hyprland # a highly customizable dynamic tiling Wayland compositor
 AddPackage hyprpaper # a blazing fast wayland wallpaper utility with IPC controls
 AddPackage rofi # A window switcher, application launcher and dmenu replacement

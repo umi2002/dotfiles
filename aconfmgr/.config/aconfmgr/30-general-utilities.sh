@@ -16,6 +16,8 @@ AddPackage stow # Manage installation of multiple softwares in the same director
 AddPackage jq # Command-line JSON processor
 AddPackage keyd # A key remapping daemon for linux
 AddPackage grim # Screenshot utility for Wayland
+AddPackage slurp # Select a region in a Wayland compositor
+AddPackage swappy # A Wayland native snapshot editing tool
 AddPackage htop # Interactive process viewer
 AddPackage lsof # Lists open files for running Unix processes
 AddPackage nmap # Utility for network discovery and security auditing
