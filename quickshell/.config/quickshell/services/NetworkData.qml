@@ -48,11 +48,11 @@ Singleton {
     Connections {
         target: root.wifiDevice ? root.wifiDevice.networks : null
 
-        function onObjectInsertedPost(object, index) {
+        function onObjectInsertedPost(object) {
             root.addToModel(object);
         }
 
-        function onObjectRemovedPost(object, index) {
+        function onObjectRemovedPost(object) {
             root.removeFromModels(object.name);
         }
     }

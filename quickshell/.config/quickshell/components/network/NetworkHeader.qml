@@ -7,8 +7,7 @@ import qs.components
 
 Rectangle {
     id: root
-    required property string networkName
-    required property bool isConnected
+    required property var network
     required property bool isHovered
     required property bool isConnecting
     property bool isExpanded
@@ -20,12 +19,12 @@ Rectangle {
 
     Text {
         id: networkName
-        text: root.networkName
+        text: root.network.name
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         font.pointSize: Style.font.size2
         font.family: Style.font.family3
-        color: root.isConnected ? Style.palette.color2 : Style.palette.color1
+        color: root.network?.connected ? Style.palette.color2 : Style.palette.color1
     }
 
     NetworkActionButton {
@@ -36,7 +35,7 @@ Rectangle {
         anchors.rightMargin: 10
 
         text: {
-            if (root.isConnected) {
+            if (root.network?.connected) {
                 return "Disconnect";
             }
 
@@ -54,7 +53,7 @@ Rectangle {
 
     Loader {
         id: caret
-        active: root.isConnected
+        active: root.network?.connected
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
 

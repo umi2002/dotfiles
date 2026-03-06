@@ -27,6 +27,7 @@ WrapperMouseArea {
                 font.family: Style.font.family3
                 color: Style.palette.color1
                 activeFocusOnPress: true
+                echoMode: TextInput.Password
 
                 onVisibleChanged: {
                     focus = visible;

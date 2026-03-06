@@ -12,13 +12,19 @@ Rectangle {
 
     property var network: null
 
+    Timer {
+        id: networkRefreshTimer
+        interval: 200
+        onTriggered: {
+            let found = NetworkData.findNetwork(root.networkName);
+            if (found) root.network = found;
+        }
+    }
+
     Connections {
         target: NetworkData
         function onNetworksChanged() {
-            let found = NetworkData.findNetwork(root.networkName);
-            if (found) {
-                root.network = found;
-            }
+            networkRefreshTimer.restart();
         }
     }
 
@@ -43,13 +49,12 @@ Rectangle {
         anchors.right: parent.right
         anchors.top: parent.top
 
-        networkName: root.networkName
-        isConnected: root.network?.connected || false
+        network: root.network
         isHovered: root.isHovered
         isConnecting: root.network?.state === NetworkState.Connecting
 
         onActionTriggered: {
-            if (isConnected) {
+            if (root.network?.connected) {
                 isExpanded = false;
                 root.network.disconnect();
                 return;
@@ -59,6 +64,8 @@ Rectangle {
                 root.network.connect();
                 return;
             }
+
+            networkHeader.isExpanded = !networkHeader.isExpanded;
         }
     }
 
