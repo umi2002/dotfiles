@@ -1,13 +1,29 @@
-import qs.services
+import QtQuick
+import Qt5Compat.GraphicalEffects
 
-import qs.components
+import qs.services
 
 MediaSection {
     id: root
 
-    CircularImage {
+    Image {
+        id: artImage
         anchors.fill: parent
-        imageSource: Media.art
         anchors.margins: 5
+        source: Media.art
+        visible: false
+    }
+
+    Rectangle {
+        id: artMask
+        anchors.fill: artImage
+        radius: 10
+        visible: false
+    }
+
+    OpacityMask {
+        anchors.fill: artImage
+        source: artImage
+        maskSource: artMask
     }
 }
