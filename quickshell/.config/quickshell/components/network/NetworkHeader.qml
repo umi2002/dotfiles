@@ -19,7 +19,7 @@ Rectangle {
 
     Text {
         id: networkName
-        text: root.network.name
+        text: root.network?.name || ""
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         font.pointSize: Style.font.size2
@@ -53,7 +53,7 @@ Rectangle {
 
     Loader {
         id: caret
-        active: root.network?.connected
+        active: root.network?.connected || false
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
 
