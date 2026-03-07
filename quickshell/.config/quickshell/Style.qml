@@ -7,8 +7,10 @@ QtObject {
         readonly property color color1: "#C1E0F7"
         readonly property color color2: "#DEBA37"
         readonly property color color3: "#C25F13"
-        readonly property color background1: "#071445"
+        readonly property color background1: "#0B1121"
         readonly property color background2: "#010B29"
+        readonly property color background3: "#071445"
+        readonly property color background4: "#173285"
         readonly property color border1: "#284BC9"
         readonly property color border2: "#03060F"
     }

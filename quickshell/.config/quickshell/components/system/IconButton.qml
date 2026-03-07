@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import Quickshell.Widgets
 import QtQuick
+import Qt5Compat.GraphicalEffects
 
 import qs
 
@@ -18,11 +19,41 @@ Rectangle {
     implicitWidth: buttonWidth
     implicitHeight: buttonHeight
     radius: buttonRadius
-    color: root.isSelected ? Style.palette.border1 : Style.palette.background2
+    color: "transparent"
 
-    Behavior on color {
-        ColorAnimation {
-            duration: 200
+    Rectangle {
+        id: bgMask
+        anchors.fill: parent
+        radius: parent.radius
+        visible: false
+    }
+
+    LinearGradient {
+        anchors.fill: parent
+        source: bgMask
+        start: Qt.point(0, 0)
+        end: Qt.point(width, height)
+        gradient: Gradient {
+            GradientStop {
+                position: 0.0
+                color: root.isSelected ? Style.palette.border1 : Style.palette.background3
+
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
+            }
+            GradientStop {
+                position: 1.0
+                color: root.isSelected ? Style.palette.color1 : Style.palette.background4
+
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
+                }
+            }
         }
     }
 

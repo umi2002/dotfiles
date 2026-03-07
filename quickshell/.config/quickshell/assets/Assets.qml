@@ -107,4 +107,8 @@ QtObject {
             return assets.resolveAsset(basePath + icon);
         }
     }
+
+    readonly property var shaders: QtObject {
+        readonly property url waves: assets.resolveAsset("../shaders/waves.frag.qsb")
+    }
 }

@@ -13,11 +13,21 @@ Rectangle {
     implicitWidth: layout.implicitWidth + margins
     implicitHeight: isExpanded ? layout.implicitHeight + margins : 0
 
-    color: "#bf" + Style.palette.background1.toString().substring(1)
     border.width: 1
     border.color: Style.palette.border1
     radius: 10
     clip: true
+
+    gradient: Gradient {
+        GradientStop {
+            position: 0.0
+            color: "#bf" + Style.palette.background2.toString().substring(1)
+        }
+        GradientStop {
+            position: 1.0
+            color: "#bf" + Style.palette.background4.toString().substring(1)
+        }
+    }
 
     ColumnLayout {
         id: layout

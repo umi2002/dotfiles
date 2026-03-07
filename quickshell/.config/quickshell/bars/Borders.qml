@@ -70,6 +70,33 @@ PanelWindow {
             anchors.fill: parent
             color: Style.palette.background1
 
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.15
+                    color: Style.palette.background1
+                }
+                GradientStop {
+                    position: 0.30
+                    color: Style.palette.background2
+                }
+                GradientStop {
+                    position: 0.45
+                    color: Style.palette.background3
+                }
+                GradientStop {
+                    position: 0.70
+                    color: Style.palette.background3
+                }
+                GradientStop {
+                    position: 0.85
+                    color: Style.palette.background2
+                }
+                GradientStop {
+                    position: 1.0
+                    color: Style.palette.background1
+                }
+            }
+
             layer.enabled: true
             layer.effect: MultiEffect {
                 maskSource: mask
