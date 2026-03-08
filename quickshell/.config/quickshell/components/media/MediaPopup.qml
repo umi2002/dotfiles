@@ -11,7 +11,7 @@ Rectangle {
     readonly property int margins: 20
 
     implicitWidth: layout.implicitWidth + margins
-    implicitHeight: isExpanded ? layout.implicitHeight + margins : 0
+    implicitHeight: layout.implicitHeight + margins
 
     border.width: 1
     border.color: Style.palette.border1
@@ -21,11 +21,11 @@ Rectangle {
     gradient: Gradient {
         GradientStop {
             position: 0.0
-            color: "#bf" + Style.palette.background2.toString().substring(1)
+            color: "#ef" + Style.palette.background2.toString().substring(1)
         }
         GradientStop {
             position: 1.0
-            color: "#bf" + Style.palette.background4.toString().substring(1)
+            color: "#ef" + Style.palette.background4.toString().substring(1)
         }
     }
 
@@ -82,13 +82,9 @@ Rectangle {
             }
         }
 
-        Loader {
-            active: root.isExpanded
-            Layout.fillWidth: true
-            sourceComponent: AudioVisualiser {
-                id: audioVisualiser
-                implicitWidth: parent.width
-            }
+        AudioVisualiser {
+            id: audioVisualiser
+            implicitWidth: parent.width
         }
     }
 }

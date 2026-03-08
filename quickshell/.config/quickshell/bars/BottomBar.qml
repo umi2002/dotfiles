@@ -27,8 +27,7 @@ Rectangle {
 
     StyledPopup {
         id: systemPopup
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.left: system.left
         anchors.bottom: system.top
         anchors.bottomMargin: 20
         isExpanded: system.isExpanded

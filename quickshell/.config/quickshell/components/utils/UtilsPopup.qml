@@ -16,7 +16,7 @@ Rectangle {
     readonly property int borderRadius: 10
 
     implicitWidth: container.implicitWidth + margins
-    implicitHeight: isExpanded ? container.implicitHeight + margins : 0
+    implicitHeight: container.implicitHeight + margins
 
     border.width: 1
     border.color: Style.palette.border1
@@ -26,11 +26,11 @@ Rectangle {
     gradient: Gradient {
         GradientStop {
             position: 0.0
-            color: "#bf" + Style.palette.background2.toString().substring(1)
+            color: "#ef" + Style.palette.background2.toString().substring(1)
         }
         GradientStop {
             position: 1.0
-            color: "#bf" + Style.palette.background4.toString().substring(1)
+            color: "#ef" + Style.palette.background4.toString().substring(1)
         }
     }
 
