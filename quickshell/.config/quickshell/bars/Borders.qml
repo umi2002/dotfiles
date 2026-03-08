@@ -8,7 +8,7 @@ import qs
 
 PanelWindow {
     id: root
-    readonly property bool hasPopup: bottomBar.hasPopup
+    readonly property bool hasPopup: bottomBar.hasPopup || topBar.hasPopup
     focusable: true
 
     MouseArea {

@@ -1,7 +1,6 @@
 import Quickshell.Widgets
 import QtQuick
 
-import qs
 import qs.components
 import qs.components.battery
 import qs.components.media

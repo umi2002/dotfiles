@@ -6,9 +6,11 @@ import qs
 import qs.assets
 import qs.components
 import qs.components.workspaces
+import qs.components.calendar
 
 Rectangle {
     id: root
+    readonly property bool hasPopup: calendarPopup.isExpanded
     readonly property int margins: 10
 
     anchors.leftMargin: margins
@@ -46,12 +48,33 @@ Rectangle {
         font.pointSize: Style.font.size1
     }
 
-    Clock {
+    Rectangle {
+        id: calendarPopupContainer
+        anchors.right: calendar.right
+        anchors.top: calendar.bottom
+        anchors.rightMargin: 10
+        width: calendarPopup.implicitWidth
+        height: calendarPopup.implicitHeight + 20
+        color: "transparent"
+
+        MouseArea {
+            id: calendarPopupMouseArea
+            enabled: calendarPopup.implicitHeight > 0
+            anchors.fill: parent
+            hoverEnabled: true
+
+            StyledPopup {
+                id: calendarPopup
+                isExpanded: calendarPopupMouseArea.containsMouse || calendar.containsMouse
+                anchors.bottom: calendarPopupMouseArea.bottom
+                popupContent: CalendarPopup {}
+            }
+        }
+    }
+
+    Calendar {
+        id: calendar
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-
-        color: Style.palette.color2
-        font.family: Style.font.family2
-        font.pointSize: Style.font.size2
     }
 }
