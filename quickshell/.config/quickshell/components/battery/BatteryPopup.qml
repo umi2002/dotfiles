@@ -12,7 +12,9 @@ Rectangle {
 
     implicitWidth: isHovered ? 200 : 0
     implicitHeight: 50
-    color: Style.palette.background1
+    color: Qt.rgba(Style.palette.background1.r, Style.palette.background1.g, Style.palette.background1.b, 0.88)
+    border.width: 1
+    border.color: Qt.rgba(Style.palette.color1.r, Style.palette.color1.g, Style.palette.color1.b, 0.6)
     radius: 10
     clip: true
 

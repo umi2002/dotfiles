@@ -35,8 +35,6 @@ Rectangle {
             Workspaces {
                 Layout.alignment: Qt.AlignVCenter
                 radius: Math.min(width, height) / 2
-
-                color: Style.palette.background2
             }
         }
     }

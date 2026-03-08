@@ -11,18 +11,18 @@ Rectangle {
     implicitHeight: 600
 
     border.width: 1
-    border.color: Style.palette.border1
+    border.color: Qt.rgba(Style.palette.color1.r, Style.palette.color1.g, Style.palette.color1.b, 0.6)
     radius: 10
     clip: true
 
     gradient: Gradient {
         GradientStop {
             position: 0.0
-            color: "#ef" + Style.palette.background2.toString().substring(1)
+            color: Qt.rgba(Style.palette.background1.r, Style.palette.background1.g, Style.palette.background1.b, 0.88)
         }
         GradientStop {
             position: 1.0
-            color: "#ef" + Style.palette.background4.toString().substring(1)
+            color: Qt.rgba(Style.palette.background2.r, Style.palette.background2.g, Style.palette.background2.b, 0.85)
         }
     }
 

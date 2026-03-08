@@ -43,7 +43,8 @@ PanelWindow {
         layer.enabled: true
         layer.effect: MultiEffect {
             shadowEnabled: true
-            shadowColor: Style.palette.border2
+            shadowColor: Style.palette.color1
+            shadowOpacity: 0.4
             blurMax: 64
         }
 
@@ -68,32 +69,32 @@ PanelWindow {
 
         Rectangle {
             anchors.fill: parent
-            color: Style.palette.background1
+            color: Qt.rgba(Style.palette.background1.r, Style.palette.background1.g, Style.palette.background1.b, 0.55)
 
             gradient: Gradient {
                 GradientStop {
                     position: 0.15
-                    color: Style.palette.background1
+                    color: Qt.rgba(Style.palette.background1.r, Style.palette.background1.g, Style.palette.background1.b, 0.9)
                 }
                 GradientStop {
                     position: 0.30
-                    color: Style.palette.background2
+                    color: Qt.rgba(Style.palette.background2.r, Style.palette.background2.g, Style.palette.background2.b, 0.88)
                 }
                 GradientStop {
                     position: 0.45
-                    color: Style.palette.background3
+                    color: Qt.rgba(Style.palette.background3.r, Style.palette.background3.g, Style.palette.background3.b, 0.85)
                 }
                 GradientStop {
                     position: 0.70
-                    color: Style.palette.background3
+                    color: Qt.rgba(Style.palette.background3.r, Style.palette.background3.g, Style.palette.background3.b, 0.85)
                 }
                 GradientStop {
                     position: 0.85
-                    color: Style.palette.background2
+                    color: Qt.rgba(Style.palette.background2.r, Style.palette.background2.g, Style.palette.background2.b, 0.88)
                 }
                 GradientStop {
                     position: 1.0
-                    color: Style.palette.background1
+                    color: Qt.rgba(Style.palette.background1.r, Style.palette.background1.g, Style.palette.background1.b, 0.9)
                 }
             }
 
