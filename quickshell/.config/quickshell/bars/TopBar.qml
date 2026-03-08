@@ -5,12 +5,12 @@ import QtQuick.Layouts
 import qs
 import qs.assets
 import qs.components
+import qs.components.dashboard
 import qs.components.workspaces
-import qs.components.calendar
 
 Rectangle {
     id: root
-    readonly property bool hasPopup: calendarPopup.isExpanded
+    readonly property bool hasPopup: dashboardPopup.isExpanded
     readonly property int margins: 10
 
     anchors.leftMargin: margins
@@ -49,31 +49,31 @@ Rectangle {
     }
 
     Rectangle {
-        id: calendarPopupContainer
-        anchors.right: calendar.right
-        anchors.top: calendar.bottom
+        id: dashboardPopupContainer
+        anchors.right: dashboard.right
+        anchors.top: dashboard.bottom
         anchors.rightMargin: 10
-        width: calendarPopup.implicitWidth
-        height: calendarPopup.implicitHeight + 20
+        width: dashboardPopup.implicitWidth
+        height: dashboardPopup.implicitHeight + 20
         color: "transparent"
 
         MouseArea {
-            id: calendarPopupMouseArea
-            enabled: calendarPopup.implicitHeight > 0
+            id: dashboardPopupMouseArea
+            enabled: dashboardPopup.implicitHeight > 0
             anchors.fill: parent
             hoverEnabled: true
 
             StyledPopup {
-                id: calendarPopup
-                isExpanded: calendarPopupMouseArea.containsMouse || calendar.containsMouse
-                anchors.bottom: calendarPopupMouseArea.bottom
-                popupContent: CalendarPopup {}
+                id: dashboardPopup
+                isExpanded: dashboardPopupMouseArea.containsMouse || dashboard.containsMouse
+                anchors.bottom: dashboardPopupMouseArea.bottom
+                popupContent: DashboardPopup {}
             }
         }
     }
 
-    Calendar {
-        id: calendar
+    Dashboard {
+        id: dashboard
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
     }
