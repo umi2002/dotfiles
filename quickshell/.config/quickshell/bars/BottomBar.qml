@@ -62,6 +62,13 @@ Rectangle {
         anchors.centerIn: parent
     }
 
+    Tray {
+        anchors.right: utils.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: root.margins
+    }
+
     WrapperMouseArea {
         id: utilsPopupMouseArea
         enabled: utilsPopup.implicitHeight > 0
@@ -75,13 +82,6 @@ Rectangle {
             isExpanded: utilsPopupMouseArea.containsMouse || utils.containsMouse
             popupContent: UtilsPopup {}
         }
-    }
-
-    Tray {
-        anchors.right: utils.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.rightMargin: root.margins
     }
 
     Utils {
