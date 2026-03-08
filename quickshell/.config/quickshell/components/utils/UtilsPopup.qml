@@ -19,18 +19,18 @@ Rectangle {
     implicitHeight: container.implicitHeight + margins
 
     border.width: 1
-    border.color: Qt.rgba(Style.palette.color1.r, Style.palette.color1.g, Style.palette.color1.b, 0.6)
+    border.color: Style.palette.color1
     radius: borderRadius
     clip: true
 
     gradient: Gradient {
         GradientStop {
             position: 0.0
-            color: Qt.rgba(Style.palette.background1.r, Style.palette.background1.g, Style.palette.background1.b, 0.88)
+            color: Style.palette.background1
         }
         GradientStop {
             position: 1.0
-            color: Qt.rgba(Style.palette.background2.r, Style.palette.background2.g, Style.palette.background2.b, 0.85)
+            color: Style.palette.background2
         }
     }
 

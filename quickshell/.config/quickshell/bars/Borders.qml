@@ -44,7 +44,6 @@ PanelWindow {
         layer.effect: MultiEffect {
             shadowEnabled: true
             shadowColor: Style.palette.color1
-            shadowOpacity: 0.4
             blurMax: 64
         }
 
@@ -69,32 +68,31 @@ PanelWindow {
 
         Rectangle {
             anchors.fill: parent
-            color: Qt.rgba(Style.palette.background1.r, Style.palette.background1.g, Style.palette.background1.b, 0.55)
 
             gradient: Gradient {
                 GradientStop {
                     position: 0.15
-                    color: Qt.rgba(Style.palette.background1.r, Style.palette.background1.g, Style.palette.background1.b, 0.9)
+                    color: Style.palette.background1
                 }
                 GradientStop {
                     position: 0.30
-                    color: Qt.rgba(Style.palette.background2.r, Style.palette.background2.g, Style.palette.background2.b, 0.88)
+                    color: Style.palette.background2
                 }
                 GradientStop {
                     position: 0.45
-                    color: Qt.rgba(Style.palette.background3.r, Style.palette.background3.g, Style.palette.background3.b, 0.85)
+                    color: Style.palette.background3
                 }
                 GradientStop {
                     position: 0.70
-                    color: Qt.rgba(Style.palette.background3.r, Style.palette.background3.g, Style.palette.background3.b, 0.85)
+                    color: Style.palette.background3
                 }
                 GradientStop {
                     position: 0.85
-                    color: Qt.rgba(Style.palette.background2.r, Style.palette.background2.g, Style.palette.background2.b, 0.88)
+                    color: Style.palette.background2
                 }
                 GradientStop {
                     position: 1.0
-                    color: Qt.rgba(Style.palette.background1.r, Style.palette.background1.g, Style.palette.background1.b, 0.9)
+                    color: Style.palette.background1
                 }
             }
 

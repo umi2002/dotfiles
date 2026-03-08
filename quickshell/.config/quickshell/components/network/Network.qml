@@ -10,27 +10,7 @@ Rectangle {
     required property string networkName
     required property bool isHovered
 
-    property var network: null
-
-    Timer {
-        id: networkRefreshTimer
-        interval: 200
-        onTriggered: {
-            let found = NetworkData.findNetwork(root.networkName);
-            if (found) root.network = found;
-        }
-    }
-
-    Connections {
-        target: NetworkData
-        function onNetworksChanged() {
-            networkRefreshTimer.restart();
-        }
-    }
-
-    Component.onCompleted: {
-        root.network = NetworkData.findNetwork(root.networkName);
-    }
+    readonly property var network: NetworkData.findNetwork(root.networkName)
 
     clip: true
     implicitHeight: networkHeader.implicitHeight + (networkHeader.isExpanded ? networkInfoLoader.implicitHeight + networkAuthenticateLoader.implicitHeight + 20 : 0)
