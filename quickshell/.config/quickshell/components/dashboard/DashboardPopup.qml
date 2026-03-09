@@ -5,6 +5,7 @@ import QtQuick.Layouts
 
 import qs
 import qs.components.calendar
+import qs.components.weather
 
 Rectangle {
     id: root
@@ -36,6 +37,13 @@ Rectangle {
         x: (parent.width - width) / 2
         y: root.margins / 2
 
-        CalendarPopup {}
+        WeatherPopup {
+            id: weather
+            implicitWidth: calendar.implicitWidth
+        }
+
+        CalendarPopup {
+            id: calendar
+        }
     }
 }

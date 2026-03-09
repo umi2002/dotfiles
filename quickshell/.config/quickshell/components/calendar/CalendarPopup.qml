@@ -6,8 +6,6 @@ import QtQuick.Layouts
 ColumnLayout {
     id: root
 
-    property bool isExpanded
-
     property var viewDate: {
         const date = new Date();
         return new Date(date.getFullYear(), date.getMonth(), 1);
