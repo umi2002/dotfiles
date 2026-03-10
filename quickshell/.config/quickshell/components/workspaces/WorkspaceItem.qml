@@ -18,10 +18,16 @@ Rectangle {
 
     signal clicked
 
-    readonly property string iconColor: isActive ? Style.palette.text : Style.palette.subtext0
+    readonly property string iconColor: isActive ? Style.palette.crust : Style.palette.text
 
     color: "transparent"
     opacity: isActive ? 1 : 0.5
+
+    Behavior on color {
+        ColorAnimation {
+            duration: 200
+        }
+    }
 
     Behavior on opacity {
         NumberAnimation {
