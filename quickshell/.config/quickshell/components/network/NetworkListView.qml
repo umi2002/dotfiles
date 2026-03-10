@@ -11,7 +11,7 @@ Rectangle {
     clip: true
     implicitHeight: networks.implicitHeight + 30
     radius: 20
-    color: Style.palette.surface2
+    color: "transparent"
 
     Behavior on implicitHeight {
         NumberAnimation {

@@ -9,5 +9,5 @@ import qs.assets
 Rectangle {
     radius: 10
 
-    color: Style.palette.surface2
+    color: "transparent"
 }

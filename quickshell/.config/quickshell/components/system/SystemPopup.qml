@@ -10,10 +10,9 @@ Rectangle {
     implicitWidth: 600
     implicitHeight: 600
 
-    border.width: 1
     radius: 10
     clip: true
-    color: Style.palette.mantle
+    color: Style.palette.base
 
     Item {
         id: headerContainer

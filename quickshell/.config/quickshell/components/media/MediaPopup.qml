@@ -13,15 +13,15 @@ Rectangle {
     implicitWidth: layout.implicitWidth + margins
     implicitHeight: layout.implicitHeight + margins
 
-    border.width: 1
     radius: 10
     clip: true
-    color: Style.palette.mantle
+    color: Style.palette.base
 
     ColumnLayout {
         id: layout
         x: (parent.width - width) / 2
         y: root.margins / 2
+        spacing: root.spacing
 
         RowLayout {
             spacing: root.spacing

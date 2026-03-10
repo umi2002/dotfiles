@@ -18,10 +18,9 @@ Rectangle {
     implicitWidth: container.implicitWidth + margins
     implicitHeight: container.implicitHeight + margins
 
-    border.width: 1
     radius: borderRadius
     clip: true
-    color: Style.palette.mantle
+    color: Style.palette.base
 
     Rectangle {
         id: container
@@ -31,7 +30,7 @@ Rectangle {
         implicitHeight: layout.implicitHeight + root.margins
         radius: root.borderRadius
 
-        color: Style.palette.surface2
+        color: "transparent"
 
         ColumnLayout {
             id: layout

@@ -35,12 +35,11 @@ Item {
         active: false
         clip: true
         sourceComponent: root.popupContent
-        opacity: root.isExpanded ? 1 : 0
 
         onItemChanged: {
             if (item) {
                 item.isExpanded = Qt.binding(() => root.isExpanded);
-                loader.width = Qt.binding(() => root.isExpanded ? item.implicitWidth : 0);
+                loader.width = Qt.binding(() => item.implicitWidth);
                 loader.height = Qt.binding(() => root.isExpanded ? item.implicitHeight : 0);
             }
         }
@@ -56,12 +55,6 @@ Item {
             NumberAnimation {
                 duration: root.animationDuration
                 easing.type: root.animationEasing
-            }
-        }
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: root.animationDuration
             }
         }
     }

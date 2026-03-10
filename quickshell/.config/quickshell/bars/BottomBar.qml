@@ -28,7 +28,7 @@ Rectangle {
         id: systemPopup
         anchors.left: system.left
         anchors.bottom: system.top
-        anchors.bottomMargin: 20
+        anchors.bottomMargin: 10
         isExpanded: system.isExpanded
         popupContent: SystemPopup {}
     }
@@ -47,7 +47,7 @@ Rectangle {
         hoverEnabled: true
         anchors.horizontalCenter: media.horizontalCenter
         anchors.bottom: media.top
-        height: mediaPopup.implicitHeight + 20
+        height: mediaPopup.implicitHeight + 10
 
         StyledPopup {
             id: mediaPopup
@@ -74,7 +74,7 @@ Rectangle {
         hoverEnabled: true
         anchors.right: utils.right
         anchors.bottom: utils.top
-        height: utilsPopup.implicitHeight + 20
+        height: utilsPopup.implicitHeight + 10
 
         StyledPopup {
             id: utilsPopup

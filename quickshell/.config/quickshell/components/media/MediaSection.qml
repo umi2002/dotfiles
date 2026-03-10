@@ -7,5 +7,5 @@ import qs
 Rectangle {
     radius: 10
 
-    color: Style.palette.surface2
+    color: Style.palette.mantle
 }

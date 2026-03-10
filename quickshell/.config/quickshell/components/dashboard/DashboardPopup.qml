@@ -16,10 +16,9 @@ Rectangle {
     implicitWidth: layout.implicitWidth + margins
     implicitHeight: layout.implicitHeight + margins
 
-    border.width: 1
     radius: 10
     clip: true
-    color: Style.palette.mantle
+    color: Style.palette.base
 
     ColumnLayout {
         id: layout

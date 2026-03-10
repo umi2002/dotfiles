@@ -12,7 +12,7 @@ Rectangle {
     clip: true
     implicitHeight: devicesList.implicitHeight + 30
     radius: 20
-    color: Style.palette.surface2
+    color: "transparent"
 
     Behavior on implicitHeight {
         NumberAnimation {
