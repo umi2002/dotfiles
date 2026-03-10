@@ -57,10 +57,16 @@ QtObject {
         readonly property url spotify: assets.resolveAsset("spotify_logo.svg")
     }
 
-    readonly property var ressources: QtObject {
-        readonly property url cpu: assets.resolveAsset("cpu.svg")
-        readonly property url memory: assets.resolveAsset("memory.svg")
-        readonly property url storage: assets.resolveAsset("storage.svg")
+    readonly property var stats: QtObject {
+        readonly property url basePath: "stats_icons/"
+        readonly property url os: assets.resolveAsset("arch_linux_icon.svg")
+        readonly property url kernel: assets.resolveAsset(basePath + "linux.svg")
+        readonly property url uptime: assets.resolveAsset(basePath + "clock.svg")
+        readonly property url wm: assets.resolveAsset(basePath + "wm.svg")
+        readonly property url cpu: assets.resolveAsset(basePath + "cpu.svg")
+        readonly property url gpu: assets.resolveAsset(basePath + "gpu.svg")
+        readonly property url memory: assets.resolveAsset(basePath + "memory.svg")
+        readonly property url storage: assets.resolveAsset(basePath + "storage.svg")
     }
 
     readonly property var battery: QtObject {

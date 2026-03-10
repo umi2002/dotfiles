@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import qs
 import qs.components.calendar
 import qs.components.weather
+import qs.components.stats
 
 Rectangle {
     id: root
@@ -20,18 +21,33 @@ Rectangle {
     clip: true
     color: Style.palette.base
 
-    ColumnLayout {
+    RowLayout {
         id: layout
         x: (parent.width - width) / 2
         y: root.margins / 2
 
-        WeatherPopup {
-            id: weather
-            implicitWidth: calendar.implicitWidth
+        ColumnLayout {
+            StatsPopup {
+                Layout.alignment: Qt.AlignHCenter
+            }
+
+            ResourcesPopup {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
         }
 
-        CalendarPopup {
-            id: calendar
+        ColumnLayout {
+            Layout.alignment: Qt.AlignVCenter
+
+            WeatherPopup {
+                id: weather
+                implicitWidth: calendar.implicitWidth
+            }
+
+            CalendarPopup {
+                id: calendar
+            }
         }
     }
 }
