@@ -1,5 +1,6 @@
 import QtQuick.Layouts
 
+import qs
 import qs.assets
 import qs.services
 import qs.components.dashboard
@@ -18,6 +19,7 @@ DashboardSection {
             Layout.alignment: Qt.AlignVCenter
 
             iconSource: Assets.stats.cpu
+            iconColor: Style.palette.sapphire
             value: StatsData.cpuUsage
         }
 
@@ -25,6 +27,7 @@ DashboardSection {
             Layout.alignment: Qt.AlignVCenter
 
             iconSource: Assets.stats.memory
+            iconColor: Style.palette.blue
             value: StatsData.memUsage
         }
 
@@ -32,6 +35,7 @@ DashboardSection {
             Layout.alignment: Qt.AlignVCenter
 
             iconSource: Assets.stats.storage
+            iconColor: Style.palette.peach
             value: StatsData.diskUsage
         }
     }

@@ -8,6 +8,7 @@ ColumnLayout {
     id: root
 
     required property string iconSource
+    required property color iconColor
     required property real value
 
     VerticalSlider {
@@ -25,7 +26,7 @@ ColumnLayout {
         Layout.alignment: Qt.AlignHCenter
 
         iconSource: root.iconSource
-        iconColor: Style.palette.green
+        iconColor: root.iconColor
         implicitSize: 30
     }
 }
