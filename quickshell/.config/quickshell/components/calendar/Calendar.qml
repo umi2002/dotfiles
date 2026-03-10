@@ -8,7 +8,7 @@ WrapperMouseArea {
     hoverEnabled: true
 
     Text {
-        color: Style.palette.color2
+        color: Style.palette.green
         font.family: Style.font.family2
         font.pointSize: Style.font.size2
 

@@ -12,7 +12,7 @@ Item {
 
     readonly property bool isHovered: popupMouseArea.containsMouse || batteryMouseArea.containsMouse
     readonly property real batteryValue: Battery.batteryPercent / 100
-    readonly property color batteryColor: Battery.isCharging ? Style.palette.color2 : Style.palette.color3
+    readonly property color batteryColor: Battery.isCharging ? Style.palette.green : Style.palette.red
 
     implicitWidth: batteryLayout.implicitWidth
     implicitHeight: batteryLayout.implicitHeight
@@ -40,7 +40,6 @@ Item {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 value: root.batteryValue
                 primaryColor: root.batteryColor
-                secondaryColor: Style.palette.background2
             }
 
             BatteryIndicator {

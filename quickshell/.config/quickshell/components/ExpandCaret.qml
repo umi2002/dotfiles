@@ -27,7 +27,7 @@ WrapperMouseArea {
         layer.enabled: true
         layer.effect: MultiEffect {
             colorization: 1
-            colorizationColor: Style.palette.color2
+            colorizationColor: Style.palette.text
         }
 
         rotation: root.isExpanded ? 90 : 0

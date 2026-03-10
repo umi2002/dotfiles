@@ -11,20 +11,9 @@ Rectangle {
     implicitHeight: 600
 
     border.width: 1
-    border.color: Style.palette.color1
     radius: 10
     clip: true
-
-    gradient: Gradient {
-        GradientStop {
-            position: 0.0
-            color: Style.palette.background1
-        }
-        GradientStop {
-            position: 1.0
-            color: Style.palette.background2
-        }
-    }
+    color: Style.palette.mantle
 
     Item {
         id: headerContainer

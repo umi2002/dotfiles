@@ -15,7 +15,7 @@ Rectangle {
     width: itemWidth
     height: itemWidth
     radius: width / 2
-    color: Style.palette.color1
+    color: Style.palette.green
 
     x: layoutX + activeIndex * (itemWidth + itemSpacing)
 

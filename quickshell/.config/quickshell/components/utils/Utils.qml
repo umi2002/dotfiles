@@ -13,31 +13,7 @@ WrapperMouseArea {
         implicitWidth: layout.width + 20
         implicitHeight: layout.height + 5
         radius: height / 2
-        color: "transparent"
-
-        Rectangle {
-            id: bgMask
-            anchors.fill: parent
-            radius: parent.radius
-            visible: false
-        }
-
-        LinearGradient {
-            anchors.fill: parent
-            source: bgMask
-            start: Qt.point(0, 0)
-            end: Qt.point(width, height)
-            gradient: Gradient {
-                GradientStop {
-                    position: 0.0
-                    color: Style.palette.background3
-                }
-                GradientStop {
-                    position: 1.0
-                    color: Style.palette.background4
-                }
-            }
-        }
+        color: Style.palette.crust
 
         RowLayout {
             id: layout

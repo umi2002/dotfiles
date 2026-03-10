@@ -16,7 +16,7 @@ RowLayout {
 
     ColorizedIcon {
         iconSource: Qt.resolvedUrl(root.icon)
-        iconColor: Style.palette.color1
+        iconColor: Style.palette.subtext1
         implicitSize: root.iconSize
     }
 

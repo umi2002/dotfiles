@@ -45,39 +45,11 @@ Item {
         width: size
         height: size
         radius: size / 2
-        color: "transparent"
+        color: root.isSelected ? Style.palette.lavender : root.isToday ? Style.palette.green : "transparent"
 
-        Rectangle {
-            id: bgMask
-            anchors.fill: parent
-            radius: parent.radius
-            visible: false
-        }
-
-        LinearGradient {
-            anchors.fill: parent
-            source: bgMask
-            start: Qt.point(0, 0)
-            end: Qt.point(width, height)
-            gradient: Gradient {
-                GradientStop {
-                    position: 0.0
-                    color: root.isSelected ? Style.palette.color1 : root.isToday ? Style.palette.border1 : "transparent"
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-                }
-                GradientStop {
-                    position: 1.0
-                    color: root.isSelected ? Style.palette.color1 : root.isToday ? Style.palette.color1 : "transparent"
-                    Behavior on color {
-                        ColorAnimation {
-                            duration: 200
-                        }
-                    }
-                }
+        Behavior on color {
+            ColorAnimation {
+                duration: 200
             }
         }
 
@@ -86,10 +58,16 @@ Item {
 
             anchors.centerIn: parent
             text: root.inMonth ? root.cellDate.getDate() : ""
-            color: root.isToday || root.isSelected ? Style.palette.background1 : Qt.rgba(Style.palette.color1.r, Style.palette.color1.g, Style.palette.color1.b, root.inMonth ? 0.85 : 0)
+            color: root.isToday || root.isSelected ? Style.palette.crust : Style.palette.subtext1
             font.family: Style.font.family3
             font.pixelSize: Style.font.size1
             font.bold: root.isToday || root.isSelected
+
+            Behavior on color {
+                ColorAnimation {
+                    duration: 200
+                }
+            }
         }
 
         Row {
@@ -104,7 +82,13 @@ Item {
                     width: size
                     height: size
                     radius: size / 2
-                    color: Style.palette.color2
+                    color: root.isToday || root.isSelected ? Style.palette.surface0 : Style.palette.green
+
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 200
+                        }
+                    }
                 }
             }
         }

@@ -5,7 +5,7 @@ import qs
 Item {
     id: root
     property int barValue: 0
-    property color barColor: Style.palette.color1
+    property color barColor: Style.palette.subtext1
 
     Rectangle {
         anchors.bottom: parent.bottom

@@ -19,7 +19,7 @@ Rectangle {
         text: root.text.join("\n")
         font.pointSize: Style.font.size2
         font.family: Style.font.family3
-        color: Style.palette.color1
+        color: Style.palette.text
     }
 
     function securityTypeToString(securityType) {

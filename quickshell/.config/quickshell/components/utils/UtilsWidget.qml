@@ -9,7 +9,7 @@ RowLayout {
 
     required property string iconSource
     required property int percentage
-    property color iconColor: Style.palette.color1
+    property color iconColor: Style.palette.subtext1
     property int iconSize: 30
     property int textWidth: 40
 
@@ -25,7 +25,7 @@ RowLayout {
         verticalAlignment: Text.AlignVCenter
         Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
         Layout.preferredWidth: root.textWidth
-        color: Style.palette.color1
+        color: Style.palette.subtext1
         font.family: Style.font.family2
         font.pixelSize: Style.font.size1
     }

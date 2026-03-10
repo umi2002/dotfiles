@@ -21,7 +21,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         font.pointSize: Style.font.size2
         font.family: Style.font.family3
-        color: root.isConnected ? Style.palette.color2 : Style.palette.color1
+        color: root.isConnected ? Style.palette.green : Style.palette.subtext1
     }
 
     Loader {

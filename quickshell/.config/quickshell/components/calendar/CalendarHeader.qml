@@ -26,7 +26,7 @@ DashboardSection {
 
         Text {
             text: "\u2039"
-            color: Style.palette.color1
+            color: Style.palette.subtext1
             font.family: Style.font.family1
             font.pixelSize: Style.font.size1 + 6
             MouseArea {
@@ -43,7 +43,7 @@ DashboardSection {
 
         Text {
             text: root.monthName(root.viewDate.getMonth()) + "  " + root.viewDate.getFullYear()
-            color: Style.palette.color1
+            color: Style.palette.text
             font.family: Style.font.family3
             font.pixelSize: Style.font.size1
             font.bold: true
@@ -56,7 +56,7 @@ DashboardSection {
 
         Text {
             text: "\u203a"
-            color: Style.palette.color1
+            color: Style.palette.subtext1
             font.family: Style.font.family1
             font.pixelSize: Style.font.size1 + 6
             MouseArea {

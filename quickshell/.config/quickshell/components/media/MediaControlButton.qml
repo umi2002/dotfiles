@@ -34,7 +34,7 @@ WrapperMouseArea {
         id: icon
         anchors.centerIn: parent
         iconSource: root.iconSource
-        iconColor: Style.palette.color1
+        iconColor: Style.palette.subtext1
         implicitSize: root.iconSize
     }
 }

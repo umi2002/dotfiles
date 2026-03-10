@@ -15,11 +15,11 @@ ColorizedIcon {
     function getNetworkColor() {
         switch (NetworkData.wifiDevice?.state) {
         case DeviceConnectionState.Connected:
-            return Style.palette.color2;
+            return Style.palette.green;
         case DeviceConnectionState.Unknown:
-            return Style.palette.color3;
+            return Style.palette.teal;
         default:
-            return Style.palette.color1;
+            return Style.palette.red;
         }
     }
 }

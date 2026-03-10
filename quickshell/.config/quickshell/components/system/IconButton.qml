@@ -5,6 +5,7 @@ import QtQuick
 import Qt5Compat.GraphicalEffects
 
 import qs
+import qs.components
 
 Rectangle {
     id: root
@@ -19,48 +20,19 @@ Rectangle {
     implicitWidth: buttonWidth
     implicitHeight: buttonHeight
     radius: buttonRadius
-    color: "transparent"
+    color: isSelected ? Style.palette.green : Style.palette.crust
 
-    Rectangle {
-        id: bgMask
-        anchors.fill: parent
-        radius: parent.radius
-        visible: false
-    }
-
-    LinearGradient {
-        anchors.fill: parent
-        source: bgMask
-        start: Qt.point(0, 0)
-        end: Qt.point(width, height)
-        gradient: Gradient {
-            GradientStop {
-                position: 0.0
-                color: root.isSelected ? Style.palette.border1 : Style.palette.background3
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 200
-                    }
-                }
-            }
-            GradientStop {
-                position: 1.0
-                color: root.isSelected ? Style.palette.color1 : Style.palette.background4
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 200
-                    }
-                }
-            }
+    Behavior on color {
+        ColorAnimation {
+            duration: 200
         }
     }
 
-    IconImage {
-        source: Qt.resolvedUrl(root.icon)
+    ColorizedIcon {
+        iconSource: Qt.resolvedUrl(root.icon)
         anchors.fill: parent
         anchors.topMargin: root.iconMargin
         anchors.bottomMargin: root.iconMargin
+        iconColor: root.isSelected ? Style.palette.crust : Style.palette.text
     }
 }

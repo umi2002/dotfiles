@@ -10,6 +10,6 @@ Rectangle {
     Layout.fillHeight: true
     Layout.leftMargin: margin
     Layout.rightMargin: margin
-    color: Style.palette.color1
+    color: Style.palette.subtext1
     opacity: 0.4
 }

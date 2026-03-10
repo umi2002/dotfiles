@@ -24,6 +24,8 @@ DashboardSection {
                 return root.selectedDate !== null ? Calendar.eventsForDate(root.selectedDate) : [];
             }
             delegate: RowLayout {
+                id: layout
+
                 required property var modelData
                 Layout.fillWidth: true
                 spacing: 5
@@ -34,13 +36,13 @@ DashboardSection {
                     Layout.preferredWidth: size
                     Layout.preferredHeight: size
                     radius: size / 2
-                    color: Style.palette.color2
+                    color: Style.palette.green
                     Layout.alignment: Qt.AlignVCenter
                 }
 
                 Text {
-                    text: modelData.allDay ? modelData.summary : Qt.formatTime(modelData.dtstart, "h:mm AP") + "  " + modelData.summary
-                    color: Style.palette.color1
+                    text: layout.modelData.allDay ? layout.modelData.summary : Qt.formatTime(layout.modelData.dtstart, "h:mm AP") + "  " + layout.modelData.summary
+                    color: Style.palette.text
                     font.family: Style.font.family3
                     font.pixelSize: Style.font.size1
                     elide: Text.ElideRight
@@ -52,7 +54,7 @@ DashboardSection {
         Text {
             visible: root.selectedDate === null || Calendar.eventsForDate(root.selectedDate).length === 0
             text: "No events"
-            color: Style.palette.color1
+            color: Style.palette.subtext1
             font.family: Style.font.family3
             font.pixelSize: Style.font.size1
             opacity: 0.4

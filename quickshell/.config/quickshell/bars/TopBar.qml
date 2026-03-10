@@ -43,7 +43,7 @@ Rectangle {
 
     Title {
         anchors.centerIn: parent
-        color: Style.palette.color1
+        color: Style.palette.text
         font.family: Style.font.family1
         font.pointSize: Style.font.size1
     }

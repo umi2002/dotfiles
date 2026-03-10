@@ -15,5 +15,11 @@ IconImage {
     layer.effect: MultiEffect {
         colorization: 1
         colorizationColor: root.iconColor
+
+        Behavior on colorizationColor {
+            ColorAnimation {
+                duration: 200
+            }
+        }
     }
 }

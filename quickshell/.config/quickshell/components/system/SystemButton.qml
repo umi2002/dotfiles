@@ -13,41 +13,11 @@ Rectangle {
     implicitWidth: layout.width + 20
     implicitHeight: layout.height + 5
     radius: height / 2
-    color: "transparent"
+    color: isExpanded ? Style.palette.overlay0 : Style.palette.crust
 
-    Rectangle {
-        id: bgMask
-        anchors.fill: parent
-        radius: parent.radius
-        visible: false
-    }
-
-    LinearGradient {
-        anchors.fill: parent
-        source: bgMask
-        start: Qt.point(0, 0)
-        end: Qt.point(width, height)
-        gradient: Gradient {
-            GradientStop {
-                position: 0.0
-                color: root.isExpanded ? Style.palette.border1 : Style.palette.background3
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 200
-                    }
-                }
-            }
-            GradientStop {
-                position: 1.0
-                color: root.isExpanded ? Style.palette.color1 : Style.palette.background4
-
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 200
-                    }
-                }
-            }
+    Behavior on color {
+        ColorAnimation {
+            duration: 200
         }
     }
 

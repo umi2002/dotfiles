@@ -16,7 +16,7 @@ WrapperMouseArea {
             implicitWidth: 300
             implicitHeight: 30
             radius: 10
-            color: Style.palette.border1
+            color: Style.palette.subtext1
 
             TextInput {
                 id: textInput
@@ -25,7 +25,7 @@ WrapperMouseArea {
                 verticalAlignment: Qt.AlignVCenter
                 font.pointSize: Style.font.size2
                 font.family: Style.font.family3
-                color: Style.palette.color1
+                color: Style.palette.mantle
                 activeFocusOnPress: true
                 echoMode: TextInput.Password
 

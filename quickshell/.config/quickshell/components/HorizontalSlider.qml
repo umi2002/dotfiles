@@ -31,13 +31,13 @@ Slider {
         implicitWidth: root.sliderWidth
         implicitHeight: root.sliderHeight
         radius: implicitHeight / 2
-        color: Style.palette.border1
+        color: Style.palette.crust
 
         Rectangle {
             implicitWidth: root.visualPosition * parent.implicitWidth
             implicitHeight: parent.implicitHeight
             radius: implicitHeight / 2
-            color: Style.palette.color1
+            color: Style.palette.subtext1
         }
     }
 

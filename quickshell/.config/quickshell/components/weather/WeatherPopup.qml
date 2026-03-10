@@ -19,16 +19,13 @@ DashboardSection {
 
     RowLayout {
         anchors.centerIn: parent
+        spacing: 40
 
         IconImage {
             Layout.alignment: Qt.AlignVCenter
             implicitSize: 100
 
             source: Weather.icon
-
-            Component.onCompleted: {
-                console.log(Weather.icon);
-            }
         }
 
         ColumnLayout {
@@ -40,7 +37,7 @@ DashboardSection {
             Text {
                 Layout.alignment: Qt.AlignHCenter
                 text: Weather.station
-                color: Style.palette.color1
+                color: Style.palette.subtext1
                 font.family: Style.font.family3
                 font.pixelSize: Style.font.size2
                 opacity: 0.6
@@ -49,7 +46,7 @@ DashboardSection {
             Text {
                 Layout.alignment: Qt.AlignHCenter
                 text: root.formatWeatherText(Weather.temperature, 1, " °C")
-                color: Style.palette.color1
+                color: Style.palette.text
                 font.family: Style.font.family3
                 font.pixelSize: 48
                 font.bold: true
@@ -61,7 +58,7 @@ DashboardSection {
 
                 Text {
                     text: "Humidity"
-                    color: Style.palette.color1
+                    color: Style.palette.subtext1
                     font.family: Style.font.family3
                     font.pixelSize: Style.font.size2
                     opacity: 0.6
@@ -69,7 +66,7 @@ DashboardSection {
 
                 Text {
                     text: root.formatWeatherText(Weather.humidity, 0, " %")
-                    color: Style.palette.color1
+                    color: Style.palette.subtext1
                     font.family: Style.font.family3
                     font.pixelSize: Style.font.size2
                 }

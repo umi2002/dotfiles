@@ -18,7 +18,7 @@ Rectangle {
 
     signal clicked
 
-    readonly property string iconColor: isActive ? Style.palette.background1 : Style.palette.color1
+    readonly property string iconColor: isActive ? Style.palette.text : Style.palette.subtext0
 
     color: "transparent"
     opacity: isActive ? 1 : 0.5

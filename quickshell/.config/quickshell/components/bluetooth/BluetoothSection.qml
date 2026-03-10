@@ -25,7 +25,7 @@ ColumnLayout {
         text: root.title
         font.pointSize: Style.font.size1
         font.family: Style.font.family1
-        color: Style.palette.color1
+        color: Style.palette.text
         Layout.alignment: Qt.AlignLeft | Qt.AlignTop
     }
 

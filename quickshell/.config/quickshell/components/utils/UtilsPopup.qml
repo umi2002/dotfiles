@@ -19,20 +19,9 @@ Rectangle {
     implicitHeight: container.implicitHeight + margins
 
     border.width: 1
-    border.color: Style.palette.color1
     radius: borderRadius
     clip: true
-
-    gradient: Gradient {
-        GradientStop {
-            position: 0.0
-            color: Style.palette.background1
-        }
-        GradientStop {
-            position: 1.0
-            color: Style.palette.background2
-        }
-    }
+    color: Style.palette.mantle
 
     Rectangle {
         id: container
@@ -42,33 +31,7 @@ Rectangle {
         implicitHeight: layout.implicitHeight + root.margins
         radius: root.borderRadius
 
-        color: "transparent"
-
-        Rectangle {
-            id: bgMask
-            anchors.fill: parent
-            radius: parent.radius
-            visible: false
-        }
-
-        ShaderEffect {
-            anchors.fill: parent
-            fragmentShader: Assets.shaders.waves
-
-            property real time: 0
-
-            NumberAnimation on time {
-                from: 0
-                to: Math.PI * 2
-                duration: 10000
-                loops: Animation.Infinite
-            }
-
-            layer.enabled: true
-            layer.effect: OpacityMask {
-                maskSource: bgMask
-            }
-        }
+        color: Style.palette.surface2
 
         ColumnLayout {
             id: layout

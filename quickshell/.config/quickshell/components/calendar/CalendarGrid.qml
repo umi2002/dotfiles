@@ -33,7 +33,7 @@ DashboardSection {
                     required property string modelData
                     width: root.cellWidth
                     text: modelData
-                    color: Style.palette.color1
+                    color: Style.palette.crust
                     font.family: Style.font.family3
                     font.pixelSize: Style.font.size2
                     font.bold: true

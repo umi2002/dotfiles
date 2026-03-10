@@ -1,5 +1,7 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell.Bluetooth
+
 import qs
 import qs.components
 import qs.services
@@ -13,12 +15,11 @@ ColorizedIcon {
     function getBluetoothColor() {
         switch (BluetoothData.state) {
         case 0:
-            return Style.palette.color3;
+            return Style.palette.red;
         case 1:
-            return Style.palette.color2;
-        case 2:
+            return Style.palette.green;
         default:
-            return Style.palette.color1;
+            return Style.palette.teal;
         }
     }
 }

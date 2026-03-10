@@ -10,10 +10,9 @@ WrapperMouseArea {
 
     property string text: ""
     property bool busy: false
-    property color backgroundColor: "#bf" + Style.palette.background1.toString().substring(1)
-    property color hoverColor: Qt.lighter(Style.palette.background1, 1.5)
-    property color borderColor: Style.palette.border1
-    property color textColor: Style.palette.color1
+    property color backgroundColor: Style.palette.surface0
+    property color hoverColor: Style.palette.overlay0
+    property color textColor: Style.palette.text
     property int fontSize: Style.font.size2
     property string fontFamily: Style.font.family3
     property int borderWidth: 1
@@ -36,7 +35,6 @@ WrapperMouseArea {
         implicitWidth: root.buttonWidth
         implicitHeight: root.buttonHeight
         border.width: root.borderWidth
-        border.color: root.borderColor
         color: root.backgroundColor
 
         ColorAnimation on color {
