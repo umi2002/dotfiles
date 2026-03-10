@@ -9,6 +9,7 @@ Slider {
     required property int sliderHeight
     property bool isUserInteracting: false
     property var onValueChange: function (newValue) {}
+    property int cursorShape: Qt.PointingHandCursor
 
     orientation: Qt.Vertical
 
@@ -24,7 +25,7 @@ Slider {
     }
 
     HoverHandler {
-        cursorShape: Qt.PointingHandCursor
+        cursorShape: root.cursorShape
     }
 
     background: Rectangle {

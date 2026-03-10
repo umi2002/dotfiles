@@ -14,6 +14,13 @@ Singleton {
     property string cpu: ""
     property string gpu: ""
 
+    property real cpuUsage: 0
+    property real memUsage: 0
+    property real diskUsage: 0
+
+    property real prevCpuTotal: 0
+    property real prevCpuIdle: 0
+
     function formatUptime(ms) {
         const totalSeconds = Math.floor(ms / 1000);
         const days = Math.floor(totalSeconds / 86400);
@@ -60,6 +67,50 @@ Singleton {
                 break;
             }
         }
+    }
+
+    function parseResources(text) {
+        for (const line of text.trim().split('\n')) {
+            const parts = line.split(' ');
+            if (parts[0] === 'cpu') {
+                const total = parseFloat(parts[1]);
+                const idle = parseFloat(parts[2]);
+                const deltaTotal = total - root.prevCpuTotal;
+                const deltaIdle = idle - root.prevCpuIdle;
+                if (deltaTotal > 0)
+                    root.cpuUsage = (deltaTotal - deltaIdle) / deltaTotal;
+                root.prevCpuTotal = total;
+                root.prevCpuIdle = idle;
+            } else if (parts[0] === 'mem') {
+                const used = parseFloat(parts[1]);
+                const total = parseFloat(parts[2]);
+                root.memUsage = total > 0 ? used / total : 0;
+            } else if (parts[0] === 'disk') {
+                const used = parseFloat(parts[1]);
+                const total = parseFloat(parts[2]);
+                root.diskUsage = total > 0 ? used / total : 0;
+            }
+        }
+    }
+
+    Process {
+        id: fetchResources
+        command: ["bash", "-c",
+            "awk 'NR==1{printf \"cpu %d %d\\n\",$2+$3+$4+$5+$6+$7+$8+$9,$5+$6}' /proc/stat;" +
+            "awk '/MemTotal/{t=$2}/MemAvailable/{a=$2}END{printf \"mem %d %d\\n\",t-a,t}' /proc/meminfo;" +
+            "df / | awk 'NR==2{printf \"disk %d %d\\n\",$3,$2}'"
+        ]
+        stdout: StdioCollector {
+            onStreamFinished: root.parseResources(this.text)
+        }
+    }
+
+    Timer {
+        interval: 2000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: fetchResources.running = true
     }
 
     Process {
