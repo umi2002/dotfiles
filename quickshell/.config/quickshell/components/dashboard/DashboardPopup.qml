@@ -27,13 +27,23 @@ Rectangle {
         y: root.margins / 2
 
         ColumnLayout {
-            StatsPopup {
-                Layout.alignment: Qt.AlignHCenter
+            Layout.fillHeight: true
+
+            DashboardVideo {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
             }
 
-            ResourcesPopup {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+            RowLayout {
+                Layout.preferredHeight: statsPopup.implicitHeight
+
+                StatsPopup {
+                    id: statsPopup
+                }
+
+                ResourcesPopup {
+                    Layout.preferredHeight: statsPopup.implicitHeight
+                }
             }
         }
 

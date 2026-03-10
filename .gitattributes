@@ -1,1 +1,2 @@
 evremap/** merge=ours
+quickshell/.config/quickshell/assets/calamitas.mp4 filter=lfs diff=lfs merge=lfs -text

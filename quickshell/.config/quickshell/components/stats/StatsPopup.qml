@@ -12,9 +12,9 @@ import qs.components.dashboard
 DashboardSection {
     id: root
 
-    readonly property int iconSize: 30
-    readonly property int spacing: 40
-    readonly property int fontSize: 18
+    readonly property int iconSize: 20
+    readonly property int spacing: 20
+    readonly property int fontSize: 16
 
     implicitWidth: layout.implicitWidth + 50
     implicitHeight: layout.implicitHeight + 50

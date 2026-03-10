@@ -10,6 +10,7 @@ QtObject {
 
     readonly property url archLinux: resolveAsset("arch_linux_icon.svg")
     readonly property url caretForward: assets.resolveAsset("caret_forward_icon.svg")
+    readonly property url dashboardVideo: assets.resolveAsset("calamitas.mp4")
 
     readonly property var workspace: QtObject {
         readonly property url occupied: assets.resolveAsset("occupied_workspace_icon.svg")

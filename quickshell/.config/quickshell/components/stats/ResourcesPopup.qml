@@ -1,3 +1,5 @@
 import qs.components.dashboard
 
-DashboardSection {}
+DashboardSection {
+    implicitWidth: 150
+}
