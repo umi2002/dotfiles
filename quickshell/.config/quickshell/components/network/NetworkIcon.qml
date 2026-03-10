@@ -17,9 +17,9 @@ ColorizedIcon {
         case DeviceConnectionState.Connected:
             return Style.palette.green;
         case DeviceConnectionState.Unknown:
-            return Style.palette.teal;
-        default:
             return Style.palette.red;
+        default:
+            return Style.palette.teal;
         }
     }
 }
