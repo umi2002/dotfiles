@@ -3,5 +3,5 @@ reboot = [ "systemctl", "reboot" ]
 poweroff = [ "systemctl", "poweroff" ]
 
 [background]
-path = "/etc/greetd/login_wallpaper.png"
+path = "/etc/greetd/dark-star.jpg"
 fit = "Cover"

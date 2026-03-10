@@ -2,40 +2,40 @@
 .view,
 frame,
 grid {
-  background-color: #03060F;
-  color: #C1E0F7;
+  background-color: #181825;
+  color: #cdd6f4;
 }
 
 .clock-label,
 label.title,
 .title {
   background-color: transparent;
-  color: #C1E0F7;
+  color: #cdd6f4;
 }
 
 .content,
 .content-view {
-  background-color: #010B29;
+  background-color: #1e1e2e;
 }
 
 window {
-  background-color: #010B29;
-  color: #C1E0F7;
+  background-color: #1e1e2e;
+  color: #cdd6f4;
   font-family: "Cantarell", "CaskaydiaCove Nerd Font Mono", "Noto Sans Mono CJK";
   font-size: 16px;
 }
 
 entry {
-  background-color: #03060F;
-  color: #C1E0F7;
-  border: 2px solid #284BC9;
+  background-color: #181825;
+  color: #cdd6f4;
+  border: 2px solid #89b4fa;
   border-radius: 6px;
   padding: 8px 12px;
   min-height: 32px;
 }
 
 entry:focus {
-  border-color: #DEBA37;
+  border-color: #cba6f7;
   outline: none;
 }
 
@@ -45,9 +45,9 @@ entry:disabled {
 
 /* Buttons */
 button {
-  background-image: linear-gradient(to bottom, #03060F, #010B29);
-  color: #C1E0F7;
-  border: 2px solid #284BC9;
+  background-image: linear-gradient(to bottom, #181825, #1e1e2e);
+  color: #cdd6f4;
+  border: 2px solid #89b4fa;
   border-radius: 6px;
   padding: 8px 16px;
   min-height: 32px;
@@ -55,31 +55,31 @@ button {
 }
 
 button:hover {
-  background-image: linear-gradient(to bottom, #071445, #284BC9);
-  border-color: #DEBA37;
+  background-image: linear-gradient(to bottom, #313244, #89b4fa);
+  border-color: #cba6f7;
 }
 
 button:active {
-  background-color: #DEBA37;
-  color: #010B29;
+  background-color: #cba6f7;
+  color: #1e1e2e;
 }
 
 button:disabled {
   opacity: 0.5;
 }
 
-dropdown, 
+dropdown,
 combobox {
-  background-color: #071445;
-  color: #C1E0F7;
-  border: 2px solid #284BC9;
+  background-color: #313244;
+  color: #cdd6f4;
+  border: 2px solid #89b4fa;
   border-radius: 6px;
   padding: 8px;
 }
 
 dropdown:hover,
 combobox:hover {
-  border-color: #DEBA37;
+  border-color: #cba6f7;
 }
 
 dropdown > button,
@@ -89,49 +89,49 @@ combobox > button {
 }
 
 popover {
-  background-color: #284BC9;
+  background-color: #313244;
   border-radius: 6px;
 }
 
 popover > contents {
   padding: 4px;
-  background-color: #284BC9;
+  background-color: #313244;
 }
 
 modelbutton {
-  color: #C1E0F7;
+  color: #cdd6f4;
   padding: 8px 12px;
   background-color: transparent;
 }
 
 modelbutton:hover {
-  background-color: #071445;
+  background-color: #45475a;
 }
 
 modelbutton:selected {
-  background-color: #DEBA37;
-  color: #010B29;
+  background-color: #cba6f7;
+  color: #1e1e2e;
 }
 
 label {
-  color: #C1E0F7;
+  color: #cdd6f4;
   font-size: 16px;
 }
 
 label.error {
-  color: #C25F13;
+  color: #f38ba8;
   font-size: 12px;
   font-family: "CaskaydiaCove Nerd Font Mono", monospace;
 }
 
 label.dim-label {
-  color: #DEBA37;
+  color: #a6adc8;
   font-size: 12px;
 }
 
 headerbar {
-  background-color: #010B29;
-  border-bottom: 2px solid #03060F;
+  background-color: #11111b;
+  border-bottom: 2px solid #181825;
 }
 
 box {
@@ -139,34 +139,35 @@ box {
 }
 
 scrollbar {
-  background-color: #03060F;
+  background-color: #11111b;
 }
 
 scrollbar slider {
-  background-color: #284BC9;
+  background-color: #89b4fa;
   border-radius: 4px;
   min-width: 8px;
   min-height: 8px;
 }
 
 scrollbar slider:hover {
-  background-color: #DEBA37;
+  background-color: #cba6f7;
 }
 
 checkbutton,
 radiobutton {
-  color: #C1E0F7;
+  color: #cdd6f4;
 }
 
 checkbutton check,
 radiobutton radio {
-  border: 2px solid #284BC9;
-  background-color: #03060F;
+  border: 2px solid #89b4fa;
+  background-color: #181825;
 }
 
 checkbutton:checked check,
 radiobutton:checked radio {
-  background-color: #DEBA37;
-  border-color: #DEBA37;
-  color: #010B29;
+  background-color: #cba6f7;
+  border-color: #cba6f7;
+  color: #1e1e2e;
 }
+

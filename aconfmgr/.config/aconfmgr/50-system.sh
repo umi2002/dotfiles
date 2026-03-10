@@ -14,8 +14,7 @@ CopyFile /etc/NetworkManager/dispatcher.d/90-open_captive_portal 755 umi umi
 CopyFile /etc/default/ufw
 CopyFile /etc/greetd/config.toml
 CopyFile /etc/greetd/hyprland.conf
-CopyFile /etc/greetd/login_wallpaper.png
-CopyFile /etc/greetd/login_wallpaper.webp
+CopyFile /etc/greetd/dark-star.jpg '' umi umi
 CopyFile /etc/greetd/regreet.css
 CopyFile /etc/greetd/regreet.toml
 CopyFile /etc/udev/rules.d/01-ttyusb.rules
