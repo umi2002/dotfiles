@@ -13,7 +13,7 @@ AddPackage --foreign pwvucontrol # Pipewire volume control for GNOME
 AddPackage --foreign zen-browser-bin # Performance oriented Firefox-based web browser
 AddPackage obs-studio # Free, open source software for live streaming and recording
 AddPackage qbittorrent # An advanced BitTorrent client programmed in C++, based on Qt toolkit and libtorrent-rasterbar
-AddPackage quickshell # Flexible toolkit for making desktop shells with QtQuick
+AddPackage --foreign quickshell-git # Flexible toolkit for making desktop shells with QtQuick
 AddPackage steam # Valve's digital software delivery system
 AddPackage --foreign vesktop # A standalone Electron-based Discord app with Vencord & improved Linux support
 AddPackage libreoffice-fresh # LibreOffice branch which contains new features and program enhancements
@@ -32,6 +32,9 @@ AddPackage --foreign ttf-ms-fonts # Core TTF Fonts from Microsoft
 AddPackage ttf-cascadia-code-nerd # Patched font Cascadia Code (Caskaydia) from nerd fonts library
 AddPackage cantarell-fonts # Humanist sans serif font
 AddPackage noto-fonts-cjk # Google Noto CJK fonts
+
+# Cursors
+AddPackage --foreign catppuccin-cursors-mocha # Soothing pastel mouse cursors - Mocha
 
 # Xorg
 AddPackage xorg-xauth # X.Org authorization settings program
