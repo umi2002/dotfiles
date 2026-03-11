@@ -20,6 +20,36 @@ Singleton {
 
     readonly property string timeToEmpty: formatTimeRemaining(displayDevice.timeToEmpty, false)
     readonly property string timeToFull: formatTimeRemaining(displayDevice.timeToFull, true)
+    readonly property int batteryThreshold: 20
+
+    onBatteryPercentChanged: {
+        if (batteryPercent < batteryThreshold && !root.isCharging) {
+            PowerProfiles.profile = PowerProfile.PowerSaver;
+        }
+    }
+
+    onChargeStateChanged: {
+        if (!displayDevice.isLaptopBattery || !PowerProfiles.hasPerformanceProfile) {
+            return;
+        }
+
+        switch (root.chargeState) {
+        case UPowerDeviceState.Charging:
+        case UPowerDeviceState.FullyCharged:
+            PowerProfiles.profile = PowerProfile.Performance;
+            break;
+        case UPowerDeviceState.Discharging:
+            if (batteryPercent < batteryThreshold) {
+                PowerProfiles.profile = PowerProfile.PowerSaver;
+            } else {
+                PowerProfiles.profile = PowerProfile.Balanced;
+            }
+            break;
+        default:
+            PowerProfiles.profile = PowerProfile.Balanced;
+            break;
+        }
+    }
 
     function formatTimeRemaining(totalSeconds: real, isCharging: bool): string {
         if (!totalSeconds || totalSeconds <= 0) {

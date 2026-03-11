@@ -7,45 +7,29 @@ import QtQuick.Layouts
 import qs
 import qs.services
 
-Item {
+WrapperMouseArea {
     id: root
+    hoverEnabled: true
 
-    readonly property bool isHovered: popupMouseArea.containsMouse || batteryMouseArea.containsMouse
     readonly property real batteryValue: Battery.batteryPercent / 100
     readonly property color batteryColor: Battery.isCharging ? Style.palette.green : Style.palette.red
 
     implicitWidth: batteryLayout.implicitWidth
     implicitHeight: batteryLayout.implicitHeight
 
-    WrapperMouseArea {
-        id: popupMouseArea
-        hoverEnabled: true
-        anchors.left: batteryMouseArea.left
-        anchors.bottom: batteryMouseArea.top
+    RowLayout {
+        id: batteryLayout
+        spacing: 5
 
-        BatteryPopup {
-            isHovered: root.isHovered
+        BatteryArcIndicator {
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            value: root.batteryValue
+            primaryColor: root.batteryColor
         }
-    }
 
-    WrapperMouseArea {
-        id: batteryMouseArea
-        hoverEnabled: true
-
-        RowLayout {
-            id: batteryLayout
-            spacing: 5
-
-            BatteryArcIndicator {
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                value: root.batteryValue
-                primaryColor: root.batteryColor
-            }
-
-            BatteryIndicator {
-                value: root.batteryValue
-                textColor: root.batteryColor
-            }
+        BatteryIndicator {
+            value: root.batteryValue
+            textColor: root.batteryColor
         }
     }
 }

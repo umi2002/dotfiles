@@ -77,6 +77,9 @@ QtObject {
         readonly property url caution: assets.resolveAsset(basePath + "battery-caution-symbolic.svg")
         readonly property url low: assets.resolveAsset(basePath + "battery-low-symbolic.svg")
         readonly property url missing: assets.resolveAsset(basePath + "battery-missing-symbolic.svg")
+        readonly property url power_saver: assets.resolveAsset(basePath + "power_saver.svg")
+        readonly property url performance: assets.resolveAsset(basePath + "performance.svg")
+        readonly property url balanced: assets.resolveAsset(basePath + "balanced.svg")
 
         function getIcon(batteryPercent: int, chargeState: int): url {
             let flooredPercent = Math.floor(batteryPercent / 10) * 10;

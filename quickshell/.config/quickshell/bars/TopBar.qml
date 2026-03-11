@@ -52,7 +52,6 @@ Rectangle {
         id: dashboardPopupContainer
         anchors.right: dashboard.right
         anchors.top: dashboard.bottom
-        anchors.rightMargin: 5
         width: dashboardPopup.implicitWidth
         height: dashboardPopup.implicitHeight + 20
         color: "transparent"
@@ -75,6 +74,7 @@ Rectangle {
     Dashboard {
         id: dashboard
         anchors.right: parent.right
+        anchors.rightMargin: root.margins
         anchors.verticalCenter: parent.verticalCenter
     }
 }

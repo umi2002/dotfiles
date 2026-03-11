@@ -10,16 +10,32 @@ import qs.components.utils
 Rectangle {
     id: root
     required property var backdrop
-    readonly property bool hasPopup: system.isExpanded || utilsPopup.isExpanded || mediaPopup.isExpanded
+    readonly property bool hasPopup: system.isExpanded || utilsPopup.isExpanded || mediaPopup.isExpanded || batteryPopup.isExpanded
     readonly property int margins: 10
 
     anchors.leftMargin: margins
     anchors.rightMargin: margins
     color: "transparent"
 
+    WrapperMouseArea {
+        id: batteryPopupMouseArea
+        enabled: batteryPopup.implicitHeight > 0
+        hoverEnabled: true
+        anchors.left: battery.left
+        anchors.bottom: battery.top
+        height: batteryPopup.implicitHeight + 10
+
+        StyledPopup {
+            id: batteryPopup
+            isExpanded: batteryPopupMouseArea.containsMouse || battery.containsMouse
+            popupContent: BatteryPopup {}
+        }
+    }
+
     Battery {
         id: battery
         anchors.left: parent.left
+        anchors.leftMargin: root.margins
         anchors.verticalCenter: parent.verticalCenter
         z: 1
     }
@@ -93,6 +109,7 @@ Rectangle {
     Language {
         id: language
         anchors.right: parent.right
+        anchors.rightMargin: root.margins
         anchors.verticalCenter: parent.verticalCenter
     }
 }
