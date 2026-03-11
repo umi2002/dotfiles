@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 
-import qs
 import qs.components
 
 Rectangle {
@@ -32,7 +31,7 @@ Rectangle {
         Text {
             Layout.alignment: Qt.AlignVCenter
 
-            text: (Math.round(root.value * 100)).toString() + " %"
+            text: `${Math.round(root.value * 100)} %`
             color: root.fgColor
             font.pointSize: 10
         }
