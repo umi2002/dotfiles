@@ -119,7 +119,7 @@ Singleton {
 
     Timer {
         id: updateNetworksTimer
-        interval: 100
+        interval: 500
         onTriggered: {
             root.categorizeNetworks();
             root.setIcon();

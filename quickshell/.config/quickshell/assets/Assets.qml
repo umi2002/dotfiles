@@ -187,5 +187,97 @@ QtObject {
         readonly property url veryCold: assets.resolveAsset(basePath + "very_cold.svg")
         readonly property url veryHot: assets.resolveAsset(basePath + "very_hot.svg")
         readonly property url windy: assets.resolveAsset(basePath + "windy.svg")
+
+        function getIcon(wc: int, day: bool, cc: int): url {
+            if (wc < 0 || wc <= 3) {
+                // No significant weather — pick by cloud cover (oktas 0-8)
+                if (cc <= 0)
+                    return day ? assets.weather.clearDay : assets.weather.clearNight;
+                if (cc <= 2)
+                    return day ? assets.weather.mostlyClearDay : assets.weather.mostlyClearNight;
+                if (cc <= 4)
+                    return day ? assets.weather.partlyCloudyDay : assets.weather.partlyCloudyNight;
+                if (cc <= 6)
+                    return day ? assets.weather.mostlyCloudyDay : assets.weather.mostlyCloudyNight;
+                return assets.weather.cloudy;
+            }
+            if (wc <= 9)
+                return assets.weather.hazeFogDustSmoke;              // Smoke, haze, dust, sand
+            if (wc <= 12)
+                return assets.weather.hazeFogDustSmoke;              // Mist, shallow fog
+            if (wc === 13 || wc === 17)
+                return assets.weather.isolatedThunderstorms;         // Lightning / thunderstorm, no precip
+            if (wc === 18)
+                return assets.weather.windy;                         // Squall
+            if (wc === 19)
+                return assets.weather.tornado;                       // Tornado / funnel cloud
+            if (wc === 20)
+                return assets.weather.drizzle;                       // Drizzle or snow grains (past hour)
+            if (wc === 21)
+                return assets.weather.showersRain;                   // Rain (past hour)
+            if (wc === 22)
+                return assets.weather.showersSnow;                   // Snow (past hour)
+            if (wc === 23)
+                return assets.weather.mixedRainSnow;                 // Rain and snow (past hour)
+            if (wc === 24)
+                return assets.weather.icy;                           // Freezing drizzle or rain (past hour)
+            if (wc === 25)
+                return day ? assets.weather.scatteredShowersDay : assets.weather.scatteredShowersNight;
+            if (wc === 26)
+                return day ? assets.weather.scatteredSnowShowersDay : assets.weather.scatteredSnowShowersNight;
+            if (wc === 27)
+                return assets.weather.mixedRainHailSleet;            // Hail shower (past hour)
+            if (wc === 28)
+                return assets.weather.hazeFogDustSmoke;              // Fog or ice fog (past hour)
+            if (wc === 29)
+                return day ? assets.weather.isolatedScatteredThunderstormsDay : assets.weather.isolatedScatteredThunderstormsNight;
+            if (wc <= 35)
+                return assets.weather.hazeFogDustSmoke;              // Duststorm / sandstorm
+            if (wc <= 39)
+                return assets.weather.blowingSnow;                   // Drifting or blowing snow
+            if (wc <= 49)
+                return assets.weather.hazeFogDustSmoke;              // Fog / ice fog (various)
+            if (wc <= 55)
+                return assets.weather.drizzle;                       // Drizzle (intermittent to continuous)
+            if (wc <= 57)
+                return assets.weather.icy;                           // Freezing drizzle
+            if (wc <= 59)
+                return assets.weather.drizzle;                       // Drizzle and rain
+            if (wc <= 61)
+                return assets.weather.showersRain;                   // Light / intermittent rain
+            if (wc <= 65)
+                return assets.weather.heavyRain;                     // Moderate to heavy continuous rain
+            if (wc <= 67)
+                return assets.weather.icy;                           // Freezing rain
+            if (wc <= 69)
+                return assets.weather.mixedRainSnow;                 // Rain or drizzle and snow
+            if (wc <= 73)
+                return assets.weather.showersSnow;                   // Light to moderate snow
+            if (wc <= 75)
+                return assets.weather.heavySnow;                     // Heavy snow
+            if (wc === 76 || wc === 78)
+                return assets.weather.icy;                           // Diamond dust / ice crystals
+            if (wc === 77)
+                return assets.weather.flurries;                      // Snow grains
+            if (wc === 79)
+                return assets.weather.sleetHail;                     // Ice pellets
+            if (wc <= 81)
+                return day ? assets.weather.scatteredShowersDay : assets.weather.scatteredShowersNight;
+            if (wc <= 84)
+                return assets.weather.heavyRain;                     // Heavy rain showers
+            if (wc <= 86)
+                return day ? assets.weather.scatteredSnowShowersDay : assets.weather.scatteredSnowShowersNight;
+            if (wc <= 88)
+                return assets.weather.mixedRainSnow;                 // Mixed rain and snow showers
+            if (wc <= 90)
+                return assets.weather.mixedRainHailSleet;            // Hail showers
+            if (wc <= 92)
+                return day ? assets.weather.isolatedScatteredThunderstormsDay : assets.weather.isolatedScatteredThunderstormsNight;
+            if (wc <= 94)
+                return assets.weather.strongThunderstorms;           // Thunderstorm with snow or hail
+            if (wc === 95)
+                return assets.weather.isolatedThunderstorms;         // Slight or moderate thunderstorm
+            return assets.weather.strongThunderstorms;               // Heavy thunderstorm / with hail (96-99)
+        }
     }
 }
