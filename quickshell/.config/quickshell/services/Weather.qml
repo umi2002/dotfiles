@@ -74,19 +74,15 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 root.parseWeather(this.text);
-                console.log(this.text);
-                console.log(root.temperature);
-                console.log(root.weatherCode);
                 if (isNaN(root.temperature)) {
                     retryTimer.restart();
                     return;
                 }
 
-                root.icon = root.getIcon();
+                root.icon = Assets.weather.getIcon();
             }
         }
         onExited: exitCode => {
-            console.log("exit: " + exitCode);
             if (exitCode !== 0)
                 retryTimer.restart();
         }
