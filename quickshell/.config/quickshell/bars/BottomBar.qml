@@ -17,19 +17,14 @@ Rectangle {
     anchors.rightMargin: margins
     color: "transparent"
 
-    WrapperMouseArea {
-        id: batteryPopupMouseArea
-        enabled: batteryPopup.implicitHeight > 0
+    StyledPopup {
+        id: batteryPopup
         hoverEnabled: true
         anchors.left: battery.left
         anchors.bottom: battery.top
-        height: batteryPopup.implicitHeight + 10
-
-        StyledPopup {
-            id: batteryPopup
-            isExpanded: batteryPopupMouseArea.containsMouse || battery.containsMouse
-            popupContent: BatteryPopup {}
-        }
+        height: batteryPopup.implicitHeight
+        isExpanded: containsMouse || battery.containsMouse
+        popupContent: BatteryPopup {}
     }
 
     Battery {
@@ -44,7 +39,6 @@ Rectangle {
         id: systemPopup
         anchors.left: system.left
         anchors.bottom: system.top
-        anchors.bottomMargin: 10
         isExpanded: system.isExpanded
         popupContent: SystemPopup {}
     }
@@ -57,19 +51,14 @@ Rectangle {
         anchors.leftMargin: root.margins
     }
 
-    WrapperMouseArea {
-        id: mediaPopupMouseArea
-        enabled: mediaPopup.implicitHeight > 0
+    StyledPopup {
+        id: mediaPopup
         hoverEnabled: true
         anchors.horizontalCenter: media.horizontalCenter
         anchors.bottom: media.top
-        height: mediaPopup.implicitHeight + 10
-
-        StyledPopup {
-            id: mediaPopup
-            isExpanded: mediaPopupMouseArea.containsMouse || media.containsMouse
-            popupContent: MediaPopup {}
-        }
+        height: mediaPopup.implicitHeight
+        isExpanded: containsMouse || media.containsMouse
+        popupContent: MediaPopup {}
     }
 
     Media {
@@ -84,19 +73,14 @@ Rectangle {
         anchors.rightMargin: root.margins
     }
 
-    WrapperMouseArea {
-        id: utilsPopupMouseArea
-        enabled: utilsPopup.implicitHeight > 0
+    StyledPopup {
+        id: utilsPopup
         hoverEnabled: true
         anchors.right: utils.right
         anchors.bottom: utils.top
-        height: utilsPopup.implicitHeight + 10
-
-        StyledPopup {
-            id: utilsPopup
-            isExpanded: utilsPopupMouseArea.containsMouse || utils.containsMouse
-            popupContent: UtilsPopup {}
-        }
+        height: utilsPopup.implicitHeight
+        isExpanded: containsMouse || utils.containsMouse
+        popupContent: UtilsPopup {}
     }
 
     Utils {

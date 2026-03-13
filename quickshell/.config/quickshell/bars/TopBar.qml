@@ -48,27 +48,14 @@ Rectangle {
         font.pointSize: Style.font.size1
     }
 
-    Rectangle {
-        id: dashboardPopupContainer
+    StyledPopup {
+        id: dashboardPopup
+        width: dashboardPopup.implicitWidth
+        height: dashboardPopup.implicitHeight
+        isExpanded: containsMouse || dashboard.containsMouse
         anchors.right: dashboard.right
         anchors.top: dashboard.bottom
-        width: dashboardPopup.implicitWidth
-        height: dashboardPopup.implicitHeight + 20
-        color: "transparent"
-
-        MouseArea {
-            id: dashboardPopupMouseArea
-            enabled: dashboardPopup.implicitHeight > 0
-            anchors.fill: parent
-            hoverEnabled: true
-
-            StyledPopup {
-                id: dashboardPopup
-                isExpanded: dashboardPopupMouseArea.containsMouse || dashboard.containsMouse
-                anchors.bottom: dashboardPopupMouseArea.bottom
-                popupContent: DashboardPopup {}
-            }
-        }
+        popupContent: DashboardPopup {}
     }
 
     Dashboard {

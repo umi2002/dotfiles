@@ -1,13 +1,10 @@
+import Quickshell.Widgets
 import QtQuick
 
-Item {
+WrapperMouseArea {
     id: root
     required property bool isExpanded
     required property Component popupContent
-    property int topMargin: 0
-    property int bottomMargin: 0
-    property int leftMargin: 0
-    property int rightMargin: 0
 
     property int animationDuration: 400
     property var animationEasing: Easing.InOutCubic
