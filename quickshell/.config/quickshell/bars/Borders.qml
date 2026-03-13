@@ -43,7 +43,7 @@ PanelWindow {
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.topMargin: 100
-        anchors.rightMargin: 20
+        anchors.rightMargin: 40
     }
 
     Item {

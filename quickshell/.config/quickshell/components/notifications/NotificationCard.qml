@@ -15,11 +15,10 @@ Rectangle {
 
     readonly property int padding: 14
 
+    anchors.centerIn: parent
     implicitWidth: 400
     implicitHeight: contentLayout.implicitHeight + padding * 2
-
-    radius: 10
-    color: Style.palette.mantle
+    color: "transparent"
 
     MouseArea {
         anchors.fill: parent
@@ -65,7 +64,7 @@ Rectangle {
 
             Text {
                 text: root.notification?.appName || ""
-                color: Style.palette.subtext0
+                color: Style.palette.mantle
                 font.pointSize: Style.font.size2
                 font.family: Style.font.family1
                 elide: Text.ElideRight
@@ -75,7 +74,7 @@ Rectangle {
             Text {
                 visible: text.length > 0
                 text: root.notification?.summary || ""
-                color: Style.palette.text
+                color: Style.palette.crust
                 font.pointSize: Style.font.size2
                 font.bold: true
                 font.family: Style.font.family1
@@ -86,7 +85,7 @@ Rectangle {
             Text {
                 visible: text.length > 0
                 text: root.notification?.body || ""
-                color: Style.palette.subtext1
+                color: Style.palette.mantle
                 font.pointSize: Style.font.size2
                 font.family: Style.font.family1
                 wrapMode: Text.WordWrap

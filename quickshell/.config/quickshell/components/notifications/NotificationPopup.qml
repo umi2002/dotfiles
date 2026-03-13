@@ -1,5 +1,6 @@
 import QtQuick
 
+import qs
 import qs.services
 
 Rectangle {
@@ -11,7 +12,8 @@ Rectangle {
     property var currentNotification: null
     property int translation: implicitWidth + anchors.rightMargin
 
-    color: "transparent"
+    radius: 10
+    color: Style.palette.red
     opacity: 0
     implicitWidth: 400
     implicitHeight: card.implicitHeight
@@ -39,7 +41,7 @@ Rectangle {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: root.animationDuration / 2
+            duration: root.animationDuration
         }
     }
 
