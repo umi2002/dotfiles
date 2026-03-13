@@ -124,6 +124,11 @@ QtObject {
         }
     }
 
+    readonly property var notifications: QtObject {
+        readonly property url idle: assets.resolveAsset("notifications.svg")
+        readonly property url unread: assets.resolveAsset("notifications_unread.svg")
+    }
+
     readonly property var weather: QtObject {
         readonly property string basePath: "weather_icons/"
 

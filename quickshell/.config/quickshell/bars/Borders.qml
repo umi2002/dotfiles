@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Effects
 
 import qs
+import qs.components.notifications
 
 PanelWindow {
     id: root
@@ -36,6 +37,13 @@ PanelWindow {
         width: root.hasPopup ? 0 : root.width
         height: root.hasPopup ? 0 : root.height - topBar.height - bottomBar.height
         intersection: Intersection.Subtract
+    }
+
+    NotificationPopup {
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: 100
+        anchors.rightMargin: 20
     }
 
     Item {

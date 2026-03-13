@@ -2,7 +2,6 @@
 # ~/.config/aconfmgr/20-desktop-environment.sh
 
 # Desktop Apps
-AddPackage dunst # Customizable and lightweight notification-daemon
 AddPackage hyprland # a highly customizable dynamic tiling Wayland compositor
 AddPackage hyprpaper # a blazing fast wayland wallpaper utility with IPC controls
 AddPackage rofi # A window switcher, application launcher and dmenu replacement
