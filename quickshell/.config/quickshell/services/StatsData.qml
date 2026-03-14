@@ -21,8 +21,8 @@ Singleton {
     property real prevCpuTotal: 0
     property real prevCpuIdle: 0
 
-    function formatUptime(ms) {
-        const totalSeconds = Math.floor(ms / 1000);
+    function formatUptime(totalSeconds) {
+        totalSeconds = Math.floor(totalSeconds);
         const days = Math.floor(totalSeconds / 86400);
         const hours = Math.floor((totalSeconds % 86400) / 3600);
         const mins = Math.floor((totalSeconds % 3600) / 60);
@@ -53,9 +53,6 @@ Singleton {
             case "Kernel":
                 root.kernel = (r.name && r.release) ? `${r.name} ${r.release}` : (r.release || "");
                 break;
-            case "Uptime":
-                root.uptime = formatUptime(r.uptime);
-                break;
             case "WM":
                 root.wm = r.version ? `${r.prettyName} ${r.version}` : (r.prettyName || "");
                 break;
@@ -69,48 +66,93 @@ Singleton {
         }
     }
 
-    function parseResources(text) {
-        for (const line of text.trim().split('\n')) {
-            const parts = line.split(' ');
-            if (parts[0] === 'cpu') {
-                const total = parseFloat(parts[1]);
-                const idle = parseFloat(parts[2]);
-                const deltaTotal = total - root.prevCpuTotal;
-                const deltaIdle = idle - root.prevCpuIdle;
-                if (deltaTotal > 0)
-                    root.cpuUsage = (deltaTotal - deltaIdle) / deltaTotal;
-                root.prevCpuTotal = total;
-                root.prevCpuIdle = idle;
-            } else if (parts[0] === 'mem') {
-                const used = parseFloat(parts[1]);
-                const total = parseFloat(parts[2]);
-                root.memUsage = total > 0 ? used / total : 0;
-            } else if (parts[0] === 'disk') {
-                const used = parseFloat(parts[1]);
-                const total = parseFloat(parts[2]);
-                root.diskUsage = total > 0 ? used / total : 0;
-            }
+    FileView {
+        id: procStat
+        path: "/proc/stat"
+        onLoaded: {
+            const parts = text().split('\n')[0].trim().split(/\s+/);
+            const user = parseFloat(parts[1]);
+            const nice = parseFloat(parts[2]);
+            const system = parseFloat(parts[3]);
+            const idle = parseFloat(parts[4]);
+            const iowait = parseFloat(parts[5]);
+            const irq = parseFloat(parts[6]);
+            const softirq = parseFloat(parts[7]);
+            const steal = parseFloat(parts[8]);
+
+            const total = user + nice + system + idle + iowait + irq + softirq + steal;
+            const idleTotal = idle + iowait;
+            const deltaTotal = total - root.prevCpuTotal;
+            const deltaIdle = idleTotal - root.prevCpuIdle;
+            if (deltaTotal > 0)
+                root.cpuUsage = (deltaTotal - deltaIdle) / deltaTotal;
+            root.prevCpuTotal = total;
+            root.prevCpuIdle = idleTotal;
         }
     }
 
-    Process {
-        id: fetchResources
-        command: ["bash", "-c",
-            "awk 'NR==1{printf \"cpu %d %d\\n\",$2+$3+$4+$5+$6+$7+$8+$9,$5+$6}' /proc/stat;" +
-            "awk '/MemTotal/{t=$2}/MemAvailable/{a=$2}END{printf \"mem %d %d\\n\",t-a,t}' /proc/meminfo;" +
-            "df / | awk 'NR==2{printf \"disk %d %d\\n\",$3,$2}'"
-        ]
-        stdout: StdioCollector {
-            onStreamFinished: root.parseResources(this.text)
+    FileView {
+        id: procMem
+        path: "/proc/meminfo"
+        onLoaded: {
+            let memTotal = 0;
+            let memAvailable = 0;
+            for (const line of text().split('\n')) {
+                if (line.startsWith('MemTotal:'))
+                    memTotal = parseFloat(line.split(/\s+/)[1]);
+                else if (line.startsWith('MemAvailable:'))
+                    memAvailable = parseFloat(line.split(/\s+/)[1]);
+                if (memTotal > 0 && memAvailable > 0)
+                    break;
+            }
+            if (memTotal > 0)
+                root.memUsage = (memTotal - memAvailable) / memTotal;
+        }
+    }
+
+    FileView {
+        id: procUptime
+        path: "/proc/uptime"
+        onLoaded: {
+            const seconds = parseFloat(text().split(' ')[0]);
+            root.uptime = root.formatUptime(seconds);
         }
     }
 
     Timer {
-        interval: 2000
+        interval: 1000
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: fetchResources.running = true
+        onTriggered: {
+            procStat.reload();
+            procMem.reload();
+            procUptime.reload();
+        }
+    }
+
+    Process {
+        id: fetchDisk
+        command: ["df", "/"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const lines = this.text.trim().split('\n');
+                if (lines.length >= 2) {
+                    const parts = lines[1].trim().split(/\s+/);
+                    const used = parseFloat(parts[2]);
+                    const total = parseFloat(parts[1]);
+                    root.diskUsage = total > 0 ? used / total : 0;
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 30000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: fetchDisk.running = true
     }
 
     Process {
@@ -121,11 +163,5 @@ Singleton {
         }
     }
 
-    Timer {
-        interval: 60000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: fetchStats.running = true
-    }
+    Component.onCompleted: fetchStats.running = true
 }
