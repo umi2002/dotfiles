@@ -50,6 +50,7 @@ Rectangle {
 
     StyledPopup {
         id: dashboardPopup
+        hoverEnabled: true
         width: dashboardPopup.implicitWidth
         height: dashboardPopup.implicitHeight
         isExpanded: containsMouse || dashboard.containsMouse
