@@ -12,7 +12,15 @@ Singleton {
 
     property ListModel knownNetworks: ListModel {}
     property ListModel unknownNetworks: ListModel {}
-    property string networkIcon: ""
+    readonly property string networkIcon: {
+        if (!wifiDevice)
+            return Assets.wifi.missing;
+        if (wifiDevice.state === DeviceConnectionState.Unknown)
+            return Assets.wifi.off;
+        if (wifiDevice.state !== DeviceConnectionState.Connected || !connectedNetwork)
+            return Assets.wifi.missing;
+        return getIconForSignalStrength(connectedNetwork.signalStrength);
+    }
 
     readonly property bool isWiFiOn: Networking.wifiEnabled
     readonly property var wifiDevice: Networking.devices.values.find(device => {
@@ -27,10 +35,8 @@ Singleton {
         Networking.wifiEnabled = !Networking.wifiEnabled;
     }
 
-    onIsWiFiOnChanged: updateNetworksTimer.restart()
     onWifiDeviceChanged: updateNetworksTimer.restart()
     onNetworksChanged: updateNetworksTimer.restart()
-    onConnectedNetworkChanged: updateNetworksTimer.restart()
 
     function findNetwork(name) {
         return networks?.find(n => n.name === name) ?? null;
@@ -84,45 +90,20 @@ Singleton {
         root.updateNetworkModel(root.unknownNetworks, unknownNetworks);
     }
 
-    function setIcon() {
-        if (!root.wifiDevice) {
-            networkIcon = Assets.wifi.missing;
-            return;
-        }
-
-        let status = root.wifiDevice.state;
-
-        if (status === DeviceConnectionState.Unknown) {
-            networkIcon = Assets.wifi.off;
-            return;
-        }
-
-        if (status !== DeviceConnectionState.Connected || !root.connectedNetwork) {
-            networkIcon = Assets.wifi.missing;
-            return;
-        }
-
-        networkIcon = getIconForSignalStrength(root.connectedNetwork.signalStrength);
-    }
-
     function getIconForSignalStrength(strength) {
-        if (strength > 0.8) {
+        if (strength > 0.8)
             return Assets.wifi.bar4;
-        } else if (strength > 0.6) {
+        else if (strength > 0.6)
             return Assets.wifi.bar3;
-        } else if (strength > 0.4) {
+        else if (strength > 0.4)
             return Assets.wifi.bar2;
-        } else {
+        else
             return Assets.wifi.bar1;
-        }
     }
 
     Timer {
         id: updateNetworksTimer
         interval: 500
-        onTriggered: {
-            root.categorizeNetworks();
-            root.setIcon();
-        }
+        onTriggered: root.categorizeNetworks()
     }
 }
