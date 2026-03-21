@@ -39,3 +39,5 @@ AddPackage --foreign sesh-bin # Smart session manager for the terminal
 AddPackage --foreign tmux-plugin-manager # tpm - Tmux Plugin Manager
 AddPackage --foreign ventoy-bin # A new bootable USB solution
 AddPackage --foreign cisco-secure-client # Cisco AnyConnect Secure Mobility Client
+AddPackage bitwarden-cli # The command line vault
+AddPackage yadm # Yet Another Dotfiles Manager
