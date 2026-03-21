@@ -19,4 +19,9 @@ sudo usermod -d /var/lib/greeter greeter
 sudo loginctl enable-linger greeter
 echo "Created home directory and granted correct permissions for greeter user"
 
+gsettings set org.gnome.desktop.interface gtk-theme 'Fluent-Dark'
+gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+echo "Set gtk settings successfully."
+
 echo "Bootstrap complete"
