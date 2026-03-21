@@ -8,4 +8,9 @@ decoration {
         enabled = false
     }
 {% endif %}
+{% if yadm.class == "Desktop" %}
+    blur {
+        enabled = true
+    }
+{% endif %}
 }

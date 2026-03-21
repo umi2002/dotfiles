@@ -17,3 +17,47 @@ workspace = 1, monitor:eDP-1
 workspace = 2, monitor:desc:LG Electronics LG ULTRAGEAR 0x0000A689
 workspace = 3, monitor:desc:HP Inc. HP E24 G4 CN43460YQQ
 {% endif %}
+{% if yadm.class == "Desktop" %}
+workspace = 1, monitor:desc:LG Electronics 27GL650F 0x00039D06
+workspace = 2, monitor:desc:GIGA-BYTE TECHNOLOGY CO. LTD. AORUS FO27Q2 24350B000355
+workspace = 3, monitor:desc:LG Electronics 27GL650F 0x00039D06
+workspace = 5, monitor:desc:GIGA-BYTE TECHNOLOGY CO. LTD. AORUS FO27Q2 24350B000355
+workspace = 7, monitor:desc:LG Electronics 27GL650F 0x00039D06
+workspace = 8, monitor:desc:LG Electronics 27GL650F 0x00039D06
+workspace = 9, monitor:desc:LG Electronics 27GL650F 0x00039D06
+
+windowrule {
+    name = opacityKitty
+    match:class = kitty
+
+    opacity = 0.8
+}
+
+windowrule {
+    name = opacityBetterbird
+    match:class = eu.betterbird.Betterbird
+
+    opacity = 0.8
+}
+
+windowrule {
+    name = opacityBitwarden
+    match:class = Bitwarden
+
+    opacity = 0.8
+}
+
+windowrule {
+    name = opacityVesktop
+    match:class = vesktop
+
+    opacity = 0.8
+}
+
+windowrule {
+    name = opacitySpotify
+    match:class = spotify
+
+    opacity = 0.8
+}
+{% endif %}
