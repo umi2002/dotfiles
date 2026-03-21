@@ -1,0 +1,67 @@
+pragma ComponentBehavior: Bound
+
+import QtQuick
+
+import qs
+import qs.components
+
+Rectangle {
+    id: root
+    required property var network
+    required property bool isHovered
+    required property bool isConnecting
+    property bool isExpanded
+
+    signal actionTriggered
+
+    implicitHeight: networkName.height + 10
+    color: "transparent"
+
+    Text {
+        id: networkName
+        text: root.network?.name || ""
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        font.pointSize: Style.font.size2
+        font.family: Style.font.family3
+        color: root.network?.connected ? Style.palette.green : Style.palette.subtext1
+    }
+
+    NetworkActionButton {
+        isHovered: root.isHovered
+        isConnecting: root.isConnecting
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: caret.left
+        anchors.rightMargin: 10
+
+        text: {
+            if (root.network?.connected) {
+                return "Disconnect";
+            }
+
+            if (root.isExpanded) {
+                return "Cancel";
+            } else {
+                return "Connect";
+            }
+        }
+
+        onActionTriggered: {
+            root.actionTriggered();
+        }
+    }
+
+    Loader {
+        id: caret
+        active: root.network?.connected || false
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+
+        sourceComponent: ExpandCaret {
+            isExpanded: root.isExpanded
+            onToggled: {
+                root.isExpanded = !root.isExpanded;
+            }
+        }
+    }
+}

@@ -1,0 +1,38 @@
+import QtQuick
+import QtQuick.Layouts
+
+import qs
+import qs.components.bluetooth
+import qs.components.network
+
+Rectangle {
+    id: root
+    property bool isExpanded: false
+
+    implicitWidth: layout.width + 20
+    implicitHeight: layout.height + 5
+    radius: height / 2
+    color: isExpanded ? Style.palette.overlay0 : Style.palette.crust
+
+    Behavior on color {
+        ColorAnimation {
+            duration: 200
+        }
+    }
+
+    RowLayout {
+        id: layout
+        anchors.centerIn: parent
+        spacing: 20
+
+        NetworkIcon {
+            id: network
+            implicitSize: 30
+        }
+
+        BluetoothIcon {
+            id: bluetooth
+            implicitSize: 30
+        }
+    }
+}

@@ -1,0 +1,13 @@
+[Unit]
+Description=Turn off Bluetooth adapter
+After=bluetooth.service
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 1
+ExecStart=/usr/bin/bluetoothctl power off
+Restart=on-failure
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target

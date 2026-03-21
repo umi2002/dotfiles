@@ -1,0 +1,3 @@
+ACTION!="remove", SUBSYSTEMS=="usb-serial", TAG+="uaccess"
+ACTION!="remove", SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", TAG+="uaccess"
+ACTION!="remove", SUBSYSTEM=="tty", DRIVERS=="cdc_acm", TAG+="uaccess"
