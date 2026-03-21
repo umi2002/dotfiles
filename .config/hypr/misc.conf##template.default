@@ -3,4 +3,10 @@ misc {
     animate_mouse_windowdragging = true
     enable_swallow = true
     swallow_regex = ^(alacritty)$
+
+{% if yadm.class == "Laptop" %}
+    vrr = false
+    vfr = true
+    render_unfocused_fps = 15
+{% endif %}
 }

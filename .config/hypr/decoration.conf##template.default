@@ -3,4 +3,9 @@ decoration {
 
     rounding = 10
 
+{% if yadm.class == "Laptop" %}
+    blur {
+        enabled = false
+    }
+{% endif %}
 }

@@ -11,3 +11,9 @@ windowrule = workspace 8, match:class ^(eu.betterbird.Betterbird)$
 windowrule = workspace 9, match:class ^(spotify)$
 
 windowrule = render_unfocused on, match:class ^(steam_app_.*)$
+
+{% if yadm.class == "Laptop" %}
+workspace = 1, monitor:eDP-1
+workspace = 2, monitor:desc:LG Electronics LG ULTRAGEAR 0x0000A689
+workspace = 3, monitor:desc:HP Inc. HP E24 G4 CN43460YQQ
+{% endif %}
