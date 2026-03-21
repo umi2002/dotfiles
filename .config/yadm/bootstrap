@@ -1,0 +1,22 @@
+#!/bin/bash
+USER_HOME="$HOME"
+
+quickshell_path="$USER_HOME/.config/quickshell"
+sudo ln -sf "$quickshell_path" /etc/greetd
+echo "Symlink greetd quickshell config successful."
+
+path="$quickshell_path"
+while [[ "$path" != "/" ]]; do
+    sudo chmod o+x "$path"
+    path=$(dirname "$path")
+done
+sudo mkdir -p /var/lib/greeter
+sudo chown greeter:greeter /var/lib/greeter
+sudo usermod -d /var/lib/greeter greeter
+sudo loginctl enable-linger greeter
+echo "Created home directory and granted correct permissions for greeter user"
+
+aconfmgr apply
+echo "Aconfmgr apply successful."
+
+echo "Bootstrap complete"
