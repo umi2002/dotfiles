@@ -20,7 +20,7 @@ That's it!
 
 ## Bootstrapping
 
-You can bootstrap the dotfiles on a new machine by curling the `bootstrap_dotfiles.sh` sript:
+You can bootstrap the dotfiles on a new machine by curling the [`bootstrap_dotfiles.sh`](https://github.com/umi2002/dotfiles/blob/main/bootstrap_dotfiles.sh) sript:
 
 ```
 bash <(curl -sL https://raw.githubusercontent.com/umi2002/dotfiles/main/bootstrap_dotfiles.sh)
