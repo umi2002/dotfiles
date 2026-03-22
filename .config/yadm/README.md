@@ -39,7 +39,23 @@ sudo chown greeter:greeter /var/lib/greeter
 sudo usermod -d /var/lib/greeter greeter
 ```
 
-3. Setting up gtk
+3. Setting up secrets with Bitwarden
+
+Some configs require secrets that I unfortunately cannot leak. I use bitwarden to store those secrets and this step is meant to pull those files from bitwarden's vault and place them in the correct directories. As of this moment, here are the files that need to pulled from the vault:
+
+- `~/.config/quickshell/Secrets.qml`
+
+```
+if bw login --check &>/dev/null; then
+  export BW_SESSION=$(bw unlock --raw)
+else
+  export BW_SESSION=$(bw login --raw)
+fi
+bw get notes "Secrets.qml" --session $BW_SESSION > "$HOME/.config/quickshell/Secrets.qml"
+bw lock
+```
+
+4. Setting up gtk
 
 This step is truly unimportant. It is mostly here to set up default dark mode for apps that use gtk as well as some default gtk icons. I've decided to configure it here but you can easily do so elsewhere or with your own configuration file.
 
@@ -49,6 +65,6 @@ gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 ```
 
-4. Enjoy!
+5. Enjoy!
 
 If you have made it this far without any problems, you may enjoy my hand crafted configurations. Happy ricing!
