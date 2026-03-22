@@ -13,6 +13,6 @@ echo "Installation of aconfmgr successful."
 yadm init
 CLASS=$(echo -e "Desktop\nLaptop" | fzf --prompt="Select class: ")
 yadm config local.class "$CLASS"
-yadm remote add origin <repo-url>
+yadm remote add origin https://github.com/umi2002/dotfiles.git
 yadm pull origin main
 echo "Initialized and pulled yadm repo successfully."
