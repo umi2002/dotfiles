@@ -1,4 +1,4 @@
-# dotfiles
+# DOTFILES
 
 The rest of the commit history can be found in the [archived dotfiles repo](https://github.com/umi2002/dotfiles-old).
 
