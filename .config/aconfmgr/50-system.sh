@@ -16,7 +16,6 @@ CopyFile /etc/greetd/config.toml
 CopyFile /etc/greetd/hyprland.conf
 CopyFile /etc/greetd/login_wallpaper.svg
 CreateDir /var/lib/greeter 755 greeter greeter
-CopyFile /var/lib/systemd/linger/greeter
 CopyFile /etc/udev/rules.d/01-ttyusb.rules
 CopyFile /etc/udev/rules.d/99-brightness.rules
 CopyFile /etc/ufw/after.rules
