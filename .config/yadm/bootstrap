@@ -16,11 +16,20 @@ done
 sudo mkdir -p /var/lib/greeter
 sudo chown greeter:greeter /var/lib/greeter
 sudo usermod -d /var/lib/greeter greeter
-echo "Created home directory and granted correct permissions for greeter user"
+echo "Created home directory and granted correct permissions for greeter user."
+
+if bw login --check &>/dev/null; then
+  export BW_SESSION=$(bw unlock --raw)
+else
+  export BW_SESSION=$(bw login --raw)
+fi
+bw get notes "Secrets.qml" --session $BW_SESSION > "$HOME/.config/quickshell/Secrets.qml"
+bw lock
+echo "Setting up secrets successful."
 
 gsettings set org.gnome.desktop.interface gtk-theme 'Fluent-Dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-echo "Set gtk settings successfully."
+echo "Setup gtk settings successful."
 
 echo "Bootstrap complete"
