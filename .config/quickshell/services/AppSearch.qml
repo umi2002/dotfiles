@@ -19,7 +19,19 @@ Singleton {
             return appDb.apps;
         }
 
-        return appDb.apps.filter(a => a.name.toLowerCase().includes(q) || (a.genericName && a.genericName.toLowerCase().includes(q)) || (a.comment && a.comment.toLowerCase().includes(q)));
+        const score = (a) => {
+            const name = a.name.toLowerCase();
+            if (name === q) return 0;
+            if (name.startsWith(q)) return 1;
+            if (name.includes(q)) return 2;
+            if (a.genericName && a.genericName.toLowerCase().includes(q)) return 3;
+            if (a.comment && a.comment.toLowerCase().includes(q)) return 4;
+            return 5;
+        };
+
+        return appDb.apps
+            .filter(a => score(a) < 5)
+            .sort((a, b) => score(a) - score(b));
     }
 
     function launch(appEntry) {
