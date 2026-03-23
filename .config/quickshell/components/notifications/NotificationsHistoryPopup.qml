@@ -57,14 +57,14 @@ Rectangle {
 
                 ColorizedIcon {
                     iconSource: Assets.notifications.idle
-                    iconColor: Style.palette.lavender
+                    iconColor: Style.palette.text
                     implicitSize: 30
                 }
 
                 Text {
                     id: title
                     text: "Notifications"
-                    color: Style.palette.lavender
+                    color: Style.palette.text
                     font.family: Style.font.family2
                     font.pixelSize: Style.font.size1
                 }
@@ -147,13 +147,13 @@ Rectangle {
                         ColorizedIcon {
                             id: icon
                             iconSource: Assets.notifications.clearNotifications
-                            iconColor: Style.palette.lavender
+                            iconColor: Style.palette.text
                             implicitSize: 30
                         }
 
                         Text {
                             text: "Clear"
-                            color: Style.palette.lavender
+                            color: Style.palette.text
                             font.family: Style.font.family2
                             font.pixelSize: Style.font.size2
                         }

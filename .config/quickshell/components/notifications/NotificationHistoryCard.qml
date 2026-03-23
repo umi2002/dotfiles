@@ -115,7 +115,7 @@ Rectangle {
             Text {
                 visible: text.length > 0
                 text: root.notification?.summary || ""
-                color: Style.palette.mauve
+                color: Style.palette.text
                 font.pointSize: Style.font.size2
                 font.bold: true
                 font.family: Style.font.family1
