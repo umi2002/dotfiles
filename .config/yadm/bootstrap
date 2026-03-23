@@ -22,9 +22,36 @@ if bw login --check &>/dev/null; then
 else
   export BW_SESSION=$(bw login --raw)
 fi
+
 bw get notes "Secrets.qml" --session $BW_SESSION > "$HOME/.config/quickshell/Secrets.qml"
+echo "Setting up quickshell secrets successful."
+
+GITHUB_PAT=$(bw get notes "Github Personal Access Token" --session $BW_SESSION | tr -d '[:space:]')
+KEY_PATH="$HOME/.ssh/id_ed25519_github"
+KEY_COMMENT="$(whoami)@$(hostname)"
+mkdir -p "$HOME/.ssh" && chmod 700 "$HOME/.ssh"
+rm -f "$KEY_PATH" "$KEY_PATH.pub"
+ssh-keygen -t ed25519 -f "$KEY_PATH" -C "$KEY_COMMENT" -N ""
+
+KEYS_LIST=$(GH_TOKEN="$GITHUB_PAT" gh ssh-key list)
+SELECTED=$(printf '+ Add as new key\n%s' \
+  "$(echo "$KEYS_LIST" | awk -F'\t' '{print "~ Replace: " $1}')" | fzf \
+  --prompt="GitHub SSH key action: " \
+  --layout=reverse --height=40% --border)
+
+if [[ "$SELECTED" == "+ Add as new key" ]]; then
+  GH_TOKEN="$GITHUB_PAT" gh ssh-key add "$KEY_PATH.pub" --title "$KEY_COMMENT"
+  echo "GitHub SSH key added."
+elif [[ "$SELECTED" == "~ Replace: "* ]]; then
+  KEY_TITLE="${SELECTED#\~ Replace: }"
+  KEY_ID=$(echo "$KEYS_LIST" | awk -F'\t' -v t="$KEY_TITLE" '$1 == t {print $2}')
+  GH_TOKEN="$GITHUB_PAT" gh ssh-key delete "$KEY_ID" --yes
+  GH_TOKEN="$GITHUB_PAT" gh ssh-key add "$KEY_PATH.pub" --title "$KEY_TITLE"
+  echo "GitHub SSH key replaced."
+fi
+echo "GitHub SSH key setup successful."
+
 bw lock
-echo "Setting up secrets successful."
 
 gsettings set org.gnome.desktop.interface gtk-theme 'Fluent-Dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
