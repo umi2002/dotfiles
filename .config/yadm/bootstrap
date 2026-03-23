@@ -1,10 +1,9 @@
 #!/bin/bash
-USER_HOME="$HOME"
 
 aconfmgr apply
 echo "Aconfmgr apply successful."
 
-quickshell_path="$USER_HOME/.config/quickshell"
+quickshell_path="$HOME/.config/quickshell"
 sudo ln -sf "$quickshell_path" /etc/greetd
 echo "Symlink greetd quickshell config successful."
 

@@ -23,8 +23,7 @@ This step is very important if you don't want to get stuck in the login screen. 
 For this to work, you must first symlink the quickshell config to greetd's config directory.
 
 ```
-USER_HOME="$HOME"
-quickshell_path="$USER_HOME/.config/quickshell"
+quickshell_path="$HOME/.config/quickshell"
 sudo ln -sf "$quickshell_path" /etc/greetd
 ```
 
