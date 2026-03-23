@@ -4,13 +4,13 @@
 # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
 
-windowrule = workspace 1, match:class ^(vesktop)$
+windowrule = workspace 1 silent, match:class ^(vesktop)$
 windowrule = workspace 2, match:class ^(kitty)$
-windowrule = workspace 5, match:class ^(steam_app_.*)$
-windowrule = workspace 7, match:class ^(Bitwarden)$
-windowrule = workspace 8, match:class ^(eu.betterbird.Betterbird)$
-windowrule = workspace 9, match:class ^(spotify)$
-windowrule = workspace 10, match:class ^(steam)$
+windowrule = workspace 5 silent, match:class ^(steam_app_.*)$
+windowrule = workspace 7 silent, match:class ^(Bitwarden)$
+windowrule = workspace 8 silent, match:class ^(eu.betterbird.Betterbird)$
+windowrule = workspace 9 silent, match:class ^(spotify)$
+windowrule = workspace 10 silent, match:class ^(steam)$
 
 windowrule = render_unfocused on, match:class ^(steam_app_.*)$
 
