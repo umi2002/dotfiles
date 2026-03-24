@@ -1,16 +1,17 @@
 # Execute your favorite apps at launch
 # exec-once = waybar & hyprpaper & firefox
-exec-once = runapp -- quickshell
+exec-once = systemctl start --user quickshell
+exec-once = systemctl start --user hyprpaper
+exec-once = systemctl start --user hypridle
+exec-once = systemctl start --user udiskie
+exec-once = systemctl start --user cliphist-text
+exec-once = systemctl start --user cliphist-image
+
 exec-once = runapp -- vesktop
 exec-once = runapp -- spotify
 exec-once = runapp -- betterbird
-exec-once = runapp -- hyprpaper
 exec-once = runapp -- bitwarden-desktop
-exec-once = runapp -- hypridle
-exec-once = runapp -- udiskie
-exec-once = wl-paste --type text --watch cliphist store
-exec-once = wl-paste --type image --watch cliphist store
 
 {% if yadm.class == "Laptop" %}
-exec-once = uwsm app -- hyprsunset
+exec-once = systemctl start --user hyprsunset
 {% endif %}

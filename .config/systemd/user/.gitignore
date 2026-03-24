@@ -1,0 +1,5 @@
+default.target.wants
+graphical-session.target.wants
+pipewire.service.wants
+sockets.target.wants
+pipewire-session-manager.service

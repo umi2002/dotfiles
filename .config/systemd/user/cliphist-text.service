@@ -1,0 +1,10 @@
+[Unit]
+Description=Cliphist text watcher
+After=wayland-session.target
+
+[Service]
+ExecStart=/usr/bin/wl-paste --type text --watch cliphist store
+Restart=on-failure
+
+[Install]
+WantedBy=wayland-session.target

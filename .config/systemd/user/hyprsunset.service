@@ -1,0 +1,10 @@
+[Unit]
+Description=Hyprsunset
+After=wayland-session.target
+
+[Service]
+ExecStart=/usr/bin/hyprsunset
+Restart=on-failure
+
+[Install]
+WantedBy=wayland-session.target
