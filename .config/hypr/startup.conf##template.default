@@ -1,11 +1,16 @@
 # Execute your favorite apps at launch
 # exec-once = waybar & hyprpaper & firefox
-exec-once = gnome-keyring-daemon --start --components=secrets
-exec-once = systemctl --user start hyprpolkitagent
-exec-once = quickshell & vesktop & spotify & betterbird & hyprpaper & bitwarden-desktop & hypridle & udiskie
+exec-once = uwsm app -- quickshell
+exec-once = uwsm app -- vesktop
+exec-once = uwsm app -- spotify
+exec-once = uwsm app -- betterbird
+exec-once = uwsm app -- hyprpaper
+exec-once = uwsm app -- bitwarden-desktop
+exec-once = uwsm app -- hypridle
+exec-once = uwsm app -- udiskie
 exec-once = wl-paste --type text --watch cliphist store
 exec-once = wl-paste --type image --watch cliphist store
 
 {% if yadm.class == "Laptop" %}
-exec-once = hyprsunset
+exec-once = uwsm app -- hyprsunset
 {% endif %}
