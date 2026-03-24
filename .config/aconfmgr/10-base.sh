@@ -22,6 +22,7 @@ AddPackage udisks2 # Daemon, tools and libraries to access and manipulate disks,
 
 #Networking
 AddPackage networkmanager # Network connection manager and user applications
+AddPackage iwd # Internet Wireless Daemon
 AddPackage iw # nl80211 based CLI configuration utility for wireless devices
 AddPackage openssh # SSH protocol implementation for remote login, command execution and file transfer
 AddPackage nss-mdns # glibc plugin providing host name resolution via mDNS

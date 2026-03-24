@@ -2,8 +2,6 @@ CopyFile /etc/locale.conf
 CopyFile /etc/locale.gen
 CreateLink /etc/localtime /usr/share/zoneinfo/America/Montreal
 CopyFile /etc/xdg/reflector/reflector.conf
-CopyFile /etc/pacman.d/mirrorlist
-CopyFile /etc/pacman.d/mirrorlist.pacnew
 CopyFile /etc/pacman.conf
 CopyFile /etc/sudoers
 CopyFile /etc/vconsole.conf
@@ -27,6 +25,8 @@ CopyFile /etc/ufw/user.rules
 CopyFile /etc/ufw/user6.rules
 CopyFile /etc/default/grub
 CopyFile /etc/tlp.conf
+CopyFile /etc/NetworkManager/conf.d/wifi_backend.conf
+CopyFile /etc/iwd/main.conf
 CopyFile /etc/systemd/system/bluetooth-off.service
 CopyFile /etc/tmpfiles.d/powertop.conf
 CopyFile /etc/systemd/system/reflector.timer
