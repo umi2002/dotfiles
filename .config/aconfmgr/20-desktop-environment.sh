@@ -7,6 +7,7 @@ AddPackage hyprland # a highly customizable dynamic tiling Wayland compositor
 AddPackage hyprpaper # a blazing fast wayland wallpaper utility with IPC controls
 AddPackage hyprlock # hyprland’s GPU-accelerated screen locking utility
 AddPackage hypridle # hyprland’s idle daemon
+AddPackage --foreign runapp # Application runner for Linux desktop environments that integrate with systemd
 AddPackage --foreign spotify # A proprietary music streaming service
 AddPackage --foreign spicetify-cli # Command-line tool to customize Spotify client
 AddPackage --foreign spicetify-marketplace-bin # Spicetify app that integrates a marketplace for extensions, themes and snippets

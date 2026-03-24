@@ -1,13 +1,13 @@
 # Execute your favorite apps at launch
 # exec-once = waybar & hyprpaper & firefox
-exec-once = uwsm app -- quickshell
-exec-once = uwsm app -- vesktop
-exec-once = uwsm app -- spotify
-exec-once = uwsm app -- betterbird
-exec-once = uwsm app -- hyprpaper
-exec-once = uwsm app -- bitwarden-desktop
-exec-once = uwsm app -- hypridle
-exec-once = uwsm app -- udiskie
+exec-once = runapp -- quickshell
+exec-once = runapp -- vesktop
+exec-once = runapp -- spotify
+exec-once = runapp -- betterbird
+exec-once = runapp -- hyprpaper
+exec-once = runapp -- bitwarden-desktop
+exec-once = runapp -- hypridle
+exec-once = runapp -- udiskie
 exec-once = wl-paste --type text --watch cliphist store
 exec-once = wl-paste --type image --watch cliphist store
 
