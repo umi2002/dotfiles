@@ -1,0 +1,7 @@
+@document.meta
+title: {TITLE_INPUT}
+authors: {AUTHOR}
+categories:
+@end
+
+* {TITLE_INPUT}
