@@ -26,14 +26,6 @@ Setup
     (setq lsp-modeline-code-actions-mode 1))
 #+end_src
 
-Respecting gitignore
-#+begin_src emacs-lisp
-  (with-eval-after-load 'lsp-mode
-    (setq lsp-file-watch-ignored-directories
-	  (append lsp-file-watch-ignored-directories
-		  projectile-globally-ignored-directories)))
-#+end_src
-
 Lsp-Booster
 #+begin_src emacs-lisp
   (defun lsp-booster--advice-json-parse (old-fn &rest args)

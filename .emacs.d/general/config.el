@@ -16,18 +16,6 @@
   (evil-window-split)
   (evil-window-down 1))
 
-(defun scroll_down_recenter()
-  :type 'line
-  (interactive)
-  (evil-scroll-page-down 1)
-  (evil-scroll-line-to-center nil))
-
-(defun scroll_up_recenter()
-  :type 'line
-  (interactive)
-  (evil-scroll-page-up 1)
-  (evil-scroll-line-to-center nil))
-
 (with-eval-after-load 'general
   (general-evil-setup)
   (setq global-map (make-sparse-keymap))
@@ -43,23 +31,11 @@
     :prefix "SPC"))
 
 (with-eval-after-load 'general
-  (leader
-    "e" 'dired)
-
-  (general-define-key
-   :states 'normal
-   :keymaps 'dired-mode-map
-   "h" 'dired-up-directory
-   "l" 'dired-find-file
-   "d" 'dired-create-directory
-   "n" 'dired-create-empty-file
-   "D" 'dired-do-delete)
-
   (general-define-key
    :states '(normal visual)
    :keymaps '(global override)
-   "J" 'scroll_down_recenter
-   "K" 'scroll_up_recenter
+   "J" 'scroll-up-command
+   "K" 'scroll-down-command
    )
 
   (general-define-key

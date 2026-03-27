@@ -1,6 +1,3 @@
-(with-eval-after-load 'doom-themes
-  (load-theme 'doom-palenight t))
-
 (with-eval-after-load 'dimmer
   (dimmer-configure-helm)
   (dimmer-mode t))
@@ -8,9 +5,11 @@
 (with-eval-after-load 'telephone-line
   (telephone-line-mode 1))
 
-(with-eval-after-load 'visual-fill-column
-  (add-hook 'text-mode-hook
-	    (lambda ()
-	      (visual-fill-column-mode)
-	      (setq fill-column 100)))
-  (setq-default visual-fill-column-center-text t))
+(setq olivetti-body-width 200)
+(with-eval-after-load 'olivetti
+  (add-hook 'text-mode-hook #'olivetti-mode)
+  (add-hook 'org-mode-hook #'olivetti-mode)
+  (olivetti-mode 1))
+
+(with-eval-after-load 'mixed-pitch
+  (add-hook 'text-mode-hook #'mixed-pitch-mode))

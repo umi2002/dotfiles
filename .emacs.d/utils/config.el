@@ -26,10 +26,10 @@
   "Toggle between vterm and current buffer."
   (interactive)
   (if (string= major-mode "vterm-mode")
-      (evil-switch-to-windows-last-buffer)
+	(evil-switch-to-windows-last-buffer)
     (if (get-buffer "vterm")
-	(switch-to-buffer "vterm")
-      (vterm))))
+	  (switch-to-buffer "vterm")
+	(vterm))))
 
 (with-eval-after-load 'vterm
   (leader

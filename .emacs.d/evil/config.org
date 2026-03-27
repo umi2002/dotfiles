@@ -11,9 +11,6 @@ Setup:
     )
 #+end_src
 
-#+RESULTS:
-: undo-redo
-
 ** Evil Collection
 Setup
 #+begin_src emacs-lisp

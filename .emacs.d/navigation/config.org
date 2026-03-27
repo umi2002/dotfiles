@@ -3,6 +3,14 @@
 
 * NAVIGATION CONFIG
 ** Helm
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'helm
+    (helm-mode 1)
+    (setq helm-completion-style 'helm-fuzzy)
+    )
+#+end_src
+
 Mappings
 #+begin_src emacs-lisp
   (with-eval-after-load 'helm
@@ -15,13 +23,6 @@ Mappings
     (buffer
       "f" 'helm-buffers-list)
     )
-#+end_src
-
-** Helm-Fuzzier
-Setup
-#+begin_src emacs-lisp
-  (with-eval-after-load 'helm-fuzzier
-    (helm-fuzzier-mode 1))
 #+end_src
 
 ** Avy

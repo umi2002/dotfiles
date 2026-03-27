@@ -2,12 +2,6 @@
 #+AUTHOR: umi
 
 * VISUALS CONFIG
-** Theme
-#+begin_src emacs-lisp
-  (with-eval-after-load 'doom-themes
-    (load-theme 'doom-palenight t))
-#+end_src
-
 ** Dimmer
 #+begin_src emacs-lisp
   (with-eval-after-load 'dimmer
@@ -21,13 +15,18 @@
     (telephone-line-mode 1))
 #+end_src
 
-
-** Visual-Fill-Column
+** Olivetti
 #+begin_src emacs-lisp
-  (with-eval-after-load 'visual-fill-column
-    (add-hook 'text-mode-hook
-	      (lambda ()
-		(visual-fill-column-mode)
-		(setq fill-column 100)))
-    (setq-default visual-fill-column-center-text t))
+  (setq olivetti-body-width 200)
+  (with-eval-after-load 'olivetti
+    (add-hook 'text-mode-hook #'olivetti-mode)
+    (add-hook 'org-mode-hook #'olivetti-mode)
+    (olivetti-mode 1))
 #+end_src
+
+** Mixed-Pitch
+#+begin_src emacs-lisp
+  (with-eval-after-load 'mixed-pitch
+    (add-hook 'text-mode-hook #'mixed-pitch-mode))
+#+end_src
+

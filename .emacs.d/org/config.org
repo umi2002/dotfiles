@@ -4,10 +4,11 @@
 * ORG CONFIG
 #+begin_src emacs-lisp
   (with-eval-after-load 'org-faces
-    (set-face-attribute 'org-default nil :family "Linux Libertine O" :height 120)
+    (set-face-attribute 'org-default nil :family "Linux Libertine O" :height 150)
     (set-face-attribute 'org-block nil :family "FiraMono Nerd Font" :height 100)
     (set-face-attribute 'org-meta-line nil :family "FiraMono Nerd Font" :height 100))
   (setq org-startup-with-inline-images t)
+  (plist-put org-format-latex-options :scale 1.5)
 #+end_src
 
 Mappings
@@ -26,25 +27,25 @@ Formatting
   (defun cleanup-org-results ()
     (when (eq major-mode 'org-mode)
       (save-excursion
-	(goto-char (point-min))
-	(while (re-search-forward "^#\\+RESULTS:.*\n.*\n\n" nil t)
-	  (replace-match "")))))
+        (goto-char (point-min))
+        (while (re-search-forward "^#\\+RESULTS:.*\n.*\n\n" nil t)
+  	(replace-match "")))))
 
   (defun indent-whole-buffer ()
     (indent-region (point-min) (point-max)))
 
   (add-hook 'org-mode-hook
-	    (lambda ()
-	      (add-hook 'before-save-hook #'indent-whole-buffer nil t)
-	      (add-hook 'before-save-hook #'cleanup-org-results nil t)))
+  	  (lambda ()
+  	    (add-hook 'before-save-hook #'indent-whole-buffer nil t)
+  	    (add-hook 'before-save-hook #'cleanup-org-results nil t)))
 #+end_src
 
 ** Org-Toc
 #+begin_src emacs-lisp
   (with-eval-after-load 'toc-org
     (if (require 'toc-org nil t)
-	(progn
-	  (add-hook 'org-mode-hook 'toc-org-mode))
+        (progn
+  	(add-hook 'org-mode-hook 'toc-org-mode))
       (warn "toc-org not found")))
 #+end_src
 
@@ -58,12 +59,12 @@ Formatting
 ** Org-Roam
 #+begin_src emacs-lisp
   (with-eval-after-load 'org-roam
-    (defun my/org-font ()
+    (defun org-font ()
       (when (org-roam-buffer-p)
-	(buffer-face-set :family "Andika" :height 120)))
+        (buffer-face-set :family "DejaVu Sans" :height 150)))
 
-    (add-hook 'org-mode-hook 'my/org-font)
-    (setq org-roam-directory (file-truename "~/umiwiki"))
+    (add-hook 'org-mode-hook 'org-font)
+    (setq org-roam-directory (file-truename "~/notes"))
     (org-roam-db-autosync-mode)
 
     (general-create-definer node
@@ -86,16 +87,16 @@ Formatting
     (while (not (eobp))
       ;;on habit line?
       (when (get-text-property (point) 'org-habit-p)
-	(let ((streak 0)
-	      (counter (+ org-habit-graph-column (- org-habit-preceding-days org-habit-following-days))))
-	  (move-to-column counter)
-	  ;;until end of line
-	  (while (= (char-after (point)) org-habit-completed-glyph)
-	    (setq streak (+ streak 1))
-	    (setq counter (- counter 1))
-	    (backward-char 1))
-	  (end-of-line)
-	  (insert (number-to-string streak))))
+        (let ((streak 0)
+  	    (counter (+ org-habit-graph-column (- org-habit-preceding-days org-habit-following-days))))
+  	(move-to-column counter)
+  	;;until end of line
+  	(while (= (char-after (point)) org-habit-completed-glyph)
+  	  (setq streak (+ streak 1))
+  	  (setq counter (- counter 1))
+  	  (backward-char 1))
+  	(end-of-line)
+  	(insert (number-to-string streak))))
       (forward-line 1)))
   (add-hook 'org-agenda-finalize-hook 'org-habit-streak-count)
   (add-hook 'org-todo-repeat-hook #'org-reset-checkbox-state-subtree)
@@ -118,4 +119,9 @@ Formatting
      "d" 'org-agenda-day-view
      "f" 'org-agenda-filter
      "RET" 'org-agenda-goto))
+#+end_src
+
+** Org-Fragtog
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'org-fragtog-mode)
 #+end_src

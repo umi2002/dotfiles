@@ -1,35 +1,35 @@
-(defun custom_project_find()
+(defun custom-project-find()
   (interactive)
-  (if (projectile-project-p)
-      (helm-projectile-find-file)
+  (if (project-current nil)
+      (project-find-file)
     (helm-find-files nil)))
 
-(with-eval-after-load 'projectile
-  (setq projectile-switch-project-action #'projectile-dired)
-  (setq projectile-indexing-method 'hybrid)
-  (setq projectile-enable-caching t)
-  (setq projectile-git-command "git ls-files -zco --exclude-standard")
-  (setq projectile-project-search-path '(("~/code/" . 2) "~/dotfiles/" ("~/code/projects/" . 2)))
-  (setq projectile-generic-command "fd . -0 --type f --color=never")
-  (setq projectile-completion-system 'helm)
-  (setq projectile-cache-file (expand-file-name ".cache/projectile.cache" user-emacs-directory))
-  (projectile-mode 1))
+(defun project-try-yadm (dir)
+  (when (and (string-prefix-p (expand-file-name "~") (expand-file-name dir))
+             (file-directory-p "~/.local/share/yadm/repo.git"))
+    (cons 'yadm "~/")))
 
-(with-eval-after-load 'projectile
+(cl-defmethod project-root ((project (head yadm)))
+  (cdr project))
+(add-hook 'project-find-functions #'project-try-vc)
+(add-hook 'project-find-functions #'project-try-yadm)
+(cl-defmethod project-files ((project (head yadm)) &optional _dirs)
+  (let ((default-directory (project-root project)))
+    (mapcar (lambda (f) (expand-file-name f (project-root project)))
+            (split-string (shell-command-to-string "yadm ls-files") "\n" t))))
+
+(with-eval-after-load 'general
   (general-create-definer project
     :keymaps '(global override)
     :wrapping leader
-    :infix "p"))
+    :infix "p")
 
-(with-eval-after-load 'helm-projectile
-  (helm-projectile-on))
-
-(with-eval-after-load 'projectile
   (leader
-    "f" 'custom_project_find)
+    "f" 'custom-project-find)
 
   (project
-    "f" 'helm-projectile-switch-project)
+    "f" 'project-switch-project)
 
   (leader
-    "wf" 'helm-projectile-rg))
+    "wf" 'project-find-regexp)
+  )

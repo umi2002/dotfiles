@@ -1,40 +1,35 @@
 (with-eval-after-load 'lsp-mode
   (setq lsp-modeline-code-actions-mode 1))
 
-(with-eval-after-load 'lsp-mode
-  (setq lsp-file-watch-ignored-directories
-	(append lsp-file-watch-ignored-directories
-		projectile-globally-ignored-directories)))
-
 (defun lsp-booster--advice-json-parse (old-fn &rest args)
   "Try to parse bytecode instead of json."
   (or
    (when (equal (following-char) ?#)
      (let ((bytecode (read (current-buffer))))
-       (when (byte-code-function-p bytecode)
-	 (funcall bytecode))))
+	 (when (byte-code-function-p bytecode)
+	   (funcall bytecode))))
    (apply old-fn args)))
 (advice-add (if (progn (require 'json)
-		       (fboundp 'json-parse-buffer))
-		'json-parse-buffer
-	      'json-read)
-	    :around
-	    #'lsp-booster--advice-json-parse)
+			 (fboundp 'json-parse-buffer))
+		  'json-parse-buffer
+		'json-read)
+	      :around
+	      #'lsp-booster--advice-json-parse)
 
 (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
   "Prepend emacs-lsp-booster command to lsp CMD."
   (let ((orig-result (funcall old-fn cmd test?)))
     (if (and (not test?)                             ;; for check lsp-server-present?
-	     (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
-	     lsp-use-plists
-	     (not (functionp 'json-rpc-connection))  ;; native json-rpc
-	     (executable-find "emacs-lsp-booster"))
-	(progn
-	  (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
-	    (setcar orig-result command-from-exec-path))
-	  (message "Using emacs-lsp-booster for %s!" orig-result)
-	  (cons "emacs-lsp-booster" orig-result))
-      orig-result)))
+	       (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+	       lsp-use-plists
+	       (not (functionp 'json-rpc-connection))  ;; native json-rpc
+	       (executable-find "emacs-lsp-booster"))
+	  (progn
+	    (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
+	      (setcar orig-result command-from-exec-path))
+	    (message "Using emacs-lsp-booster for %s!" orig-result)
+	    (cons "emacs-lsp-booster" orig-result))
+	orig-result)))
 (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
 
 (with-eval-after-load 'helm-xref
@@ -63,8 +58,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		(append format-all-formatters
-			'(("Lua" (stylua))))))
+		  (append format-all-formatters
+			  '(("Lua" (stylua))))))
 
 (use-package web-mode
   :after lsp-mode
@@ -84,8 +79,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		(append format-all-formatters
-			'(("TypeScript" (prettierd))))))
+		  (append format-all-formatters
+			  '(("TypeScript" (prettierd))))))
 
 (use-package eslintd-fix
   :after (lsp-mode flycheck)
@@ -100,8 +95,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		(append format-all-formatters
-			'(("C" (clang-format "--style=Microsoft"))))))
+		  (append format-all-formatters
+			  '(("C" (clang-format "--style=Microsoft"))))))
 
 (with-eval-after-load 'lsp-mode
   (add-hook 'c++-mode-hook #'lsp-deferred)
@@ -109,8 +104,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		(append format-all-formatters
-			'(("C++" (clang-format "--style=Microsoft"))))))
+		  (append format-all-formatters
+			  '(("C++" (clang-format "--style=Microsoft"))))))
 
 (with-eval-after-load 'lsp-mode
   (add-hook 'csharp-mode-hook #'lsp-deferred)
@@ -118,8 +113,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		(append format-all-formatters
-			'(("C#" (csharpier))))))
+		  (append format-all-formatters
+			  '(("C#" (csharpier))))))
 
 (use-package python-mode
   :after lsp-mode

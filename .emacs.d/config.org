@@ -6,6 +6,7 @@
 * Umi's Config :TOC:
   - [[#editor-settings][EDITOR SETTINGS]]
   - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
+  - [[#dired][DIRED]]
   - [[#navigation][NAVIGATION]]
   - [[#project][PROJECT]]
   - [[#lsp][LSP]]
@@ -27,42 +28,42 @@
 *** Elpaca Package Manager
 Installing Elpaca
 #+begin_src emacs-lisp
-  (defvar elpaca-installer-version 0.9)
+  (defvar elpaca-installer-version 0.12)
   (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
   (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-  (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+  (defvar elpaca-sources-directory (expand-file-name "sources/" elpaca-directory))
   (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-				:ref nil :depth 1 :inherit ignore
-				:files (:defaults "elpaca-test.el" (:exclude "extensions"))
-				:build (:not elpaca--activate-package)))
-  (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
-	 (build (expand-file-name "elpaca/" elpaca-builds-directory))
-	 (order (cdr elpaca-order))
-	 (default-directory repo))
+  			      :ref nil :depth 1 :inherit ignore
+  			      :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+  			      :build (:not elpaca-activate)))
+  (let* ((repo  (expand-file-name "elpaca/" elpaca-sources-directory))
+         (build (expand-file-name "elpaca/" elpaca-builds-directory))
+         (order (cdr elpaca-order))
+         (default-directory repo))
     (add-to-list 'load-path (if (file-exists-p build) build repo))
     (unless (file-exists-p repo)
       (make-directory repo t)
-      (when (< emacs-major-version 28) (require 'subr-x))
+      (when (<= emacs-major-version 28) (require 'subr-x))
       (condition-case-unless-debug err
-	  (if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-		    ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
-						    ,@(when-let* ((depth (plist-get order :depth)))
-							(list (format "--depth=%d" depth) "--no-single-branch"))
-						    ,(plist-get order :repo) ,repo))))
-		    ((zerop (call-process "git" nil buffer t "checkout"
-					  (or (plist-get order :ref) "--"))))
-		    (emacs (concat invocation-directory invocation-name))
-		    ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-					  "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-		    ((require 'elpaca))
-		    ((elpaca-generate-autoloads "elpaca" repo)))
-	      (progn (message "%s" (buffer-string)) (kill-buffer buffer))
-	    (error "%s" (with-current-buffer buffer (buffer-string))))
-	((error) (warn "%s" err) (delete-directory repo 'recursive))))
+  	(if-let* ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+  		  ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+  						  ,@(when-let* ((depth (plist-get order :depth)))
+  						      (list (format "--depth=%d" depth) "--no-single-branch"))
+  						  ,(plist-get order :repo) ,repo))))
+  		  ((zerop (call-process "git" nil buffer t "checkout"
+  					(or (plist-get order :ref) "--"))))
+  		  (emacs (concat invocation-directory invocation-name))
+  		  ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+  					"--eval" "(byte-recompile-directory \".\" 0 'force)")))
+  		  ((require 'elpaca))
+  		  ((elpaca-generate-autoloads "elpaca" repo)))
+  	    (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+  	  (error "%s" (with-current-buffer buffer (buffer-string))))
+        ((error) (warn "%s" err) (delete-directory repo 'recursive))))
     (unless (require 'elpaca-autoloads nil t)
       (require 'elpaca)
       (elpaca-generate-autoloads "elpaca" repo)
-      (load "./elpaca-autoloads")))
+      (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
   (add-hook 'after-init-hook #'elpaca-process-queues)
   (elpaca `(,@elpaca-order))
 #+End_src
@@ -126,15 +127,24 @@ Installing General
     user-emacs-directory))
 #+end_src
 
+** DIRED
+Installing Dired-Narrow
+#+begin_src emacs-lisp
+  (use-package dired-narrow)
+#+end_src
+
+[[file:dired/config.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "dired/config.org"
+    user-emacs-directory))
+#+end_src
+
 ** NAVIGATION
 Installing Helm
 #+begin_src emacs-lisp
   (use-package helm)
-#+end_src
-
-Installing Helm-Fuzzier
-#+begin_src emacs-lisp
-  (use-package helm-fuzzier)
 #+end_src
 
 Installing Helm-Rg
@@ -157,17 +167,6 @@ Installing Avy
 #+end_src
 
 ** PROJECT
-Installing Projectile
-#+begin_src emacs-lisp
-  (use-package projectile)
-#+end_src
-
-Installing Helm-Projectile
-#+begin_src emacs-lisp
-  (use-package helm-projectile
-    :after (helm projectile))
-#+end_src
-
 [[file:project/config.org][Configuration]]
 #+begin_src emacs-lisp
   (org-babel-load-file
@@ -318,10 +317,10 @@ Installing Git-Gutter
 #+end_src
 
 ** VISUALS
-Installing Doom-Themes
+Installing Catppuccin-Theme
 #+begin_src emacs-lisp
-  (use-package doom-themes
-    :config (load-theme 'doom-palenight t))
+  (use-package catppuccin-theme
+    :config (load-theme 'catppuccin :noconfirm))
 #+end_src
 
 Installing Dimmer
@@ -334,15 +333,20 @@ Installing Telephone Line
   (use-package telephone-line)
 #+end_src
 
-Installing Visual-Fill-Column
+Installing Olivetti
 #+begin_src emacs-lisp
-  (use-package visual-fill-column)
+  (use-package olivetti)
 #+end_src
 
 Installing All-The-Icons
 #+begin_src emacs-lisp
   (use-package all-the-icons
     :if (display-graphic-p))
+#+end_src
+
+Installing Mixed-Pitch
+#+begin_src emacs-lisp
+  (use-package mixed-pitch)
 #+end_src
 
 [[file:visuals/config.org][Configuration]]
@@ -385,3 +389,8 @@ Installing Org-Download
     user-emacs-directory))
 #+end_src
 
+Installing Org-Fragtog
+#+begin_src emacs-lisp
+  (use-package org-fragtog
+    :after org)
+#+end_src

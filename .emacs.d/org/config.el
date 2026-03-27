@@ -1,8 +1,9 @@
 (with-eval-after-load 'org-faces
-  (set-face-attribute 'org-default nil :family "Linux Libertine O" :height 120)
+  (set-face-attribute 'org-default nil :family "Linux Libertine O" :height 150)
   (set-face-attribute 'org-block nil :family "FiraMono Nerd Font" :height 100)
   (set-face-attribute 'org-meta-line nil :family "FiraMono Nerd Font" :height 100))
 (setq org-startup-with-inline-images t)
+(plist-put org-format-latex-options :scale 1.5)
 
 (with-eval-after-load 'general
   (general-create-definer org
@@ -38,12 +39,12 @@
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
 
 (with-eval-after-load 'org-roam
-  (defun my/org-font ()
+  (defun org-font ()
     (when (org-roam-buffer-p)
-      (buffer-face-set :family "Andika" :height 120)))
+      (buffer-face-set :family "DejaVu Sans" :height 150)))
 
-  (add-hook 'org-mode-hook 'my/org-font)
-  (setq org-roam-directory (file-truename "~/umiwiki"))
+  (add-hook 'org-mode-hook 'org-font)
+  (setq org-roam-directory (file-truename "~/notes"))
   (org-roam-db-autosync-mode)
 
   (general-create-definer node
@@ -95,3 +96,5 @@
    "d" 'org-agenda-day-view
    "f" 'org-agenda-filter
    "RET" 'org-agenda-goto))
+
+(add-hook 'org-mode-hook 'org-fragtog-mode)
