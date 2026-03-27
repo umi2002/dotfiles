@@ -2,6 +2,23 @@
 #+AUTHOR: umi
 
 * ORG CONFIG
+Functions
+#+begin_src emacs-lisp
+  (defun fix-org-links-in-md (file)
+    (with-temp-buffer
+      (insert-file-contents file)
+      (goto-char (point-min))
+      (while (re-search-forward "\\.org)" nil t)
+        (replace-match ".md)"))
+      (write-file file)))
+
+  (defun org-export-to-md-on-save ()
+    (when (eq major-mode 'org-mode)
+      (let ((md-file (org-md-export-to-markdown)))
+        (fix-org-links-in-md md-file))))
+  #+end_src
+
+Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'org-faces
     (set-face-attribute 'org-default nil :family "Linux Libertine O" :height 150)
@@ -9,6 +26,7 @@
     (set-face-attribute 'org-meta-line nil :family "FiraMono Nerd Font" :height 100))
   (setq org-startup-with-inline-images t)
   (plist-put org-format-latex-options :scale 1.5)
+  (add-hook 'after-save-hook #'org-export-to-md-on-save)
 #+end_src
 
 Mappings

@@ -1,9 +1,9 @@
 :PROPERTIES:
 #+TITLE: umi's config
 #+AUTHOR: umi
-#+TOC: toc-org
+#+TOC: toc:t
 
-* Umi's Config                                                          :TOC:
+* Umi's Config                                                          :TOC:noexport:
   - [[#editor-settings][EDITOR SETTINGS]]
   - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
   - [[#dired][DIRED]]
@@ -381,16 +381,16 @@ Installing Org-Download
   (use-package org-download)
 #+end_src
 
+Installing Org-Fragtog
+#+begin_src emacs-lisp
+  (use-package org-fragtog
+    :after org)
+#+end_src
+
 [[file:org/readme.org][Configuration]]
 #+begin_src emacs-lisp
   (org-babel-load-file
    (expand-file-name
     "org/readme.org"
     user-emacs-directory))
-#+end_src
-
-Installing Org-Fragtog
-#+begin_src emacs-lisp
-  (use-package org-fragtog
-    :after org)
 #+end_src
