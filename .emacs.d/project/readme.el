@@ -6,7 +6,8 @@
 
 (defun project-try-yadm (dir)
   (when (and (string-prefix-p (expand-file-name "~") (expand-file-name dir))
-             (file-directory-p "~/.local/share/yadm/repo.git"))
+             (file-directory-p "~/.local/share/yadm/repo.git")
+             (not (locate-dominating-file dir ".git")))
     (cons 'yadm "~/")))
 
 (cl-defmethod project-root ((project (head yadm)))

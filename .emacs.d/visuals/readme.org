@@ -1,1 +1,32 @@
-config.org
+#+TITLE: Visuals Config
+#+AUTHOR: umi
+
+* VISUALS CONFIG
+** Dimmer
+#+begin_src emacs-lisp
+  (with-eval-after-load 'dimmer
+    (dimmer-configure-helm)
+    (dimmer-mode t))
+#+end_src
+
+** Telephone Line
+#+begin_src emacs-lisp
+  (with-eval-after-load 'telephone-line
+    (telephone-line-mode 1))
+#+end_src
+
+** Olivetti
+#+begin_src emacs-lisp
+  (setq olivetti-body-width 200)
+  (with-eval-after-load 'olivetti
+    (add-hook 'text-mode-hook #'olivetti-mode)
+    (add-hook 'org-mode-hook #'olivetti-mode)
+    (olivetti-mode 1))
+#+end_src
+
+** Mixed-Pitch
+#+begin_src emacs-lisp
+  (with-eval-after-load 'mixed-pitch
+    (add-hook 'text-mode-hook #'mixed-pitch-mode))
+#+end_src
+

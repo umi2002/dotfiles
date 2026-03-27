@@ -1,9 +1,0 @@
-#+TITLE: Git Config
-#+AUTHOR: umi
-
-* GIT CONFIG
-** Git-Gutter
-#+begin_src emacs-lisp
-  (with-eval-after-load 'git-gutter
-    (global-git-gutter-mode +1))
-#+end_src

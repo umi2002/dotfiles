@@ -1,6 +1,6 @@
 (org-babel-load-file
  (expand-file-name
-  "settings.org"
+  "settings/readme.org"
   user-emacs-directory))
 
 (defvar elpaca-installer-version 0.12)
@@ -64,21 +64,21 @@
 
 (org-babel-load-file
  (expand-file-name
-  "evil/config.org"
+  "evil/readme.org"
   user-emacs-directory))
 
 (use-package general :demand t)
 
 (org-babel-load-file
  (expand-file-name
-  "general/config.org"
+  "general/readme.org"
   user-emacs-directory))
 
 (use-package dired-narrow)
 
 (org-babel-load-file
  (expand-file-name
-  "dired/config.org"
+  "dired/readme.org"
   user-emacs-directory))
 
 (use-package helm)
@@ -90,12 +90,12 @@
 
 (org-babel-load-file
  (expand-file-name
-  "navigation/config.org"
+  "navigation/readme.org"
   user-emacs-directory))
 
 (org-babel-load-file
  (expand-file-name
-  "project/config.org"
+  "project/readme.org"
   user-emacs-directory))
 
 (use-package lsp-mode
@@ -125,7 +125,7 @@
 
 (org-babel-load-file
  (expand-file-name
-  "lsp/config.org"
+  "lsp/readme.org"
   user-emacs-directory))
 
 (use-package evil-surround
@@ -150,7 +150,7 @@
 
 (org-babel-load-file
  (expand-file-name
-  "utils/config.org"
+  "utils/readme.org"
   user-emacs-directory))
 
 (use-package transient)
@@ -161,7 +161,7 @@
 
 (org-babel-load-file
  (expand-file-name
-  "git/config.org"
+  "git/readme.org"
   user-emacs-directory))
 
 (use-package catppuccin-theme
@@ -180,7 +180,7 @@
 
 (org-babel-load-file
  (expand-file-name
-  "visuals/config.org"
+  "visuals/readme.org"
   user-emacs-directory))
 
 (use-package toc-org
@@ -196,7 +196,7 @@
 
 (org-babel-load-file
  (expand-file-name
-  "org/config.org"
+  "org/readme.org"
   user-emacs-directory))
 
 (use-package org-fragtog

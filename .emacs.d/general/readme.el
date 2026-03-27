@@ -1,17 +1,17 @@
-(defun open_window_left()
+(defun open-window-left()
   (interactive)
   (evil-window-vsplit))
 
-(defun open_window_right()
+(defun open-window-right()
   (interactive)
   (evil-window-vsplit)
   (evil-window-right 1))
 
-(defun open_window_up()
+(defun open-window-up()
   (interactive)
   (evil-window-split))
 
-(defun open_window_down()
+(defun open-window-down()
   (interactive)
   (evil-window-split)
   (evil-window-down 1))
@@ -52,10 +52,10 @@
     :infix "w")
 
   (window
-    "h" 'open_window_left
-    "j" 'open_window_down
-    "k" 'open_window_up
-    "l" 'open_window_right)
+    "h" 'open-window-left
+    "j" 'open-window-down
+    "k" 'open-window-up
+    "l" 'open-window-right)
 
   (general-define-key
    :states '(normal)
