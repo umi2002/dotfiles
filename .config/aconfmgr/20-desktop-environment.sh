@@ -25,6 +25,8 @@ AddPackage --foreign vesktop # A standalone Electron-based Discord app with Venc
 AddPackage libreoffice-fresh # LibreOffice branch which contains new features and program enhancements
 AddPackage --foreign betterbird-bin # EN-US // Betterbird is a fine-tuned version of Mozilla Thunderbird, Thunderbird on steroids, if you will.
 AddPackage yazi # Blazing fast terminal file manager written in Rust, based on async I/O
+AddPackage emacs # The extensible, customizable, self-documenting real-time display editor
+AddPackage bitwarden # A secure and free password manager for all of your devices
 
 # Printer
 AddPackage cups # OpenPrinting CUPS - daemon package
@@ -41,7 +43,7 @@ AddPackage ttf-cascadia-code-nerd # Patched font Cascadia Code (Caskaydia) from 
 AddPackage cantarell-fonts # Humanist sans serif font
 AddPackage noto-fonts-cjk # Google Noto CJK fonts
 AddPackage noto-fonts-emoji # Google Noto Color Emoji font
-AddPackage bitwarden # A secure and free password manager for all of your devices
+AddPackage ttf-linux-libertine # Serif (Libertine) and Sans Serif (Biolinum) OpenType fonts with large Unicode coverage
 
 # Cursors
 AddPackage --foreign catppuccin-cursors-mocha # Soothing pastel mouse cursors - Mocha

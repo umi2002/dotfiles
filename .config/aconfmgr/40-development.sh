@@ -3,14 +3,15 @@
 
 # Development
 AddPackage neovim # Fork of Vim aiming to improve user experience, plugins, and GUIs
+AddPackage dotnet-sdk # The .NET Core SDK
 AddPackage aspnet-runtime # The ASP.NET Core runtime
+AddPackage aspnet-targeting-pack # The ASP.NET Core targeting pack
 AddPackage clang # C language family frontend for LLVM
 AddPackage composer # Dependency Manager for PHP
 AddPackage cpanminus # get, unpack, build and install modules from CPAN
 AddPackage docker # Pack, ship and run any application as a lightweight container
 AddPackage docker-compose # Fast, isolated development environments using Docker
 AddPackage --foreign devcontainer-cli # Dev container CLI, which can take a devcontainer.json and create and configure a dev container from it.
-AddPackage dotnet-sdk # The .NET Core SDK
 AddPackage go # Core compiler tools for the Go programming language
 AddPackage jdk-openjdk # OpenJDK Java 24 development kit
 AddPackage julia # High-level, high-performance, dynamic programming language
@@ -20,6 +21,7 @@ AddPackage luarocks # Deployment and management system for Lua modules
 AddPackage nvm # Node Version Manager - Simple bash script to manage multiple active node.js versions
 AddPackage php # A general-purpose scripting language that is especially suited to web development
 AddPackage python-pip # The PyPA recommended tool for installing Python packages
+AddPackage python-pdm # A modern Python package and dependency manager supporting the latest PEP standards
 AddPackage python-pynvim # Python client for Neovim
 AddPackage ruby # An object-oriented language for quick and easy programming
 AddPackage rustup # The Rust toolchain installer
