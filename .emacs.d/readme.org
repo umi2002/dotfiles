@@ -1,9 +1,9 @@
-:PROPERTIES:
 #+TITLE: umi's config
 #+AUTHOR: umi
-#+TOC: toc:t
+#+OPTIONS: toc:t
 
-* Umi's Config                                                          :TOC:noexport:
+* UMI'S CONFIG :TOC:noexport:
+- [[#my-config][MY CONFIG]]
   - [[#editor-settings][EDITOR SETTINGS]]
   - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
   - [[#dired][DIRED]]
@@ -14,6 +14,8 @@
   - [[#git][GIT]]
   - [[#visuals][VISUALS]]
   - [[#org][ORG]]
+
+* MY CONFIG
 
 ** EDITOR SETTINGS
 [[file:settings/readme.org][Configuration]]

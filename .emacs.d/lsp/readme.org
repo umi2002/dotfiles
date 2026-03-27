@@ -1,8 +1,9 @@
 #+TITLE: Lsp config
 #+AUTHOR: umi
-#+TOC: toc:t
+#+OPTIONS: toc:t
 
 * LSP CONFIG :TOC:noexport:
+- [[#lsp-config][LSP CONFIG]]
   - [[#general][General]]
   - [[#lua][Lua]]
   - [[#html][HTML]]
@@ -19,6 +20,8 @@
   - [[#flycheck-inline][Flycheck-Inline]]
 - [[#formatting][FORMATTING]]
   - [[#format-all-mode][Format-All-Mode]]
+
+* LSP CONFIG
 
 ** General
 Setup

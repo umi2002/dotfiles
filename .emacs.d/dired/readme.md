@@ -1,12 +1,12 @@
 
 # Table of Contents
 
-1.  [DIRED CONFIG](#org41aaf7f)
-    1.  [Dired-Narrow](#orge8dc5d3)
+1.  [DIRED CONFIG](#org0601b9a)
+    1.  [Dired-Narrow](#orga1b0793)
 
 
 
-<a id="org41aaf7f"></a>
+<a id="org0601b9a"></a>
 
 # DIRED CONFIG
 
@@ -34,7 +34,7 @@ Mappings
       )
 
 
-<a id="orge8dc5d3"></a>
+<a id="orga1b0793"></a>
 
 ## Dired-Narrow
 

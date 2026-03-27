@@ -1,5 +1,6 @@
 #+TITLE: Navigation config
 #+AUTHOR: umi
+#+OPTIONS: toc:t
 
 * NAVIGATION CONFIG
 ** Helm

@@ -1,5 +1,6 @@
 #+TITLE: Dired Config
 #+AUTHOR: umi
+#+OPTIONS: toc:t
 
 * DIRED CONFIG
 Functions

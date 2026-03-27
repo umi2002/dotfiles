@@ -1,5 +1,6 @@
 #+TITLE: Git Config
 #+AUTHOR: umi
+#+OPTIONS: toc:t
 
 * GIT CONFIG
 ** Git-Gutter

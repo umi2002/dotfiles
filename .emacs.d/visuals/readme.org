@@ -1,5 +1,6 @@
 #+TITLE: Visuals Config
 #+AUTHOR: umi
+#+OPTIONS: toc:t
 
 * VISUALS CONFIG
 ** Dimmer

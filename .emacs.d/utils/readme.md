@@ -1,23 +1,23 @@
 
 # Table of Contents
 
-1.  [UTILS CONFIG](#org3359d7c)
-    1.  [Evil-Surround](#orgc6d14b7)
-    2.  [Evil-Embrace](#orgb440acd)
-    3.  [Evil-Commentary](#org39d4836)
-    4.  [Evil-Goggles](#org81f3fe4)
-    5.  [Vterm](#org3ae5bfb)
-    6.  [Undo-Tree](#org6acec21)
-    7.  [Exec-Path-From-Shell](#org98713e7)
+1.  [UTILS CONFIG](#org43462af)
+    1.  [Evil-Surround](#orgf6c1532)
+    2.  [Evil-Embrace](#orgf2f5daf)
+    3.  [Evil-Commentary](#orgbec6a11)
+    4.  [Evil-Goggles](#org016052f)
+    5.  [Vterm](#orga66ded5)
+    6.  [Undo-Tree](#org89766fc)
+    7.  [Exec-Path-From-Shell](#orgd9b9649)
 
 
 
-<a id="org3359d7c"></a>
+<a id="org43462af"></a>
 
 # UTILS CONFIG
 
 
-<a id="orgc6d14b7"></a>
+<a id="orgf6c1532"></a>
 
 ## Evil-Surround
 
@@ -25,7 +25,7 @@
       (global-evil-surround-mode 1))
 
 
-<a id="orgb440acd"></a>
+<a id="orgf2f5daf"></a>
 
 ## Evil-Embrace
 
@@ -47,7 +47,7 @@ Mappings
       )
 
 
-<a id="org39d4836"></a>
+<a id="orgbec6a11"></a>
 
 ## Evil-Commentary
 
@@ -57,7 +57,7 @@ Setup
       (evil-commentary-mode))
 
 
-<a id="org81f3fe4"></a>
+<a id="org016052f"></a>
 
 ## Evil-Goggles
 
@@ -67,7 +67,7 @@ Setup
       )
 
 
-<a id="org3ae5bfb"></a>
+<a id="orga66ded5"></a>
 
 ## Vterm
 
@@ -90,7 +90,7 @@ Mappings
       )
 
 
-<a id="org6acec21"></a>
+<a id="org89766fc"></a>
 
 ## Undo-Tree
 
@@ -113,7 +113,7 @@ Mappings
       )
 
 
-<a id="org98713e7"></a>
+<a id="orgd9b9649"></a>
 
 ## Exec-Path-From-Shell
 

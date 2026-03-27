@@ -1,5 +1,6 @@
 #+TITLE: Editor settings
 #+AUTHOR: umi
+#+OPTIONS: toc:t
 
 * SETTINGS
 #+begin_src emacs-lisp

@@ -1,5 +1,6 @@
 #+TITLE: Org config
 #+AUTHOR: umi
+#+OPTIONS: toc:t
 
 * ORG CONFIG
 Functions

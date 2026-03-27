@@ -1,20 +1,20 @@
 
 # Table of Contents
 
-1.  [VISUALS CONFIG](#org0ff1893)
-    1.  [Dimmer](#org16dccb4)
-    2.  [Telephone Line](#org3fae41d)
-    3.  [Olivetti](#org733b379)
-    4.  [Mixed-Pitch](#org3083011)
+1.  [VISUALS CONFIG](#orgccf0764)
+    1.  [Dimmer](#orgdc6f2e9)
+    2.  [Telephone Line](#orgab604c3)
+    3.  [Olivetti](#org50a4f05)
+    4.  [Mixed-Pitch](#orgcd938e5)
 
 
 
-<a id="org0ff1893"></a>
+<a id="orgccf0764"></a>
 
 # VISUALS CONFIG
 
 
-<a id="org16dccb4"></a>
+<a id="orgdc6f2e9"></a>
 
 ## Dimmer
 
@@ -23,7 +23,7 @@
       (dimmer-mode t))
 
 
-<a id="org3fae41d"></a>
+<a id="orgab604c3"></a>
 
 ## Telephone Line
 
@@ -31,7 +31,7 @@
       (telephone-line-mode 1))
 
 
-<a id="org733b379"></a>
+<a id="org50a4f05"></a>
 
 ## Olivetti
 
@@ -42,7 +42,7 @@
       (olivetti-mode 1))
 
 
-<a id="org3083011"></a>
+<a id="orgcd938e5"></a>
 
 ## Mixed-Pitch
 

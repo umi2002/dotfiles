@@ -1,18 +1,18 @@
 
 # Table of Contents
 
-1.  [NAVIGATION CONFIG](#org2da8f57)
-    1.  [Helm](#org1ff7e30)
-    2.  [Avy](#orgadd0ce6)
+1.  [NAVIGATION CONFIG](#orgb858db9)
+    1.  [Helm](#org33593ff)
+    2.  [Avy](#org113331f)
 
 
 
-<a id="org2da8f57"></a>
+<a id="orgb858db9"></a>
 
 # NAVIGATION CONFIG
 
 
-<a id="org1ff7e30"></a>
+<a id="org33593ff"></a>
 
 ## Helm
 
@@ -37,7 +37,7 @@ Mappings
       )
 
 
-<a id="orgadd0ce6"></a>
+<a id="org113331f"></a>
 
 ## Avy
 

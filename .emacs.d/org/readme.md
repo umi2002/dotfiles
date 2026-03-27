@@ -1,16 +1,16 @@
 
 # Table of Contents
 
-1.  [ORG CONFIG](#orgad3fe49)
-    1.  [Org-Toc](#orgc54fb0a)
-    2.  [Org-Modern](#org322f293)
-    3.  [Org-Roam](#org6868c47)
-    4.  [Org-Agenda](#org3bd1072)
-    5.  [Org-Fragtog](#org95920d4)
+1.  [ORG CONFIG](#orgd101999)
+    1.  [Org-Toc](#org8e760f8)
+    2.  [Org-Modern](#org76511b3)
+    3.  [Org-Roam](#org1dc951d)
+    4.  [Org-Agenda](#org7547298)
+    5.  [Org-Fragtog](#org84fda39)
 
 
 
-<a id="orgad3fe49"></a>
+<a id="orgd101999"></a>
 
 # ORG CONFIG
 
@@ -67,7 +67,7 @@ Formatting
                 (add-hook 'before-save-hook #'cleanup-org-results nil t)))
 
 
-<a id="orgc54fb0a"></a>
+<a id="org8e760f8"></a>
 
 ## Org-Toc
 
@@ -78,7 +78,7 @@ Formatting
         (warn "toc-org not found")))
 
 
-<a id="org322f293"></a>
+<a id="org76511b3"></a>
 
 ## Org-Modern
 
@@ -87,7 +87,7 @@ Formatting
       (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
 
 
-<a id="org6868c47"></a>
+<a id="org1dc951d"></a>
 
 ## Org-Roam
 
@@ -111,7 +111,7 @@ Formatting
         "c" 'org-roam-capture))
 
 
-<a id="org3bd1072"></a>
+<a id="org7547298"></a>
 
 ## Org-Agenda
 
@@ -156,7 +156,7 @@ Formatting
        "RET" 'org-agenda-goto))
 
 
-<a id="org95920d4"></a>
+<a id="org84fda39"></a>
 
 ## Org-Fragtog
 

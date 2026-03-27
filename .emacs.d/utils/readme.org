@@ -1,5 +1,6 @@
 #+TITLE: Utils config
 #+AUTHOR: umi
+#+OPTIONS: toc:t
 
 * UTILS CONFIG
 ** Evil-Surround

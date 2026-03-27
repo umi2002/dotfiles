@@ -1,5 +1,6 @@
 #+TITLE: Project config
 #+AUTHOR: umi
+#+OPTIONS: toc:t
 
 * PROJECT CONFIG
 Functions

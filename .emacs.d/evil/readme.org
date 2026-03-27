@@ -1,5 +1,6 @@
 #+TITLE: Evil config
 #+AUTHOR: umi
+#+OPTIONS: toc:t
 
 * EVIL CONFIG
 ** Evil
