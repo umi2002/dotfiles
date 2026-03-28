@@ -1,23 +1,11 @@
-(defun fix-org-links-in-md (file)
-  (with-temp-buffer
-    (insert-file-contents file)
-    (goto-char (point-min))
-    (while (re-search-forward "\\.org)" nil t)
-      (replace-match ".md)"))
-    (write-file file)))
-
-(defun org-export-to-md-on-save ()
-  (when (eq major-mode 'org-mode)
-    (let ((md-file (org-md-export-to-markdown)))
-      (fix-org-links-in-md md-file))))
-
-(with-eval-after-load 'org-faces
+(defun load-org-fonts ()
   (set-face-attribute 'org-default nil :family "Linux Libertine O" :height 150)
   (set-face-attribute 'org-block nil :family "FiraMono Nerd Font" :height 100)
   (set-face-attribute 'org-meta-line nil :family "FiraMono Nerd Font" :height 100))
+
+(add-hook 'org-mode-hook #'load-org-fonts)
 (setq org-startup-with-inline-images t)
 (plist-put org-format-latex-options :scale 1.5)
-(add-hook 'after-save-hook #'org-export-to-md-on-save)
 
 (with-eval-after-load 'general
   (general-create-definer org
