@@ -16,6 +16,10 @@
   (evil-window-split)
   (evil-window-down 1))
 
+(defun load-config-file()
+  (interactive)
+  (load-file "~/.emacs.d/init.el"))
+
 (with-eval-after-load 'general
   (general-evil-setup)
   (setq global-map (make-sparse-keymap))
@@ -31,6 +35,9 @@
     :prefix "SPC"))
 
 (with-eval-after-load 'general
+  (leader
+    "rr" 'load-config-file)
+
   (general-define-key
    :states '(normal visual)
    :keymaps '(global override)

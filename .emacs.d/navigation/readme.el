@@ -1,6 +1,7 @@
 (with-eval-after-load 'helm
   (helm-mode 1)
   (setq helm-completion-style 'helm-fuzzy)
+  (setq helm-mode-handle-completion-in-region t)
   )
 
 (with-eval-after-load 'helm

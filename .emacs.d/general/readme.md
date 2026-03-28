@@ -1,11 +1,11 @@
 
 # Table of Contents
 
-1.  [GENERAL CONFIGURATION](#org8cc4fc1)
+1.  [GENERAL CONFIGURATION](#org5b8d2a1)
 
 
 
-<a id="org8cc4fc1"></a>
+<a id="org5b8d2a1"></a>
 
 # GENERAL CONFIGURATION
 
@@ -28,6 +28,10 @@ Functions
       (interactive)
       (evil-window-split)
       (evil-window-down 1))
+    
+    (defun load-config-file()
+      (interactive)
+      (load-file "~/.emacs.d/init.el"))
 
 Setup
 
@@ -50,6 +54,9 @@ Defining leader key
 Mappings
 
     (with-eval-after-load 'general
+      (leader
+        "rr" 'load-config-file)
+    
       (general-define-key
        :states '(normal visual)
        :keymaps '(global override)
