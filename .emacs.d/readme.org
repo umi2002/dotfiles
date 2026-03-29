@@ -149,15 +149,14 @@ Installing Helm
   (use-package helm)
 #+end_src
 
-Installing Helm-Rg
+Installing Helm-Flx
 #+begin_src emacs-lisp
-  (use-package helm-rg
-    :after helm)
-#+end_src
+  (use-package helm-flx)
+  #+end_src
 
 Installing Avy
-#+begin_src emacs-lisp
-  (use-package avy)
+  #+begin_src emacs-lisp
+    (use-package avy)
 #+end_src
 
 [[file:navigation/readme.org][Configuration]]

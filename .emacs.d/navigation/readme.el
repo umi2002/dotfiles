@@ -1,10 +1,4 @@
 (with-eval-after-load 'helm
-  (helm-mode 1)
-  (setq helm-completion-style 'helm-fuzzy)
-  (setq helm-mode-handle-completion-in-region t)
-  )
-
-(with-eval-after-load 'helm
   (general-define-key
    :keymaps 'helm-map
    "C-w" 'backward-kill-word
@@ -13,9 +7,11 @@
 
   (buffer
     "f" 'helm-buffers-list)
-  )
+
+  (general-define-key
+   :states '(normal visual)
+   "M-x" 'helm-M-x))
 
 (with-eval-after-load 'avy
   (leader
-    "l" 'avy-goto-char-2)
-  )
+    "l" 'avy-goto-char-2))

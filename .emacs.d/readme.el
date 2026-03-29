@@ -194,10 +194,10 @@
 
 (use-package org-download)
 
+(use-package org-fragtog
+  :after org)
+
 (org-babel-load-file
  (expand-file-name
   "org/readme.org"
   user-emacs-directory))
-
-(use-package org-fragtog
-  :after org)
