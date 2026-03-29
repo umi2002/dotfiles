@@ -1,52 +1,52 @@
 (with-eval-after-load 'lsp-mode
   (setq lsp-modeline-code-actions-mode 1))
+(with-eval-after-load 'lsp-ui
+  (setq lsp-ui-sideline-show-diagnostics 1))
 
 (defun lsp-booster--advice-json-parse (old-fn &rest args)
   "Try to parse bytecode instead of json."
   (or
    (when (equal (following-char) ?#)
      (let ((bytecode (read (current-buffer))))
-	 (when (byte-code-function-p bytecode)
-	   (funcall bytecode))))
+       (when (byte-code-function-p bytecode)
+	 (funcall bytecode))))
    (apply old-fn args)))
 (advice-add (if (progn (require 'json)
-			 (fboundp 'json-parse-buffer))
-		  'json-parse-buffer
-		'json-read)
-	      :around
-	      #'lsp-booster--advice-json-parse)
+		       (fboundp 'json-parse-buffer))
+		'json-parse-buffer
+	      'json-read)
+	    :around
+	    #'lsp-booster--advice-json-parse)
 
 (defun lsp-booster--advice-final-command (old-fn cmd &optional test?)
   "Prepend emacs-lsp-booster command to lsp CMD."
   (let ((orig-result (funcall old-fn cmd test?)))
     (if (and (not test?)                             ;; for check lsp-server-present?
-	       (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
-	       lsp-use-plists
-	       (not (functionp 'json-rpc-connection))  ;; native json-rpc
-	       (executable-find "emacs-lsp-booster"))
-	  (progn
-	    (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
-	      (setcar orig-result command-from-exec-path))
-	    (message "Using emacs-lsp-booster for %s!" orig-result)
-	    (cons "emacs-lsp-booster" orig-result))
-	orig-result)))
+	     (not (file-remote-p default-directory)) ;; see lsp-resolve-final-command, it would add extra shell wrapper
+	     lsp-use-plists
+	     (not (functionp 'json-rpc-connection))  ;; native json-rpc
+	     (executable-find "emacs-lsp-booster"))
+	(progn
+	  (when-let ((command-from-exec-path (executable-find (car orig-result))))  ;; resolve command from exec-path (in case not found in $PATH)
+	    (setcar orig-result command-from-exec-path))
+	  (message "Using emacs-lsp-booster for %s!" orig-result)
+	  (cons "emacs-lsp-booster" orig-result))
+      orig-result)))
 (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
-
-(with-eval-after-load 'helm-xref
-  (leader
-    "rf" 'xref-find-references
-    "df" 'xref-find-definitions))
 
 (with-eval-after-load 'helm-lsp
   (leader
     "ca" 'helm-lsp-code-actions))
 
 (with-eval-after-load 'lsp-ui
+  (leader
+    "rf" 'lsp-ui-peek-find-references
+    "df" 'lsp-ui-peek-find-definitions)
+
   (general-define-key
-   :states '(normal visual)
-   :keymaps 'lsp-ui-mode-map
-   [remap xref-find-definitions] #'lsp-ui-peek-find-definitions
-   [remap xref-find-references] #'lsp-ui-peek-find-references))
+   :keymaps 'lsp-ui-peek-mode-map
+   "C-k" 'lsp-ui-peek--select-prev
+   "C-j" 'lsp-ui-peek--select-next))
 
 (use-package lua-mode
   :after lsp-mode
@@ -58,8 +58,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		  (append format-all-formatters
-			  '(("Lua" (stylua))))))
+		(append format-all-formatters
+			'(("Lua" (stylua))))))
 
 (use-package web-mode
   :after lsp-mode
@@ -79,8 +79,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		  (append format-all-formatters
-			  '(("TypeScript" (prettierd))))))
+		(append format-all-formatters
+			'(("TypeScript" (prettierd))))))
 
 (use-package eslintd-fix
   :after (lsp-mode flycheck)
@@ -95,8 +95,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		  (append format-all-formatters
-			  '(("C" (clang-format "--style=Microsoft"))))))
+		(append format-all-formatters
+			'(("C" (clang-format "--style=Microsoft"))))))
 
 (with-eval-after-load 'lsp-mode
   (add-hook 'c++-mode-hook #'lsp-deferred)
@@ -104,8 +104,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		  (append format-all-formatters
-			  '(("C++" (clang-format "--style=Microsoft"))))))
+		(append format-all-formatters
+			'(("C++" (clang-format "--style=Microsoft"))))))
 
 (with-eval-after-load 'lsp-mode
   (add-hook 'csharp-mode-hook #'lsp-deferred)
@@ -113,8 +113,8 @@
 
 (with-eval-after-load 'format-all
   (setq-default format-all-formatters
-		  (append format-all-formatters
-			  '(("C#" (csharpier))))))
+		(append format-all-formatters
+			'(("C#" (csharpier))))))
 
 (use-package python-mode
   :after lsp-mode

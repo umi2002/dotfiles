@@ -193,12 +193,6 @@ Installing Company
   (use-package company)
 #+end_src
 
-Installing Helm-Xref
-#+begin_src emacs-lisp
-  (use-package helm-xref
-    :after helm)
-#+end_src
-
 Installing Helm-Lsp
 #+begin_src emacs-lisp
   (use-package helm-lsp

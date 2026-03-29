@@ -12,6 +12,9 @@
    :states '(normal visual)
    "M-x" 'helm-M-x))
 
+(with-eval-after-load 'helm-flx
+  (helm-flx-mode 1))
+
 (with-eval-after-load 'avy
   (leader
     "l" 'avy-goto-char-2))

@@ -37,6 +37,7 @@
   (let ((default-directory (project-root project)))
     (mapcar (lambda (f) (expand-file-name f (project-root project)))
             (split-string (shell-command-to-string "yadm ls-files") "\n" t))))
+(setq project-switch-commands 'project-dired)
 
 (with-eval-after-load 'general
   (general-create-definer project
@@ -51,5 +52,4 @@
     "f" 'helm-project-switch)
 
   (leader
-    "wf" 'project-find-regexp)
-  )
+    "wf" 'project-find-regexp))

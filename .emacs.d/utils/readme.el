@@ -51,5 +51,5 @@
   )
 
 (with-eval-after-load 'exec-path-from-shell
-  (when (memq window-system '(mac ns x))
+  (when (daemonp)
     (exec-path-from-shell-initialize)))

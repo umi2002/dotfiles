@@ -83,8 +83,7 @@
 
 (use-package helm)
 
-(use-package helm-rg
-  :after helm)
+(use-package helm-flx)
 
 (use-package avy)
 
@@ -104,9 +103,6 @@
 (use-package lsp-ui)
 
 (use-package company)
-
-(use-package helm-xref
-  :after helm)
 
 (use-package helm-lsp
   :after (helm lsp-mode))
