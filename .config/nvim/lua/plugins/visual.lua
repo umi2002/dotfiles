@@ -1,34 +1,27 @@
-return {
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		config = function()
-			require("catppuccin").setup()
+vim.pack.add({
+	{ src = "https://github.com/catppuccin/nvim", name = "catppuccin" },
+	"https://github.com/NvChad/nvim-colorizer.lua",
+	"https://github.com/gbprod/yanky.nvim",
+	{ src = "https://github.com/j-hui/fidget.nvim", version = "legacy" },
+	"https://github.com/lukas-reineke/headlines.nvim",
+	"https://github.com/lukas-reineke/indent-blankline.nvim",
+})
 
-			vim.cmd.colorscheme("catppuccin")
-		end,
-	},
-	{
-		"NvChad/nvim-colorizer.lua",
-		config = true,
-	},
-	{
-		"gbprod/yanky.nvim",
-		config = true,
-	},
-	{
-		"j-hui/fidget.nvim",
-		tag = "legacy",
-		config = true,
-	},
-	{
-		"lukas-reineke/headlines.nvim",
-		config = true,
-	},
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		main = "ibl",
-		config = true,
-	},
-}
+-- catppuccin (load colorscheme first)
+require("catppuccin").setup()
+vim.cmd.colorscheme("catppuccin")
+
+-- colorizer
+require("colorizer").setup()
+
+-- yanky
+require("yanky").setup()
+
+-- fidget
+require("fidget").setup()
+
+-- headlines
+require("headlines").setup()
+
+-- indent-blankline
+require("ibl").setup()

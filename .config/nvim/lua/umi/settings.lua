@@ -1,4 +1,4 @@
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("off")
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "

@@ -1,151 +1,99 @@
-return {
-	{
-		"mbbill/undotree",
-		config = function()
-			vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>", { noremap = true })
-		end,
-	},
-	{
-		"akinsho/bufferline.nvim",
-		version = "*",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		opts = {
-			options = {
-				themable = true,
-				numbers = "ordinal",
-				diagnostics = "nvim_lsp",
-				indicator = {
-					icon = " ", -- this should be omitted if indicator style is not 'icon'
-					style = "icon",
-				},
-				diagnostics_indicator = function(count, level, diagnostics_dict, context)
-					local icon = level:match("error") and " " or " "
-					return " " .. icon .. count
-				end,
-			},
-		},
-		config = function(opts)
-			require("bufferline").setup(_, opts)
-			local options = { noremap = true, silent = true }
+vim.pack.add({
+	"https://github.com/mbbill/undotree",
+	"https://github.com/akinsho/bufferline.nvim",
+	"https://github.com/numToStr/Comment.nvim",
+	"https://github.com/lewis6991/hover.nvim",
+	"https://github.com/echasnovski/mini.surround",
+	"https://github.com/echasnovski/mini.move",
+	"https://github.com/folke/todo-comments.nvim",
+	"https://github.com/folke/trouble.nvim",
+	"https://github.com/windwp/nvim-autopairs",
+	"https://github.com/iamcco/markdown-preview.nvim",
+})
 
-			vim.keymap.set("n", "<S-Tab>", "<CMD> bprev<CR>", options)
-			vim.keymap.set("n", "<Tab>", "<CMD> bnext<CR>", options)
-			vim.keymap.set("n", "<leader>qa", "<CMD> bufdo bw! <CR>", options)
-		end,
-	},
-	{
-		"numToStr/Comment.nvim",
-		opts = {
-			ignore = "^$",
-		},
-	},
-	{
-		"lewis6991/hover.nvim",
-		opts = {
-			init = function()
-				require("hover.providers.lsp")
-				require("hover.providers.man")
-				require("hover.providers.dictionary")
-			end,
-			preview_opts = {
-				border = "rounded",
-			},
-			preview_window = false,
-			title = true,
-		},
-		config = function(_, opts)
-			local hover = require("hover")
-			hover.setup(opts)
+-- undotree
+vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>", { noremap = true })
 
-			vim.keymap.set("n", "<leader>H", hover.hover)
-			vim.keymap.set("n", "<leader>gH", hover.hover_select)
+require("bufferline").setup({
+	options = {
+		themable = true,
+		numbers = "ordinal",
+		diagnostics = "nvim_lsp",
+		indicator = {
+			icon = " ",
+			style = "icon",
+		},
+		diagnostics_indicator = function(count, level, diagnostics_dict, context)
+			local icon = level:match("error") and " " or " "
+			return " " .. icon .. count
 		end,
 	},
-	{
-		"echasnovski/mini.surround",
-		opts = {
-			mappings = {
-				add = "<leader>sa",
-				delete = "<leader>sd",
-				find = "<leader>sf",
-				find_left = "<leader>sF",
-				highlight = "<leader>sh",
-				replace = "<leader>sr",
-				update_n_lines = "<leader>sn",
-			},
-		},
+})
+local buf_opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<S-Tab>", "<CMD> bprev<CR>", buf_opts)
+vim.keymap.set("n", "<Tab>", "<CMD> bnext<CR>", buf_opts)
+vim.keymap.set("n", "<leader>qa", "<CMD> bufdo bw! <CR>", buf_opts)
+
+-- Comment.nvim
+require("Comment").setup({
+	ignore = "^$",
+})
+
+-- hover.nvim
+local hover = require("hover")
+hover.setup({
+	init = function()
+		require("hover.providers.lsp")
+		require("hover.providers.man")
+		require("hover.providers.dictionary")
+	end,
+	preview_opts = {
+		border = "rounded",
 	},
-	{
-		"echasnovski/mini.move",
-		config = true,
+	preview_window = false,
+	title = true,
+})
+vim.keymap.set("n", "<leader>H", hover.hover)
+vim.keymap.set("n", "<leader>gH", hover.hover_select)
+
+-- mini.surround
+require("mini.surround").setup({
+	mappings = {
+		add = "<leader>sa",
+		delete = "<leader>sd",
+		find = "<leader>sf",
+		find_left = "<leader>sF",
+		highlight = "<leader>sh",
+		replace = "<leader>sr",
+		update_n_lines = "<leader>sn",
 	},
-	{
-		"folke/todo-comments.nvim",
-		config = function()
-			vim.keymap.set("n", "<leader>td", "<cmd>TodoQuickFix<cr>")
-		end,
-	},
-	{
-		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
-		cmd = "Trouble",
-		keys = {
-			{
-				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>cl",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
-		},
-	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = true,
-	},
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-	},
-	{
-		"arnaupv/nvim-devcontainer-cli",
-		opts = {
-			-- By default, if no extra config is added, following nvim_dotfiles are
-			-- installed: "https://github.com/LazyVim/starter"
-			-- This is an example for configuring other nvim_dotfiles inside the docker container
-			nvim_dotfiles_repo = "https://github.com/umi2002/dotfiles.git",
-			nvim_dotfiles_install_command = "echo 'ok'",
-			-- In case you want to change the way the devenvironment is setup, you can also provide your own setup
-			setup_environment_repo = "https://github.com/umi2002/dotfiles.git",
-			setup_environment_install_command = "echo 'ok'",
-		},
-	},
-}
+})
+
+-- mini.move
+require("mini.move").setup()
+
+-- todo-comments
+require("todo-comments").setup()
+vim.keymap.set("n", "<leader>td", "<cmd>TodoQuickFix<cr>")
+
+-- trouble
+require("trouble").setup()
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
+vim.keymap.set(
+	"n",
+	"<leader>xX",
+	"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+	{ desc = "Buffer Diagnostics (Trouble)" }
+)
+vim.keymap.set("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
+vim.keymap.set(
+	"n",
+	"<leader>cl",
+	"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+	{ desc = "LSP Definitions / references / ... (Trouble)" }
+)
+vim.keymap.set("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
+vim.keymap.set("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
+
+-- nvim-autopairs
+require("nvim-autopairs").setup()

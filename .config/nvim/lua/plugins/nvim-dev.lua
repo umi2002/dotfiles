@@ -1,14 +1,9 @@
-return {
-	{
-		"nvim-tree/nvim-web-devicons",
-		opts = {
-			default = true,
-		},
-	},
-	{ "nvim-lua/plenary.nvim" },
-	{
-		"folke/neodev.nvim",
-		config = true,
-	},
-	{ "nvim-neotest/nvim-nio" },
-}
+vim.pack.add({
+	"https://github.com/nvim-tree/nvim-web-devicons",
+	"https://github.com/nvim-lua/plenary.nvim",
+	"https://github.com/folke/neodev.nvim",
+	"https://github.com/nvim-neotest/nvim-nio",
+})
+
+require("nvim-web-devicons").setup({ default = true })
+require("neodev").setup()
