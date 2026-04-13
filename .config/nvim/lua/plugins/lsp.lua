@@ -27,7 +27,7 @@ local default_config = {
 	capabilities = lsp_capabilities,
 }
 
-local angularls_path = vim.fn.expand("$MASON/packages/angular-language-server")
+local angularls_path = vim.fn.stdpath("data") .. "/mason/packages/angular-language-server"
 local cmd = {
 	"ngserver",
 	"--stdio",
