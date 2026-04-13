@@ -3,9 +3,6 @@ vim.pack.add({
 	"https://github.com/gpanders/nvim-parinfer",
 })
 
--- LSP setup
-local lsp = require("lspconfig")
-
 local lsp_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>df", require("fzf-lua").lsp_definitions)
 	vim.keymap.set("n", "<leader>rf", require("fzf-lua").lsp_references)
@@ -19,11 +16,7 @@ local lsp_attach = function(client, bufnr)
 	end)
 
 	if client and client:supports_method("textDocument/codeLens") then
-		vim.lsp.codelens.refresh()
-		vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
-			buffer = bufnr,
-			callback = vim.lsp.codelens.refresh,
-		})
+		vim.lsp.codelens.enable(true, { bufnr = bufnr })
 	end
 end
 
@@ -82,16 +75,6 @@ local custom_configs = {
 		end,
 	},
 	clangd = {
-		on_attach = lsp.util.add_hook_after(lsp_attach, function(client, bufnr)
-			client.server_capabilities.documentFormattingProvider = true
-
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ bufnr = bufnr })
-				end,
-			})
-		end),
 		cmd = {
 			"clangd",
 			"--fallback-style=Google",
@@ -132,7 +115,7 @@ local custom_configs = {
 		init_options = {
 			bundles = bundles,
 		},
-		root_dir = lsp.util.root_pattern("pom.xml", ".git", "build.gradle", "settings.gradle", "gradlew", "mvnw"),
+		root_markers = { "pom.xml", ".git", "build.gradle", "settings.gradle", "gradlew", "mvnw" },
 	},
 	pyright = {
 		settings = {
@@ -150,28 +133,14 @@ local custom_configs = {
 	},
 	ruff = {
 		on_attach = function(client, bufnr)
-			lsp_attach()
+			lsp_attach(client, bufnr)
 			-- Disable hover in favor of Pyright
 			client.server_capabilities.hoverProvider = false
-
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ bufnr = bufnr })
-				end,
-			})
 		end,
 	},
 	qmlls = {
-		on_attach = function(_, bufnr)
-			lsp_attach()
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				buffer = bufnr,
-				callback = function()
-					vim.lsp.buf.format({ bufnr = bufnr })
-				end,
-			})
-		end,
+		root_markers = { ".git", ".qmlls.ini" },
+		workspace_required = false,
 	},
 }
 
