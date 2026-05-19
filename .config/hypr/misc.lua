@@ -1,0 +1,10 @@
+hl.config({
+	misc = {
+		animate_manual_resizes = true,
+		animate_mouse_windowdragging = true,
+		enable_swallow = true,
+		swallow_regex = "^(alacritty)$",
+		vrr = false,
+		render_unfocused_fps = 15,
+	},
+})

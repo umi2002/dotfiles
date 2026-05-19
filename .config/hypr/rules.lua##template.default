@@ -1,0 +1,30 @@
+hl.window_rule({ name = "ws-discord",    match = { class = "^(discord)$" },                    workspace = "1 silent" })
+hl.window_rule({ name = "ws-kitty",      match = { class = "^(kitty)$" },                      workspace = "2" })
+hl.window_rule({ name = "ws-steamapp",   match = { class = "^(steam_app_.*)$" },               workspace = "5 silent" })
+hl.window_rule({ name = "ws-bitwarden",  match = { class = "^(Bitwarden)$" },                  workspace = "7 silent" })
+hl.window_rule({ name = "ws-betterbird", match = { class = "^(eu.betterbird.Betterbird)$" },   workspace = "8 silent" })
+hl.window_rule({ name = "ws-spotify",    match = { class = "^(spotify)$" },                    workspace = "9 silent" })
+hl.window_rule({ name = "ws-steam",      match = { class = "^(steam)$" },                      workspace = "10 silent" })
+
+hl.window_rule({ name = "render-steamapp", match = { class = "^(steam_app_.*)$" }, render_unfocused = true })
+
+{% if yadm.class == "Laptop" %}
+hl.workspace_rule({ workspace = "1", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "2", monitor = "desc:LG Electronics LG ULTRAGEAR 0x0000A689" })
+hl.workspace_rule({ workspace = "3", monitor = "desc:HP Inc. HP E24 G4 CN43460YQQ" })
+{% endif %}
+{% if yadm.class == "Desktop" %}
+hl.workspace_rule({ workspace = "1", monitor = "desc:LG Electronics 27GL650F 0x00039D06" })
+hl.workspace_rule({ workspace = "2", monitor = "desc:GIGA-BYTE TECHNOLOGY CO. LTD. AORUS FO27Q2 24350B000355" })
+hl.workspace_rule({ workspace = "3", monitor = "desc:LG Electronics 27GL650F 0x00039D06" })
+hl.workspace_rule({ workspace = "5", monitor = "desc:GIGA-BYTE TECHNOLOGY CO. LTD. AORUS FO27Q2 24350B000355" })
+hl.workspace_rule({ workspace = "7", monitor = "desc:LG Electronics 27GL650F 0x00039D06" })
+hl.workspace_rule({ workspace = "8", monitor = "desc:LG Electronics 27GL650F 0x00039D06" })
+hl.workspace_rule({ workspace = "9", monitor = "desc:LG Electronics 27GL650F 0x00039D06" })
+
+hl.window_rule({ name = "opacityKitty",      match = { class = "kitty" },                    opacity = 0.8 })
+hl.window_rule({ name = "opacityBetterbird", match = { class = "eu.betterbird.Betterbird" }, opacity = 0.8 })
+hl.window_rule({ name = "opacityBitwarden",  match = { class = "Bitwarden" },                opacity = 0.8 })
+hl.window_rule({ name = "opacityVesktop",    match = { class = "discord" },                  opacity = 0.8 })
+hl.window_rule({ name = "opacitySpotify",    match = { class = "spotify" },                  opacity = 0.8 })
+{% endif %}

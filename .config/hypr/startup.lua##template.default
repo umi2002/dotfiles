@@ -1,0 +1,17 @@
+hl.on("hyprland.start", function()
+    hl.exec_cmd("systemctl start --user quickshell")
+    hl.exec_cmd("systemctl start --user hyprpaper")
+    hl.exec_cmd("systemctl start --user hypridle")
+    hl.exec_cmd("systemctl start --user udiskie")
+    hl.exec_cmd("systemctl start --user cliphist-text")
+    hl.exec_cmd("systemctl start --user cliphist-image")
+
+    hl.exec_cmd("runapp -- discord")
+    hl.exec_cmd("runapp -- spotify")
+    hl.exec_cmd("runapp -- betterbird")
+    hl.exec_cmd("runapp -- bitwarden-desktop")
+
+{% if yadm.class == "Laptop" %}
+    hl.exec_cmd("systemctl start --user hyprsunset")
+{% endif %}
+end)
