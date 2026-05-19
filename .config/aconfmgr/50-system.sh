@@ -11,7 +11,7 @@ CopyFile /etc/nsswitch.conf
 CopyFile /etc/NetworkManager/dispatcher.d/90-open_captive_portal 755
 CopyFile /etc/default/ufw
 CopyFile /etc/greetd/config.toml
-CopyFile /etc/greetd/hyprland.conf
+CopyFile /etc/greetd/hyprland.lua
 CopyFile /etc/greetd/login_wallpaper.svg
 CreateDir /var/lib/greeter 755 greeter greeter
 CopyFile /etc/udev/rules.d/01-ttyusb.rules
@@ -53,3 +53,4 @@ CreateLink /etc/systemd/system/sockets.target.wants/docker.socket /usr/lib/syste
 CreateLink /etc/systemd/system/timers.target.wants/reflector.timer /usr/lib/systemd/system/reflector.timer
 CreateLink /etc/systemd/system/systemd-rfkill.service /dev/null
 CreateLink /etc/systemd/system/systemd-rfkill.socket /dev/null
+CreateLink /etc/systemd/system/multi-user.target.wants/vboxservice.service /usr/lib/systemd/system/vboxservice.service

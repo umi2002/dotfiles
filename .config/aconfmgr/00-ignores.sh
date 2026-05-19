@@ -82,6 +82,7 @@ IgnorePath '/etc/audit/*'
 IgnorePath '/etc/greetd/quickshell/*'
 IgnorePath '/etc/greetd/quickshell'
 IgnorePath '/etc/texmf/*'
+IgnorePath /etc/dbeaver/bundles.info
 
 IgnorePath '/etc/systemd/system/getty.target.wants/*'
 IgnorePath '/usr/lib/systemd/system/getty@.service'
