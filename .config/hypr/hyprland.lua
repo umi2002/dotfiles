@@ -23,7 +23,7 @@ local shiftMod = "SUPER + SHIFT"
 
 hl.bind(shiftMod .. " + Q", hl.dsp.window.close())
 hl.bind(shiftMod .. " + X", hl.dsp.exit())
-hl.bind(shiftMod .. " + L", hl.dsp.exec_cmd("runapp -- hyprlock"))
+hl.bind(shiftMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("runapp -- kitty"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("runapp -- brave"))
 hl.bind(mainMod .. " + R", function()
