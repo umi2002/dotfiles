@@ -76,7 +76,7 @@ ShellRoot {
 
         function onReadyToLaunch() {
             shellRoot.isLoading = false;
-            Greetd.launch(["start-hyprland"]);
+            Greetd.launch(["uwsm", "start", "-e", "-D", "Hyprland", "hyprland.desktop"], ["XDG_SESSION_TYPE=wayland"]);
         }
 
         function onAuthFailure(message) {

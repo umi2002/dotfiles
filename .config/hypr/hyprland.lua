@@ -13,19 +13,14 @@ require("rules")
 require("monitor")
 require("scrolling")
 
-hl.env("HYPRCURSOR_THEME", "catppuccin-mocha-light-cursors")
-hl.env("HYPRCURSOR_SIZE", "24")
-hl.env("XCURSOR_THEME", "catppuccin-mocha-light-cursors")
-hl.env("XCURSOR_SIZE", "24")
-
 local mainMod = "SUPER"
 local shiftMod = "SUPER + SHIFT"
 
 hl.bind(shiftMod .. " + Q", hl.dsp.window.close())
-hl.bind(shiftMod .. " + X", hl.dsp.exit())
+hl.bind(shiftMod .. " + X", hl.dsp.exec_cmd("uwsm stop"))
 hl.bind(shiftMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("runapp -- kitty"))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("runapp -- brave"))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("runapp -- brave-origin"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl dispatch 'hl.dsp.global(\"umi:runner\")'"), { release = true })
 hl.bind(shiftMod .. " + P", hl.dsp.exec_cmd([[grim -g "$(slurp -o)" - | swappy -f -]]))
 

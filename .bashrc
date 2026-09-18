@@ -15,8 +15,6 @@ alias m-pull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull
 alias m-main="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} checkout main \;"
 alias dc="docker compose"
 
-export XDG_RUNTIME_DIR="/run/user/$(id -u)"
-
 source /usr/share/fzf/key-bindings.bash
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -24,28 +22,14 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --hidden"
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
-export QT_QPA_PLATFORM=wayland
-export NVD_BACKEND=direct
-export WLR_BACKEND=vulkan
-export MOZ_ENABLE_WAYLAND=1
-
 export EDITOR=nvim
 export CHROME_BIN=chromium
 
-export MANPATH=$MANPATH:/usr/local/texlive/2023/texmf-dist/doc/man
-export INFOPATH=$INFOPATH:/usr/local/texlive/2023/texmf-dist/doc/info
-
-export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 export PATH=/home/umi/.cargo/bin:$PATH
-export PATH=/opt/Xilinx/Vivado/2023.1/bin:$PATH
 export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 
-export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt/plugins/platforms
-export QT_PLUGIN_PATH=/usr/lib/qt/plugins
-export QML2_IMPORT_PATH=/usr/lib/qt/qml
-
 # Created by `pipx` o/ 2023-06-29 22:01:34
-export PATH="$PATH:/home/umi/.local/bin"
+[[ ":$PATH:" != *":/home/umi/.local/bin:"* ]] && export PATH="$PATH:/home/umi/.local/bin"
 
 export PATH="$PATH:/home/umi/.dotnet/tools"
 
@@ -201,3 +185,4 @@ source "$OSH"/oh-my-bash.sh
 
 source /usr/share/nvm/init-nvm.sh
 eval "$(zoxide init bash)"
+export LIBVIRT_DEFAULT_URI="qemu:///system"

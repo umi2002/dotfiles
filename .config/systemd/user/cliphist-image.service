@@ -1,10 +1,11 @@
 [Unit]
 Description=Cliphist image watcher
-After=wayland-session.target
+PartOf=graphical-session.target
+After=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/wl-paste --type image --watch cliphist store
 Restart=on-failure
 
 [Install]
-WantedBy=wayland-session.target
+WantedBy=graphical-session.target

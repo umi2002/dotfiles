@@ -13,10 +13,15 @@ hl.monitor({
 
 hl.monitor({ output = "desc:Lenovo Group Limited 0x403D", mode = "1920x1200@60", position = "0x0", scale = 1 })
 hl.monitor({
-	output = "desc:LG Electronics LG ULTRAGEAR 0x0000A689",
+	output = "desc:HP Inc. HP E24 G4 CN43460YQQ",
 	mode = "preferred",
 	position = "1920x0",
 	scale = 1,
 })
-hl.monitor({ output = "desc:HP Inc. HP E24 G4 CN43460YQQ", mode = "preferred", position = "3840x0", scale = 1 })
+hl.monitor({
+	output = "desc:LG Electronics LG ULTRAGEAR 0x0000A689",
+	mode = "preferred",
+	position = "3840x0",
+	scale = 1,
+})
 hl.monitor({ output = "HDMI-A-2", mode = "1920x1080@60", position = "auto", scale = 1, mirror = "eDP-1" })
