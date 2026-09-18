@@ -21,7 +21,7 @@ hl.bind(shiftMod .. " + X", hl.dsp.exec_cmd("uwsm stop"))
 hl.bind(shiftMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("runapp -- kitty"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("runapp -- brave-origin"))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl dispatch 'hl.dsp.global(\"umi:runner\")'"), { release = true })
+hl.bind(mainMod .. " + SUPER_L", hl.dsp.global("umi:runner"), { release = true })
 hl.bind(shiftMod .. " + P", hl.dsp.exec_cmd([[grim -g "$(slurp -o)" - | swappy -f -]]))
 
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))

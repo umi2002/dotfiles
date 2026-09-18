@@ -19,7 +19,7 @@ ShellRoot {
     CustomShortcut {
         name: "runner"
         description: "Toggle app runner"
-        onPressed: {
+        onReleased: {
             if (!RunnerState.visible)
                 RunnerState.targetScreen = Hyprland.focusedMonitor?.name ?? "";
             RunnerState.visible = !RunnerState.visible;
