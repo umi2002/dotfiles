@@ -13,7 +13,6 @@ CopyFile /etc/default/ufw
 CopyFile /etc/greetd/config.toml
 CopyFile /etc/greetd/hyprland.lua
 CopyFile /etc/greetd/login_wallpaper.svg
-CreateDir /var/lib/greeter 755 greeter greeter
 CopyFile /etc/udev/rules.d/01-ttyusb.rules
 CopyFile /etc/udev/rules.d/99-brightness.rules
 CopyFile /etc/ufw/after.rules
@@ -31,6 +30,10 @@ CopyFile /etc/systemd/system/bluetooth-off.service
 CopyFile /etc/tmpfiles.d/powertop.conf
 CopyFile /etc/systemd/system/reflector.timer
 CopyFile /usr/local/bin/brightness.sh 755
+SetFileProperty / mode 555
+CopyFile /etc/libvirt/qemu/RDPWindows.xml 600
+CopyFile /etc/libvirt/qemu/networks/default.xml
+CreateLink /etc/libvirt/qemu/networks/autostart/default.xml /etc/libvirt/qemu/networks/default.xml
 
 CreateLink /etc/systemd/system/bluetooth.target.wants/bluetooth.service /usr/lib/systemd/system/bluetooth.service
 CreateLink /etc/systemd/system/display-manager.service /usr/lib/systemd/system/greetd.service
@@ -54,3 +57,11 @@ CreateLink /etc/systemd/system/timers.target.wants/reflector.timer /usr/lib/syst
 CreateLink /etc/systemd/system/systemd-rfkill.service /dev/null
 CreateLink /etc/systemd/system/systemd-rfkill.socket /dev/null
 CreateLink /etc/systemd/system/multi-user.target.wants/vboxservice.service /usr/lib/systemd/system/vboxservice.service
+CreateLink /etc/systemd/system/multi-user.target.wants/libvirtd.service /usr/lib/systemd/system/libvirtd.service
+CreateLink /etc/systemd/system/sockets.target.wants/libvirtd-admin.socket /usr/lib/systemd/system/libvirtd-admin.socket
+CreateLink /etc/systemd/system/sockets.target.wants/libvirtd-ro.socket /usr/lib/systemd/system/libvirtd-ro.socket
+CreateLink /etc/systemd/system/sockets.target.wants/libvirtd.socket /usr/lib/systemd/system/libvirtd.socket
+CreateLink /etc/systemd/system/sockets.target.wants/virtlockd-admin.socket /usr/lib/systemd/system/virtlockd-admin.socket
+CreateLink /etc/systemd/system/sockets.target.wants/virtlockd.socket /usr/lib/systemd/system/virtlockd.socket
+CreateLink /etc/systemd/system/sockets.target.wants/virtlogd-admin.socket /usr/lib/systemd/system/virtlogd-admin.socket
+CreateLink /etc/systemd/system/sockets.target.wants/virtlogd.socket /usr/lib/systemd/system/virtlogd.socket

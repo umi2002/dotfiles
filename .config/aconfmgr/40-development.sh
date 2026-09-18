@@ -40,3 +40,6 @@ AddPackage postgresql                              # Sophisticated object-relati
 AddPackage putty                                   # A terminal integrated SSH/Telnet client
 AddPackage dbeaver                                 # Free universal SQL Client for developers and database administrators (community edition)
 AddPackage tk                                      # A windowing toolkit for use with tcl
+AddPackage jupyterlab                              # JupyterLab computational environment
+AddPackage python-matplotlib                       # A python plotting library, making publication quality plots
+AddPackage python-scipy                            # Open-source software for mathematics, science, and engineering

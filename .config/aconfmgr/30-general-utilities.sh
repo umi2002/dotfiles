@@ -41,6 +41,8 @@ AddPackage --foreign cisco-secure-client # Cisco AnyConnect Secure Mobility Clie
 AddPackage bitwarden-cli                 # The command line vault
 AddPackage yadm                          # Yet Another Dotfiles Manager
 AddPackage github-cli                    # The GitHub CLI
+AddPackage freerdp                       # Free implementation of the Remote Desktop Protocol (RDP)
+AddPackage fuse2                         # Interface for userspace programs to export a filesystem to the Linux kernel
 
 # LaTeX
 AddPackage texlive-basic            # TeX Live - Essential programs and files

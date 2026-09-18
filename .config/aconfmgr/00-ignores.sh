@@ -39,6 +39,7 @@ IgnorePath '/var/lib/private'
 IgnorePath '/var/lib/tlp/*'
 IgnorePath '/var/lib/tpm2-tss/*'
 IgnorePath '/var/lib/texmf/*'
+IgnorePath '/var/lib/libvirt/*'
 
 IgnorePath '/etc/ca-certificates/*'
 IgnorePath '/etc/.pwd.lock'
@@ -83,6 +84,8 @@ IgnorePath '/etc/greetd/quickshell/*'
 IgnorePath '/etc/greetd/quickshell'
 IgnorePath '/etc/texmf/*'
 IgnorePath /etc/dbeaver/bundles.info
+IgnorePath '/etc/libvirt/nwfilter/*'
+IgnorePath '*.pacnew'
 
 IgnorePath '/etc/systemd/system/getty.target.wants/*'
 IgnorePath '/usr/lib/systemd/system/getty@.service'

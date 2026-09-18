@@ -28,6 +28,18 @@
 -A ufw-user-input -p udp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
 -A ufw-user-input -p udp --dport 22 -j ufw-user-limit-accept
 
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 in_virbr0
+-A ufw-user-input -i virbr0 -j ACCEPT
+
+### tuple ### allow any any 0.0.0.0/0 any 0.0.0.0/0 out_virbr0
+-A ufw-user-output -o virbr0 -j ACCEPT
+
+### tuple ### route:allow any any 0.0.0.0/0 any 0.0.0.0/0 in_virbr0
+-A ufw-user-forward -i virbr0 -j ACCEPT
+
+### tuple ### route:allow any any 0.0.0.0/0 any 0.0.0.0/0 out_virbr0
+-A ufw-user-forward -o virbr0 -j ACCEPT
+
 ### END RULES ###
 
 ### LOGGING ###

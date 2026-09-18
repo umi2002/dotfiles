@@ -14,7 +14,7 @@ AddPackage --foreign spicetify-marketplace-bin # Spicetify app that integrates a
 AddPackage vlc                                 # Free and open source cross-platform multimedia player and framework
 AddPackage vlc-plugins-all                     # Free and open source cross-platform multimedia player and framework - all plugins
 AddPackage --foreign pwvucontrol               # Pipewire volume control for GNOME
-AddPackage --foreign brave-bin                 # Web browser that blocks ads and trackers by default (binary release)
+AddPackage --foreign brave-origin-bin          # The minimalist browser from the makers of Brave (binary release).
 AddPackage obs-studio                          # Free, open source software for live streaming and recording
 AddPackage qbittorrent                         # An advanced BitTorrent client programmed in C++, based on Qt toolkit and libtorrent-rasterbar
 AddPackage --foreign quickshell-git            # Flexible toolkit for making desktop shells with QtQuick
@@ -22,6 +22,7 @@ AddPackage --foreign caelestia-shell           # The desktop shell for the Caele
 AddPackage --foreign quickshell-greetd         # Use Quickshell lockscreen as greetd greeter
 AddPackage steam                               # Valve's digital software delivery system
 AddPackage discord                             # All-in-one voice and text chat for gamers
+AddPackage --foreign vesktop                   # A standalone Electron-based Discord app with Vencord & improved Linux support
 AddPackage libreoffice-fresh                   # LibreOffice branch which contains new features and program enhancements
 AddPackage --foreign betterbird-bin            # EN-US // Betterbird is a fine-tuned version of Mozilla Thunderbird, Thunderbird on steroids, if you will.
 AddPackage yazi                                # Blazing fast terminal file manager written in Rust, based on async I/O
@@ -31,6 +32,12 @@ AddPackage virtualbox                          # Powerful x86 virtualization for
 AddPackage virtualbox-guest-iso                # The official VirtualBox Guest Additions ISO image
 AddPackage --foreign zoom                      # Video Conferencing and Web Conferencing Service
 AddPackage drawing                             # Drawing application for the GNOME desktop
+AddPackage remmina                             # Remote desktop client written in GTK+
+AddPackage libvirt                             # API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)
+AddPackage qemu-base                           # A basic QEMU setup for headless environments
+AddPackage virt-install                        # Command line tool for creating new KVM , Xen, or Linux container guests using the libvirt hypervisor
+AddPackage virt-viewer                         # A lightweight interface for interacting with the graphical display of virtualized guest OS.
+AddPackage --foreign claude-desktop-bin        # Claude Desktop - Linux (unofficial, from official binary)
 
 # Printer
 AddPackage cups     # OpenPrinting CUPS - daemon package
