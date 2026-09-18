@@ -48,7 +48,8 @@ Singleton {
 
     function dismissAll() {
         history.clear();
-        storage.setText([]);
+        adapter.items = [];
+        storage.writeAdapter();
     }
 
     Timer {
@@ -57,26 +58,23 @@ Singleton {
         onTriggered: {
             const items = [];
             for (let i = 0; i < root.history.count; i++)
-                items.push(root.history.get(i));
-            storage.setText(JSON.stringify(items));
+                items.push(Object.assign({}, root.history.get(i)));
+            adapter.items = items;
+            storage.writeAdapter();
         }
     }
 
     FileView {
         id: storage
-        path: "/home/umi/.local/state/quickshell/notifs.json"
+        path: Quickshell.statePath("notifs.json")
         onLoaded: {
-            const text = storage.text();
-            if (text) {
-                const items = JSON.parse(text);
-                for (const item of items)
-                    root.history.append(item);
-            }
+            for (const item of adapter.items)
+                root.history.append(item);
         }
-    }
 
-    Process {
-        command: ["mkdir", "-p", "/home/umi/.local/state/quickshell"]
-        running: true
+        JsonAdapter {
+            id: adapter
+            property var items: []
+        }
     }
 }

@@ -23,7 +23,7 @@ WrapperMouseArea {
         Network {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
-            networkName: root.modelData
+            networkName: root.modelData.name
             isHovered: root.isHovered
         }
 

@@ -14,9 +14,9 @@ ColorizedIcon {
 
     function getNetworkColor() {
         switch (NetworkData.wifiDevice?.state) {
-        case DeviceConnectionState.Connected:
+        case ConnectionState.Connected:
             return Style.palette.green;
-        case DeviceConnectionState.Unknown:
+        case ConnectionState.Unknown:
             return Style.palette.red;
         default:
             return Style.palette.teal;

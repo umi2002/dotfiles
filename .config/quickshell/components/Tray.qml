@@ -1,31 +1,18 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell
 import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import QtQuick
-import QtQml.Models
 
 import qs.services
 
 Rectangle {
     id: root
-    readonly property ListModel trayItems: Tray.trayModel
+    readonly property ScriptModel trayItems: Tray.trayModel
 
     implicitWidth: listView.implicitWidth
     color: "transparent"
-
-    function getTrayIcon(icon) {
-        if (!icon) {
-            return "";
-        }
-
-        if (icon.includes("?path=")) {
-            const [name, path] = icon.split("?path=");
-            icon = Qt.resolvedUrl(`${path}/${name.slice(name.lastIndexOf("/") + 1)}`);
-        }
-
-        return icon;
-    }
 
     Behavior on implicitWidth {
         NumberAnimation {
@@ -46,17 +33,13 @@ Rectangle {
 
         delegate: WrapperMouseArea {
             id: trayItem
-            required property string id
-            readonly property SystemTrayItem item: Tray.trayMap[trayItem.id] || null
+            required property SystemTrayItem modelData
+            readonly property SystemTrayItem item: modelData
             cursorShape: Qt.PointingHandCursor
 
             onClicked: {
-                const itemId = (trayItem.item?.id ?? "").toLowerCase();
-                const itemTitle = (trayItem.item?.title ?? "").toLowerCase();
-                const matchedClass = Object.values(HyprlandData.windowClasses).find(cls => {
-                    const c = cls.toLowerCase();
-                    return c === itemId || itemId.includes(c) || c.includes(itemId) || c === itemTitle || itemTitle.includes(c) || c.includes(itemTitle);
-                });
+                const itemName = (trayItem.item?.id ?? "").toLowerCase().split(/[^a-z0-9]+/)[0];
+                const matchedClass = itemName ? HyprlandData.windowClasses.find(cls => cls.toLowerCase().split(/[^a-z0-9]+/).includes(itemName)) : undefined;
 
                 if (matchedClass) {
                     HyprlandData.focusWindow(matchedClass);
@@ -67,7 +50,7 @@ Rectangle {
 
             IconImage {
 
-                source: root.getTrayIcon(trayItem.item?.icon)
+                source: trayItem.item?.icon ?? ""
                 implicitSize: 20
             }
         }

@@ -1,7 +1,6 @@
 pragma Singleton
 
 import Quickshell
-import Quickshell.Io
 import Quickshell.Services.Pipewire
 import Caelestia.Services
 
@@ -52,23 +51,13 @@ Singleton {
     }
 
     function setVolume(volume) {
-        setVolumeProcess.volume = volume;
-        setVolumeProcess.running = true;
+        if (root.defaultSink?.audio)
+            root.defaultSink.audio.volume = volume / 100;
     }
 
     function toggleMute() {
-        toggleMuteProcess.running = true;
-    }
-
-    Process {
-        id: setVolumeProcess
-        property int volume
-        command: ["wpctl", "set-volume", "@DEFAULT_SINK@", volume.toString() + "%"]
-    }
-
-    Process {
-        id: toggleMuteProcess
-        command: ["wpctl", "set-mute", "@DEFAULT_SINK@", "toggle"]
+        if (root.defaultSink?.audio)
+            root.defaultSink.audio.muted = !root.defaultSink.audio.muted;
     }
 
     CavaProvider {

@@ -1,7 +1,6 @@
 pragma Singleton
 
 import Quickshell
-import Quickshell.Io
 import Quickshell.Services.Mpris
 
 Singleton {
@@ -26,13 +25,7 @@ Singleton {
     function setVolume(volume) {
         const clampedVolume = Math.max(0, Math.min(1, volume));
 
-        setVolumeProcess.volume = clampedVolume;
-        setVolumeProcess.running = true;
-    }
-
-    Process {
-        id: setVolumeProcess
-        property real volume: 0
-        command: ["playerctl", "-p", "spotify", "volume", volume.toString()]
+        if (root.spotifyPlayer)
+            root.spotifyPlayer.volume = clampedVolume;
     }
 }

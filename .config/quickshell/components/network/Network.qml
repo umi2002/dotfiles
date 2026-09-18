@@ -31,7 +31,7 @@ Rectangle {
 
         network: root.network
         isHovered: root.isHovered
-        isConnecting: root.network?.state === NetworkState.Connecting
+        isConnecting: root.network?.state === ConnectionState.Connecting
 
         onActionTriggered: {
             if (root.network?.connected) {

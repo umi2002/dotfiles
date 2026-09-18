@@ -10,105 +10,59 @@ Singleton {
 
     readonly property int nWorkspaces: 10
 
-    property list<bool> occupiedWorkspaces: new Array(nWorkspaces).fill(false)
-    property var workspaceIcons: ({})
+    readonly property list<bool> occupiedWorkspaces: Array.from({
+        length: nWorkspaces
+    }, (_, i) => Hyprland.workspaces.values.some(ws => ws.id === i + 1 && ws.toplevels.values.length > 0))
+    readonly property var workspaceIcons: {
+        const icons = {};
+        if (!DesktopEntries.applications.values.length)
+            return icons;
+        for (const ws of Hyprland.workspaces.values) {
+            const windows = ws.toplevels.values;
+            const lastAddr = workspaceLastWindows[ws.id];
+            const toplevel = windows.find(t => t.address === lastAddr) ?? windows[0];
+            const icon = resolveIcon(toplevel?.lastIpcObject?.class ?? "");
+            if (icon)
+                icons[ws.id] = icon;
+        }
+        return icons;
+    }
     property string keyboardLanguage: ""
 
-    signal workspaceIconsUpdated
-
-    property var windowWorkspaces: ({})
-    property var windowClasses: ({})
+    readonly property var windowClasses: Hyprland.toplevels.values.map(t => t.lastIpcObject?.class ?? "").filter(cls => cls)
     property var workspaceLastWindows: ({})
 
     function resolveIcon(windowClass) {
         if (!windowClass)
             return "";
-        const entry = DesktopEntries.byId(windowClass);
+        const entry = DesktopEntries.heuristicLookup(windowClass);
         if (!entry?.icon)
             return "";
         return Quickshell.iconPath(entry.icon);
     }
 
-    function updateOccupiedWorkspaces() {
-        const occupied = new Array(nWorkspaces).fill(false);
-        Object.values(windowWorkspaces).forEach(wsId => {
-            if (wsId >= 1 && wsId <= nWorkspaces)
-                occupied[wsId - 1] = true;
+    function updateLastWindow() {
+        const toplevel = Hyprland.activeToplevel;
+        const workspaceId = toplevel?.workspace?.id;
+        if (!workspaceId)
+            return;
+        workspaceLastWindows = Object.assign({}, workspaceLastWindows, {
+            [workspaceId]: toplevel.address
         });
-        for (let i = 0; i < nWorkspaces; i++)
-            occupiedWorkspaces[i] = occupied[i];
-    }
-
-    function updateWorkspaceIcon(workspaceId) {
-        const lastAddr = workspaceLastWindows[workspaceId];
-        const addr = (lastAddr && windowWorkspaces[lastAddr] === workspaceId) ? lastAddr : Object.entries(windowWorkspaces).find(([, wsId]) => wsId === workspaceId)?.[0] ?? null;
-
-        const icon = addr ? resolveIcon(windowClasses[addr] ?? "") : "";
-        if (icon)
-            workspaceIcons[workspaceId] = icon;
-        else
-            delete workspaceIcons[workspaceId];
-        workspaceIconsUpdated();
     }
 
     Connections {
         target: Hyprland
 
+        function onActiveToplevelChanged() {
+            root.updateLastWindow();
+        }
+
         function onRawEvent(event) {
             switch (event.name) {
             case "openwindow":
-                {
-                    const args = event.parse(4);
-                    const addr = "0x" + args[0];
-                    const workspaceId = parseInt(args[1]);
-                    root.windowWorkspaces[addr] = workspaceId;
-                    root.windowClasses[addr] = args[2];
-                    root.workspaceLastWindows[workspaceId] = addr;
-                    root.updateOccupiedWorkspaces();
-                    root.updateWorkspaceIcon(workspaceId);
-                    break;
-                }
-            case "closewindow":
-                {
-                    const args = event.parse(1);
-                    const addr = "0x" + args[0];
-                    const workspaceId = root.windowWorkspaces[addr];
-                    delete root.windowWorkspaces[addr];
-                    delete root.windowClasses[addr];
-                    if (root.workspaceLastWindows[workspaceId] === addr)
-                        delete root.workspaceLastWindows[workspaceId];
-                    root.updateOccupiedWorkspaces();
-                    if (workspaceId)
-                        root.updateWorkspaceIcon(workspaceId);
-                    break;
-                }
-            case "movewindow":
-                {
-                    const args = event.parse(2);
-                    const addr = "0x" + args[0];
-                    const newWorkspaceId = parseInt(args[1]);
-                    const oldWorkspaceId = root.windowWorkspaces[addr];
-                    root.windowWorkspaces[addr] = newWorkspaceId;
-                    if (root.workspaceLastWindows[oldWorkspaceId] === addr)
-                        delete root.workspaceLastWindows[oldWorkspaceId];
-                    root.workspaceLastWindows[newWorkspaceId] = addr;
-                    root.updateOccupiedWorkspaces();
-                    if (oldWorkspaceId)
-                        root.updateWorkspaceIcon(oldWorkspaceId);
-                    root.updateWorkspaceIcon(newWorkspaceId);
-                    break;
-                }
-            case "activewindowv2":
-                {
-                    const args = event.parse(1);
-                    const addr = "0x" + args[0];
-                    const workspaceId = root.windowWorkspaces[addr];
-                    if (workspaceId) {
-                        root.workspaceLastWindows[workspaceId] = addr;
-                        root.updateWorkspaceIcon(workspaceId);
-                    }
-                    break;
-                }
+                Hyprland.refreshToplevels();
+                break;
             case "activelayout":
                 devicesProcess.running = true;
                 break;
@@ -116,37 +70,18 @@ Singleton {
         }
     }
 
-    Process {
-        id: clientsProcess
-        command: ["hyprctl", "clients", "-j"]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                JSON.parse(this.text).forEach(client => {
-                    const addr = client.address;
-                    const wsId = client.workspace?.id;
-                    const cls = client.class;
-                    if (addr && wsId && cls) {
-                        root.windowWorkspaces[addr] = wsId;
-                        root.windowClasses[addr] = cls;
-                    }
-                });
-                root.updateOccupiedWorkspaces();
-                const uniqueWorkspaces = new Set(Object.values(root.windowWorkspaces));
-                uniqueWorkspaces.forEach(wsId => root.updateWorkspaceIcon(wsId));
-            }
+    Connections {
+        target: Hyprland.activeToplevel
+
+        function onWorkspaceChanged() {
+            root.updateLastWindow();
         }
     }
 
-    property string focusTarget: ""
-
     function focusWindow(windowClass) {
-        focusTarget = windowClass;
-        focusProcess.running = true;
-    }
-
-    Process {
-        id: focusProcess
-        command: ["hyprctl", "dispatch", "focuswindow", `class:${root.focusTarget}`]
+        const toplevel = Hyprland.toplevels.values.find(t => t.lastIpcObject?.class === windowClass);
+        if (toplevel)
+            Hyprland.dispatch(`hl.dsp.focus({ window = "address:0x${toplevel.address}" })`);
     }
 
     Process {
@@ -163,7 +98,6 @@ Singleton {
     }
 
     Component.onCompleted: {
-        clientsProcess.running = true;
         devicesProcess.running = true;
     }
 }

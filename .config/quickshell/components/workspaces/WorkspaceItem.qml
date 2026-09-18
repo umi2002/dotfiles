@@ -47,7 +47,7 @@ Rectangle {
 
     ColorizedIcon {
         id: iconImage
-        property string desktopIcon
+        readonly property string desktopIcon: HyprlandData.workspaceIcons[workspaceItem.index + 1] || ""
         readonly property string icon: workspaceItem.modelData ? Assets.workspace.occupied : Assets.workspace.unoccupied
 
         iconSource: desktopIcon || Qt.resolvedUrl(icon)
@@ -55,13 +55,6 @@ Rectangle {
         layer.enabled: !desktopIcon
         anchors.centerIn: parent
         implicitSize: 15
-
-        Connections {
-            target: HyprlandData
-            function onWorkspaceIconsUpdated() {
-                iconImage.desktopIcon = HyprlandData.workspaceIcons[workspaceItem.index + 1] || "";
-            }
-        }
     }
 
     MouseArea {
