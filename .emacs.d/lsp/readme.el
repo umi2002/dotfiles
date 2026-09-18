@@ -1,7 +1,14 @@
+(defun toggle-docs()
+  (interactive)
+  (lsp-ui-doc-show)
+  ;; (lsp-ui-doc-focus-frame)
+  )
+
 (with-eval-after-load 'lsp-mode
   (setq lsp-modeline-code-actions-mode 1))
 (with-eval-after-load 'lsp-ui
-  (setq lsp-ui-sideline-show-diagnostics 1))
+  (setq lsp-ui-doc-enable t)
+  (setq lsp-ui-doc-position 'at-point))
 
 (defun lsp-booster--advice-json-parse (old-fn &rest args)
   "Try to parse bytecode instead of json."
@@ -41,7 +48,8 @@
 (with-eval-after-load 'lsp-ui
   (leader
     "rf" 'lsp-ui-peek-find-references
-    "df" 'lsp-ui-peek-find-definitions)
+    "df" 'lsp-ui-peek-find-definitions
+    "H" 'toggle-docs)
 
   (general-define-key
    :keymaps 'lsp-ui-peek-mode-map
@@ -50,7 +58,7 @@
 
 (use-package lua-mode
   :after lsp-mode
-  :mode "\\.lua\\'"
+  :mode ("\\.lua\\'")
   :hook (lua-mode . lsp-deferred))
 
 (with-eval-after-load 'lsp-mode

@@ -1,17 +1,7 @@
-(defun helm-project-files ()
-  (interactive)
-  (let ((project (project-current t)))
-    (helm :sources
-          (helm-build-sync-source "Project Files"
-            :candidates (project-files project)
-	    :fuzzy-match t
-            :action #'find-file)
-          :buffer "*helm project files*")))
-
 (defun custom-project-find()
   (interactive)
   (if (project-current nil)
-      (helm-project-files)
+      (project-find-file)
     (helm-find-files nil)))
 
 (defun project-try-yadm (dir)
@@ -19,15 +9,6 @@
              (file-directory-p "~/.local/share/yadm/repo.git")
              (not (locate-dominating-file dir ".git")))
     (cons 'yadm "~/")))
-
-(defun helm-project-switch ()
-  (interactive)
-  (helm :sources
-	(helm-build-sync-source "Projects"
-	  :candidates (project-known-project-roots)
-	  :fuzzy-match t
-	  :action #'project-switch-project)
-	:buffer "*helm project switch*"))
 
 (cl-defmethod project-root ((project (head yadm)))
   (cdr project))
@@ -49,7 +30,7 @@
     "f" 'custom-project-find)
 
   (project
-    "f" 'helm-project-switch)
+    "f" 'project-switch-project)
 
   (leader
     "wf" 'project-find-regexp))

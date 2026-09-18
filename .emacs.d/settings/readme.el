@@ -16,3 +16,4 @@
 (global-set-key (kbd "<escape>")      'keyboard-escape-quit)
 (setq xref-search-program 'ripgrep)
 (setq scroll-preserve-screen-position t)
+(setq outline-minor-mode-cycle t)

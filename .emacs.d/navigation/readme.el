@@ -1,4 +1,8 @@
 (with-eval-after-load 'helm
+  (helm-mode t)
+  (setq helm-completion-style 'helm-fuzzy))
+
+(with-eval-after-load 'helm
   (general-define-key
    :keymaps 'helm-map
    "C-w" 'backward-kill-word

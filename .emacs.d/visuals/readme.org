@@ -30,4 +30,3 @@
   (with-eval-after-load 'mixed-pitch
     (add-hook 'text-mode-hook #'mixed-pitch-mode))
 #+end_src
-

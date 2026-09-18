@@ -25,8 +25,7 @@
   (setq global-map (make-sparse-keymap))
   (general-define-key
    :states 'normal
-   "SPC s" nil)
-  )
+   "SPC s" nil))
 
 (with-eval-after-load 'general
   (general-create-definer leader
@@ -77,6 +76,9 @@
   (buffer
     "n" 'next-buffer
     "p" 'previous-buffer
-    "k" 'kill-buffer
-    )
-  )
+    "k" 'kill-buffer)
+
+  (general-define-key
+   :states '(normal visual)
+   :keymaps '(help-mode-map)
+   (kbd "<backtab>") 'outline-cycle-buffer))

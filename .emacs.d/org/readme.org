@@ -9,7 +9,7 @@ Functions
     (set-face-attribute 'org-default nil :family "Linux Libertine O" :height 150)
     (set-face-attribute 'org-block nil :family "FiraMono Nerd Font" :height 100)
     (set-face-attribute 'org-meta-line nil :family "FiraMono Nerd Font" :height 100))
-  #+end_src
+#+end_src
 
 Setup
 #+begin_src emacs-lisp
