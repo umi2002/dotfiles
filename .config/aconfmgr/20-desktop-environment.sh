@@ -48,7 +48,7 @@ AddPackage emacs                               # The extensible, customizable, s
 AddPackage bitwarden                           # A secure and free password manager for all of your devices
 AddPackage --foreign zoom                      # Video Conferencing and Web Conferencing Service
 AddPackage drawing                             # Drawing application for the GNOME desktop
-AddPackage --foreign claude-desktop-bin        # Claude Desktop - Linux (unofficial, from official binary)
+AddPackage --foreign claude-desktop            # Official Claude AI desktop app from Anthropic — Chat, Cowork, and Claude Code
 
 # Virtualization
 AddPackage libvirt      # API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)
