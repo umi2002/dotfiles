@@ -23,10 +23,8 @@ PanelWindow {
     color: "transparent"
 
     mask: Region {
-        x: 0
-        y: topBar.height
-        width: root.width
-        height: root.height - topBar.height - bottomBar.height
+        item: frameHole
+        radius: frameHole.radius
         intersection: Intersection.Subtract
 
         Region {
@@ -121,6 +119,7 @@ PanelWindow {
             visible: false
 
             Rectangle {
+                id: frameHole
                 anchors.fill: parent
                 anchors.margins: 10
                 anchors.topMargin: topBar.implicitHeight

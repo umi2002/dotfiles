@@ -41,18 +41,13 @@ Singleton {
         command: ["brillo", "-S", brightness.toString()]
     }
 
-    Process {
-        id: brightnessMonitor
-        command: ["inotifywait", "-m", "-e", "modify", "/sys/class/backlight/amdgpu_bl1/brightness"]
-        stdout: SplitParser {
-            onRead: () => {
-                getBrightness.running = true;
-            }
-        }
+    FileView {
+        path: "/sys/class/backlight/amdgpu_bl1/brightness"
+        watchChanges: true
+        onFileChanged: getBrightness.running = true
     }
 
     Component.onCompleted: {
-        brightnessMonitor.running = true;
         getBrightness.running = true;
     }
 }

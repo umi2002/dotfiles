@@ -27,7 +27,6 @@ AddPackage --foreign caelestia-shell # The desktop shell for the Caelestia dotfi
 
 # Quickshell Dependencies
 AddPackage --foreign brillo # Control the brightness of backlight and keyboard LED devices
-AddPackage inotify-tools    # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.
 AddPackage fastfetch        # A feature-rich and performance oriented neofetch like system information tool
 
 # Applications
