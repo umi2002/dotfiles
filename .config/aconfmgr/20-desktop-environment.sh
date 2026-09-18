@@ -58,6 +58,8 @@ AddPackage virt-viewer  # A lightweight interface for interacting with the graph
 AddPackage remmina      # Remote desktop client written in GTK+
 AddPackage freerdp      # Free implementation of the Remote Desktop Protocol (RDP)
 AddPackage fuse2        # Interface for userspace programs to export a filesystem to the Linux kernel
+AddPackage dialog       # A tool to display dialog boxes from shell scripts
+AddPackage dnsmasq      # Lightweight, easy to configure DNS forwarder and DHCP server
 
 # Printer
 AddPackage cups     # OpenPrinting CUPS - daemon package
