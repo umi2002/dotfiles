@@ -1,13 +1,36 @@
 #!/bin/bash
 # ~/.config/aconfmgr/20-desktop-environment.sh
 
-# Desktop Apps
-AddPackage uwsm                                # A standalone Wayland session manager
-AddPackage hyprland                            # a highly customizable dynamic tiling Wayland compositor
-AddPackage hyprpaper                           # a blazing fast wayland wallpaper utility with IPC controls
-AddPackage hyprlock                            # hyprland’s GPU-accelerated screen locking utility
-AddPackage hypridle                            # hyprland’s idle daemon
-AddPackage --foreign runapp                    # Application runner for Linux desktop environments that integrate with systemd
+# Hyprland Session
+AddPackage greetd                      # Generic greeter daemon
+AddPackage uwsm                        # A standalone Wayland session manager
+AddPackage hyprland                    # a highly customizable dynamic tiling Wayland compositor
+AddPackage hyprpaper                   # a blazing fast wayland wallpaper utility with IPC controls
+AddPackage hyprlock                    # hyprland’s GPU-accelerated screen locking utility
+AddPackage hypridle                    # hyprland’s idle daemon
+AddPackage hyprsunset                  # An application to enable a blue-light filter on Hyprland
+AddPackage hyprpolkitagent             # Simple polkit authentication agent for Hyprland, written in QT/QML
+AddPackage xdg-desktop-portal          # Desktop integration portals for sandboxed apps
+AddPackage xdg-desktop-portal-gtk      # A backend implementation for xdg-desktop-portal using GTK
+AddPackage xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
+AddPackage --foreign runapp            # Application runner for Linux desktop environments that integrate with systemd
+AddPackage kitty                       # A modern, hackable, featureful, OpenGL-based terminal emulator
+AddPackage grim                        # Screenshot utility for Wayland
+AddPackage slurp                       # Select a region in a Wayland compositor
+AddPackage swappy                      # A Wayland native snapshot editing tool
+AddPackage cliphist                    # wayland clipboard manager
+AddPackage upower                      # Abstraction for enumerating power devices, listening to device events and querying history and statistics
+
+# Quickshell
+AddPackage --foreign quickshell-git  # Flexible toolkit for making desktop shells with QtQuick
+AddPackage --foreign caelestia-shell # The desktop shell for the Caelestia dotfiles
+
+# Quickshell Dependencies
+AddPackage --foreign brillo # Control the brightness of backlight and keyboard LED devices
+AddPackage inotify-tools    # inotify-tools is a C library and a set of command-line programs for Linux providing a simple interface to inotify.
+AddPackage fastfetch        # A feature-rich and performance oriented neofetch like system information tool
+
+# Applications
 AddPackage --foreign spotify                   # A proprietary music streaming service
 AddPackage --foreign spicetify-cli             # Command-line tool to customize Spotify client
 AddPackage --foreign spicetify-marketplace-bin # Spicetify app that integrates a marketplace for extensions, themes and snippets
@@ -17,27 +40,25 @@ AddPackage --foreign pwvucontrol               # Pipewire volume control for GNO
 AddPackage --foreign brave-origin-bin          # The minimalist browser from the makers of Brave (binary release).
 AddPackage obs-studio                          # Free, open source software for live streaming and recording
 AddPackage qbittorrent                         # An advanced BitTorrent client programmed in C++, based on Qt toolkit and libtorrent-rasterbar
-AddPackage --foreign quickshell-git            # Flexible toolkit for making desktop shells with QtQuick
-AddPackage --foreign caelestia-shell           # The desktop shell for the Caelestia dotfiles
-AddPackage --foreign quickshell-greetd         # Use Quickshell lockscreen as greetd greeter
 AddPackage steam                               # Valve's digital software delivery system
-AddPackage discord                             # All-in-one voice and text chat for gamers
 AddPackage --foreign vesktop                   # A standalone Electron-based Discord app with Vencord & improved Linux support
 AddPackage libreoffice-fresh                   # LibreOffice branch which contains new features and program enhancements
 AddPackage --foreign betterbird-bin            # EN-US // Betterbird is a fine-tuned version of Mozilla Thunderbird, Thunderbird on steroids, if you will.
 AddPackage yazi                                # Blazing fast terminal file manager written in Rust, based on async I/O
 AddPackage emacs                               # The extensible, customizable, self-documenting real-time display editor
 AddPackage bitwarden                           # A secure and free password manager for all of your devices
-AddPackage virtualbox                          # Powerful x86 virtualization for enterprise as well as home use
-AddPackage virtualbox-guest-iso                # The official VirtualBox Guest Additions ISO image
 AddPackage --foreign zoom                      # Video Conferencing and Web Conferencing Service
 AddPackage drawing                             # Drawing application for the GNOME desktop
-AddPackage remmina                             # Remote desktop client written in GTK+
-AddPackage libvirt                             # API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)
-AddPackage qemu-base                           # A basic QEMU setup for headless environments
-AddPackage virt-install                        # Command line tool for creating new KVM , Xen, or Linux container guests using the libvirt hypervisor
-AddPackage virt-viewer                         # A lightweight interface for interacting with the graphical display of virtualized guest OS.
 AddPackage --foreign claude-desktop-bin        # Claude Desktop - Linux (unofficial, from official binary)
+
+# Virtualization
+AddPackage libvirt      # API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)
+AddPackage qemu-base    # A basic QEMU setup for headless environments
+AddPackage virt-install # Command line tool for creating new KVM , Xen, or Linux container guests using the libvirt hypervisor
+AddPackage virt-viewer  # A lightweight interface for interacting with the graphical display of virtualized guest OS.
+AddPackage remmina      # Remote desktop client written in GTK+
+AddPackage freerdp      # Free implementation of the Remote Desktop Protocol (RDP)
+AddPackage fuse2        # Interface for userspace programs to export a filesystem to the Linux kernel
 
 # Printer
 AddPackage cups     # OpenPrinting CUPS - daemon package
