@@ -157,7 +157,7 @@ Singleton {
 
     Process {
         id: fetchStats
-        command: ["fastfetch", "--json"]
+        command: ["fastfetch", "--json", "-s", "OS:Kernel:WM:CPU:GPU"]
         stdout: StdioCollector {
             onStreamFinished: root.parseStats(this.text)
         }
