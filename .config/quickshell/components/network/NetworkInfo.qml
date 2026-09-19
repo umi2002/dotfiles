@@ -12,7 +12,7 @@ Rectangle {
     implicitHeight: networkInfo.implicitHeight
     color: "transparent"
 
-    readonly property list<string> text: ["Security type: " + root.securityTypeToString(NetworkData.connectedNetwork?.security), "Signal strength: " + NetworkData.connectedNetwork?.signalStrength * 100]
+    readonly property list<string> text: ["Security type: " + root.securityTypeToString(NetworkData.connectedNetwork?.security), "Signal strength: " + Math.round((NetworkData.connectedNetwork?.signalStrength ?? 0) * 100) + "%"]
 
     Text {
         id: networkInfo

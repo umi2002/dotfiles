@@ -12,8 +12,7 @@ StyledButton {
 
     signal actionTriggered
 
-    busy: isConnecting
-    opacity: isHovered ? (isConnecting ? 0.5 : 1) : 0
+    opacity: isHovered || isConnecting ? 1 : 0
 
     onClicked: {
         actionTriggered();

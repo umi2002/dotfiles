@@ -11,8 +11,22 @@ Rectangle {
     required property bool isHovered
     required property bool isConnecting
     property bool isExpanded
+    property bool isSaved: false
+    property bool confirmingForget: false
 
     signal actionTriggered
+    signal forgetTriggered
+
+    onIsHoveredChanged: {
+        if (!isHovered)
+            confirmingForget = false;
+    }
+
+    Timer {
+        id: forgetConfirmTimer
+        interval: 3000
+        onTriggered: root.confirmingForget = false
+    }
 
     implicitHeight: networkName.height + 10
     color: "transparent"
@@ -27,7 +41,49 @@ Rectangle {
         color: root.network?.connected ? Style.palette.green : Style.palette.subtext1
     }
 
+    Loader {
+        active: root.isConnecting
+        anchors.right: actionButton.left
+        anchors.rightMargin: 10
+        anchors.verticalCenter: parent.verticalCenter
+
+        sourceComponent: Throbber {
+            size: 18
+            strokeWidth: 2
+            throbberColor: Style.palette.mauve
+        }
+    }
+
+    StyledButton {
+        text: root.confirmingForget ? "Confirm" : "Forget"
+        textColor: Style.palette.red
+        visible: root.isSaved && !root.isConnecting
+        enabled: root.isHovered
+        opacity: root.isHovered ? 1 : 0
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: actionButton.left
+        anchors.rightMargin: 10
+
+        Behavior on opacity {
+            NumberAnimation {
+                duration: 200
+            }
+        }
+
+        onClicked: {
+            if (root.confirmingForget) {
+                root.confirmingForget = false;
+                forgetConfirmTimer.stop();
+                root.forgetTriggered();
+            } else {
+                root.confirmingForget = true;
+                forgetConfirmTimer.restart();
+            }
+        }
+    }
+
     NetworkActionButton {
+        id: actionButton
         isHovered: root.isHovered
         isConnecting: root.isConnecting
         anchors.verticalCenter: parent.verticalCenter
@@ -39,7 +95,7 @@ Rectangle {
                 return "Disconnect";
             }
 
-            if (root.isExpanded) {
+            if (root.isConnecting || root.isExpanded) {
                 return "Cancel";
             } else {
                 return "Connect";

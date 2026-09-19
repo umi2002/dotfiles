@@ -26,7 +26,6 @@ CreateLink /etc/systemd/system/multi-user.target.wants/keyd.service /usr/lib/sys
 
 # Networking
 CopyFile /etc/nsswitch.conf
-CopyFile /etc/NetworkManager/dispatcher.d/90-open_captive_portal 755
 CopyFile /etc/NetworkManager/conf.d/wifi_backend.conf
 CopyFile /etc/iwd/main.conf
 CreateLink /etc/systemd/system/multi-user.target.wants/NetworkManager.service /usr/lib/systemd/system/NetworkManager.service

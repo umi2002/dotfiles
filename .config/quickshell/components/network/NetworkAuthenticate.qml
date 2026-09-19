@@ -4,34 +4,75 @@ import QtQuick
 import qs
 
 WrapperMouseArea {
-    cursorShape: Qt.IBeamCursor
+    id: root
+    property bool failed: false
+    property bool showInput: true
+    property bool busy: false
+    property string errorText: ""
+
+    signal submitted(string password)
+
+    function submit() {
+        if (root.busy || textInput.text.length === 0)
+            return;
+        root.submitted(textInput.text);
+        textInput.text = "";
+    }
+
+    cursorShape: !root.showInput ? Qt.ArrowCursor : (root.busy ? Qt.BusyCursor : Qt.IBeamCursor)
 
     Rectangle {
-        implicitWidth: input.implicitWidth
-        implicitHeight: input.implicitHeight
+        implicitWidth: content.implicitWidth
+        implicitHeight: content.implicitHeight
         color: "transparent"
 
-        Rectangle {
-            id: input
-            implicitWidth: 300
-            implicitHeight: 30
-            radius: 10
-            color: Style.palette.subtext1
+        Column {
+            id: content
+            spacing: 8
 
-            TextInput {
-                id: textInput
-                anchors.fill: parent
-                anchors.margins: 5
-                verticalAlignment: Qt.AlignVCenter
+            Rectangle {
+                id: input
+                visible: root.showInput
+                implicitWidth: 300
+                implicitHeight: 30
+                radius: 10
+                opacity: root.busy ? 0.5 : 1
+                color: root.failed && textInput.text.length === 0 ? Style.palette.red : Style.palette.subtext1
+
+                TextInput {
+                    id: textInput
+                    anchors.fill: parent
+                    anchors.margins: 5
+                    verticalAlignment: Qt.AlignVCenter
+                    font.pointSize: Style.font.size2
+                    font.family: Style.font.family3
+                    color: Style.palette.mantle
+                    enabled: !root.busy
+                    activeFocusOnPress: true
+                    echoMode: TextInput.Password
+
+                    Keys.onReturnPressed: root.submit()
+                    Keys.onEnterPressed: root.submit()
+
+                    onVisibleChanged: {
+                        focus = visible;
+                    }
+
+                    onEnabledChanged: {
+                        if (enabled && visible)
+                            forceActiveFocus();
+                    }
+                }
+            }
+
+            Text {
+                visible: root.errorText.length > 0
+                width: 300
+                wrapMode: Text.WordWrap
+                text: root.errorText
+                color: Style.palette.red
                 font.pointSize: Style.font.size2
                 font.family: Style.font.family3
-                color: Style.palette.mantle
-                activeFocusOnPress: true
-                echoMode: TextInput.Password
-
-                onVisibleChanged: {
-                    focus = visible;
-                }
             }
         }
     }

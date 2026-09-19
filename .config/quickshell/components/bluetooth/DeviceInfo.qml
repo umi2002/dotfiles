@@ -17,6 +17,6 @@ Rectangle {
         text: BluetoothData.batteryPercent.toString() + "% Battery"
         font.pointSize: Style.font.size2
         font.family: Style.font.family3
-        color: Style.palette.color1
+        color: Style.palette.text
     }
 }
