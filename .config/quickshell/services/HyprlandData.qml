@@ -89,7 +89,13 @@ Singleton {
         command: ["hyprctl", "devices", "-j"]
         stdout: StdioCollector {
             onStreamFinished: {
-                const devices = JSON.parse(this.text);
+                let devices;
+                try {
+                    devices = JSON.parse(this.text);
+                } catch (e) {
+                    console.warn("HyprlandData: could not parse hyprctl devices output:", e);
+                    return;
+                }
                 const mainKeyboard = devices.keyboards?.find(kb => kb.main);
                 if (mainKeyboard)
                     root.keyboardLanguage = mainKeyboard.active_keymap.substring(0, 2);

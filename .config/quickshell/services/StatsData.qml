@@ -38,7 +38,13 @@ Singleton {
     }
 
     function parseStats(text) {
-        let data = JSON.parse(text);
+        let data;
+        try {
+            data = JSON.parse(text);
+        } catch (e) {
+            console.warn("StatsData: could not parse fastfetch output:", e);
+            return;
+        }
 
         for (const item of data) {
             const r = item.result;

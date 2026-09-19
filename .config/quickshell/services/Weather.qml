@@ -37,7 +37,12 @@ Singleton {
         command: ["curl", "-s", `https://api.weatherapi.com/v1/current.json?key=${Secrets.weather}&q=${Secrets.location}&aqi=no`]
         stdout: StdioCollector {
             onStreamFinished: {
-                root.parseWeather(JSON.parse(this.text));
+                try {
+                    root.parseWeather(JSON.parse(this.text));
+                } catch (e) {
+                    retryTimer.restart();
+                    return;
+                }
                 if (isNaN(root.temperature))
                     retryTimer.restart();
             }

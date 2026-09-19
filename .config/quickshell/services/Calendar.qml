@@ -29,7 +29,8 @@ Singleton {
         command: ["curl", Secrets.calendar]
         stdout: StdioCollector {
             onStreamFinished: {
-                root.events = root.parseIcs(this.text);
+                if (this.text.includes("BEGIN:VCALENDAR") && this.text.includes("END:VCALENDAR"))
+                    root.events = root.parseIcs(this.text);
             }
         }
     }
