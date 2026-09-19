@@ -39,7 +39,7 @@ WrapperMouseArea {
             active: Battery.displayDevice.isLaptopBattery
 
             sourceComponent: RowLayout {
-                spacing: 5
+                spacing: Style.spacing.small
 
                 BatteryArcIndicator {
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter

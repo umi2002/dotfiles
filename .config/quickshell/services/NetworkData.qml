@@ -1,11 +1,10 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import QtQuick
 import QtQml
 import Quickshell.Networking
-
-import qs.assets
 
 Singleton {
     id: root
@@ -34,15 +33,6 @@ Singleton {
     }
     readonly property ScriptModel unknownNetworks: ScriptModel {
         values: root.networks?.filter(network => !network.known || root.pendingPsk[network.name]) ?? []
-    }
-    readonly property string networkIcon: {
-        if (!wifiDevice)
-            return Assets.wifi.missing;
-        if (wifiDevice.state === ConnectionState.Unknown)
-            return Assets.wifi.off;
-        if (wifiDevice.state !== ConnectionState.Connected || !connectedNetwork)
-            return Assets.wifi.missing;
-        return getIconForSignalStrength(connectedNetwork.signalStrength);
     }
 
     readonly property bool isWiFiOn: Networking.wifiEnabled
@@ -106,18 +96,4 @@ Singleton {
         }
     }
 
-    function findNetwork(name) {
-        return networks?.find(n => n.name === name) ?? null;
-    }
-
-    function getIconForSignalStrength(strength) {
-        if (strength > 0.8)
-            return Assets.wifi.bar4;
-        else if (strength > 0.6)
-            return Assets.wifi.bar3;
-        else if (strength > 0.4)
-            return Assets.wifi.bar2;
-        else
-            return Assets.wifi.bar1;
-    }
 }

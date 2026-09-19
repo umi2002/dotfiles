@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 
+import qs
 import qs.services
 
 Rectangle {
@@ -15,7 +16,7 @@ Rectangle {
 
     Behavior on implicitHeight {
         NumberAnimation {
-            duration: 300
+            duration: Style.animation.slow
             easing.type: Easing.InOutCubic
         }
     }

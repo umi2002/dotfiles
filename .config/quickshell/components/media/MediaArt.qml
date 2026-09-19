@@ -1,6 +1,9 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import Qt5Compat.GraphicalEffects
 
+import qs
 import qs.services
 
 MediaSection {
@@ -9,7 +12,7 @@ MediaSection {
     Image {
         id: artImage
         anchors.fill: parent
-        anchors.margins: 5
+        anchors.margins: Style.spacing.small
         source: Media.art
         visible: false
     }

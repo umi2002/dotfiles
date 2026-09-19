@@ -121,10 +121,10 @@ PanelWindow {
             Rectangle {
                 id: frameHole
                 anchors.fill: parent
-                anchors.margins: 10
+                anchors.margins: Style.spacing.normal
                 anchors.topMargin: topBar.implicitHeight
                 anchors.bottomMargin: bottomBar.implicitHeight
-                radius: 20
+                radius: Style.radius.large
             }
         }
     }

@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick
 
@@ -5,7 +7,7 @@ import qs
 
 Row {
     id: root
-    spacing: 10
+    spacing: Style.spacing.normal
 
     property string selectedUser: ""
     property var userList: []

@@ -2,7 +2,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
+
+import qs.components
 
 import qs
 import qs.assets
@@ -12,7 +13,7 @@ Rectangle {
     id: root
 
     property bool isExpanded
-    readonly property int margins: 20
+    readonly property int margins: Style.spacing.large
     readonly property int borderRadius: 10
 
     implicitWidth: container.implicitWidth + margins
@@ -38,16 +39,18 @@ Rectangle {
 
             UtilsSlider {
                 value: Brightness.brightness
-                icon: Brightness.brightnessIcon
+                icon: Assets.brightness.getIcon(Brightness.brightness)
                 setValueCallback: Brightness.setBrightness
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             }
 
-            UtilsPopupSeparator {}
+            Separator {
+                margin: 0
+            }
 
             UtilsSlider {
                 value: Audio.volume
-                icon: Audio.volumeIcon
+                icon: Assets.volume.getIcon(Audio.volume, Audio.muted)
                 setValueCallback: Audio.setVolume
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             }

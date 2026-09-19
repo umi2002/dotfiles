@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 
@@ -19,7 +21,7 @@ ColumnLayout {
 
     UserAvatar {
         Layout.alignment: Qt.AlignHCenter
-        Layout.bottomMargin: 20
+        Layout.bottomMargin: Style.spacing.large
         opacity: root.isLoading ? 0 : 1
         selectedUser: root.selectedUser
     }

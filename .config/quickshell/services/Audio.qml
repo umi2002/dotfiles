@@ -1,10 +1,11 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Services.Pipewire
 import Caelestia.Services
 
-import qs.assets
+import qs
 
 Singleton {
     id: root
@@ -29,22 +30,10 @@ Singleton {
     readonly property PwNode defaultSource: sources.find(source => {
         return source === Pipewire.defaultAudioSource;
     }) || null
+    readonly property bool muted: defaultSink?.audio?.muted ?? false
     readonly property int volume: Math.round(defaultSink?.audio?.volume * 100)
-    readonly property string volumeIcon: {
-        if (defaultSink?.audio?.muted) {
-            return Assets.volume.off;
-        }
-
-        if (volume > 60) {
-            return Assets.volume.high;
-        } else if (volume > 20) {
-            return Assets.volume.medium;
-        } else {
-            return Assets.volume.low;
-        }
-    }
     readonly property alias cava: cava
-    readonly property int cavaBars: 20
+    readonly property int cavaBars: Config.cavaBars
 
     PwObjectTracker {
         objects: [...root.sinks, ...root.sources]

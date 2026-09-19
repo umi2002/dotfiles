@@ -5,6 +5,7 @@ import Quickshell.Widgets
 import Quickshell.Services.SystemTray
 import QtQuick
 
+import qs
 import qs.services
 
 Rectangle {
@@ -16,7 +17,7 @@ Rectangle {
 
     Behavior on implicitWidth {
         NumberAnimation {
-            duration: 200
+            duration: Style.animation.normal
             easing.type: Easing.InOutCubic
         }
     }
@@ -26,7 +27,7 @@ Rectangle {
 
         model: root.trayItems
         orientation: ListView.Horizontal
-        spacing: 5
+        spacing: Style.spacing.small
         implicitWidth: contentWidth
         implicitHeight: 20
         anchors.verticalCenter: parent.verticalCenter
@@ -60,14 +61,14 @@ Rectangle {
                 properties: "opacity"
                 from: 0
                 to: 1
-                duration: 200
+                duration: Style.animation.normal
                 easing.type: Easing.InOutCubic
             }
             NumberAnimation {
                 properties: "scale"
                 from: 0.5
                 to: 1
-                duration: 200
+                duration: Style.animation.normal
                 easing.type: Easing.InOutCubic
             }
         }
@@ -77,14 +78,14 @@ Rectangle {
                 properties: "opacity"
                 from: 1
                 to: 0
-                duration: 200
+                duration: Style.animation.normal
                 easing.type: Easing.InOutCubic
             }
             NumberAnimation {
                 properties: "scale"
                 from: 1
                 to: 0.5
-                duration: 200
+                duration: Style.animation.normal
                 easing.type: Easing.InOutCubic
             }
         }
@@ -92,7 +93,7 @@ Rectangle {
         displaced: Transition {
             NumberAnimation {
                 properties: "x"
-                duration: 200
+                duration: Style.animation.normal
                 easing.type: Easing.InOutCubic
             }
         }

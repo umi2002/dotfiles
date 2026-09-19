@@ -1,9 +1,11 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Services.UPower
 import QtQuick
-import qs.assets
+
+import qs
 
 Singleton {
     id: root
@@ -16,53 +18,13 @@ Singleton {
     readonly property bool isFullyCharged: chargeState === UPowerDeviceState.FullyCharged
     readonly property bool isPluggedIn: isCharging || isFullyCharged
 
-    readonly property string batteryIcon: Assets.battery.getIcon(batteryPercent, chargeState)
-
     readonly property string timeRemaining: isCharging ? timeToFull : timeToEmpty
 
     readonly property string timeToEmpty: formatTimeRemaining(displayDevice.timeToEmpty, false)
     readonly property string timeToFull: formatTimeRemaining(displayDevice.timeToFull, true)
-    readonly property int batteryThreshold: 20
+    readonly property int batteryThreshold: Config.batteryThreshold
 
     readonly property bool deviceReady: displayDevice.ready
-
-    function applyDesktopProfile() {
-        if (deviceReady && !displayDevice.isLaptopBattery && PowerProfiles.hasPerformanceProfile) {
-            PowerProfiles.profile = PowerProfile.Performance;
-        }
-    }
-
-    Component.onCompleted: applyDesktopProfile()
-    onDeviceReadyChanged: applyDesktopProfile()
-
-    onBatteryPercentChanged: {
-        if (batteryPercent < batteryThreshold && !root.isCharging) {
-            PowerProfiles.profile = PowerProfile.PowerSaver;
-        }
-    }
-
-    onChargeStateChanged: {
-        if (!displayDevice.isLaptopBattery || !PowerProfiles.hasPerformanceProfile) {
-            return;
-        }
-
-        switch (root.chargeState) {
-        case UPowerDeviceState.Charging:
-        case UPowerDeviceState.FullyCharged:
-            PowerProfiles.profile = PowerProfile.Performance;
-            break;
-        case UPowerDeviceState.Discharging:
-            if (batteryPercent < batteryThreshold) {
-                PowerProfiles.profile = PowerProfile.PowerSaver;
-            } else {
-                PowerProfiles.profile = PowerProfile.Balanced;
-            }
-            break;
-        default:
-            PowerProfiles.profile = PowerProfile.Balanced;
-            break;
-        }
-    }
 
     function formatTimeRemaining(totalSeconds: real, isCharging: bool): string {
         if (!totalSeconds || totalSeconds <= 0) {

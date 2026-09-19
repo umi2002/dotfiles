@@ -1,4 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
+
+import qs.components
 
 import qs
 import qs.services
@@ -10,7 +14,7 @@ Rectangle {
     implicitWidth: 600
     implicitHeight: 600
 
-    radius: 10
+    radius: Style.radius.small
     clip: true
     color: Style.palette.base
 
@@ -30,7 +34,7 @@ Rectangle {
         }
     }
 
-    PopupSeparator {
+    Separator {
         id: separator
         anchors.top: headerContainer.bottom
         anchors.left: parent.left
@@ -45,8 +49,8 @@ Rectangle {
         anchors.right: parent.right
         anchors.topMargin: 30
         anchors.bottomMargin: 30
-        anchors.leftMargin: 5
-        anchors.rightMargin: 5
+        anchors.leftMargin: Style.spacing.small
+        anchors.rightMargin: Style.spacing.small
 
         selectedIndex: header.selectedIndex
         popupWidth: root.implicitWidth

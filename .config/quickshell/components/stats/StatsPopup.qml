@@ -13,7 +13,7 @@ DashboardSection {
     id: root
 
     readonly property int iconSize: 20
-    readonly property int spacing: 20
+    readonly property int spacing: Style.spacing.large
     readonly property int fontSize: 16
 
     implicitWidth: layout.implicitWidth + 50
@@ -35,7 +35,7 @@ DashboardSection {
 
             Text {
                 Layout.alignment: Qt.AlignHCenter
-                text: StatsData.os
+                text: SystemInfo.os
                 color: Style.palette.text
                 font.family: Style.font.family3
                 font.pixelSize: root.fontSize
@@ -54,7 +54,7 @@ DashboardSection {
 
             Text {
                 Layout.alignment: Qt.AlignHCenter
-                text: StatsData.kernel
+                text: SystemInfo.kernel
                 color: Style.palette.text
                 font.family: Style.font.family3
                 font.pixelSize: root.fontSize
@@ -73,7 +73,7 @@ DashboardSection {
 
             Text {
                 Layout.alignment: Qt.AlignHCenter
-                text: StatsData.wm
+                text: SystemInfo.wm
                 color: Style.palette.text
                 font.family: Style.font.family3
                 font.pixelSize: root.fontSize
@@ -92,7 +92,7 @@ DashboardSection {
 
             Text {
                 Layout.alignment: Qt.AlignHCenter
-                text: StatsData.cpu
+                text: SystemInfo.cpu
                 color: Style.palette.text
                 font.family: Style.font.family3
                 font.pixelSize: root.fontSize
@@ -111,7 +111,7 @@ DashboardSection {
 
             Text {
                 Layout.alignment: Qt.AlignHCenter
-                text: StatsData.gpu
+                text: SystemInfo.gpu
                 color: Style.palette.text
                 font.family: Style.font.family3
                 font.pixelSize: root.fontSize
@@ -130,7 +130,7 @@ DashboardSection {
 
             Text {
                 Layout.alignment: Qt.AlignHCenter
-                text: StatsData.uptime
+                text: SystemInfo.uptime
                 color: Style.palette.text
                 font.family: Style.font.family3
                 font.pixelSize: root.fontSize

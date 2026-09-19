@@ -3,6 +3,8 @@ pragma ComponentBehavior: Bound
 import Quickshell.Widgets
 import QtQuick.Layouts
 
+import qs.components
+
 WrapperMouseArea {
     id: root
     required property var modelData
@@ -23,7 +25,7 @@ WrapperMouseArea {
         Network {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
-            networkName: root.modelData.name
+            network: root.modelData
             isHovered: root.isHovered
         }
 

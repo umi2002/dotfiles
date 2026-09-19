@@ -3,8 +3,9 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 
+import qs.components
+
 import qs
-import qs.services
 
 ColumnLayout {
     id: root
@@ -13,11 +14,11 @@ ColumnLayout {
     required property bool isVisible
 
     opacity: isVisible ? 1 : 0
-    spacing: 10
+    spacing: Style.spacing.normal
 
     Behavior on opacity {
         NumberAnimation {
-            duration: 200
+            duration: Style.animation.normal
         }
     }
 
@@ -29,8 +30,11 @@ ColumnLayout {
         Layout.alignment: Qt.AlignLeft | Qt.AlignTop
     }
 
-    BluetoothListView {
+    StyledListView {
         model: root.bluetoothModel
+        delegateComponent: BluetoothListViewItem {
+            width: ListView.view.width
+        }
         Layout.alignment: Qt.AlignLeft | Qt.AlignTop
         Layout.fillWidth: true
     }

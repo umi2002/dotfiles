@@ -1,4 +1,5 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 import QtQuick
 
 QtObject {
@@ -28,6 +29,16 @@ QtObject {
     }
 
     readonly property var wifi: QtObject {
+        function getIcon(signalStrength: real): url {
+            if (signalStrength > 0.8)
+                return bar4;
+            if (signalStrength > 0.6)
+                return bar3;
+            if (signalStrength > 0.4)
+                return bar2;
+            return bar1;
+        }
+
         readonly property url default_: assets.resolveAsset("wifi_icon.svg")
         readonly property url off: assets.resolveAsset("wifi_off_icon.svg")
         readonly property url missing: assets.resolveAsset("missing_wifi_icon.svg")
@@ -38,6 +49,16 @@ QtObject {
     }
 
     readonly property var volume: QtObject {
+        function getIcon(volume: int, muted: bool): url {
+            if (muted)
+                return off;
+            if (volume > 60)
+                return high;
+            if (volume > 20)
+                return medium;
+            return low;
+        }
+
         readonly property url off: assets.resolveAsset("volume_off_icon.svg")
         readonly property url low: assets.resolveAsset("volume_low_icon.svg")
         readonly property url medium: assets.resolveAsset("volume_medium_icon.svg")
@@ -45,6 +66,14 @@ QtObject {
     }
 
     readonly property var brightness: QtObject {
+        function getIcon(brightness: int): url {
+            if (brightness > 80)
+                return high;
+            if (brightness > 40)
+                return medium;
+            return low;
+        }
+
         readonly property url low: assets.resolveAsset("brightness_low_icon.svg")
         readonly property url medium: assets.resolveAsset("brightness_medium_icon.svg")
         readonly property url high: assets.resolveAsset("brightness_high_icon.svg")

@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
@@ -14,7 +16,7 @@ Rectangle {
     id: root
     readonly property alias runnerPopupItem: runnerPopup
     readonly property alias dashboardPopupItem: dashboardPopup
-    readonly property int margins: 10
+    readonly property int margins: Style.spacing.normal
     property bool showRunner: true
 
     anchors.leftMargin: margins

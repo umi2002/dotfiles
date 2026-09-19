@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 //@ pragma IconTheme Adwaita
 
 import Quickshell
@@ -8,6 +10,8 @@ import qs.components
 import qs.services
 
 ShellRoot {
+    readonly property var powerPolicy: PowerPolicy
+
     Variants {
         model: Quickshell.screens
 

@@ -2,6 +2,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick.Layouts
 
+import qs
+
 ColumnLayout {
     id: root
 
@@ -11,7 +13,7 @@ ColumnLayout {
     }
     property var selectedDate: null
 
-    spacing: 5
+    spacing: Style.spacing.small
 
     CalendarHeader {
         Layout.fillWidth: true

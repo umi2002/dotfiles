@@ -14,7 +14,7 @@ Rectangle {
     required property var scriptModel
 
     implicitHeight: 50
-    radius: 10
+    radius: Style.radius.small
     color: Style.palette.surface0
 
     readonly property alias text: searchField.text
@@ -27,10 +27,10 @@ Rectangle {
     RowLayout {
         anchors {
             fill: parent
-            leftMargin: 20
-            rightMargin: 20
+            leftMargin: Style.spacing.large
+            rightMargin: Style.spacing.large
         }
-        spacing: 10
+        spacing: Style.spacing.normal
 
         Text {
             text: "\uf002"

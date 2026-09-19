@@ -3,14 +3,13 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell.Networking
 
+import qs
 import qs.services
 
 Rectangle {
     id: root
-    required property string networkName
+    required property var network
     required property bool isHovered
-
-    readonly property var network: NetworkData.findNetwork(root.networkName)
     readonly property bool usesPsk: [WifiSecurityType.WpaPsk, WifiSecurityType.Wpa2Psk, WifiSecurityType.Sae].includes(network?.security)
     property bool pskSubmitted: false
     property bool passwordFailed: false
@@ -39,7 +38,7 @@ Rectangle {
 
     Behavior on implicitHeight {
         NumberAnimation {
-            duration: 300
+            duration: Style.animation.slow
             easing.type: Easing.InOutCubic
         }
     }
@@ -126,13 +125,13 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: networkHeader.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: Style.spacing.large
         opacity: networkHeader.isExpanded ? 1 : 0
         visible: opacity > 0
 
         Behavior on opacity {
             NumberAnimation {
-                duration: 300
+                duration: Style.animation.slow
                 easing.type: Easing.InOutCubic
             }
         }
@@ -146,13 +145,13 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: networkHeader.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: Style.spacing.large
         opacity: networkHeader.isExpanded ? 1 : 0
         visible: opacity > 0
 
         Behavior on opacity {
             NumberAnimation {
-                duration: 300
+                duration: Style.animation.slow
                 easing.type: Easing.InOutCubic
             }
         }

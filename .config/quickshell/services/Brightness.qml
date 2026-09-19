@@ -1,24 +1,14 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Io
 import QtQuick
 
-import qs.assets
-
 Singleton {
     id: root
 
     property int brightness
-    readonly property string brightnessIcon: {
-        if (brightness > 80) {
-            return Assets.brightness.high;
-        } else if (brightness > 40) {
-            return Assets.brightness.medium;
-        } else {
-            return Assets.brightness.low;
-        }
-    }
 
     function setBrightness(brightness) {
         setBrightnessProcess.brightness = brightness;
@@ -41,13 +31,26 @@ Singleton {
         command: ["brillo", "-S", brightness.toString()]
     }
 
+    property string backlightPath: ""
+
+    Process {
+        id: findBacklight
+        command: ["sh", "-c", "ls -d /sys/class/backlight/*/brightness | head -1"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                root.backlightPath = text.trim();
+            }
+        }
+    }
+
     FileView {
-        path: "/sys/class/backlight/amdgpu_bl1/brightness"
+        path: root.backlightPath
         watchChanges: true
         onFileChanged: getBrightness.running = true
     }
 
     Component.onCompleted: {
+        findBacklight.running = true;
         getBrightness.running = true;
     }
 }

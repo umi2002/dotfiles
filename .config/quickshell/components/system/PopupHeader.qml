@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 
@@ -13,7 +15,7 @@ Item {
     RowLayout {
         id: buttonRow
         anchors.fill: parent
-        spacing: 20
+        spacing: Style.spacing.large
 
         SystemPopupButton {
             id: wifiButton
@@ -36,7 +38,7 @@ Item {
 
     Rectangle {
         anchors.top: parent.bottom
-        anchors.topMargin: 10
+        anchors.topMargin: Style.spacing.normal
         implicitHeight: 5
         implicitWidth: root.selectedIndex === 0 ? wifiButton.implicitWidth : bluetoothButton.implicitWidth
         radius: implicitHeight / 2
@@ -45,13 +47,13 @@ Item {
 
         Behavior on x {
             NumberAnimation {
-                duration: 200
+                duration: Style.animation.normal
                 easing.type: Easing.InOutQuad
             }
         }
         Behavior on implicitWidth {
             NumberAnimation {
-                duration: 200
+                duration: Style.animation.normal
                 easing.type: Easing.InOutQuad
             }
         }

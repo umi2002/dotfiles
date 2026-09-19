@@ -1,4 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
+
+import qs
 
 Item {
     id: root
@@ -16,7 +20,7 @@ Item {
 
     Behavior on x {
         NumberAnimation {
-            duration: 300
+            duration: Style.animation.slow
             easing.type: Easing.InOutCubic
         }
     }

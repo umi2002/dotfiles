@@ -18,7 +18,7 @@ DashboardSection {
     Flickable {
         id: flickable
         anchors.fill: parent
-        anchors.margins: 10
+        anchors.margins: Style.spacing.normal
         contentWidth: width
         contentHeight: eventList.implicitHeight
         clip: true
@@ -37,7 +37,7 @@ DashboardSection {
 
                     required property var modelData
                     Layout.fillWidth: true
-                    spacing: 5
+                    spacing: Style.spacing.small
 
                     Rectangle {
                         readonly property int size: 6

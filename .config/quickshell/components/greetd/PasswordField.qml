@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Shapes
 
@@ -33,8 +35,8 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: 10
-            anchors.rightMargin: 10
+            anchors.leftMargin: Style.spacing.normal
+            anchors.rightMargin: Style.spacing.normal
             visible: passwordInput.text.length === 0
             text: "Password"
             font.family: Style.font.family4
@@ -47,8 +49,8 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
-            anchors.leftMargin: 10
-            anchors.rightMargin: 10
+            anchors.leftMargin: Style.spacing.normal
+            anchors.rightMargin: Style.spacing.normal
             focus: true
             echoMode: TextInput.Password
             font.family: Style.font.family4

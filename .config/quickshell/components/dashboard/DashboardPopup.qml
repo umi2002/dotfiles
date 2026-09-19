@@ -11,13 +11,13 @@ import qs.components.stats
 Rectangle {
     id: root
     property bool isExpanded
-    readonly property int spacing: 5
-    readonly property int margins: 20
+    readonly property int spacing: Style.spacing.small
+    readonly property int margins: Style.spacing.large
 
     implicitWidth: layout.implicitWidth + margins
     implicitHeight: layout.implicitHeight + margins
 
-    radius: 10
+    radius: Style.radius.small
     clip: true
     color: Style.palette.base
 

@@ -19,7 +19,7 @@ Switch {
 
         Behavior on color {
             ColorAnimation {
-                duration: 200
+                duration: Style.animation.normal
             }
         }
 
@@ -33,13 +33,13 @@ Switch {
 
             Behavior on x {
                 NumberAnimation {
-                    duration: 200
+                    duration: Style.animation.normal
                 }
             }
 
             Behavior on color {
                 ColorAnimation {
-                    duration: 200
+                    duration: Style.animation.normal
                 }
             }
         }

@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick
 
@@ -99,7 +101,7 @@ WrapperMouseArea {
     Rectangle {
         id: notificationPopup
 
-        radius: 10
+        radius: Style.radius.small
         color: Style.palette.red
         opacity: 0
         implicitWidth: 400
@@ -113,7 +115,7 @@ WrapperMouseArea {
                 NumberAnimation {
                     duration: root.animationDuration
                     easing.type: Easing.Bezier
-                    easing.bezierCurve: [0.05, 0.7, 0.1, 1.0, 1.0, 1.0]
+                    easing.bezierCurve: Style.animation.curve
                 }
             }
         }
@@ -122,7 +124,7 @@ WrapperMouseArea {
             NumberAnimation {
                 duration: root.animationDuration
                 easing.type: Easing.Bezier
-                easing.bezierCurve: [0.05, 0.7, 0.1, 1.0, 1.0, 1.0]
+                easing.bezierCurve: Style.animation.curve
             }
         }
 
@@ -130,8 +132,8 @@ WrapperMouseArea {
             id: card
             anchors.top: parent.top
             anchors.right: parent.right
-            anchors.topMargin: 10
-            anchors.rightMargin: 10
+            anchors.topMargin: Style.spacing.normal
+            anchors.rightMargin: Style.spacing.normal
             visible: root.currentNotification !== null
             notification: root.currentNotification
             Component.onCompleted: {

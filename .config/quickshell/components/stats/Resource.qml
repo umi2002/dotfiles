@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 
+import qs
 import qs.components
 
 Rectangle {
@@ -14,11 +15,11 @@ Rectangle {
     required property real value
 
     color: bgColor
-    radius: 10
+    radius: Style.radius.small
 
     RowLayout {
         anchors.fill: parent
-        anchors.margins: 5
+        anchors.margins: Style.spacing.small
 
         ColorizedIcon {
             Layout.alignment: Qt.AlignVCenter

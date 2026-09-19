@@ -5,6 +5,8 @@ import QtQuick
 import QtQuick.Shapes
 import QtQuick.Effects
 
+import qs.assets
+
 import qs.components
 import qs.services
 
@@ -67,7 +69,7 @@ Item {
         }
 
         ColorizedIcon {
-            iconSource: Battery.batteryIcon
+            iconSource: Assets.battery.getIcon(Battery.batteryPercent, Battery.chargeState)
             iconColor: root.primaryColor
             anchors.centerIn: parent
             implicitSize: 20

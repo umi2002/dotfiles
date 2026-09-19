@@ -5,7 +5,7 @@ import QtQuick
 import qs
 
 Rectangle {
-    radius: 10
+    radius: Style.radius.small
 
     color: Style.palette.mantle
 }

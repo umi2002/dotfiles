@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 
+import qs
 import qs.components
 
 StyledButton {
@@ -20,7 +21,7 @@ StyledButton {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: 200
+            duration: Style.animation.normal
         }
     }
 }

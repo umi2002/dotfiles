@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick.Layouts
 
 import qs
@@ -13,14 +15,14 @@ DashboardSection {
 
     RowLayout {
         anchors.centerIn: parent
-        spacing: 10
+        spacing: Style.spacing.normal
 
         ResourcesSlider {
             Layout.alignment: Qt.AlignVCenter
 
             iconSource: Assets.stats.cpu
             iconColor: Style.palette.sapphire
-            value: StatsData.cpuUsage
+            value: Resources.cpuUsage
         }
 
         ResourcesSlider {
@@ -28,7 +30,7 @@ DashboardSection {
 
             iconSource: Assets.stats.memory
             iconColor: Style.palette.blue
-            value: StatsData.memUsage
+            value: Resources.memUsage
         }
 
         ResourcesSlider {
@@ -36,7 +38,7 @@ DashboardSection {
 
             iconSource: Assets.stats.storage
             iconColor: Style.palette.peach
-            value: StatsData.diskUsage
+            value: Resources.diskUsage
         }
     }
 }

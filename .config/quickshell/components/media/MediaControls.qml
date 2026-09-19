@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick.Layouts
 
 import qs.assets
@@ -22,7 +24,7 @@ MediaSection {
         MediaControlButton {
             Layout.alignment: Qt.AlignHCenter
             controlType: "play"
-            iconSource: Media.spotifyPlayer?.isPlaying ? Assets.media.pause : Assets.media.play
+            iconSource: Media.activePlayer?.isPlaying ? Assets.media.pause : Assets.media.play
             iconSize: layout.iconSize
         }
 

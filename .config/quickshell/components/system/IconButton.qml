@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 
 import Quickshell.Widgets
 import QtQuick
-import Qt5Compat.GraphicalEffects
 
 import qs
 import qs.components
@@ -31,7 +30,7 @@ Rectangle {
 
         Behavior on iconColor {
             ColorAnimation {
-                duration: 200
+                duration: Style.animation.normal
             }
         }
     }

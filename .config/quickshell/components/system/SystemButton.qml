@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 
@@ -16,14 +18,14 @@ Rectangle {
 
     Behavior on color {
         ColorAnimation {
-            duration: 200
+            duration: Style.animation.normal
         }
     }
 
     RowLayout {
         id: layout
         anchors.centerIn: parent
-        spacing: 20
+        spacing: Style.spacing.large
 
         NetworkIcon {
             id: network

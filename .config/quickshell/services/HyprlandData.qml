@@ -1,14 +1,17 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Hyprland
 import Quickshell.Io
 import QtQuick
 
+import qs
+
 Singleton {
     id: root
 
-    readonly property int nWorkspaces: 10
+    readonly property int nWorkspaces: Config.nWorkspaces
 
     readonly property list<bool> occupiedWorkspaces: Array.from({
         length: nWorkspaces

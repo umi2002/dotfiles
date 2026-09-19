@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick
 
@@ -23,7 +25,7 @@ WrapperMouseArea {
 
         Behavior on color {
             ColorAnimation {
-                duration: 200
+                duration: Style.animation.normal
             }
         }
 

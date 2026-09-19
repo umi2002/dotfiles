@@ -11,7 +11,7 @@ Rectangle {
     id: root
 
     property bool isExpanded
-    readonly property int margins: 20
+    readonly property int margins: Style.spacing.large
     readonly property int profileItemWidth: 30
     readonly property int profileSpacing: 20
     readonly property int activeProfileIndex: {
@@ -28,7 +28,7 @@ Rectangle {
     implicitWidth: layout.implicitWidth + margins
     implicitHeight: layout.implicitHeight + margins
 
-    radius: 10
+    radius: Style.radius.small
     clip: true
     color: Style.palette.base
 
@@ -42,7 +42,7 @@ Rectangle {
 
         Behavior on x {
             NumberAnimation {
-                duration: 200
+                duration: Style.animation.normal
                 easing.type: Easing.InOutCubic
             }
         }

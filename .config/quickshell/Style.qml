@@ -1,4 +1,5 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import QtQuick
 
@@ -40,5 +41,24 @@ QtObject {
         readonly property string family4: "JetBrainsMono Nerd Font"
         readonly property int size1: 16
         readonly property int size2: 12
+    }
+
+    readonly property var animation: QtObject {
+        readonly property int fast: 150
+        readonly property int normal: 200
+        readonly property int slow: 300
+        readonly property int popup: 450
+        readonly property var curve: [0.05, 0.7, 0.1, 1.0, 1.0, 1.0]
+    }
+
+    readonly property var spacing: QtObject {
+        readonly property int small: 5
+        readonly property int normal: 10
+        readonly property int large: 20
+    }
+
+    readonly property var radius: QtObject {
+        readonly property int small: 10
+        readonly property int large: 20
     }
 }

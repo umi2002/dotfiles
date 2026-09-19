@@ -4,6 +4,8 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Effects
 
+import qs
+
 IconImage {
     id: root
     required property string iconSource
@@ -18,7 +20,7 @@ IconImage {
 
         Behavior on colorizationColor {
             ColorAnimation {
-                duration: 200
+                duration: Style.animation.normal
             }
         }
     }

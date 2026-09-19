@@ -1,12 +1,16 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick
+
+import qs
 
 WrapperMouseArea {
     id: root
     required property bool isExpanded
     required property Component popupContent
 
-    property int animationDuration: 450
+    property int animationDuration: Style.animation.popup
 
     hoverEnabled: true
     implicitWidth: loader.width
@@ -46,7 +50,7 @@ WrapperMouseArea {
             NumberAnimation {
                 duration: root.animationDuration
                 easing.type: Easing.Bezier
-                easing.bezierCurve: [0.05, 0.7, 0.1, 1.0, 1.0, 1.0]
+                easing.bezierCurve: Style.animation.curve
             }
         }
 
@@ -54,7 +58,7 @@ WrapperMouseArea {
             NumberAnimation {
                 duration: root.animationDuration
                 easing.type: Easing.Bezier
-                easing.bezierCurve: [0.05, 0.7, 0.1, 1.0, 1.0, 1.0]
+                easing.bezierCurve: Style.animation.curve
             }
         }
 

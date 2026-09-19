@@ -4,6 +4,8 @@ import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
 
+import qs.assets
+
 import qs
 import qs.services
 import qs.components.dashboard
@@ -25,12 +27,12 @@ DashboardSection {
             Layout.alignment: Qt.AlignVCenter
             implicitSize: 100
 
-            source: Weather.icon
+            source: Assets.weather.getIcon(Weather.weatherCode, Weather.isDay)
         }
 
         ColumnLayout {
             id: layout
-            spacing: 10
+            spacing: Style.spacing.normal
 
             Layout.alignment: Qt.AlignVCenter
 
@@ -54,7 +56,7 @@ DashboardSection {
 
             RowLayout {
                 Layout.alignment: Qt.AlignHCenter
-                spacing: 10
+                spacing: Style.spacing.normal
 
                 Text {
                     text: "Humidity"

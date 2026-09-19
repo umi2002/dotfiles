@@ -41,7 +41,7 @@ WrapperMouseArea {
             id: pulseAnimation
             from: root.backgroundColor
             to: root.hoverColor
-            duration: 200
+            duration: Style.animation.normal
             running: false
 
             onStopped: {
@@ -54,7 +54,7 @@ WrapperMouseArea {
             target: button
             property: "color"
             to: root.backgroundColor
-            duration: 200
+            duration: Style.animation.normal
             running: false
         }
 

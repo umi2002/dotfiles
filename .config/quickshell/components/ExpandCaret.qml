@@ -34,7 +34,7 @@ WrapperMouseArea {
 
         Behavior on rotation {
             NumberAnimation {
-                duration: 200
+                duration: Style.animation.normal
                 easing.type: Easing.OutQuad
             }
         }

@@ -1,9 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
-
-import qs
 
 WrapperMouseArea {
     id: root
@@ -13,13 +12,13 @@ WrapperMouseArea {
         id: layout
         anchors.centerIn: parent
 
-        Brightness {
+        BrightnessWidget {
             Layout.alignment: Qt.AlignVCenter
             Layout.preferredWidth: childrenRect.width
             Layout.preferredHeight: childrenRect.height
         }
 
-        Audio {
+        AudioWidget {
             Layout.alignment: Qt.AlignVCenter
             Layout.preferredWidth: childrenRect.width
             Layout.preferredHeight: childrenRect.height

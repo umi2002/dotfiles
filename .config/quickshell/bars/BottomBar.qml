@@ -1,5 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 
+import qs
 import qs.components
 import qs.components.battery
 import qs.components.media
@@ -14,7 +17,7 @@ Rectangle {
     readonly property alias mediaPopupItem: mediaPopup
     readonly property alias utilsPopupItem: utilsPopup
     readonly property alias notificationsPopupItem: notificationsPopup
-    readonly property int margins: 10
+    readonly property int margins: Style.spacing.normal
 
     anchors.leftMargin: margins
     anchors.rightMargin: margins
@@ -28,7 +31,7 @@ Rectangle {
         popupContent: BatteryPopup {}
     }
 
-    Battery {
+    BatteryWidget {
         id: battery
         anchors.left: parent.left
         anchors.leftMargin: root.margins
@@ -66,12 +69,12 @@ Rectangle {
         popupContent: MediaPopup {}
     }
 
-    Media {
+    MediaWidget {
         id: media
         anchors.centerIn: parent
     }
 
-    Tray {
+    TrayWidget {
         anchors.right: utils.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom

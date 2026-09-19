@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 
 import qs
@@ -9,7 +11,7 @@ WrapperMouseArea {
     required property string iconSource
     required property string iconSize
     property string controlType: "play"
-    property var player: Media.spotifyPlayer
+    property var player: Media.activePlayer
 
     cursorShape: Qt.PointingHandCursor
 

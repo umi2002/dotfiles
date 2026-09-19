@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Services.Mpris
 import QtQuick
 
@@ -6,7 +8,7 @@ import qs.components
 
 MediaSection {
     id: root
-    property var player: Media.spotifyPlayer
+    property var player: Media.activePlayer
 
     implicitHeight: 50
 

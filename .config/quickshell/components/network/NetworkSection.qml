@@ -3,6 +3,8 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 
+import qs.components
+
 import qs
 
 ColumnLayout {
@@ -12,12 +14,12 @@ ColumnLayout {
     required property var networkModel
     required property bool isVisible
 
-    spacing: 10
+    spacing: Style.spacing.normal
     opacity: isVisible ? 1 : 0
 
     Behavior on opacity {
         NumberAnimation {
-            duration: 200
+            duration: Style.animation.normal
         }
     }
 
@@ -29,8 +31,11 @@ ColumnLayout {
         Layout.alignment: Qt.AlignLeft | Qt.AlignTop
     }
 
-    NetworkListView {
+    StyledListView {
         model: root.networkModel
+        delegateComponent: NetworkListViewItem {
+            width: ListView.view.width
+        }
         Layout.alignment: Qt.AlignLeft | Qt.AlignTop
         Layout.fillWidth: true
     }

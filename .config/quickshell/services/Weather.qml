@@ -1,11 +1,11 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Io
 import QtQml
 
 import qs
-import qs.assets
 
 Singleton {
     id: root
@@ -16,7 +16,6 @@ Singleton {
     property string lastUpdated: ""
     property int weatherCode: -1
     property bool isDay: false
-    property url icon: Assets.weather.clearDay
 
     function parseWeather(json) {
         if (json.error)
@@ -29,7 +28,6 @@ Singleton {
         root.lastUpdated = json.location.localtime;
         root.weatherCode = current.condition.code;
         root.isDay = current.is_day === 1;
-        root.icon = Assets.weather.getIcon(root.weatherCode, root.isDay);
     }
 
     Process {
@@ -55,13 +53,13 @@ Singleton {
 
     Timer {
         id: retryTimer
-        interval: 30 * 1000
+        interval: Config.weatherRetryInterval
         repeat: false
         onTriggered: fetchProcess.running = true
     }
 
     Timer {
-        interval: 10 * 60 * 1000
+        interval: Config.weatherInterval
         running: true
         repeat: true
         triggeredOnStart: true

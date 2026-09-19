@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick.Layouts
 
 import qs
@@ -9,7 +11,7 @@ MediaSection {
     ColumnLayout {
         id: mediaInfo
         anchors.centerIn: parent
-        spacing: 5
+        spacing: Style.spacing.small
 
         MediaText {
             text: Media.title

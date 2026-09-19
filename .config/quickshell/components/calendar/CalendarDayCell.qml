@@ -1,7 +1,6 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import Qt5Compat.GraphicalEffects
 
 import qs
 import qs.services
@@ -49,7 +48,7 @@ Item {
 
         Behavior on color {
             ColorAnimation {
-                duration: 200
+                duration: Style.animation.normal
             }
         }
 
@@ -65,7 +64,7 @@ Item {
 
             Behavior on color {
                 ColorAnimation {
-                    duration: 200
+                    duration: Style.animation.normal
                 }
             }
         }
@@ -86,7 +85,7 @@ Item {
 
                     Behavior on color {
                         ColorAnimation {
-                            duration: 200
+                            duration: Style.animation.normal
                         }
                     }
                 }

@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import qs.components
 import qs.services
 
@@ -9,7 +11,7 @@ MediaSection {
         sliderWidth: 10
         sliderHeight: root.height - 50
         anchors.centerIn: parent
-        value: Media.spotifyPlayer?.volume || 0
+        value: Media.activePlayer?.volume || 0
         from: 0
         to: 1
 

@@ -1,7 +1,10 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import Caelestia.Services
 
+import qs
 import qs.services
 
 MediaSection {
@@ -13,7 +16,7 @@ MediaSection {
 
     RowLayout {
         anchors.fill: parent
-        anchors.margins: 5
+        anchors.margins: Style.spacing.small
         spacing: 2
 
         Repeater {

@@ -1,7 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import QtQuick
 
 import qs
-import qs.services
 
 Item {
     id: root

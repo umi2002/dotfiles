@@ -12,13 +12,13 @@ import qs.services
 Rectangle {
     id: root
     property bool isExpanded
-    readonly property int spacing: 5
-    readonly property int margins: 20
+    readonly property int spacing: Style.spacing.small
+    readonly property int margins: Style.spacing.large
 
     implicitWidth: 450
     implicitHeight: layout.implicitHeight + margins
 
-    radius: 10
+    radius: Style.radius.small
     clip: true
     color: Style.palette.base
 
@@ -45,15 +45,15 @@ Rectangle {
         anchors.margins: root.margins
 
         Rectangle {
-            Layout.leftMargin: 10
-            Layout.bottomMargin: 10
+            Layout.leftMargin: Style.spacing.normal
+            Layout.bottomMargin: Style.spacing.normal
             Layout.preferredWidth: titleLayout.implicitWidth
             Layout.preferredHeight: 40
             color: "transparent"
 
             RowLayout {
                 id: titleLayout
-                spacing: 10
+                spacing: Style.spacing.normal
 
                 ColorizedIcon {
                     iconSource: Assets.notifications.idle
@@ -72,7 +72,7 @@ Rectangle {
 
             Rectangle {
                 anchors.top: titleLayout.bottom
-                anchors.topMargin: 5
+                anchors.topMargin: Style.spacing.small
                 x: title.x + title.implicitWidth / 2 - implicitWidth / 2
                 color: Style.palette.mauve
                 implicitWidth: 100
@@ -95,7 +95,7 @@ Rectangle {
                     properties: "y"
                     duration: 400
                     easing.type: Easing.Bezier
-                    easing.bezierCurve: [0.05, 0.7, 0.1, 1.0, 1.0, 1.0]
+                    easing.bezierCurve: Style.animation.curve
                 }
             }
 
@@ -117,7 +117,7 @@ Rectangle {
                     anchors.top: parent.top
                     notification: delegateItem.model
                     color: Style.palette.mantle
-                    radius: 10
+                    radius: Style.radius.small
                 }
             }
         }
@@ -126,8 +126,8 @@ Rectangle {
             id: controls
             implicitHeight: 50
             Layout.fillWidth: true
-            Layout.topMargin: 10
-            Layout.leftMargin: 10
+            Layout.topMargin: Style.spacing.normal
+            Layout.leftMargin: Style.spacing.normal
 
             WrapperMouseArea {
                 cursorShape: Qt.PointingHandCursor

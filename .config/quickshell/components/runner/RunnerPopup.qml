@@ -16,7 +16,7 @@ Rectangle {
 
     implicitWidth: 600
     implicitHeight: column.implicitHeight + 20
-    radius: 10
+    radius: Style.radius.small
     clip: true
     color: Style.palette.base
 
@@ -25,7 +25,7 @@ Rectangle {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: 300
+            duration: Style.animation.slow
             easing.type: Easing.OutCubic
         }
     }
@@ -42,9 +42,9 @@ Rectangle {
             left: parent.left
             right: parent.right
             top: parent.top
-            margins: 10
+            margins: Style.spacing.normal
         }
-        spacing: 10
+        spacing: Style.spacing.normal
 
         RunnerSearchBar {
             id: searchBar
@@ -68,7 +68,7 @@ Rectangle {
 
             highlightFollowsCurrentItem: false
             highlight: Rectangle {
-                radius: 10
+                radius: Style.radius.small
                 color: Style.palette.surface0
                 width: appList.width
                 height: root.itemHeight
@@ -76,7 +76,7 @@ Rectangle {
 
                 Behavior on y {
                     NumberAnimation {
-                        duration: 150
+                        duration: Style.animation.fast
                         easing.type: Easing.OutCubic
                     }
                 }
@@ -87,7 +87,7 @@ Rectangle {
                     property: "opacity"
                     from: 0
                     to: 1
-                    duration: 200
+                    duration: Style.animation.normal
                     easing.type: Easing.OutCubic
                 }
             }
@@ -97,7 +97,7 @@ Rectangle {
                     property: "opacity"
                     from: 1
                     to: 0
-                    duration: 150
+                    duration: Style.animation.fast
                     easing.type: Easing.InCubic
                 }
             }
@@ -105,7 +105,7 @@ Rectangle {
             displaced: Transition {
                 NumberAnimation {
                     property: "y"
-                    duration: 200
+                    duration: Style.animation.normal
                     easing.type: Easing.OutCubic
                 }
                 NumberAnimation {

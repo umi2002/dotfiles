@@ -1,9 +1,12 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Notifications
 import QtQuick
+
+import qs
 
 Singleton {
     id: root
@@ -13,7 +16,7 @@ Singleton {
     signal notificationReceived(var notification)
 
     property ListModel history: ListModel {}
-    readonly property int storageWriteDebounce: 1000
+    readonly property int storageWriteDebounce: Config.storageWriteDebounce
 
     NotificationServer {
         id: server
@@ -38,7 +41,7 @@ Singleton {
                 time: Date.now()
             });
 
-            while (root.history.count > 100) {
+            while (root.history.count > Config.notificationHistoryLimit) {
                 root.history.remove(root.history.count - 1);
             }
 

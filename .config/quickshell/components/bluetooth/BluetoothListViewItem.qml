@@ -2,6 +2,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick.Layouts
 
+import qs.components
+
 ColumnLayout {
     id: layout
     required property var modelData

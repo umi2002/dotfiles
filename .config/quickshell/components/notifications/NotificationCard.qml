@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
@@ -24,7 +26,7 @@ Rectangle {
         NumberAnimation {
             duration: 350
             easing.type: Easing.Bezier
-            easing.bezierCurve: [0.05, 0.7, 0.1, 1.0, 1.0, 1.0]
+            easing.bezierCurve: Style.animation.curve
         }
     }
 
@@ -32,7 +34,7 @@ Rectangle {
         NumberAnimation {
             duration: 350
             easing.type: Easing.Bezier
-            easing.bezierCurve: [0.05, 0.7, 0.1, 1.0, 1.0, 1.0]
+            easing.bezierCurve: Style.animation.curve
         }
     }
 
@@ -46,7 +48,7 @@ Rectangle {
             margins: root.padding
         }
 
-        spacing: 10
+        spacing: Style.spacing.normal
 
         Item {
             Layout.preferredWidth: 100

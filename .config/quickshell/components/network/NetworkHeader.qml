@@ -44,7 +44,7 @@ Rectangle {
     Loader {
         active: root.isConnecting
         anchors.right: actionButton.left
-        anchors.rightMargin: 10
+        anchors.rightMargin: Style.spacing.normal
         anchors.verticalCenter: parent.verticalCenter
 
         sourceComponent: Throbber {
@@ -62,11 +62,11 @@ Rectangle {
         opacity: root.isHovered ? 1 : 0
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: actionButton.left
-        anchors.rightMargin: 10
+        anchors.rightMargin: Style.spacing.normal
 
         Behavior on opacity {
             NumberAnimation {
-                duration: 200
+                duration: Style.animation.normal
             }
         }
 
@@ -88,7 +88,7 @@ Rectangle {
         isConnecting: root.isConnecting
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: caret.left
-        anchors.rightMargin: 10
+        anchors.rightMargin: Style.spacing.normal
 
         text: {
             if (root.network?.connected) {

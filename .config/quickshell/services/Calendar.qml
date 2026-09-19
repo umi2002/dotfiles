@@ -1,4 +1,5 @@
 pragma Singleton
+pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Io
@@ -36,7 +37,7 @@ Singleton {
     }
 
     Timer {
-        interval: 15 * 60 * 1000
+        interval: Config.calendarInterval
         running: true
         repeat: true
         onTriggered: fetchCalendar.running = true

@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick
 
@@ -35,14 +37,14 @@ WrapperMouseArea {
                 visible: root.showInput
                 implicitWidth: 300
                 implicitHeight: 30
-                radius: 10
+                radius: Style.radius.small
                 opacity: root.busy ? 0.5 : 1
                 color: root.failed && textInput.text.length === 0 ? Style.palette.red : Style.palette.subtext1
 
                 TextInput {
                     id: textInput
                     anchors.fill: parent
-                    anchors.margins: 5
+                    anchors.margins: Style.spacing.small
                     verticalAlignment: Qt.AlignVCenter
                     font.pointSize: Style.font.size2
                     font.family: Style.font.family3

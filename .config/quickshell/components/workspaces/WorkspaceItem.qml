@@ -29,19 +29,19 @@ Rectangle {
     Behavior on implicitWidth {
         NumberAnimation {
             duration: 250
-            easing.bezierCurve: [0.05, 0.7, 0.1, 1.0, 1.0, 1.0]
+            easing.bezierCurve: Style.animation.curve
         }
     }
 
     Behavior on color {
         ColorAnimation {
-            duration: 200
+            duration: Style.animation.normal
         }
     }
 
     Behavior on opacity {
         NumberAnimation {
-            duration: 200
+            duration: Style.animation.normal
         }
     }
 

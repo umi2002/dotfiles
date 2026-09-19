@@ -113,8 +113,8 @@ ShellRoot {
             TimeDisplay {
                 anchors.top: parent.top
                 anchors.right: parent.right
-                anchors.topMargin: 20
-                anchors.rightMargin: 20
+                anchors.topMargin: Style.spacing.large
+                anchors.rightMargin: Style.spacing.large
             }
 
             LoginForm {

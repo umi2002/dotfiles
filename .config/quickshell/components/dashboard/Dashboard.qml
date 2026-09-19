@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick.Layouts
 
@@ -16,7 +18,7 @@ WrapperMouseArea {
     hoverEnabled: true
 
     RowLayout {
-        spacing: 10
+        spacing: Style.spacing.normal
 
         Resource {
             Layout.preferredWidth: root.resourceWidth
@@ -26,7 +28,7 @@ WrapperMouseArea {
             fgColor: Style.palette.crust
             bgColor: Style.palette.sapphire
             iconSource: Assets.stats.cpu
-            value: StatsData.cpuUsage
+            value: Resources.cpuUsage
         }
 
         Resource {
@@ -37,7 +39,7 @@ WrapperMouseArea {
             fgColor: Style.palette.crust
             bgColor: Style.palette.blue
             iconSource: Assets.stats.memory
-            value: StatsData.memUsage
+            value: Resources.memUsage
         }
 
         Resource {
@@ -48,10 +50,10 @@ WrapperMouseArea {
             fgColor: Style.palette.crust
             bgColor: Style.palette.peach
             iconSource: Assets.stats.storage
-            value: StatsData.diskUsage
+            value: Resources.diskUsage
         }
 
-        Calendar {
+        CalendarWidget {
             Layout.alignment: Qt.AlignVCenter
         }
     }

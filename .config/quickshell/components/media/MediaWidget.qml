@@ -1,14 +1,16 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
 import QtQuick.Layouts
 
-import qs.assets
+import qs
 import qs.services
 
 WrapperMouseArea {
     id: root
-    readonly property string title: Media.spotifyPlayer?.trackTitle || ""
-    readonly property string artist: Media.spotifyPlayer?.trackArtist || ""
-    readonly property bool isAvailable: Media.spotifyPlayer !== null
+    readonly property string title: Media.activePlayer?.trackTitle || ""
+    readonly property string artist: Media.activePlayer?.trackArtist || ""
+    readonly property bool isAvailable: Media.activePlayer !== null
 
     hoverEnabled: true
 
@@ -19,9 +21,10 @@ WrapperMouseArea {
         }
 
         IconImage {
-            source: Assets.logos.spotify
-            Layout.leftMargin: 5
-            Layout.rightMargin: 5
+            source: Media.icon
+            visible: root.isAvailable && Media.icon != ""
+            Layout.leftMargin: Style.spacing.small
+            Layout.rightMargin: Style.spacing.small
             implicitSize: 30
         }
 
@@ -31,7 +34,7 @@ WrapperMouseArea {
         }
 
         MediaText {
-            text: "Spotify unavailable"
+            text: "No media playing"
             visible: !root.isAvailable
         }
     }

@@ -24,10 +24,10 @@ WrapperMouseArea {
     RowLayout {
         anchors {
             fill: parent
-            leftMargin: 10
-            rightMargin: 10
+            leftMargin: Style.spacing.normal
+            rightMargin: Style.spacing.normal
         }
-        spacing: 10
+        spacing: Style.spacing.normal
 
         IconImage {
             source: Quickshell.iconPath(root.modelData?.entry?.icon ?? "", "application-x-executable")

@@ -1,4 +1,8 @@
+pragma ComponentBehavior: Bound
+
 import Quickshell.Widgets
+
+import qs.assets
 
 import qs.services
 
@@ -13,7 +17,7 @@ WrapperMouseArea {
     }
 
     UtilsWidget {
-        iconSource: Audio.volumeIcon
+        iconSource: Assets.volume.getIcon(Audio.volume, Audio.muted)
         percentage: Audio.volume
     }
 }
