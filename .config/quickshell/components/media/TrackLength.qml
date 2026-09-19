@@ -19,7 +19,7 @@ MediaSection {
         enabled: false
         from: 0
         to: root.player?.length || 0
-        value: root.player?.position
+        value: root.player?.position ?? 0
 
         FrameAnimation {
             running: root.player?.playbackState === MprisPlaybackState.Playing

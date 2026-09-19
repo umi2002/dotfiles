@@ -35,9 +35,10 @@ WrapperMouseArea {
 
         onItemChanged: {
             if (item) {
-                item.isExpanded = Qt.binding(() => root.isExpanded);
-                loader.width = Qt.binding(() => item.implicitWidth);
-                loader.height = Qt.binding(() => root.isExpanded ? item.implicitHeight : 0);
+                const content = item;
+                content.isExpanded = Qt.binding(() => root.isExpanded);
+                loader.width = Qt.binding(() => content?.implicitWidth ?? 0);
+                loader.height = Qt.binding(() => root.isExpanded && content ? content.implicitHeight : 0);
             }
         }
 

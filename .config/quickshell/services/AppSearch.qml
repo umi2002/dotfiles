@@ -16,7 +16,7 @@ Singleton {
     function search(query) {
         const q = query.trim().toLowerCase();
         if (!q) {
-            return appDb.apps;
+            return [...appDb.apps];
         }
 
         const score = a => {

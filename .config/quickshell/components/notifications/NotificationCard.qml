@@ -62,7 +62,7 @@ Rectangle {
 
             IconImage {
                 anchors.fill: parent
-                source: Quickshell.iconPath(root.notification?.appIcon || "")
+                source: root.notification?.appIcon ? Quickshell.iconPath(root.notification.appIcon) : ""
                 visible: notifImage.status !== Image.Ready
             }
         }

@@ -24,11 +24,16 @@ Singleton {
     readonly property string timeToFull: formatTimeRemaining(displayDevice.timeToFull, true)
     readonly property int batteryThreshold: 20
 
-    Component.onCompleted: {
-        if (!displayDevice.isLaptopBattery) {
+    readonly property bool deviceReady: displayDevice.ready
+
+    function applyDesktopProfile() {
+        if (deviceReady && !displayDevice.isLaptopBattery && PowerProfiles.hasPerformanceProfile) {
             PowerProfiles.profile = PowerProfile.Performance;
         }
     }
+
+    Component.onCompleted: applyDesktopProfile()
+    onDeviceReadyChanged: applyDesktopProfile()
 
     onBatteryPercentChanged: {
         if (batteryPercent < batteryThreshold && !root.isCharging) {
