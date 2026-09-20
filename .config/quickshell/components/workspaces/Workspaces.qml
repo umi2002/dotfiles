@@ -31,7 +31,7 @@ Rectangle {
                 isActive: root.activeWorkspaceIndex === index
 
                 onClicked: {
-                    Hyprland.dispatch(`hl.dsp.focus({ workspace = ${index + 1} })`);
+                    HyprlandData.focusWorkspace(index + 1);
                 }
             }
         }

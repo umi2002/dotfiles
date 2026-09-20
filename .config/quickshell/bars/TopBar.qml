@@ -10,11 +10,13 @@ import qs.services
 import qs.components
 import qs.components.dashboard
 import qs.components.workspaces
+import qs.components.overview
 import qs.components.runner
 
 Rectangle {
     id: root
     readonly property alias runnerPopupItem: runnerPopup
+    readonly property alias overviewPopupItem: overviewPopup
     readonly property alias dashboardPopupItem: dashboardPopup
     readonly property int margins: Style.spacing.normal
     property bool showRunner: true
@@ -34,6 +36,7 @@ Rectangle {
     }
 
     Workspaces {
+        id: workspaces
         Layout.alignment: Qt.AlignVCenter
         radius: Math.min(width, height) / 2
         anchors.left: logo.right
@@ -47,6 +50,21 @@ Rectangle {
         anchors.top: title.bottom
         anchors.horizontalCenter: title.horizontalCenter
         popupContent: RunnerPopup {}
+    }
+
+    OverviewButton {
+        id: overviewButton
+        anchors.left: workspaces.right
+        anchors.leftMargin: root.margins
+        anchors.verticalCenter: parent.verticalCenter
+    }
+
+    StyledPopup {
+        id: overviewPopup
+        isExpanded: OverviewState.visible
+        anchors.top: overviewButton.bottom
+        anchors.horizontalCenter: title.horizontalCenter
+        popupContent: OverviewPopup {}
     }
 
     Title {

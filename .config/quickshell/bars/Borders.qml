@@ -37,6 +37,10 @@ PanelWindow {
             intersection: Intersection.Subtract
         }
         Region {
+            item: topBar.overviewPopupItem
+            intersection: Intersection.Subtract
+        }
+        Region {
             item: topBar.dashboardPopupItem
             intersection: Intersection.Subtract
         }

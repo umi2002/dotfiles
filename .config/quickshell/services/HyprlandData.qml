@@ -12,6 +12,7 @@ Singleton {
     id: root
 
     readonly property int nWorkspaces: Config.nWorkspaces
+    readonly property int activeWorkspaceId: Hyprland.focusedWorkspace?.id ?? 0
 
     readonly property list<bool> occupiedWorkspaces: Array.from({
         length: nWorkspaces
@@ -84,7 +85,24 @@ Singleton {
     function focusWindow(windowClass) {
         const toplevel = Hyprland.toplevels.values.find(t => t.lastIpcObject?.class === windowClass);
         if (toplevel)
-            Hyprland.dispatch(`hl.dsp.focus({ window = "address:0x${toplevel.address}" })`);
+            focusWindowByAddress(toplevel.address);
+    }
+
+    function focusWindowByAddress(address) {
+        Hyprland.dispatch(`hl.dsp.focus({ window = "address:0x${address}" })`);
+    }
+
+    function focusWorkspace(workspaceId) {
+        Hyprland.dispatch(`hl.dsp.focus({ workspace = ${workspaceId} })`);
+    }
+
+    function moveWindowToWorkspace(address, workspaceId) {
+        Hyprland.dispatch(`hl.dsp.window.move({ window = "address:0x${address}", workspace = ${workspaceId}, follow = false })`);
+    }
+
+    function windowsForWorkspace(workspaceId) {
+        const workspace = Hyprland.workspaces.values.find(ws => ws.id === workspaceId);
+        return workspace ? workspace.toplevels.values : [];
     }
 
     Process {
