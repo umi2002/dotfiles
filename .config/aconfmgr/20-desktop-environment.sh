@@ -22,8 +22,7 @@ AddPackage cliphist                    # wayland clipboard manager
 AddPackage upower                      # Abstraction for enumerating power devices, listening to device events and querying history and statistics
 
 # Quickshell
-AddPackage --foreign quickshell-git  # Flexible toolkit for making desktop shells with QtQuick
-AddPackage --foreign caelestia-shell # The desktop shell for the Caelestia dotfiles
+AddPackage --foreign quickshell-git # Flexible toolkit for making desktop shells with QtQuick
 
 # Quickshell Dependencies
 AddPackage --foreign brillo # Control the brightness of backlight and keyboard LED devices

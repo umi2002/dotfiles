@@ -30,7 +30,7 @@ WrapperMouseArea {
         spacing: Style.spacing.normal
 
         IconImage {
-            source: Quickshell.iconPath(root.modelData?.entry?.icon ?? "", "application-x-executable")
+            source: Quickshell.iconPath(root.modelData?.icon ?? "", "application-x-executable")
             implicitSize: 30
             Layout.alignment: Qt.AlignVCenter
         }

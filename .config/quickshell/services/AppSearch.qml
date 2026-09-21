@@ -2,22 +2,20 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import Quickshell
-import Caelestia.Models
+import Quickshell.Io
+import QtQuick
 
 Singleton {
     id: root
 
-    AppDb {
-        id: appDb
-        path: Quickshell.shellDir + "/runner-apps.sqlite"
-        favouriteApps: []
-        entries: DesktopEntries.applications.values.filter(a => !a.noDisplay)
-    }
+    readonly property var frequencies: adapter.frequencies
+
+    readonly property var apps: DesktopEntries.applications.values.filter(a => !a.noDisplay).sort((a, b) => (root.frequencies[b.id] ?? 0) - (root.frequencies[a.id] ?? 0) || a.name.localeCompare(b.name))
 
     function search(query) {
         const q = query.trim().toLowerCase();
         if (!q) {
-            return [...appDb.apps];
+            return [...root.apps];
         }
 
         const score = a => {
@@ -35,14 +33,32 @@ Singleton {
             return 5;
         };
 
-        return appDb.apps.filter(a => score(a) < 5).sort((a, b) => score(a) - score(b));
+        return root.apps.filter(a => score(a) < 5).sort((a, b) => score(a) - score(b));
     }
 
     function launch(appEntry) {
-        appDb.incrementFrequency(appEntry.id);
-        Quickshell.execDetached({
-            command: ["uwsm", "app", "--"].concat(appEntry.entry.command),
-            workingDirectory: appEntry.entry.workingDirectory
+        adapter.frequencies = Object.assign({}, adapter.frequencies, {
+            [appEntry.id]: (adapter.frequencies[appEntry.id] ?? 0) + 1
         });
+        storage.writeAdapter();
+        Quickshell.execDetached({
+            command: ["uwsm", "app", "--"].concat(appEntry.command),
+            workingDirectory: appEntry.workingDirectory
+        });
+    }
+
+    Component.onCompleted: storage.waitForJob()
+
+    FileView {
+        id: storage
+        path: Quickshell.statePath("runner-frequencies.json")
+        preload: true
+        blockLoading: true
+        printErrors: false
+
+        JsonAdapter {
+            id: adapter
+            property var frequencies: ({})
+        }
     }
 }
