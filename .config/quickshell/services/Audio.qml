@@ -3,7 +3,6 @@ pragma ComponentBehavior: Bound
 
 import Quickshell
 import Quickshell.Services.Pipewire
-import Caelestia.Services
 
 import qs
 
@@ -32,8 +31,6 @@ Singleton {
     }) || null
     readonly property bool muted: defaultSink?.audio?.muted ?? false
     readonly property int volume: Math.round(defaultSink?.audio?.volume * 100)
-    readonly property alias cava: cava
-    readonly property int cavaBars: Config.cavaBars
 
     PwObjectTracker {
         objects: [...root.sinks, ...root.sources]
@@ -47,10 +44,5 @@ Singleton {
     function toggleMute() {
         if (root.defaultSink?.audio)
             root.defaultSink.audio.muted = !root.defaultSink.audio.muted;
-    }
-
-    CavaProvider {
-        id: cava
-        bars: root.cavaBars
     }
 }

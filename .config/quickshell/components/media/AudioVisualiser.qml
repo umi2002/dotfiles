@@ -2,7 +2,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
-import Caelestia.Services
 
 import qs
 import qs.services
@@ -10,9 +9,8 @@ import qs.services
 MediaSection {
     implicitHeight: 100
 
-    ServiceRef {
-        service: Audio.cava
-    }
+    Component.onCompleted: Cava.acquire()
+    Component.onDestruction: Cava.release()
 
     RowLayout {
         anchors.fill: parent
@@ -21,7 +19,7 @@ MediaSection {
 
         Repeater {
             model: Array.from({
-                length: Audio.cavaBars
+                length: Cava.bars
             }, (_, i) => i)
 
             delegate: AudioBar {
@@ -29,7 +27,7 @@ MediaSection {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                barValue: Math.max(1e-3, Math.min(1, Audio.cava.values[modelData]))
+                barValue: Math.max(1e-3, Math.min(1, Cava.values[modelData] ?? 0))
             }
         }
     }
