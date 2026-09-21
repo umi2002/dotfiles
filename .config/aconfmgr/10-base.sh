@@ -36,6 +36,7 @@ AddPackage openbsd-netcat # TCP/IP swiss army knife. OpenBSD variant.
 AddPackage git                    # the fast distributed version control system
 AddPackage man-db                 # A utility for reading man pages
 AddPackage man-pages              # Linux man pages
+AddPackage pacman-contrib         # Contributed scripts and tools for pacman systems
 AddPackage reflector              # A Python 3 module and script to retrieve and filter the latest Pacman mirror list.
 AddPackage alsa-utils             # Advanced Linux Sound Architecture - Utilities
 AddPackage ex-vi-compat           # The ex and vi commands based on vim's compatibility modes

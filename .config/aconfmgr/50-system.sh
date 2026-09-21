@@ -16,6 +16,7 @@ CopyFile /etc/pacman.conf
 CopyFile /etc/xdg/reflector/reflector.conf
 CopyFile /etc/systemd/system/reflector.timer
 CreateLink /etc/systemd/system/timers.target.wants/reflector.timer /usr/lib/systemd/system/reflector.timer
+CreateLink /etc/systemd/system/timers.target.wants/paccache.timer /usr/lib/systemd/system/paccache.timer
 
 # Sudo
 CopyFile /etc/sudoers
