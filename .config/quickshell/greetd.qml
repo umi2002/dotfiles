@@ -79,6 +79,10 @@ ShellRoot {
             Greetd.launch(["uwsm", "start", "-e", "-D", "Hyprland", "hyprland.desktop"], ["XDG_SESSION_TYPE=wayland"]);
         }
 
+        function onLaunched() {
+            Qt.quit();
+        }
+
         function onAuthFailure(message) {
             shellRoot.isLoading = false;
             shellRoot.authFailed = true;

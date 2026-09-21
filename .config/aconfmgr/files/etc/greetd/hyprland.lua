@@ -1,6 +1,6 @@
 hl.env("WAYLAND_DISPLAY", "wayland-1")
 hl.on("hyprland.start", function()
-	hl.exec_cmd("quickshell -p /etc/greetd/quickshell/greetd.qml; hyprctl dispatch exit")
+	hl.exec_cmd("quickshell -p /etc/greetd/quickshell/greetd.qml; hyprctl dispatch 'hl.dsp.exit()'")
 end)
 hl.config({
 	misc = {

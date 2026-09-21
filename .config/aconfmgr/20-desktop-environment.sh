@@ -59,6 +59,7 @@ AddPackage freerdp      # Free implementation of the Remote Desktop Protocol (RD
 AddPackage fuse2        # Interface for userspace programs to export a filesystem to the Linux kernel
 AddPackage dialog       # A tool to display dialog boxes from shell scripts
 AddPackage dnsmasq      # Lightweight, easy to configure DNS forwarder and DHCP server
+AddPackage dmidecode    # Desktop Management Interface table related utilities
 
 # Printer
 AddPackage cups     # OpenPrinting CUPS - daemon package

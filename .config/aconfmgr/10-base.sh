@@ -25,6 +25,7 @@ AddPackage keyd      # A key remapping daemon for linux
 AddPackage networkmanager # Network connection manager and user applications
 AddPackage iwd            # Internet Wireless Daemon
 AddPackage iw             # nl80211 based CLI configuration utility for wireless devices
+AddPackage wireless-regdb # Central Regulatory Domain Database
 AddPackage openssh        # SSH protocol implementation for remote login, command execution and file transfer
 AddPackage nss-mdns       # glibc plugin providing host name resolution via mDNS
 AddPackage bluez          # Daemons for the bluetooth protocol stack
@@ -44,6 +45,8 @@ AddPackage pipewire               # Low-latency audio/video router and processor
 AddPackage pipewire-pulse         # Low-latency audio/video router and processor - PulseAudio replacement
 AddPackage pipewire-alsa          # Low-latency audio/video router and processor - ALSA configuration
 AddPackage pipewire-libcamera     # Low-latency audio/video router and processor - Libcamera support
+AddPackage speech-dispatcher      # High-level device independent layer for speech synthesis interface
+AddPackage rtkit                  # Realtime Policy and Watchdog Daemon
 AddPackage wget                   # Network utility to retrieve files from the web
 AddPackage --foreign aconfmgr-git # A configuration manager for Arch Linux
 AddPackage --foreign yay          # Yet another yogurt. Pacman wrapper and AUR helper written in go.

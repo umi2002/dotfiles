@@ -3,15 +3,19 @@
 aconfmgr apply
 echo "Aconfmgr apply successful."
 
-quickshell_path="$HOME/.config/quickshell"
-sudo ln -sf "$quickshell_path" /etc/greetd
-echo "Symlink greetd quickshell config successful."
+systemctl --user enable \
+    cliphist-image.service \
+    cliphist-text.service \
+    emacs.service \
+    gnome-keyring-daemon.service \
+    hypridle.service \
+    hyprpaper.service \
+    hyprpolkitagent.service \
+    hyprsunset.service \
+    quickshell.service \
+    udiskie.service
+echo "Enabling user services successful."
 
-path="$quickshell_path"
-while [[ "$path" != "/" ]]; do
-    sudo chmod o+x "$path"
-    path=$(dirname "$path")
-done
 sudo mkdir -p /var/lib/greeter
 sudo chown greeter:greeter /var/lib/greeter
 sudo usermod -d /var/lib/greeter greeter
