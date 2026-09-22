@@ -8,6 +8,7 @@ import qs.services
 
 WrapperMouseArea {
     id: root
+    property int maxTextWidth: 250
     readonly property string title: Media.activePlayer?.trackTitle || ""
     readonly property string artist: Media.activePlayer?.trackArtist || ""
     readonly property bool isAvailable: Media.activePlayer !== null
@@ -15,9 +16,12 @@ WrapperMouseArea {
     hoverEnabled: true
 
     RowLayout {
-        MediaText {
+        ScrollingText {
             text: root.title || "No song playing"
             visible: root.isAvailable
+            maximumWidth: root.maxTextWidth
+            fontSize: Style.font.size1
+            Layout.preferredHeight: implicitHeight
         }
 
         IconImage {
@@ -28,9 +32,12 @@ WrapperMouseArea {
             implicitSize: 30
         }
 
-        MediaText {
+        ScrollingText {
             text: root.artist || ""
             visible: root.isAvailable
+            maximumWidth: root.maxTextWidth
+            fontSize: Style.font.size1
+            Layout.preferredHeight: implicitHeight
         }
 
         MediaText {

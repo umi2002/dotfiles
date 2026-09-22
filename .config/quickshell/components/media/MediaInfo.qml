@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 
+import QtQuick
 import QtQuick.Layouts
 
 import qs
@@ -11,24 +12,28 @@ MediaSection {
     ColumnLayout {
         id: mediaInfo
         anchors.centerIn: parent
+        width: parent.width - Style.spacing.large
         spacing: Style.spacing.small
 
-        MediaText {
+        ScrollingText {
             text: Media.title
-            Layout.alignment: Qt.AlignHCenter
             fontSize: Style.font.size1
+            Layout.fillWidth: true
+            Layout.preferredHeight: implicitHeight
         }
 
-        MediaText {
+        ScrollingText {
             text: Media.artist
-            Layout.alignment: Qt.AlignHCenter
             fontSize: Style.font.size2
+            Layout.fillWidth: true
+            Layout.preferredHeight: implicitHeight
         }
 
-        MediaText {
+        ScrollingText {
             text: Media.album
-            Layout.alignment: Qt.AlignHCenter
             fontSize: Style.font.size2
+            Layout.fillWidth: true
+            Layout.preferredHeight: implicitHeight
         }
     }
 }
