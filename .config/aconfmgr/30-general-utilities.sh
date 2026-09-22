@@ -26,6 +26,7 @@ AddPackage --foreign cisco-secure-client # Cisco AnyConnect Secure Mobility Clie
 AddPackage bitwarden-cli                 # The command line vault
 AddPackage yadm                          # Yet Another Dotfiles Manager
 AddPackage github-cli                    # The GitHub CLI
+AddPackage ncdu                          # Disk usage analyzer with an ncurses interface
 
 # LaTeX
 AddPackage texlive-basic            # TeX Live - Essential programs and files

@@ -46,6 +46,7 @@ CreateLink /etc/systemd/system/multi-user.target.wants/ufw.service /usr/lib/syst
 
 # Bluetooth
 CopyFile /etc/bluetooth/main.conf
+SetFileProperty /etc/bluetooth mode 755
 CreateLink /etc/systemd/system/bluetooth.target.wants/bluetooth.service /usr/lib/systemd/system/bluetooth.service
 
 # Power
