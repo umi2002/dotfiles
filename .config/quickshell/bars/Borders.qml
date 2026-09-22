@@ -64,12 +64,22 @@ PanelWindow {
             item: bottomBar.notificationsPopupItem
             intersection: Intersection.Subtract
         }
+        Region {
+            item: bottomBar.trayMenuPopupItem
+            intersection: Intersection.Subtract
+        }
     }
 
     HyprlandFocusGrab {
         active: RunnerState.visible && screen.name === RunnerState.targetScreen
         windows: [root]
         onCleared: RunnerState.visible = false
+    }
+
+    HyprlandFocusGrab {
+        active: bottomBar.trayWidgetItem.menuItem !== null
+        windows: [root]
+        onCleared: bottomBar.trayWidgetItem.closeMenu()
     }
 
     NotificationPopup {

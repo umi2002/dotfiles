@@ -17,6 +17,8 @@ Rectangle {
     readonly property alias mediaPopupItem: mediaPopup
     readonly property alias utilsPopupItem: utilsPopup
     readonly property alias notificationsPopupItem: notificationsPopup
+    readonly property alias trayMenuPopupItem: trayMenuPopup
+    readonly property alias trayWidgetItem: tray
     readonly property int margins: Style.spacing.normal
 
     anchors.leftMargin: margins
@@ -74,7 +76,19 @@ Rectangle {
         anchors.centerIn: parent
     }
 
+    StyledPopup {
+        id: trayMenuPopup
+        x: Math.max(0, Math.min(tray.x + tray.menuCenter - width / 2, root.width - width))
+        anchors.bottom: tray.top
+        isExpanded: tray.menuItem !== null
+        popupContent: TrayMenu {
+            menuHandle: tray.menuItem?.menu ?? null
+            onEntryTriggered: tray.closeMenu()
+        }
+    }
+
     TrayWidget {
+        id: tray
         anchors.right: utils.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
