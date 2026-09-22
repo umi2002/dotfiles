@@ -13,7 +13,7 @@ AddPackage viu                           # Simple terminal image viewer
 AddPackage --foreign oh-my-bash-git      # A delightful community-driven framework for managing your bash configuration, and an auto-update tool so that makes it easy to keep up with the latest updates from the community
 AddPackage socat                         # Multipurpose relay
 AddPackage jq                            # Command-line JSON processor
-AddPackage htop                          # Interactive process viewer
+AddPackage btop                          # A monitor of system resources, bpytop ported to C++
 AddPackage lsof                          # Lists open files for running Unix processes
 AddPackage nmap                          # Utility for network discovery and security auditing
 AddPackage speedtest-cli                 # Command line interface for testing internet bandwidth using speedtest.net
