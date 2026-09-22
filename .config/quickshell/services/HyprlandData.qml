@@ -32,6 +32,7 @@ Singleton {
         return icons;
     }
     property string keyboardLanguage: ""
+    readonly property bool hasFullscreen: Hyprland.focusedWorkspace?.lastIpcObject?.hasfullscreen ?? false
 
     readonly property var windowClasses: Hyprland.toplevels.values.map(t => t.lastIpcObject?.class ?? "").filter(cls => cls)
     property var workspaceLastWindows: ({})
@@ -69,6 +70,9 @@ Singleton {
                 break;
             case "activelayout":
                 devicesProcess.running = true;
+                break;
+            case "fullscreen":
+                Hyprland.refreshWorkspaces();
                 break;
             }
         }

@@ -26,6 +26,8 @@ ShellRoot {
         name: "runner"
         description: "Toggle app runner"
         onReleased: {
+            if (HyprlandData.hasFullscreen)
+                return;
             if (!RunnerState.visible)
                 RunnerState.targetScreen = Hyprland.focusedMonitor?.name ?? "";
             RunnerState.visible = !RunnerState.visible;

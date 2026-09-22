@@ -44,7 +44,7 @@ Rectangle {
 
     StyledPopup {
         id: runnerPopup
-        isExpanded: RunnerState.visible && root.showRunner
+        isExpanded: RunnerState.visible && root.showRunner && !HyprlandData.hasFullscreen
         dismissable: true
         onDismissed: RunnerState.visible = false
         target: title
@@ -61,7 +61,7 @@ Rectangle {
 
     StyledPopup {
         id: overviewPopup
-        isExpanded: OverviewState.visible
+        isExpanded: OverviewState.visible && !HyprlandData.hasFullscreen
         dismissable: true
         onDismissed: OverviewState.visible = false
         target: title

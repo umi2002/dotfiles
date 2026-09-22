@@ -10,6 +10,7 @@ import qs.components.media
 import qs.components.system
 import qs.components.utils
 import qs.components.notifications
+import qs.services
 
 Rectangle {
     id: root
@@ -42,7 +43,7 @@ Rectangle {
         target: system
         gravity: Edges.Left
         anchors.bottom: system.top
-        isExpanded: system.isExpanded
+        isExpanded: system.isExpanded && !HyprlandData.hasFullscreen
         dismissable: true
         onDismissed: system.isExpanded = false
         popupContent: SystemPopup {}
@@ -118,7 +119,7 @@ Rectangle {
         target: notifications
         gravity: Edges.Right
         anchors.bottom: notifications.top
-        isExpanded: notifications.isExpanded
+        isExpanded: notifications.isExpanded && !HyprlandData.hasFullscreen
         dismissable: true
         onDismissed: notifications.isExpanded = false
         popupContent: NotificationsHistoryPopup {}
