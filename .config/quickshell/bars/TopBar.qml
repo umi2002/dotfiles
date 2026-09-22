@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell
 import Quickshell.Widgets
 import QtQuick
 import QtQuick.Layouts
@@ -15,9 +16,6 @@ import qs.components.runner
 
 Rectangle {
     id: root
-    readonly property alias runnerPopupItem: runnerPopup
-    readonly property alias overviewPopupItem: overviewPopup
-    readonly property alias dashboardPopupItem: dashboardPopup
     readonly property int margins: Style.spacing.normal
     property bool showRunner: true
 
@@ -47,8 +45,10 @@ Rectangle {
     StyledPopup {
         id: runnerPopup
         isExpanded: RunnerState.visible && root.showRunner
+        dismissable: true
+        onDismissed: RunnerState.visible = false
+        target: title
         anchors.top: title.bottom
-        anchors.horizontalCenter: title.horizontalCenter
         popupContent: RunnerPopup {}
     }
 
@@ -62,8 +62,10 @@ Rectangle {
     StyledPopup {
         id: overviewPopup
         isExpanded: OverviewState.visible
+        dismissable: true
+        onDismissed: OverviewState.visible = false
+        target: title
         anchors.top: overviewButton.bottom
-        anchors.horizontalCenter: title.horizontalCenter
         popupContent: OverviewPopup {}
     }
 
@@ -78,7 +80,8 @@ Rectangle {
     StyledPopup {
         id: dashboardPopup
         isExpanded: containsMouse || dashboard.containsMouse
-        anchors.right: dashboard.right
+        target: dashboard
+        gravity: Edges.Right
         anchors.top: dashboard.bottom
         popupContent: DashboardPopup {}
     }

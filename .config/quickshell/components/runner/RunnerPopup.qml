@@ -5,20 +5,17 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs
+import qs.components
 import qs.services
 
-Rectangle {
+StyledPopupContent {
     id: root
-    property bool isExpanded
 
     readonly property int itemHeight: 60
     readonly property int maxItems: 8
 
     implicitWidth: 600
     implicitHeight: column.implicitHeight + 20
-    radius: Style.radius.small
-    clip: true
-    color: Style.palette.base
 
     opacity: isExpanded ? 1.0 : 0.0
     transformOrigin: Item.Top

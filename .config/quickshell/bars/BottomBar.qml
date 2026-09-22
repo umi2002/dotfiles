@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell
 import QtQuick
 
 import qs
@@ -12,12 +13,6 @@ import qs.components.notifications
 
 Rectangle {
     id: root
-    readonly property alias batteryPopupItem: batteryPopup
-    readonly property alias systemPopupItem: systemPopup
-    readonly property alias mediaPopupItem: mediaPopup
-    readonly property alias utilsPopupItem: utilsPopup
-    readonly property alias notificationsPopupItem: notificationsPopup
-    readonly property alias trayMenuPopupItem: trayMenuPopup
     readonly property alias trayWidgetItem: tray
     readonly property int margins: Style.spacing.normal
 
@@ -27,7 +22,8 @@ Rectangle {
 
     StyledPopup {
         id: batteryPopup
-        anchors.left: battery.left
+        target: battery
+        gravity: Edges.Left
         anchors.bottom: battery.top
         isExpanded: containsMouse || battery.containsMouse
         popupContent: BatteryPopup {}
@@ -43,9 +39,12 @@ Rectangle {
 
     StyledPopup {
         id: systemPopup
-        anchors.left: system.left
+        target: system
+        gravity: Edges.Left
         anchors.bottom: system.top
         isExpanded: system.isExpanded
+        dismissable: true
+        onDismissed: system.isExpanded = false
         popupContent: SystemPopup {}
     }
 
@@ -65,7 +64,7 @@ Rectangle {
 
     StyledPopup {
         id: mediaPopup
-        anchors.horizontalCenter: media.horizontalCenter
+        target: media
         anchors.bottom: media.top
         isExpanded: containsMouse || media.containsMouse
         popupContent: MediaPopup {}
@@ -78,9 +77,12 @@ Rectangle {
 
     StyledPopup {
         id: trayMenuPopup
-        x: Math.max(0, Math.min(tray.x + tray.menuCenter - width / 2, root.width - width))
+        target: tray
+        targetOffset: tray.menuCenter
         anchors.bottom: tray.top
         isExpanded: tray.menuItem !== null
+        dismissable: true
+        onDismissed: tray.closeMenu()
         popupContent: TrayMenu {
             menuHandle: tray.menuItem?.menu ?? null
             onEntryTriggered: tray.closeMenu()
@@ -97,7 +99,8 @@ Rectangle {
 
     StyledPopup {
         id: utilsPopup
-        anchors.right: utils.right
+        target: utils
+        gravity: Edges.Right
         anchors.bottom: utils.top
         isExpanded: containsMouse || utils.containsMouse
         popupContent: UtilsPopup {}
@@ -112,9 +115,12 @@ Rectangle {
 
     StyledPopup {
         id: notificationsPopup
-        anchors.right: notifications.right
+        target: notifications
+        gravity: Edges.Right
         anchors.bottom: notifications.top
         isExpanded: notifications.isExpanded
+        dismissable: true
+        onDismissed: notifications.isExpanded = false
         popupContent: NotificationsHistoryPopup {}
     }
 

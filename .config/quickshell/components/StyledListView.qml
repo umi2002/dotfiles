@@ -10,8 +10,15 @@ Rectangle {
     required property var model
     required property Component delegateComponent
 
+    property int margins: Style.spacing.large
+    property int padding: 30
+    property bool interactive: false
+    property int addDuration: Style.animation.popup
+    property int displacedDuration: Style.animation.slow
+    property int removeDuration: Style.animation.slow
+
     clip: true
-    implicitHeight: listView.implicitHeight + 30
+    implicitHeight: listView.implicitHeight + padding
     radius: Style.radius.large
     color: "transparent"
 
@@ -31,17 +38,17 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.leftMargin: Style.spacing.large
-        anchors.rightMargin: Style.spacing.large
+        anchors.leftMargin: root.margins
+        anchors.rightMargin: root.margins
         implicitHeight: contentHeight
-        interactive: false
+        interactive: root.interactive
 
         add: Transition {
             NumberAnimation {
                 properties: "opacity"
                 from: 0
                 to: 1
-                duration: 500
+                duration: root.addDuration
                 easing.type: Easing.InOutCubic
             }
         }
@@ -49,7 +56,7 @@ Rectangle {
         displaced: Transition {
             NumberAnimation {
                 properties: "y"
-                duration: 400
+                duration: root.displacedDuration
                 easing.type: Easing.InOutCubic
             }
         }
@@ -58,7 +65,7 @@ Rectangle {
             NumberAnimation {
                 properties: "opacity"
                 to: 0
-                duration: Style.animation.slow
+                duration: root.removeDuration
                 easing.type: Easing.InOutCubic
             }
         }

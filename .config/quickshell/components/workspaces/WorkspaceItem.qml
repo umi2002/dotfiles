@@ -28,7 +28,7 @@ Rectangle {
 
     Behavior on implicitWidth {
         NumberAnimation {
-            duration: 250
+            duration: Style.animation.normal
             easing.bezierCurve: Style.animation.curve
         }
     }

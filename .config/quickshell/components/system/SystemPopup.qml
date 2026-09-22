@@ -7,16 +7,12 @@ import qs.components
 import qs
 import qs.services
 
-Rectangle {
+StyledPopupContent {
     id: root
-    property bool isExpanded
 
     implicitWidth: 600
     implicitHeight: 600
 
-    radius: Style.radius.small
-    clip: true
-    color: Style.palette.base
 
     Item {
         id: headerContainer

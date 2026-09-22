@@ -3,19 +3,16 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 import qs
+import qs.components
 
-Rectangle {
+StyledPopupContent {
     id: root
-    property bool isExpanded
     readonly property int spacing: Style.spacing.small
     readonly property int margins: Style.spacing.large
 
     implicitWidth: layout.implicitWidth + margins
     implicitHeight: layout.implicitHeight + margins
 
-    radius: Style.radius.small
-    clip: true
-    color: Style.palette.base
 
     ColumnLayout {
         id: layout

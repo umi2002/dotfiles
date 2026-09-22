@@ -4,12 +4,12 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs
+import qs.components
 import qs.services
 
-Rectangle {
+StyledPopupContent {
     id: root
 
-    property bool isExpanded
     property var dragToplevel: null
     property string dragTitle: ""
 
@@ -18,9 +18,6 @@ Rectangle {
 
     implicitWidth: grid.implicitWidth + Style.spacing.large
     implicitHeight: grid.implicitHeight + Style.spacing.large
-    radius: Style.radius.small
-    color: Style.palette.base
-    clip: true
 
     function beginDrag(toplevel, pos) {
         root.dragToplevel = toplevel;

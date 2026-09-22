@@ -5,12 +5,12 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs
+import qs.components
 import qs.assets
 
-Rectangle {
+StyledPopupContent {
     id: root
 
-    property bool isExpanded
     readonly property int margins: Style.spacing.large
     readonly property int profileItemWidth: 30
     readonly property int profileSpacing: 20
@@ -28,9 +28,6 @@ Rectangle {
     implicitWidth: layout.implicitWidth + margins
     implicitHeight: layout.implicitHeight + margins
 
-    radius: Style.radius.small
-    clip: true
-    color: Style.palette.base
 
     Rectangle {
         width: root.profileItemWidth

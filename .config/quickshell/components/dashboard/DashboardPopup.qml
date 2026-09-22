@@ -4,22 +4,19 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs
+import qs.components
 import qs.components.calendar
 import qs.components.weather
 import qs.components.stats
 
-Rectangle {
+StyledPopupContent {
     id: root
-    property bool isExpanded
     readonly property int spacing: Style.spacing.small
     readonly property int margins: Style.spacing.large
 
     implicitWidth: layout.implicitWidth + margins
     implicitHeight: layout.implicitHeight + margins
 
-    radius: Style.radius.small
-    clip: true
-    color: Style.palette.base
 
     RowLayout {
         id: layout

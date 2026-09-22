@@ -24,7 +24,7 @@ Rectangle {
 
     Behavior on height {
         NumberAnimation {
-            duration: 350
+            duration: Style.animation.slow
             easing.type: Easing.Bezier
             easing.bezierCurve: Style.animation.curve
         }
@@ -32,7 +32,7 @@ Rectangle {
 
     Behavior on width {
         NumberAnimation {
-            duration: 350
+            duration: Style.animation.slow
             easing.type: Easing.Bezier
             easing.bezierCurve: Style.animation.curve
         }

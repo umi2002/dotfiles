@@ -22,64 +22,63 @@ PanelWindow {
     }
     color: "transparent"
 
+    property var maskRegions: []
+
+    function ownsPopup(popup) {
+        for (let item = popup; item; item = item.parent)
+            if (item === barsContainer)
+                return true;
+        return false;
+    }
+
+    function rebuildMaskRegions() {
+        for (const region of maskRegions)
+            region.destroy();
+
+        const regions = PopupRegistry.popups.filter(popup => root.ownsPopup(popup)).map(popup => popupRegion.createObject(root, {
+            item: popup
+        }));
+        regions.push(popupRegion.createObject(root, {
+            item: Qt.binding(() => notifPopup.isVisible ? notifPopup : null)
+        }));
+        maskRegions = regions;
+    }
+
+    Component {
+        id: popupRegion
+
+        Region {
+            intersection: Intersection.Subtract
+        }
+    }
+
+    Connections {
+        target: PopupRegistry
+
+        function onPopupsChanged() {
+            Qt.callLater(root.rebuildMaskRegions);
+        }
+    }
+
+    Component.onCompleted: Qt.callLater(rebuildMaskRegions)
+
     mask: Region {
         item: frameHole
         radius: frameHole.radius
         intersection: Intersection.Subtract
-
-        Region {
-            item: notifPopup.isVisible ? notifPopup : null
-            intersection: Intersection.Subtract
-        }
-
-        Region {
-            item: topBar.runnerPopupItem
-            intersection: Intersection.Subtract
-        }
-        Region {
-            item: topBar.overviewPopupItem
-            intersection: Intersection.Subtract
-        }
-        Region {
-            item: topBar.dashboardPopupItem
-            intersection: Intersection.Subtract
-        }
-        Region {
-            item: bottomBar.batteryPopupItem
-            intersection: Intersection.Subtract
-        }
-        Region {
-            item: bottomBar.systemPopupItem
-            intersection: Intersection.Subtract
-        }
-        Region {
-            item: bottomBar.mediaPopupItem
-            intersection: Intersection.Subtract
-        }
-        Region {
-            item: bottomBar.utilsPopupItem
-            intersection: Intersection.Subtract
-        }
-        Region {
-            item: bottomBar.notificationsPopupItem
-            intersection: Intersection.Subtract
-        }
-        Region {
-            item: bottomBar.trayMenuPopupItem
-            intersection: Intersection.Subtract
-        }
+        regions: root.maskRegions
     }
 
-    HyprlandFocusGrab {
-        active: RunnerState.visible && screen.name === RunnerState.targetScreen
-        windows: [root]
-        onCleared: RunnerState.visible = false
-    }
+    readonly property var dismissablePopups: PopupRegistry.popups.filter(popup => popup.dismissable && popup.isExpanded && root.ownsPopup(popup))
+
 
     HyprlandFocusGrab {
-        active: bottomBar.trayWidgetItem.menuItem !== null
+        active: root.dismissablePopups.length > 0
         windows: [root]
-        onCleared: bottomBar.trayWidgetItem.closeMenu()
+        onCleared: {
+            for (const popup of root.dismissablePopups)
+                popup.dismissed();
+        }
     }
 
     NotificationPopup {
@@ -91,6 +90,8 @@ PanelWindow {
     }
 
     Item {
+        id: barsContainer
+
         anchors.fill: parent
         layer.enabled: true
 

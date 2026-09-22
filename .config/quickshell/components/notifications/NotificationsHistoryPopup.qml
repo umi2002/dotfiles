@@ -9,18 +9,14 @@ import qs.assets
 import qs.components
 import qs.services
 
-Rectangle {
+StyledPopupContent {
     id: root
-    property bool isExpanded
     readonly property int spacing: Style.spacing.small
     readonly property int margins: Style.spacing.large
 
     implicitWidth: 450
     implicitHeight: layout.implicitHeight + margins
 
-    radius: Style.radius.small
-    clip: true
-    color: Style.palette.base
 
     function animateClearAll() {
         for (let i = 0; i < listView.count; i++)
@@ -93,7 +89,7 @@ Rectangle {
             displaced: Transition {
                 NumberAnimation {
                     properties: "y"
-                    duration: 400
+                    duration: Style.animation.slow
                     easing.type: Easing.Bezier
                     easing.bezierCurve: Style.animation.curve
                 }

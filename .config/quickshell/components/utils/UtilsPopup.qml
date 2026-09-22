@@ -9,19 +9,14 @@ import qs
 import qs.assets
 import qs.services
 
-Rectangle {
+StyledPopupContent {
     id: root
 
-    property bool isExpanded
     readonly property int margins: Style.spacing.large
-    readonly property int borderRadius: 10
 
     implicitWidth: container.implicitWidth + margins
     implicitHeight: container.implicitHeight + margins
 
-    radius: borderRadius
-    clip: true
-    color: Style.palette.base
 
     Rectangle {
         id: container
@@ -29,7 +24,7 @@ Rectangle {
         y: root.margins / 2
         implicitWidth: layout.implicitWidth + root.margins
         implicitHeight: layout.implicitHeight + root.margins
-        radius: root.borderRadius
+        radius: Style.radius.small
 
         color: "transparent"
 

@@ -5,11 +5,11 @@ import QtQuick
 import QtQuick.Layouts
 
 import qs
+import qs.components
 
-Rectangle {
+StyledPopupContent {
     id: root
 
-    property bool isExpanded
     property var menuHandle: null
     property var expandedEntry: null
 
@@ -20,9 +20,6 @@ Rectangle {
     implicitWidth: Math.max(180, layout.implicitWidth + margins * 2)
     implicitHeight: layout.implicitHeight + margins * 2
 
-    radius: Style.radius.small
-    clip: true
-    color: Style.palette.base
 
     onMenuHandleChanged: expandedEntry = null
 
