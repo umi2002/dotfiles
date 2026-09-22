@@ -2,4 +2,5 @@ default.target.wants
 graphical-session.target.wants
 pipewire.service.wants
 sockets.target.wants
+timers.target.wants
 pipewire-session-manager.service

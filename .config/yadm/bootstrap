@@ -13,8 +13,14 @@ systemctl --user enable \
     hyprpolkitagent.service \
     hyprsunset.service \
     quickshell.service \
+    sysupdate-check.timer \
     udiskie.service
 echo "Enabling user services successful."
+
+for group in docker informant keyd kvm libvirt uucp video wheel; do
+    getent group "$group" >/dev/null && sudo usermod -aG "$group" "$(whoami)"
+done
+echo "Adding user to groups successful."
 
 sudo mkdir -p /var/lib/greeter
 sudo chown greeter:greeter /var/lib/greeter

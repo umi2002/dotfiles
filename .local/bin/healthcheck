@@ -1,0 +1,54 @@
+#!/bin/bash
+
+boot=${1:--b}
+attention=0
+
+failed=$({ systemctl --failed --no-legend; systemctl --user --failed --no-legend; } 2>/dev/null)
+if [[ -n "$failed" ]]; then
+    echo "Currently failed:"
+    echo "$failed" | sed 's/^/  /'
+    attention=1
+fi
+
+entries=$(journalctl "$boot" _COMM=systemd --grep "Failed with result" -o json --no-pager 2>/dev/null | python3 -c '
+import sys, json
+from datetime import datetime
+seen = []
+stamps = []
+for line in sys.stdin:
+    try:
+        d = json.loads(line)
+    except ValueError:
+        continue
+    message = d.get("MESSAGE") or ""
+    if isinstance(message, list):
+        message = bytes(message).decode("utf8", "replace")
+    unit = message.split(":")[0]
+    stamp = int(d.get("__REALTIME_TIMESTAMP", 0)) / 1e6
+    pair = (d.get("_UID", "0"), unit)
+    if pair not in seen:
+        seen.append(pair)
+        stamps.append(stamp)
+for (uid, unit), stamp in zip(seen, stamps):
+    print(f"{uid}\t{unit}\t{datetime.fromtimestamp(stamp + 1):%Y-%m-%d %H:%M:%S}")
+')
+
+if [[ -n "$entries" ]]; then
+    echo "Failed at some point, including units that recovered:"
+    while IFS=$'\t' read -r uid unit when; do
+        case "$uid" in
+            0) scope="system"; log=$(journalctl "$boot" -u "$unit" --until "$when" -n 6 -o short --no-pager 2>/dev/null) ;;
+            "$(id -u)") scope="user"; log=$(journalctl "$boot" --user-unit "$unit" --until "$when" -n 6 -o short --no-pager 2>/dev/null) ;;
+            *) scope="uid $uid"; log=$(journalctl "$boot" _UID="$uid" _SYSTEMD_USER_UNIT="$unit" --until "$when" -n 6 -o short --no-pager 2>/dev/null) ;;
+        esac
+        echo "  $unit ($scope, $when)"
+        echo "$log" | sed 's/^/    /'
+    done <<< "$entries"
+    attention=1
+fi
+
+if (( attention == 0 )); then
+    echo "No service failures."
+fi
+
+exit $attention

@@ -39,6 +39,7 @@ IgnorePath '/var/lib/tlp/*'
 IgnorePath '/var/lib/tpm2-tss/*'
 IgnorePath '/var/lib/texmf/*'
 IgnorePath '/var/lib/libvirt/*'
+IgnorePath '/var/lib/informant.dat'
 
 IgnorePath '/etc/ca-certificates/*'
 IgnorePath '/etc/.pwd.lock'

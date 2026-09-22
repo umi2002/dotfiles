@@ -1,0 +1,74 @@
+#!/bin/bash
+
+check_only=0
+if [[ "$1" == "--check" ]]; then
+    check_only=1
+    shift
+fi
+
+start=$(date '+%Y-%m-%d %H:%M:%S')
+attention=0
+
+if (( check_only == 0 )); then
+    if ! informant check >/dev/null 2>&1; then
+        informant check
+        echo "Read the news with 'informant read' before updating."
+        exit 1
+    fi
+
+    yay -Syu "$@" || exit $?
+    echo
+fi
+
+echo "=== Post-update checks ==="
+
+pacnew=$(pacdiff -o 2>/dev/null)
+if [[ -n "$pacnew" ]]; then
+    echo "Pending merges, review with 'sudo DIFFPROG=\"nvim -d\" pacdiff':"
+    echo "$pacnew" | sed 's/^/  /'
+    attention=1
+fi
+
+declared=$(grep -hoE '^AddPackage (--foreign )?[^ ]+' "$HOME/.config/aconfmgr"/*.sh | awk '{print $NF}' | sort -u)
+undeclared=$(comm -13 <(echo "$declared") <(pacman -Qqe | sort))
+if [[ -n "$undeclared" ]]; then
+    echo "Installed but not in aconfmgr, run 'aconfmgr save' then sort:"
+    echo "$undeclared" | sed 's/^/  /'
+    attention=1
+fi
+
+orphans=$(pacman -Qtdq 2>/dev/null)
+if [[ -n "$orphans" ]]; then
+    echo "Orphaned packages, remove with 'pacman -Rns \$(pacman -Qtdq)':"
+    echo "$orphans" | sed 's/^/  /'
+    attention=1
+fi
+
+if command -v healthcheck >/dev/null; then
+    healthcheck || attention=1
+fi
+
+kernel=$(pacman -Q linux 2>/dev/null | awk '{print $2}')
+if [[ -n "$kernel" && "$(uname -r | tr '-' '.')" != "${kernel//-/.}" ]]; then
+    echo "Kernel is now $kernel, reboot to leave $(uname -r)."
+    attention=1
+fi
+
+errors=$(journalctl -p 3 --since "$start" --no-pager -q 2>/dev/null)
+if [[ -n "$errors" ]]; then
+    echo "Errors logged during the update:"
+    echo "$errors" | sed 's/^/  /'
+    attention=1
+fi
+
+changes=$(cd "$HOME" && yadm status --short 2>/dev/null)
+if [[ -n "$changes" ]]; then
+    echo "Uncommitted dotfile changes:"
+    echo "$changes" | sed 's/^/  /'
+fi
+
+if (( attention == 0 )); then
+    echo "Nothing needs attention."
+fi
+
+exit $attention

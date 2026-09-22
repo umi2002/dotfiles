@@ -45,9 +45,8 @@ CopyFile /etc/ufw/user6.rules
 CreateLink /etc/systemd/system/multi-user.target.wants/ufw.service /usr/lib/systemd/system/ufw.service
 
 # Bluetooth
-CopyFile /etc/systemd/system/bluetooth-off.service
+CopyFile /etc/bluetooth/main.conf
 CreateLink /etc/systemd/system/bluetooth.target.wants/bluetooth.service /usr/lib/systemd/system/bluetooth.service
-CreateLink /etc/systemd/system/multi-user.target.wants/bluetooth-off.service /etc/systemd/system/bluetooth-off.service
 
 # Power
 CopyFile /etc/tlp.conf
