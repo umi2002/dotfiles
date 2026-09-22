@@ -13,6 +13,7 @@ WrapperMouseArea {
     readonly property int animationDuration: 400
 
     property var currentNotification: null
+    property var shownNotification: null
     property int translation: implicitWidth + anchors.rightMargin
 
     readonly property bool isVisible: notificationPopup.opacity > 0
@@ -54,6 +55,13 @@ WrapperMouseArea {
 
             root.show();
             root.currentNotification = notif;
+            root.shownNotification = {
+                appName: notif.appName ?? "",
+                appIcon: notif.appIcon ?? "",
+                image: notif.image ?? "",
+                summary: notif.summary ?? "",
+                body: notif.body ?? ""
+            };
 
             if (root.containsMouse) {
                 return;
@@ -66,7 +74,6 @@ WrapperMouseArea {
     Connections {
         target: root.currentNotification
         function onClosed() {
-            animationTimer.stop();
             root.currentNotification = null;
         }
     }
@@ -86,6 +93,7 @@ WrapperMouseArea {
         onTriggered: {
             root.currentNotification?.expire();
             root.currentNotification = null;
+            root.shownNotification = null;
         }
     }
 
@@ -95,6 +103,7 @@ WrapperMouseArea {
         onTriggered: {
             root.currentNotification?.dismiss();
             root.currentNotification = null;
+            root.shownNotification = null;
         }
     }
 
@@ -134,8 +143,8 @@ WrapperMouseArea {
             anchors.right: parent.right
             anchors.topMargin: Style.spacing.normal
             anchors.rightMargin: Style.spacing.normal
-            visible: root.currentNotification !== null
-            notification: root.currentNotification
+            visible: root.shownNotification !== null
+            notification: root.shownNotification
             Component.onCompleted: {
                 height = implicitHeight;
                 width = implicitWidth;

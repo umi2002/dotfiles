@@ -13,6 +13,8 @@ Rectangle {
     required property var notification
 
     readonly property int padding: 14
+    property int summaryLines: 2
+    property int bodyLines: 4
 
     anchors.centerIn: parent
     implicitWidth: 400
@@ -90,6 +92,8 @@ Rectangle {
                 font.bold: true
                 font.family: Style.font.family1
                 wrapMode: Text.WordWrap
+                maximumLineCount: root.summaryLines
+                elide: Text.ElideRight
                 Layout.fillWidth: true
             }
 
@@ -100,6 +104,8 @@ Rectangle {
                 font.pointSize: Style.font.size2
                 font.family: Style.font.family1
                 wrapMode: Text.WordWrap
+                maximumLineCount: root.bodyLines
+                elide: Text.ElideRight
                 Layout.fillWidth: true
             }
         }
