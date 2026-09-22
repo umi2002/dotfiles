@@ -5,6 +5,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+source "$HOME/.config/xdg-dirs.env"
+
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
@@ -25,13 +27,13 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export EDITOR=nvim
 export CHROME_BIN=chromium
 
-export PATH=/home/umi/.cargo/bin:$PATH
+export PATH="$CARGO_HOME/bin:$PATH"
 export PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 
 # Created by `pipx` o/ 2023-06-29 22:01:34
 [[ ":$PATH:" != *":/home/umi/.local/bin:"* ]] && export PATH="$PATH:/home/umi/.local/bin"
 
-export PATH="$PATH:/home/umi/.dotnet/tools"
+export PATH="$PATH:$DOTNET_CLI_HOME/tools"
 
 PATH="/home/umi/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/umi/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
