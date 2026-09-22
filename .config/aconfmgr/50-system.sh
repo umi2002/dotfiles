@@ -21,6 +21,10 @@ CreateLink /etc/systemd/system/timers.target.wants/paccache.timer /usr/lib/syste
 # Sudo
 CopyFile /etc/sudoers
 
+# PAM
+CopyFile /etc/pam.d/greetd
+CopyFile /etc/pam.d/passwd
+
 # Input
 CopyFile /etc/keyd/default.conf
 CreateLink /etc/systemd/system/multi-user.target.wants/keyd.service /usr/lib/systemd/system/keyd.service

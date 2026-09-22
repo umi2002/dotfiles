@@ -7,7 +7,6 @@ systemctl --user enable \
     cliphist-image.service \
     cliphist-text.service \
     emacs.service \
-    gnome-keyring-daemon.service \
     hypridle.service \
     hyprpaper.service \
     hyprpolkitagent.service \
