@@ -31,6 +31,8 @@ ColumnLayout {
     }
 
     StyledListView {
+        maximumHeight: 200
+        Layout.fillHeight: true
         model: root.bluetoothModel
         delegateComponent: BluetoothListViewItem {
             width: ListView.view.width

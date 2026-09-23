@@ -11,6 +11,7 @@ Rectangle {
     required property Component delegateComponent
 
     property int margins: Style.spacing.large
+    property int maximumHeight: 0
     property int padding: 30
     property bool interactive: false
     property int addDuration: Style.animation.popup
@@ -35,13 +36,14 @@ Rectangle {
         model: root.model
         delegate: root.delegateComponent
 
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.fill: parent
         anchors.leftMargin: root.margins
         anchors.rightMargin: root.margins
-        implicitHeight: contentHeight
-        interactive: root.interactive
+        anchors.topMargin: root.padding / 2
+        anchors.bottomMargin: root.padding / 2
+        implicitHeight: root.maximumHeight > 0 ? Math.min(contentHeight, root.maximumHeight) : contentHeight
+        interactive: root.maximumHeight > 0 || root.interactive
+        clip: true
 
         add: Transition {
             NumberAnimation {

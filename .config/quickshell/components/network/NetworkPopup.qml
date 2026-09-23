@@ -17,12 +17,14 @@ ColumnLayout {
     }
 
     NetworkSection {
+        Layout.fillHeight: true
         title: "Saved Networks"
         networkModel: NetworkData.knownNetworks
         isVisible: NetworkData.isWiFiOn
     }
 
     NetworkSection {
+        Layout.fillHeight: true
         title: "Available Networks"
         networkModel: NetworkData.unknownNetworks
         isVisible: NetworkData.isWiFiOn

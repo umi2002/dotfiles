@@ -8,6 +8,7 @@ Item {
     id: root
     required property int currentIndex
     required property int containerWidth
+    required property int containerHeight
     required property int popupWidth
     required property Component networkContent
     required property Component bluetoothContent
@@ -27,7 +28,7 @@ Item {
 
     Rectangle {
         id: networkPopupContainer
-        height: networkLoader.implicitHeight
+        height: Math.min(networkLoader.implicitHeight, root.containerHeight)
         implicitWidth: root.containerWidth - root.margins
         x: root.margins / 2
         color: "transparent"
@@ -41,7 +42,7 @@ Item {
 
     Rectangle {
         id: bluetoothPopupContainer
-        height: bluetoothLoader.implicitHeight
+        height: Math.min(bluetoothLoader.implicitHeight, root.containerHeight)
         width: root.containerWidth - root.margins
         x: root.popupWidth + root.margins / 2
         color: "transparent"

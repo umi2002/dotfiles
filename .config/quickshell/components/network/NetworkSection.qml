@@ -32,6 +32,8 @@ ColumnLayout {
     }
 
     StyledListView {
+        maximumHeight: 200
+        Layout.fillHeight: true
         model: root.networkModel
         delegateComponent: NetworkListViewItem {
             width: ListView.view.width

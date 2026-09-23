@@ -13,6 +13,7 @@ Flickable {
     contentWidth: container.width
     contentHeight: container.height
     flickableDirection: Flickable.VerticalFlick
+    interactive: false
     clip: true
 
     Item {
@@ -24,6 +25,7 @@ Flickable {
             id: slider
             currentIndex: root.selectedIndex
             containerWidth: container.width
+            containerHeight: root.height
             popupWidth: root.popupWidth
 
             networkContent: NetworkPopup {
