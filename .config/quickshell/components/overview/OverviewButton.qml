@@ -14,7 +14,11 @@ WrapperMouseArea {
     hoverEnabled: true
     cursorShape: Qt.PointingHandCursor
 
+    required property string screenName
+
     onClicked: {
+        if (!OverviewState.visible)
+            OverviewState.targetScreen = root.screenName;
         OverviewState.visible = !OverviewState.visible;
     }
 

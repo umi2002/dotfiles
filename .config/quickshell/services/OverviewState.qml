@@ -5,4 +5,5 @@ import Quickshell
 
 Singleton {
     property bool visible: false
+    property string targetScreen: ""
 }

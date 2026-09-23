@@ -103,6 +103,7 @@ PanelWindow {
             implicitHeight: 50
             z: 1
             showRunner: screen.name === RunnerState.targetScreen
+            screenName: screen.name
         }
 
         BottomBar {

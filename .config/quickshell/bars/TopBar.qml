@@ -18,6 +18,7 @@ Rectangle {
     id: root
     readonly property int margins: Style.spacing.normal
     property bool showRunner: true
+    required property string screenName
 
     anchors.leftMargin: margins
     anchors.rightMargin: margins
@@ -54,6 +55,7 @@ Rectangle {
 
     OverviewButton {
         id: overviewButton
+        screenName: root.screenName
         anchors.left: workspaces.right
         anchors.leftMargin: root.margins
         anchors.verticalCenter: parent.verticalCenter
@@ -61,7 +63,7 @@ Rectangle {
 
     StyledPopup {
         id: overviewPopup
-        isExpanded: OverviewState.visible && !HyprlandData.hasFullscreen
+        isExpanded: OverviewState.visible && OverviewState.targetScreen === root.screenName && !HyprlandData.hasFullscreen
         dismissable: true
         onDismissed: OverviewState.visible = false
         target: title
