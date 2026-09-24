@@ -1,0 +1,28 @@
+#!/bin/bash
+
+src="$HOME/.config/quickshell"
+dest=/etc/greetd/quickshell
+
+files=(greetd.qml Style.qml assets/Assets.qml assets/login_wallpaper.jpg components/Throbber.qml)
+for f in "$src"/components/greetd/*.qml; do
+    files+=("${f#"$src/"}")
+done
+
+if [[ "$1" == "--check" ]]; then
+    attention=0
+    for f in "${files[@]}"; do
+        if ! cmp -s "$src/$f" "$dest/$f"; then
+            echo "  greeter drift: $f"
+            attention=1
+        fi
+    done
+    (( attention == 1 )) && echo "  run 'sync-greeter' to update $dest"
+    exit $attention
+fi
+
+sudo rm -rf "$dest" || exit 1
+for f in "${files[@]}"; do
+    sudo install -D -m 644 -o root -g root "$src/$f" "$dest/$f" || exit 1
+done
+
+echo "Synced ${#files[@]} files from $src to $dest."

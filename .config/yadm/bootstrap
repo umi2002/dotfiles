@@ -21,6 +21,8 @@ for group in docker informant keyd kvm libvirt uucp video wheel; do
 done
 echo "Adding user to groups successful."
 
+sync-greeter
+
 sudo mkdir -p /var/lib/greeter
 sudo chown greeter:greeter /var/lib/greeter
 sudo usermod -d /var/lib/greeter greeter

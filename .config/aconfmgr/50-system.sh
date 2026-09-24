@@ -72,12 +72,6 @@ CopyFile /etc/greetd/config.toml
 CopyFile /etc/greetd/hyprland.lua
 CopyFile /etc/greetd/login_wallpaper.svg
 CreateLink /etc/systemd/system/display-manager.service /usr/lib/systemd/system/greetd.service
-greeter_src=$HOME/.config/quickshell
-greeter_files=(greetd.qml Style.qml assets/Assets.qml assets/login_wallpaper.jpg components/Throbber.qml)
-greeter_files+=("$greeter_src"/components/greetd/*.qml)
-for f in "${greeter_files[@]#"$greeter_src"/}"; do
-    cat "$greeter_src/$f" >"$(CreateFile "/etc/greetd/quickshell/$f")"
-done
 
 # Printing
 CreateLink /etc/systemd/system/multi-user.target.wants/cups.path /usr/lib/systemd/system/cups.path
