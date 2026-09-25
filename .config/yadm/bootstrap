@@ -1,72 +1,85 @@
 #!/bin/bash
 
+set -Eeuo pipefail
+
+trap 'echo "Bootstrap failed at line $LINENO: $BASH_COMMAND" >&2' ERR
+
+if [[ $EUID -eq 0 ]]; then
+    echo "Run this as your normal user, not as root." >&2
+    exit 1
+fi
+
+missing=()
+for cmd in aconfmgr gsettings setup-secrets sync-greeter systemctl; do
+    command -v "$cmd" >/dev/null || missing+=("$cmd")
+done
+if ((${#missing[@]} > 0)); then
+    echo "Missing required commands: ${missing[*]}" >&2
+    exit 1
+fi
+
+sudo -v
+
 aconfmgr apply
 echo "Aconfmgr apply successful."
 
-systemctl --user enable \
-    cliphist-image.service \
-    cliphist-text.service \
-    emacs.service \
-    hypridle.service \
-    hyprpaper.service \
-    hyprpolkitagent.service \
-    hyprsunset.service \
-    quickshell.service \
-    sysupdate-check.timer \
+UNITS=(
+    cliphist-image.service
+    cliphist-text.service
+    emacs.service
+    hypridle.service
+    hyprpaper.service
+    hyprpolkitagent.service
+    hyprsunset.service
+    quickshell.service
+    sysupdate-check.timer
     udiskie.service
-echo "Enabling user services successful."
+)
+
+systemctl --user daemon-reload
+systemctl --user enable "${UNITS[@]}" ||
+    echo "Warning: some user services could not be enabled." >&2
+
+not_enabled=()
+for unit in "${UNITS[@]}"; do
+    case "$(systemctl --user is-enabled "$unit" 2>/dev/null)" in
+    enabled | enabled-runtime | static | indirect | generated | alias) ;;
+    *) not_enabled+=("$unit") ;;
+    esac
+done
+if ((${#not_enabled[@]} > 0)); then
+    echo "Warning: these units are still not enabled: ${not_enabled[*]}" >&2
+else
+    echo "Enabling user services successful."
+fi
 
 for group in docker informant keyd kvm libvirt uucp video wheel; do
-    getent group "$group" >/dev/null && sudo usermod -aG "$group" "$(whoami)"
+    if getent group "$group" >/dev/null; then
+        sudo usermod -aG "$group" "$(whoami)"
+    fi
 done
 echo "Adding user to groups successful."
 
 sync-greeter
 
-sudo mkdir -p /var/lib/greeter
-sudo chown greeter:greeter /var/lib/greeter
-sudo usermod -d /var/lib/greeter greeter
-echo "Created home directory and granted correct permissions for greeter user."
-
-if bw login --check &>/dev/null; then
-  export BW_SESSION=$(bw unlock --raw)
+if getent passwd greeter >/dev/null; then
+    sudo mkdir -p /var/lib/greeter
+    sudo chown greeter:greeter /var/lib/greeter
+    sudo usermod -d /var/lib/greeter greeter
+    echo "Created home directory and granted correct permissions for greeter user."
 else
-  export BW_SESSION=$(bw login --raw)
+    echo "Warning: no 'greeter' user yet, skipping its home directory setup." >&2
 fi
 
-bw get notes "Secrets.qml" --session $BW_SESSION > "$HOME/.config/quickshell/Secrets.qml"
-echo "Setting up quickshell secrets successful."
+setup-secrets
 
-GITHUB_PAT=$(bw get notes "Github Personal Access Token" --session $BW_SESSION | tr -d '[:space:]')
-KEY_PATH="$HOME/.ssh/id_ed25519_github"
-KEY_COMMENT="$(whoami)@$(hostname)"
-mkdir -p "$HOME/.ssh" && chmod 700 "$HOME/.ssh"
-rm -f "$KEY_PATH" "$KEY_PATH.pub"
-ssh-keygen -t ed25519 -f "$KEY_PATH" -C "$KEY_COMMENT" -N ""
-
-KEYS_LIST=$(GH_TOKEN="$GITHUB_PAT" gh ssh-key list)
-SELECTED=$(printf '+ Add as new key\n%s' \
-  "$(echo "$KEYS_LIST" | awk -F'\t' '{print "~ Replace: " $1}')" | fzf \
-  --prompt="GitHub SSH key action: " \
-  --layout=reverse --height=40% --border)
-
-if [[ "$SELECTED" == "+ Add as new key" ]]; then
-  GH_TOKEN="$GITHUB_PAT" gh ssh-key add "$KEY_PATH.pub" --title "$KEY_COMMENT"
-  echo "GitHub SSH key added."
-elif [[ "$SELECTED" == "~ Replace: "* ]]; then
-  KEY_TITLE="${SELECTED#\~ Replace: }"
-  KEY_ID=$(echo "$KEYS_LIST" | awk -F'\t' -v t="$KEY_TITLE" '$1 == t {print $2}')
-  GH_TOKEN="$GITHUB_PAT" gh ssh-key delete "$KEY_ID" --yes
-  GH_TOKEN="$GITHUB_PAT" gh ssh-key add "$KEY_PATH.pub" --title "$KEY_TITLE"
-  echo "GitHub SSH key replaced."
+if [[ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ]]; then
+    gsettings set org.gnome.desktop.interface gtk-theme 'Fluent-Dark'
+    gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+    echo "Setup gtk settings successful."
+else
+    echo "Warning: no session bus, skipping gtk settings. Re-run from a desktop session." >&2
 fi
-echo "GitHub SSH key setup successful."
-
-bw lock
-
-gsettings set org.gnome.desktop.interface gtk-theme 'Fluent-Dark'
-gsettings set org.gnome.desktop.interface icon-theme 'Adwaita'
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-echo "Setup gtk settings successful."
 
 echo "Bootstrap complete"

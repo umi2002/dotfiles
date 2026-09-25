@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+session=$(bw unlock --raw || bw login --raw || true)
+
+if [[ -z "$session" ]]; then
+    echo "Bitwarden unlock failed. Run 'bw logout; bw login' and retry." >&2
+    exit 1
+fi
+
+printf '%s\n' "$session"
