@@ -2,6 +2,7 @@ pragma Singleton
 pragma ComponentBehavior: Bound
 
 import Quickshell
+import Quickshell.Io
 import QtQuick
 import QtQml
 import Quickshell.Networking
@@ -18,10 +19,26 @@ Singleton {
         if (connectivity === NetworkConnectivity.Portal) {
             if (!portalOpened) {
                 portalOpened = true;
-                Quickshell.execDetached(["uwsm", "app", "--", "xdg-open", "http://ping.archlinux.org/nm-check.txt"]);
+                portalProbe.running = true;
             }
         } else if (connectivity === NetworkConnectivity.Full || connectivity === NetworkConnectivity.None) {
             portalOpened = false;
+        }
+    }
+
+    function openPortal(url) {
+        Quickshell.execDetached(["uwsm", "app", "--", "xdg-open", url]);
+    }
+
+    Process {
+        id: portalProbe
+        command: ["curl", "-sS", "-m", "5", "-o", "/dev/null", "-w", "%{redirect_url}", "http://ping.archlinux.org/nm-check.txt"]
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                const redirect = text.trim();
+                root.openPortal(redirect.length > 0 ? redirect : "http://neverssl.com");
+            }
         }
     }
 
