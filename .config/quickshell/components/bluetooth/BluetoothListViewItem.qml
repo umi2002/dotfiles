@@ -1,19 +1,34 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell.Widgets
 import QtQuick.Layouts
 
 import qs.components
 
-ColumnLayout {
-    id: layout
+WrapperMouseArea {
+    id: root
     required property var modelData
     required property int index
+    property bool isHovered: false
 
-    Device {
-        Layout.fillWidth: true
-        Layout.alignment: Qt.AlignVCenter
-        device: layout.modelData
+    hoverEnabled: true
+
+    onEntered: {
+        isHovered = true;
     }
 
-    Separator {}
+    onExited: {
+        isHovered = false;
+    }
+
+    ColumnLayout {
+        Device {
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignVCenter
+            device: root.modelData
+            isHovered: root.isHovered
+        }
+
+        Separator {}
+    }
 }

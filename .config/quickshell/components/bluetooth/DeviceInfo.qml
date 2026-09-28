@@ -8,13 +8,26 @@ import qs.services
 Rectangle {
     id: root
 
-    clip: true
-    implicitHeight: batteryText.implicitHeight
+    required property var device
+
+    readonly property list<string> text: {
+        const lines = ["Status: " + BluetoothData.deviceStatus(device)];
+        const battery = BluetoothData.deviceBattery(device);
+        if (battery >= 0)
+            lines.push("Battery: " + battery + "%");
+        if (device?.icon)
+            lines.push("Type: " + device.icon.replace(/^audio-/, "").replace(/-/g, " "));
+        lines.push("Address: " + (device?.address ?? ""));
+        lines.push("Trusted: " + (device?.trusted ? "Yes" : "No"));
+        return lines;
+    }
+
+    implicitHeight: deviceInfo.implicitHeight
     color: "transparent"
 
     Text {
-        id: batteryText
-        text: BluetoothData.batteryPercent.toString() + "% Battery"
+        id: deviceInfo
+        text: root.text.join("\n")
         font.pointSize: Style.font.size2
         font.family: Style.font.family3
         color: Style.palette.text

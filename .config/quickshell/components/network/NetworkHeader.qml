@@ -82,7 +82,7 @@ Rectangle {
         }
     }
 
-    NetworkActionButton {
+    ActionButton {
         id: actionButton
         isHovered: root.isHovered
         isConnecting: root.isConnecting
