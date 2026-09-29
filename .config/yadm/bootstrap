@@ -10,7 +10,7 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 missing=()
-for cmd in aconfmgr gsettings setup-secrets sync-greeter systemctl; do
+for cmd in aconfmgr gsettings setup-secrets sync-greeter systemctl yadm; do
     command -v "$cmd" >/dev/null || missing+=("$cmd")
 done
 if ((${#missing[@]} > 0)); then
@@ -30,13 +30,67 @@ UNITS=(
     hypridle.service
     hyprpaper.service
     hyprpolkitagent.service
-    hyprsunset.service
     quickshell.service
     sysupdate-check.timer
     udiskie.service
 )
 
+UNITS_Laptop=(
+    hyprsunset.service
+)
+
+UNITS_Desktop=()
+
+CLASS="$(yadm config --get local.class 2>/dev/null || true)"
+if [[ -z $CLASS ]]; then
+    echo "Warning: yadm local.class is unset, enabling common units only." >&2
+elif declare -p "UNITS_$CLASS" >/dev/null 2>&1; then
+    declare -n class_units="UNITS_$CLASS"
+    UNITS+=("${class_units[@]}")
+    echo "Class '$CLASS' contributes ${#class_units[@]} unit(s)."
+else
+    echo "Warning: no unit list defined for class '$CLASS', enabling common units only." >&2
+fi
+
+USER_UNIT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/yadm-bootstrap"
+STATE_FILE="$STATE_DIR/managed-user-units"
+
 systemctl --user daemon-reload
+
+declare -A desired=()
+for unit in "${UNITS[@]}"; do
+    desired[$unit]=1
+done
+
+declare -A claimed=()
+if [[ -f $STATE_FILE ]]; then
+    while read -r unit || [[ -n $unit ]]; do
+        [[ -n $unit ]] && claimed[$unit]=1
+    done <"$STATE_FILE"
+fi
+for path in "$USER_UNIT_DIR"/*.service "$USER_UNIT_DIR"/*.timer "$USER_UNIT_DIR"/*.socket; do
+    [[ -f $path && ! -L $path ]] || continue
+    unit=${path##*/}
+    [[ $(systemctl --user is-enabled "$unit" 2>/dev/null) == enabled ]] && claimed[$unit]=1
+done
+
+stale=()
+for unit in "${!claimed[@]}"; do
+    [[ -v desired[$unit] ]] || stale+=("$unit")
+done
+
+if ((${#stale[@]} > 0)); then
+    failed_disable=()
+    for unit in "${stale[@]}"; do
+        systemctl --user disable --now "$unit" 2>/dev/null || failed_disable+=("$unit")
+    done
+    echo "Disabled units no longer declared: ${stale[*]}"
+    if ((${#failed_disable[@]} > 0)); then
+        echo "Warning: could not disable: ${failed_disable[*]}" >&2
+    fi
+fi
+
 systemctl --user enable "${UNITS[@]}" ||
     echo "Warning: some user services could not be enabled." >&2
 
@@ -52,6 +106,9 @@ if ((${#not_enabled[@]} > 0)); then
 else
     echo "Enabling user services successful."
 fi
+
+mkdir -p "$STATE_DIR"
+printf '%s\n' "${UNITS[@]}" >"$STATE_FILE.tmp" && mv -f "$STATE_FILE.tmp" "$STATE_FILE"
 
 for group in docker informant keyd kvm libvirt uucp video wheel; do
     if getent group "$group" >/dev/null; then

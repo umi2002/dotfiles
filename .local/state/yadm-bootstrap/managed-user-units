@@ -1,0 +1,10 @@
+cliphist-image.service
+cliphist-text.service
+emacs.service
+hypridle.service
+hyprpaper.service
+hyprpolkitagent.service
+quickshell.service
+sysupdate-check.timer
+udiskie.service
+hyprsunset.service
