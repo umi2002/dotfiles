@@ -127,10 +127,23 @@ ShellRoot {
                 }
 
                 Image {
-                    anchors.fill: parent
+                    anchors.left: banner.right
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
                     source: Assets.login_wallpaper
                     fillMode: Image.PreserveAspectCrop
                     sourceSize.height: height
+                }
+
+                Rectangle {
+                    id: banner
+
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    width: parent.width * 0.28
+                    color: Style.palette.crust
                 }
 
                 TimeDisplay {
@@ -141,7 +154,7 @@ ShellRoot {
                 }
 
                 LoginForm {
-                    anchors.centerIn: parent
+                    anchors.centerIn: banner
                     authFailed: shellRoot.authFailed
                     isLoading: shellRoot.isLoading
                     errorMessage: shellRoot.errorMessage
