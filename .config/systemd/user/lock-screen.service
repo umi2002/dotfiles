@@ -1,7 +1,7 @@
 [Unit]
-Description=Lock the session with Quickshell
+Description=Engage the Quickshell lock screen
 PartOf=lock.target
-After=quickshell-lock.service
+After=quickshell-locker.service
 
 [Service]
 Type=oneshot

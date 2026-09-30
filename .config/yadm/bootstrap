@@ -29,9 +29,9 @@ UNITS=(
     emacs.service
     hyprpaper.service
     hyprpolkitagent.service
+    lock-screen.service
     quickshell.service
-    quickshell-lock.service
-    quickshell-lock-session.service
+    quickshell-locker.service
     systemd-lock-handler.service
     sysupdate-check.timer
     udiskie.service
