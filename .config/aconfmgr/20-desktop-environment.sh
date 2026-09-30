@@ -48,6 +48,7 @@ AddPackage bitwarden                           # A secure and free password mana
 AddPackage --foreign zoom                      # Video Conferencing and Web Conferencing Service
 AddPackage drawing                             # Drawing application for the GNOME desktop
 AddPackage --foreign claude-desktop            # Official Claude AI desktop app from Anthropic — Chat, Cowork, and Claude Code
+AddPackage --foreign github-desktop-bin        # GUI for managing Git and GitHub.
 
 # Virtualization
 AddPackage libvirt      # API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)

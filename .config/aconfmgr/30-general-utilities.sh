@@ -51,3 +51,7 @@ AddPackage texlive-plaingeneric     # TeX Live - Plain (La)TeX packages
 AddPackage texlive-pstricks         # TeX Live - PSTricks
 AddPackage texlive-publishers       # TeX Live - Publisher styles, theses, etc.
 AddPackage texlive-xetex            # TeX Live - XeTeX and packages
+AddPackage texlive-langfrench       # TeX Live - French
+AddPackage inkscape                 # Professional vector graphics editor
+AddPackage zathura                  # Minimalistic document viewer
+AddPackage zathura-pdf-mupdf        # PDF support for Zathura (MuPDF backend) (Supports PDF, ePub, and OpenXPS)
