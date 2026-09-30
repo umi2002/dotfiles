@@ -6,7 +6,6 @@ AddPackage greetd                      # Generic greeter daemon
 AddPackage uwsm                        # A standalone Wayland session manager
 AddPackage hyprland                    # a highly customizable dynamic tiling Wayland compositor
 AddPackage hyprpaper                   # a blazing fast wayland wallpaper utility with IPC controls
-AddPackage hyprlock                    # hyprland’s GPU-accelerated screen locking utility
 AddPackage hypridle                    # hyprland’s idle daemon
 AddPackage hyprsunset                  # An application to enable a blue-light filter on Hyprland
 AddPackage hyprpolkitagent             # Simple polkit authentication agent for Hyprland, written in QT/QML

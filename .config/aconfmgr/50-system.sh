@@ -24,6 +24,7 @@ CopyFile /etc/sudoers
 # PAM
 CopyFile /etc/pam.d/greetd
 CopyFile /etc/pam.d/passwd
+CopyFile /etc/pam.d/quickshell-lock
 
 # Input
 CopyFile /etc/keyd/default.conf

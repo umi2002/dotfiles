@@ -31,6 +31,7 @@ UNITS=(
     hyprpaper.service
     hyprpolkitagent.service
     quickshell.service
+    quickshell-lock.service
     sysupdate-check.timer
     udiskie.service
 )
