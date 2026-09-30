@@ -2,23 +2,23 @@
 # ~/.config/aconfmgr/20-desktop-environment.sh
 
 # Hyprland Session
-AddPackage greetd                      # Generic greeter daemon
-AddPackage uwsm                        # A standalone Wayland session manager
-AddPackage hyprland                    # a highly customizable dynamic tiling Wayland compositor
-AddPackage hyprpaper                   # a blazing fast wayland wallpaper utility with IPC controls
-AddPackage hypridle                    # hyprland’s idle daemon
-AddPackage hyprsunset                  # An application to enable a blue-light filter on Hyprland
-AddPackage hyprpolkitagent             # Simple polkit authentication agent for Hyprland, written in QT/QML
-AddPackage xdg-desktop-portal          # Desktop integration portals for sandboxed apps
-AddPackage xdg-desktop-portal-gtk      # A backend implementation for xdg-desktop-portal using GTK
-AddPackage xdg-desktop-portal-hyprland # xdg-desktop-portal backend for hyprland
-AddPackage --foreign runapp            # Application runner for Linux desktop environments that integrate with systemd
-AddPackage kitty                       # A modern, hackable, featureful, OpenGL-based terminal emulator
-AddPackage grim                        # Screenshot utility for Wayland
-AddPackage slurp                       # Select a region in a Wayland compositor
-AddPackage swappy                      # A Wayland native snapshot editing tool
-AddPackage cliphist                    # wayland clipboard manager
-AddPackage upower                      # Abstraction for enumerating power devices, listening to device events and querying history and statistics
+AddPackage greetd                         # Generic greeter daemon
+AddPackage uwsm                           # A standalone Wayland session manager
+AddPackage hyprland                       # a highly customizable dynamic tiling Wayland compositor
+AddPackage hyprpaper                      # a blazing fast wayland wallpaper utility with IPC controls
+AddPackage hyprsunset                     # An application to enable a blue-light filter on Hyprland
+AddPackage hyprpolkitagent                # Simple polkit authentication agent for Hyprland, written in QT/QML
+AddPackage --foreign systemd-lock-handler # Logind lock event to systemd target translation.
+AddPackage xdg-desktop-portal             # Desktop integration portals for sandboxed apps
+AddPackage xdg-desktop-portal-gtk         # A backend implementation for xdg-desktop-portal using GTK
+AddPackage xdg-desktop-portal-hyprland    # xdg-desktop-portal backend for hyprland
+AddPackage --foreign runapp               # Application runner for Linux desktop environments that integrate with systemd
+AddPackage kitty                          # A modern, hackable, featureful, OpenGL-based terminal emulator
+AddPackage grim                           # Screenshot utility for Wayland
+AddPackage slurp                          # Select a region in a Wayland compositor
+AddPackage swappy                         # A Wayland native snapshot editing tool
+AddPackage cliphist                       # wayland clipboard manager
+AddPackage upower                         # Abstraction for enumerating power devices, listening to device events and querying history and statistics
 
 # Quickshell
 AddPackage --foreign quickshell-git # Flexible toolkit for making desktop shells with QtQuick

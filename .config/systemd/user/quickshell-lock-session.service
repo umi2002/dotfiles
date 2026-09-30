@@ -1,0 +1,11 @@
+[Unit]
+Description=Lock the session with Quickshell
+PartOf=lock.target
+After=quickshell-lock.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/quickshell --path %h/.config/quickshell/lock.qml ipc call lock lock
+
+[Install]
+WantedBy=lock.target

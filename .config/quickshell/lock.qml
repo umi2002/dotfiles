@@ -79,6 +79,42 @@ ShellRoot {
         }
     }
 
+    Process {
+        id: brightnessProc
+    }
+
+    Process {
+        id: dpmsProc
+    }
+
+    Process {
+        id: sessionProc
+    }
+
+    IdleMonitor {
+        timeout: 540
+
+        onIsIdleChanged: {
+            if (isIdle)
+                brightnessProc.exec(["sh", "-c", "brillo -O && brillo -u 200000 -S 0"]);
+            else
+                brightnessProc.exec(["brillo", "-u", "200000", "-I"]);
+        }
+    }
+
+    IdleMonitor {
+        timeout: 600
+
+        onIsIdleChanged: {
+            if (isIdle) {
+                sessionProc.exec(["loginctl", "lock-session"]);
+                dpmsProc.exec(["hyprctl", "dispatch", 'hl.dsp.dpms({ action = "disable" })']);
+            } else {
+                dpmsProc.exec(["hyprctl", "dispatch", 'hl.dsp.dpms({ action = "enable" })']);
+            }
+        }
+    }
+
     PamContext {
         id: pam
 
@@ -100,6 +136,7 @@ ShellRoot {
             if (result === PamResult.Success) {
                 shellRoot.reset();
                 sessionLock.locked = false;
+                sessionProc.exec(["loginctl", "unlock-session"]);
                 return;
             }
             shellRoot.fail(shellRoot.pamErrorMessage(pam.message));

@@ -27,11 +27,12 @@ UNITS=(
     cliphist-image.service
     cliphist-text.service
     emacs.service
-    hypridle.service
     hyprpaper.service
     hyprpolkitagent.service
     quickshell.service
     quickshell-lock.service
+    quickshell-lock-session.service
+    systemd-lock-handler.service
     sysupdate-check.timer
     udiskie.service
 )
