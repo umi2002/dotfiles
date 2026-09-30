@@ -8,7 +8,7 @@ import QtQuick
 
 import qs
 import qs.assets
-import qs.components.greetd
+import qs.components.auth
 
 ShellRoot {
     id: shellRoot
