@@ -1,10 +1,11 @@
 cliphist-image.service
 cliphist-text.service
 emacs.service
-hypridle.service
 hyprpaper.service
 hyprpolkitagent.service
+lock-screen.service
 quickshell.service
+quickshell-locker.service
+systemd-lock-handler.service
 sysupdate-check.timer
 udiskie.service
-hyprsunset.service
