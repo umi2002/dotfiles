@@ -116,33 +116,45 @@ ShellRoot {
         WlSessionLockSurface {
             color: Style.palette.base
 
-            Image {
+            Item {
                 anchors.fill: parent
-                source: Assets.login_wallpaper
-                fillMode: Image.PreserveAspectCrop
-            }
+                opacity: 0
 
-            TimeDisplay {
-                anchors.top: parent.top
-                anchors.right: parent.right
-                anchors.topMargin: Style.spacing.large
-                anchors.rightMargin: Style.spacing.large
-            }
+                NumberAnimation on opacity {
+                    to: 1
+                    duration: Style.animation.slow
+                    easing.type: Easing.InOutCubic
+                }
 
-            LoginForm {
-                anchors.centerIn: parent
-                authFailed: shellRoot.authFailed
-                isLoading: shellRoot.isLoading
-                errorMessage: shellRoot.errorMessage
-                selectedUser: shellRoot.sessionUser
-                userList: [shellRoot.sessionUser]
-                onSubmitted: password => {
-                    shellRoot.authFailed = false;
-                    shellRoot.errorMessage = "";
-                    shellRoot.isLoading = true;
-                    shellRoot.pendingPassword = password;
-                    if (!pam.start())
-                        shellRoot.fail("Could not start authentication.");
+                Image {
+                    anchors.fill: parent
+                    source: Assets.login_wallpaper
+                    fillMode: Image.PreserveAspectCrop
+                    sourceSize.height: height
+                }
+
+                TimeDisplay {
+                    anchors.top: parent.top
+                    anchors.right: parent.right
+                    anchors.topMargin: Style.spacing.large
+                    anchors.rightMargin: Style.spacing.large
+                }
+
+                LoginForm {
+                    anchors.centerIn: parent
+                    authFailed: shellRoot.authFailed
+                    isLoading: shellRoot.isLoading
+                    errorMessage: shellRoot.errorMessage
+                    selectedUser: shellRoot.sessionUser
+                    userList: [shellRoot.sessionUser]
+                    onSubmitted: password => {
+                        shellRoot.authFailed = false;
+                        shellRoot.errorMessage = "";
+                        shellRoot.isLoading = true;
+                        shellRoot.pendingPassword = password;
+                        if (!pam.start())
+                            shellRoot.fail("Could not start authentication.");
+                    }
                 }
             }
         }

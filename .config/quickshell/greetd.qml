@@ -112,6 +112,8 @@ ShellRoot {
             Image {
                 anchors.fill: parent
                 source: Assets.login_wallpaper
+                fillMode: Image.PreserveAspectCrop
+                sourceSize.height: height
             }
 
             TimeDisplay {

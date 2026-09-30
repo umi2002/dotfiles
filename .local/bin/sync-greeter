@@ -3,7 +3,7 @@
 src="$HOME/.config/quickshell"
 dest=/etc/greetd/quickshell
 
-files=(greetd.qml Style.qml assets/Assets.qml assets/login_wallpaper.jpg components/Throbber.qml)
+files=(greetd.qml Style.qml assets/Assets.qml assets/login_wallpaper.svg components/Throbber.qml)
 for f in "$src"/components/greetd/*.qml; do
     files+=("${f#"$src/"}")
 done

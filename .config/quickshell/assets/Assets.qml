@@ -14,7 +14,7 @@ QtObject {
     readonly property url dashboardVideo: resolveAsset("calamitas.mp4")
     readonly property url desktop: resolveAsset("desktop.svg")
     readonly property url keyboard: resolveAsset("keyboard.svg")
-    readonly property url login_wallpaper: resolveAsset("login_wallpaper.jpg")
+    readonly property url login_wallpaper: resolveAsset("login_wallpaper.svg")
 
     readonly property var workspace: QtObject {
         readonly property url occupied: assets.resolveAsset("occupied_workspace_icon.svg")
