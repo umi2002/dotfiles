@@ -71,6 +71,7 @@ CopyFile /usr/local/bin/brightness.sh 755
 # greetd
 CopyFile /etc/greetd/config.toml
 CopyFile /etc/greetd/hyprland.lua
+CopyFile /etc/systemd/user/xdg-desktop-portal-gtk.service.d/greeter.conf
 CreateLink /etc/systemd/system/display-manager.service /usr/lib/systemd/system/greetd.service
 
 # Printing

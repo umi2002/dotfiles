@@ -48,6 +48,8 @@ AddPackage --foreign zoom                      # Video Conferencing and Web Conf
 AddPackage drawing                             # Drawing application for the GNOME desktop
 AddPackage --foreign claude-desktop            # Official Claude AI desktop app from Anthropic — Chat, Cowork, and Claude Code
 AddPackage --foreign github-desktop-bin        # GUI for managing Git and GitHub.
+AddPackage easyeffects                         # Audio Effects for Pipewire applications
+AddPackage lsp-plugins                         # Collection of open-source plugins
 
 # Virtualization
 AddPackage libvirt      # API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)
