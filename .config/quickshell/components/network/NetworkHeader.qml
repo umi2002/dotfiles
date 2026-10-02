@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 
 import qs
+import qs.assets
 import qs.components
 
 Rectangle {
@@ -54,23 +55,16 @@ Rectangle {
         }
     }
 
-    StyledButton {
-        text: root.confirmingForget ? "Confirm" : "Forget"
-        textColor: Style.palette.red
+    IconActionButton {
+        icon: root.confirmingForget ? Assets.actions.confirm : Assets.actions.remove
+        iconColor: Style.palette.red
         visible: root.isSaved && !root.isConnecting
-        enabled: root.isHovered
-        opacity: root.isHovered ? 1 : 0
+        revealed: root.isHovered
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: actionButton.left
         anchors.rightMargin: Style.spacing.normal
 
-        Behavior on opacity {
-            NumberAnimation {
-                duration: Style.animation.normal
-            }
-        }
-
-        onClicked: {
+        onActionTriggered: {
             if (root.confirmingForget) {
                 root.confirmingForget = false;
                 forgetConfirmTimer.stop();
@@ -82,25 +76,21 @@ Rectangle {
         }
     }
 
-    ActionButton {
+    IconActionButton {
         id: actionButton
-        isHovered: root.isHovered
-        isConnecting: root.isConnecting
+        revealed: root.isHovered || root.isConnecting
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: caret.left
         anchors.rightMargin: Style.spacing.normal
 
-        text: {
-            if (root.network?.connected) {
-                return "Disconnect";
-            }
-
-            if (root.isConnecting || root.isExpanded) {
-                return "Cancel";
-            } else {
-                return "Connect";
-            }
+        icon: {
+            if (root.network?.connected)
+                return Assets.actions.linkOff;
+            if (root.isConnecting || root.isExpanded)
+                return Assets.actions.close;
+            return Assets.actions.link;
         }
+        iconColor: root.network?.connected ? Style.palette.red : Style.palette.green
 
         onActionTriggered: {
             root.actionTriggered();

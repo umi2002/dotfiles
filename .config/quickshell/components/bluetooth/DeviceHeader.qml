@@ -3,6 +3,7 @@ pragma ComponentBehavior: Bound
 import QtQuick
 
 import qs
+import qs.assets
 import qs.components
 import qs.services
 
@@ -56,23 +57,16 @@ Rectangle {
         }
     }
 
-    StyledButton {
-        text: root.confirmingForget ? "Confirm" : "Forget"
-        textColor: Style.palette.red
+    IconActionButton {
+        icon: root.confirmingForget ? Assets.actions.confirm : Assets.actions.remove
+        iconColor: Style.palette.red
         visible: root.isPaired && !root.isBusy
-        enabled: root.isHovered
-        opacity: root.isHovered ? 1 : 0
+        revealed: root.isHovered
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: actionButton.left
         anchors.rightMargin: Style.spacing.normal
 
-        Behavior on opacity {
-            NumberAnimation {
-                duration: Style.animation.normal
-            }
-        }
-
-        onClicked: {
+        onActionTriggered: {
             if (root.confirmingForget) {
                 root.confirmingForget = false;
                 forgetConfirmTimer.stop();
@@ -84,21 +78,21 @@ Rectangle {
         }
     }
 
-    ActionButton {
+    IconActionButton {
         id: actionButton
-        isHovered: root.isHovered
-        isConnecting: root.isBusy
+        revealed: root.isHovered || root.isBusy
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: caret.left
         anchors.rightMargin: Style.spacing.normal
 
-        text: {
+        icon: {
             if (root.device?.pairing)
-                return "Cancel";
+                return Assets.actions.close;
             if (!root.isPaired)
-                return "Pair";
-            return root.device?.connected ? "Disconnect" : "Connect";
+                return Assets.actions.addLink;
+            return root.device?.connected ? Assets.actions.linkOff : Assets.actions.link;
         }
+        iconColor: root.device?.connected ? Style.palette.red : Style.palette.green
 
         onActionTriggered: {
             root.actionTriggered();

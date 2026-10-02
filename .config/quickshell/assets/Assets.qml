@@ -90,6 +90,15 @@ QtObject {
         readonly property url spotify: assets.resolveAsset("spotify_logo.svg")
     }
 
+    readonly property var actions: QtObject {
+        readonly property url link: assets.resolveAsset("link_icon.svg")
+        readonly property url linkOff: assets.resolveAsset("link_off_icon.svg")
+        readonly property url addLink: assets.resolveAsset("add_link_icon.svg")
+        readonly property url close: assets.resolveAsset("close_icon.svg")
+        readonly property url remove: assets.resolveAsset("delete_icon.svg")
+        readonly property url confirm: assets.resolveAsset("check_icon.svg")
+    }
+
     readonly property var services: QtObject {
         readonly property url default_: assets.resolveAsset("services_icon.svg")
         readonly property url warning: assets.resolveAsset("warning_icon.svg")

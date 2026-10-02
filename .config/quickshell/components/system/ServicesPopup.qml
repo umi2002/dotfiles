@@ -5,6 +5,7 @@ import QtQuick.Layouts
 
 import qs
 import qs.assets
+import qs.components
 import qs.services
 
 ColumnLayout {
@@ -30,7 +31,7 @@ ColumnLayout {
             Layout.fillWidth: true
         }
 
-        ServiceActionButton {
+        IconActionButton {
             icon: Assets.services.restart
             iconColor: Style.palette.subtext0
             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter

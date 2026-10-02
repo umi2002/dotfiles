@@ -49,7 +49,7 @@ Rectangle {
         color: root.failed ? Style.palette.red : (root.running ? Style.palette.green : Style.palette.subtext1)
     }
 
-    ServiceActionButton {
+    IconActionButton {
         id: restartButton
 
         icon: Assets.services.restart
@@ -62,7 +62,7 @@ Rectangle {
         onActionTriggered: root.actionTriggered("restart")
     }
 
-    ServiceActionButton {
+    IconActionButton {
         id: toggleButton
 
         icon: root.running ? Assets.services.stop : Assets.services.start
