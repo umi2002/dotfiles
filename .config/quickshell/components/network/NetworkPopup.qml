@@ -16,17 +16,23 @@ ColumnLayout {
         onToggled: NetworkData.toggleWiFi()
     }
 
-    NetworkSection {
+    ListSection {
         Layout.fillHeight: true
         title: "Saved Networks"
-        networkModel: NetworkData.knownNetworks
+        sectionModel: NetworkData.knownNetworks
+        delegateComponent: NetworkListViewItem {
+            width: ListView.view.width
+        }
         isVisible: NetworkData.isWiFiOn
     }
 
-    NetworkSection {
+    ListSection {
         Layout.fillHeight: true
         title: "Available Networks"
-        networkModel: NetworkData.unknownNetworks
+        sectionModel: NetworkData.unknownNetworks
+        delegateComponent: NetworkListViewItem {
+            width: ListView.view.width
+        }
         isVisible: NetworkData.isWiFiOn
     }
 }

@@ -40,14 +40,24 @@ ColumnLayout {
         }
     }
 
-    ServicesSection {
+    ListSection {
+        Layout.fillHeight: true
         title: "User"
-        servicesModel: Systemd.userUnits
+        sectionModel: Systemd.userUnits
+        maximumHeight: 220
+        delegateComponent: ServiceListViewItem {
+            width: ListView.view.width
+        }
     }
 
-    ServicesSection {
+    ListSection {
+        Layout.fillHeight: true
         title: "System"
-        servicesModel: Systemd.systemUnits
+        sectionModel: Systemd.systemUnits
+        maximumHeight: 220
+        delegateComponent: ServiceListViewItem {
+            width: ListView.view.width
+        }
     }
 
     Item {

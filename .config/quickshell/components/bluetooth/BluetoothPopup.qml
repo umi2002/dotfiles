@@ -21,17 +21,23 @@ ColumnLayout {
         onToggled: BluetoothData.bluetoothToggle()
     }
 
-    BluetoothSection {
+    ListSection {
         Layout.fillHeight: true
         title: "Paired Devices"
-        bluetoothModel: BluetoothData.pairedDevices
+        sectionModel: BluetoothData.pairedDevices
+        delegateComponent: BluetoothListViewItem {
+            width: ListView.view.width
+        }
         isVisible: BluetoothData.state !== 0
     }
 
-    BluetoothSection {
+    ListSection {
         Layout.fillHeight: true
         title: BluetoothData.discovering ? "Scanning…" : "Available Devices"
-        bluetoothModel: BluetoothData.availableDevices
+        sectionModel: BluetoothData.availableDevices
+        delegateComponent: BluetoothListViewItem {
+            width: ListView.view.width
+        }
         isVisible: BluetoothData.state !== 0
     }
 }
