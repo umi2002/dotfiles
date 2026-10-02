@@ -35,6 +35,10 @@ Flickable {
             bluetoothContent: BluetoothPopup {
                 anchors.fill: parent
             }
+
+            servicesContent: ServicesPopup {
+                anchors.fill: parent
+            }
         }
     }
 }

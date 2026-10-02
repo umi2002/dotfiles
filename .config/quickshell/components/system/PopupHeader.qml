@@ -10,6 +10,8 @@ Item {
     id: root
     property int selectedIndex: 0
 
+    readonly property var tabs: [wifiButton, bluetoothButton, servicesButton]
+
     implicitHeight: buttonRow.implicitHeight
 
     RowLayout {
@@ -31,6 +33,13 @@ Item {
             onClicked: root.selectedIndex = 1
         }
 
+        SystemPopupButton {
+            id: servicesButton
+            icon: Assets.services.default_
+            isSelected: root.selectedIndex === 2
+            onClicked: root.selectedIndex = 2
+        }
+
         Item {
             Layout.fillWidth: true
         }
@@ -40,10 +49,10 @@ Item {
         anchors.top: parent.bottom
         anchors.topMargin: Style.spacing.normal
         implicitHeight: 5
-        implicitWidth: root.selectedIndex === 0 ? wifiButton.implicitWidth : bluetoothButton.implicitWidth
+        implicitWidth: root.tabs[root.selectedIndex].implicitWidth
         radius: implicitHeight / 2
         color: Style.palette.green
-        x: root.selectedIndex === 0 ? wifiButton.x : bluetoothButton.x
+        x: root.tabs[root.selectedIndex].x
 
         Behavior on x {
             NumberAnimation {

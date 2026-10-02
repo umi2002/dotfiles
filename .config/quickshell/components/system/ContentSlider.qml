@@ -12,11 +12,13 @@ Item {
     required property int popupWidth
     required property Component networkContent
     required property Component bluetoothContent
+    required property Component servicesContent
 
     readonly property int margins: 100
+    readonly property var containers: [networkPopupContainer, bluetoothPopupContainer, servicesPopupContainer]
 
     implicitWidth: root.containerWidth
-    implicitHeight: root.currentIndex === 0 ? networkPopupContainer.height : bluetoothPopupContainer.height
+    implicitHeight: root.containers[root.currentIndex].height
     x: -root.currentIndex * root.popupWidth
 
     Behavior on x {
@@ -50,6 +52,20 @@ Item {
         Loader {
             id: bluetoothLoader
             sourceComponent: root.bluetoothContent
+            anchors.fill: parent
+        }
+    }
+
+    Rectangle {
+        id: servicesPopupContainer
+        height: Math.min(servicesLoader.implicitHeight, root.containerHeight)
+        width: root.containerWidth - root.margins
+        x: 2 * root.popupWidth + root.margins / 2
+        color: "transparent"
+
+        Loader {
+            id: servicesLoader
+            sourceComponent: root.servicesContent
             anchors.fill: parent
         }
     }

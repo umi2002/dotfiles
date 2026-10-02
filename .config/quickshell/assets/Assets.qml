@@ -90,6 +90,14 @@ QtObject {
         readonly property url spotify: assets.resolveAsset("spotify_logo.svg")
     }
 
+    readonly property var services: QtObject {
+        readonly property url default_: assets.resolveAsset("services_icon.svg")
+        readonly property url warning: assets.resolveAsset("warning_icon.svg")
+        readonly property url start: assets.resolveAsset("start_icon.svg")
+        readonly property url stop: assets.resolveAsset("stop_icon.svg")
+        readonly property url restart: assets.resolveAsset("refresh_icon.svg")
+    }
+
     readonly property var stats: QtObject {
         readonly property url basePath: "stats_icons/"
         readonly property url os: assets.resolveAsset("arch_linux_icon.svg")

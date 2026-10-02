@@ -36,5 +36,10 @@ Rectangle {
             id: bluetooth
             implicitSize: 30
         }
+
+        ServicesIcon {
+            id: services
+            implicitSize: 30
+        }
     }
 }
