@@ -49,7 +49,6 @@ StyledPopupContent {
         anchors.rightMargin: Style.spacing.small
 
         selectedIndex: header.selectedIndex
-        popupWidth: root.implicitWidth
     }
 
     onIsExpandedChanged: {

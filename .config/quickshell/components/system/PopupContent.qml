@@ -8,7 +8,6 @@ import qs.components.network
 Flickable {
     id: root
     required property int selectedIndex
-    required property int popupWidth
 
     contentWidth: container.width
     contentHeight: container.height
@@ -19,14 +18,13 @@ Flickable {
     Item {
         id: container
         implicitWidth: root.width
-        implicitHeight: slider.implicitHeight
+        implicitHeight: tabContent.implicitHeight
 
-        ContentSlider {
-            id: slider
+        TabContent {
+            id: tabContent
             currentIndex: root.selectedIndex
             containerWidth: container.width
             containerHeight: root.height
-            popupWidth: root.popupWidth
 
             networkContent: NetworkPopup {
                 anchors.fill: parent
