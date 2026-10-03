@@ -11,7 +11,7 @@ StyledPopupContent {
     id: root
 
     implicitWidth: 600
-    implicitHeight: 600
+    implicitHeight: 850
 
 
     Item {

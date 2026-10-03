@@ -11,7 +11,7 @@ import qs.services
 ColumnLayout {
     id: root
 
-    spacing: 30
+    spacing: Style.spacing.large
 
     Component.onCompleted: Systemd.refresh()
 
@@ -44,7 +44,7 @@ ColumnLayout {
         Layout.fillHeight: true
         title: "User"
         sectionModel: Systemd.userUnits
-        maximumHeight: 220
+        maximumHeight: 260
         delegateComponent: ServiceListViewItem {
             width: ListView.view.width
         }
@@ -54,13 +54,10 @@ ColumnLayout {
         Layout.fillHeight: true
         title: "System"
         sectionModel: Systemd.systemUnits
-        maximumHeight: 220
+        maximumHeight: 260
         delegateComponent: ServiceListViewItem {
             width: ListView.view.width
         }
     }
 
-    Item {
-        Layout.fillHeight: true
-    }
 }

@@ -12,11 +12,13 @@ Rectangle {
 
     property int margins: Style.spacing.large
     property int maximumHeight: 0
-    property int padding: 30
+    property int padding: 20
     property bool interactive: false
     property int addDuration: Style.animation.popup
     property int displacedDuration: Style.animation.slow
     property int removeDuration: Style.animation.slow
+
+    readonly property real naturalHeight: listView.contentHeight + padding
 
     clip: true
     implicitHeight: listView.implicitHeight + padding

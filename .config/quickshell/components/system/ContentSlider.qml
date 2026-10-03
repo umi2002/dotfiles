@@ -18,7 +18,7 @@ Item {
     readonly property var containers: [networkPopupContainer, bluetoothPopupContainer, servicesPopupContainer]
 
     implicitWidth: root.containerWidth
-    implicitHeight: root.containers[root.currentIndex].height
+    implicitHeight: root.containerHeight
     x: -root.currentIndex * root.popupWidth
 
     Behavior on x {
@@ -30,7 +30,7 @@ Item {
 
     Rectangle {
         id: networkPopupContainer
-        height: Math.min(networkLoader.implicitHeight, root.containerHeight)
+        height: root.containerHeight
         implicitWidth: root.containerWidth - root.margins
         x: root.margins / 2
         color: "transparent"
@@ -44,7 +44,7 @@ Item {
 
     Rectangle {
         id: bluetoothPopupContainer
-        height: Math.min(bluetoothLoader.implicitHeight, root.containerHeight)
+        height: root.containerHeight
         width: root.containerWidth - root.margins
         x: root.popupWidth + root.margins / 2
         color: "transparent"
@@ -58,7 +58,7 @@ Item {
 
     Rectangle {
         id: servicesPopupContainer
-        height: Math.min(servicesLoader.implicitHeight, root.containerHeight)
+        height: root.containerHeight
         width: root.containerWidth - root.margins
         x: 2 * root.popupWidth + root.margins / 2
         color: "transparent"

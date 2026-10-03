@@ -3,12 +3,13 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
 
+import qs
 import qs.components
 
 import qs.services
 
 ColumnLayout {
-    spacing: 30
+    spacing: Style.spacing.large
 
     ToggleHeader {
         label: "Wi-Fi"
