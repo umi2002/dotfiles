@@ -1,9 +1,12 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell
 import Quickshell.Io
 import QtQuick
 
 import qs
+import qs.assets
+import qs.components
 import qs.services
 
 Rectangle {
@@ -13,6 +16,15 @@ Rectangle {
 
     readonly property bool failed: Systemd.isFailed(root.service)
     property string logText: ""
+    property bool copied: false
+
+    function copyLog(): void {
+        if (root.logText.length === 0)
+            return;
+        Quickshell.clipboardText = root.logText;
+        root.copied = true;
+        copyFeedback.restart();
+    }
 
     implicitHeight: column.implicitHeight
     color: "transparent"
@@ -25,6 +37,13 @@ Rectangle {
         stdout: StdioCollector {
             onStreamFinished: root.logText = text.trim()
         }
+    }
+
+    Timer {
+        id: copyFeedback
+
+        interval: 1500
+        onTriggered: root.copied = false
     }
 
     Column {
@@ -54,7 +73,7 @@ Rectangle {
 
         Rectangle {
             width: parent.width
-            implicitHeight: logOutput.implicitHeight + Style.spacing.normal * 2
+            implicitHeight: Math.max(logOutput.implicitHeight, copyButton.height) + Style.spacing.normal * 2
             visible: root.failed && root.logText.length > 0
             radius: Style.radius.small
             color: Style.palette.crust
@@ -62,13 +81,28 @@ Rectangle {
             Text {
                 id: logOutput
 
-                anchors.fill: parent
+                anchors.left: parent.left
+                anchors.top: parent.top
+                anchors.right: copyButton.left
                 anchors.margins: Style.spacing.normal
                 text: root.logText
                 wrapMode: Text.Wrap
                 font.pointSize: Style.font.size2
                 font.family: Style.font.family2
                 color: Style.palette.subtext0
+            }
+
+            IconActionButton {
+                id: copyButton
+
+                icon: root.copied ? Assets.actions.confirm : Assets.actions.copy
+                iconColor: root.copied ? Style.palette.green : Style.palette.subtext0
+                size: 16
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: Style.spacing.normal
+
+                onActionTriggered: root.copyLog()
             }
         }
     }

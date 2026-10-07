@@ -97,6 +97,7 @@ QtObject {
         readonly property url close: assets.resolveAsset("close_icon.svg")
         readonly property url remove: assets.resolveAsset("delete_icon.svg")
         readonly property url confirm: assets.resolveAsset("check_icon.svg")
+        readonly property url copy: assets.resolveAsset("copy_icon.svg")
     }
 
     readonly property var services: QtObject {

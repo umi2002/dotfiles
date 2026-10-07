@@ -18,6 +18,7 @@ ShellRoot {
     property string errorMessage: ""
     property string pendingPassword: ""
     readonly property string sessionUser: Quickshell.env("USER") || ""
+    property bool externallyInhibited: false
 
     function pamErrorMessage(raw) {
         if (!raw)
@@ -61,6 +62,18 @@ ShellRoot {
     }
 
     IpcHandler {
+        target: "idle"
+
+        function setInhibited(inhibited: bool): void {
+            shellRoot.externallyInhibited = inhibited;
+        }
+
+        function isInhibited(): bool {
+            return shellRoot.externallyInhibited;
+        }
+    }
+
+    IpcHandler {
         target: "lock"
 
         function lock(): void {
@@ -93,6 +106,7 @@ ShellRoot {
 
     IdleMonitor {
         timeout: 540
+        enabled: !shellRoot.externallyInhibited
 
         onIsIdleChanged: {
             if (isIdle)
@@ -104,6 +118,7 @@ ShellRoot {
 
     IdleMonitor {
         timeout: 600
+        enabled: !shellRoot.externallyInhibited
 
         onIsIdleChanged: {
             if (isIdle) {
