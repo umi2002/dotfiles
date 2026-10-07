@@ -3,7 +3,18 @@
 boot=${1:--b}
 attention=0
 
-failed=$({ systemctl --failed --no-legend; systemctl --user --failed --no-legend; } 2>/dev/null)
+self=$(sed -n 's|^0::.*/||p' /proc/self/cgroup)
+[[ "$self" == *.service ]] || self=""
+
+drop_self() {
+    if [[ -n "$self" ]]; then
+        grep -vF "$self"
+    else
+        cat
+    fi | grep -v '^[[:space:]]*$'
+}
+
+failed=$({ systemctl --failed --no-legend; systemctl --user --failed --no-legend; } 2>/dev/null | drop_self)
 if [[ -n "$failed" ]]; then
     echo "Currently failed:"
     echo "$failed" | sed 's/^/  /'
@@ -31,7 +42,7 @@ for line in sys.stdin:
         stamps.append(stamp)
 for (uid, unit), stamp in zip(seen, stamps):
     print(f"{uid}\t{unit}\t{datetime.fromtimestamp(stamp + 1):%Y-%m-%d %H:%M:%S}")
-')
+' | drop_self)
 
 if [[ -n "$entries" ]]; then
     echo "Failed at some point, including units that recovered:"

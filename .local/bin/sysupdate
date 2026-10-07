@@ -6,7 +6,7 @@ if [[ "$1" == "--check" ]]; then
     shift
 fi
 
-start=$(date '+%Y-%m-%d %H:%M:%S')
+start=$(date '+%Y-%m-%d %H:%M:%S.%6N')
 attention=0
 
 if (( check_only == 0 )); then
