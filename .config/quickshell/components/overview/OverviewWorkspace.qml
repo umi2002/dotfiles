@@ -1,5 +1,6 @@
 pragma ComponentBehavior: Bound
 
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
 
@@ -18,8 +19,10 @@ Rectangle {
     readonly property int fittingCount: Math.max(0, Math.floor((listArea.height + Style.spacing.small) / (rowHeight + Style.spacing.small)))
     readonly property var visibleWindows: windows.length > fittingCount ? windows.slice(0, Math.max(0, fittingCount - 1)) : windows
     readonly property int hiddenCount: windows.length - visibleWindows.length
+    readonly property var previewSource: root.windows.length > 0 ? (root.windows[0].wayland ?? null) : null
 
     radius: Style.radius.small
+    clip: true
     color: root.isActive ? Style.palette.surface1 : Style.palette.mantle
     border.width: root.overview.dragToplevel ? 1 : 0
     border.color: Style.palette.mauve
@@ -28,6 +31,22 @@ Rectangle {
         ColorAnimation {
             duration: Style.animation.normal
         }
+    }
+
+    ScreencopyView {
+        id: preview
+
+        readonly property real factor: preview.sourceSize.width > 0 ? Math.max(root.width / preview.sourceSize.width, root.height / preview.sourceSize.height) : 1
+
+        visible: root.previewSource !== null
+        live: false
+        paintCursor: false
+        captureSource: root.previewSource
+        opacity: 0.3
+        width: preview.sourceSize.width * preview.factor
+        height: preview.sourceSize.height * preview.factor
+        x: (root.width - preview.width) / 2
+        y: (root.height - preview.height) / 2
     }
 
     MouseArea {
