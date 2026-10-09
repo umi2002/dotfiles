@@ -100,6 +100,11 @@ QtObject {
         readonly property url copy: assets.resolveAsset("copy_icon.svg")
     }
 
+    readonly property var recorder: QtObject {
+        readonly property url record: assets.resolveAsset("record_icon.svg")
+        readonly property url stop: assets.resolveAsset("stop_icon.svg")
+    }
+
     readonly property var services: QtObject {
         readonly property url default_: assets.resolveAsset("services_icon.svg")
         readonly property url warning: assets.resolveAsset("warning_icon.svg")

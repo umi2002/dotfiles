@@ -12,6 +12,7 @@ import qs.components
 import qs.components.dashboard
 import qs.components.workspaces
 import qs.components.overview
+import qs.components.recorder
 import qs.components.runner
 
 Rectangle {
@@ -69,6 +70,36 @@ Rectangle {
         target: title
         anchors.top: overviewButton.bottom
         popupContent: OverviewPopup {}
+    }
+
+    RecorderButton {
+        id: recorderButton
+        screenName: root.screenName
+        anchors.left: overviewButton.right
+        anchors.leftMargin: root.margins
+        anchors.verticalCenter: parent.verticalCenter
+    }
+
+    StyledPopup {
+        id: recorderPopup
+        isExpanded: RecorderState.visible && RecorderState.targetScreen === root.screenName && !HyprlandData.hasFullscreen
+        dismissable: true
+        onDismissed: RecorderState.visible = false
+        target: recorderButton
+        gravity: Edges.Left
+        anchors.top: recorderButton.bottom
+        popupContent: RecorderPopup {}
+    }
+
+    StyledPopup {
+        id: monitorPickerPopup
+        isExpanded: RecorderState.monitorPickerVisible && RecorderState.targetScreen === root.screenName && !HyprlandData.hasFullscreen
+        dismissable: true
+        onDismissed: RecorderState.monitorPickerVisible = false
+        target: recorderButton
+        gravity: Edges.Left
+        anchors.top: recorderButton.bottom
+        popupContent: MonitorPickerPopup {}
     }
 
     Title {

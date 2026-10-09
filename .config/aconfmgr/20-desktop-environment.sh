@@ -16,6 +16,7 @@ AddPackage kitty                          # A modern, hackable, featureful, Open
 AddPackage grim                           # Screenshot utility for Wayland
 AddPackage slurp                          # Select a region in a Wayland compositor
 AddPackage swappy                         # A Wayland native snapshot editing tool
+AddPackage gpu-screen-recorder            # A shadowplay-like screen recorder for Linux
 AddPackage cliphist                       # wayland clipboard manager
 AddPackage upower                         # Abstraction for enumerating power devices, listening to device events and querying history and statistics
 
