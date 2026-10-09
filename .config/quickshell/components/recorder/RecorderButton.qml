@@ -64,14 +64,11 @@ WrapperMouseArea {
             ColorizedIcon {
                 id: icon
 
-                property real pulse: 1
-
                 visible: !Recorder.starting
 
-                iconSource: Assets.recorder.record
+                iconSource: Recorder.recording ? Assets.recorder.stop : Assets.recorder.record
                 iconColor: Recorder.recording ? Style.palette.red : (Recorder.starting ? Style.palette.yellow : (RecorderState.visible ? Style.palette.green : Style.palette.text))
                 implicitSize: 20
-                opacity: Recorder.recording ? icon.pulse : 1
                 Layout.alignment: Qt.AlignVCenter
 
                 Behavior on iconColor {
@@ -80,26 +77,6 @@ WrapperMouseArea {
                     }
                 }
 
-                SequentialAnimation {
-                    running: Recorder.recording
-                    loops: Animation.Infinite
-
-                    NumberAnimation {
-                        target: icon
-                        property: "pulse"
-                        to: 0.35
-                        duration: 700
-                        easing.type: Easing.InOutSine
-                    }
-
-                    NumberAnimation {
-                        target: icon
-                        property: "pulse"
-                        to: 1
-                        duration: 700
-                        easing.type: Easing.InOutSine
-                    }
-                }
             }
 
             Text {

@@ -37,7 +37,7 @@ WrapperMouseArea {
         ColorizedIcon {
             id: icon
             anchors.centerIn: parent
-            iconSource: Assets.desktop
+            iconSource: Assets.overview
             iconColor: OverviewState.visible ? Style.palette.green : Style.palette.text
             implicitSize: 20
         }
