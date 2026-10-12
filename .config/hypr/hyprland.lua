@@ -144,7 +144,7 @@ local binds = {
 
 	{
 		key = "F9",
-		action = hl.dsp.pass({ window = "^(discord)$" }),
+		action = hl.dsp.pass({ window = "^(vesktop)$" }),
 		group = "Media",
 		description = "Discord toggle mute",
 	},

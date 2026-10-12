@@ -36,7 +36,7 @@ end
 
 function M.launch(entry)
 	if not M.desktop_exists(entry) then
-		hl.notify("hyprland: missing desktop entry " .. entry)
+		hl.exec_cmd("notify-send -u critical Hyprland 'Missing desktop entry: " .. entry .. "'")
 		return
 	end
 	hl.exec_cmd("uwsm app -- " .. entry)

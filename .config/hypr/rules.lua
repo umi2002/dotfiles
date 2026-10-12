@@ -1,21 +1,35 @@
 local lib = require("lib")
 
 local workspace_apps = {
-	{ workspace = 1, class = "discord" },
+	{ workspace = 1, class = "vesktop" },
 	{ workspace = 2, class = "kitty", follow = true },
 	{ workspace = 5, class = "steam_app_.*" },
 	{ workspace = 7, class = "Bitwarden" },
 	{ workspace = 8, class = "eu.betterbird.Betterbird" },
-	{ workspace = 9, class = "Spotify" },
+	{ workspace = 9, class = "spotify" },
 	{ workspace = 10, class = "steam" },
 }
 
-for _, app in ipairs(workspace_apps) do
+local M = {}
+
+local function applyWorkspaceRule(app, silent)
 	hl.window_rule({
 		name = "ws-" .. app.class:gsub("%W", ""),
 		match = { class = "^(" .. app.class .. ")$" },
-		workspace = app.workspace .. (app.follow and "" or " silent"),
+		workspace = app.workspace .. ((silent and not app.follow) and " silent" or ""),
 	})
+end
+
+function M.setSilent(class, silent)
+	for _, app in ipairs(workspace_apps) do
+		if app.class == class then
+			applyWorkspaceRule(app, silent)
+		end
+	end
+end
+
+for _, app in ipairs(workspace_apps) do
+	applyWorkspaceRule(app, false)
 end
 
 hl.window_rule({ name = "render-steamapp", match = { class = "^(steam_app_.*)$" }, render_unfocused = true })
@@ -38,8 +52,10 @@ for monitor, workspaces in pairs(screens) do
 end
 
 if lib.desktop then
-	local dimmed = { "kitty", "eu.betterbird.Betterbird", "Bitwarden", "discord", "Spotify" }
+	local dimmed = { "kitty", "eu.betterbird.Betterbird", "Bitwarden", "vesktop", "spotify" }
 	for _, class in ipairs(dimmed) do
 		hl.window_rule({ name = "opacity-" .. class:gsub("%W", ""), match = { class = class }, opacity = 0.8 })
 	end
 end
+
+return M
