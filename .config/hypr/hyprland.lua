@@ -1,3 +1,5 @@
+local lib = require("lib")
+
 require("startup")
 require("input")
 require("general")
@@ -16,54 +18,171 @@ require("scrolling")
 local mainMod = "SUPER"
 local shiftMod = "SUPER + SHIFT"
 
-hl.bind(shiftMod .. " + Q", hl.dsp.window.close())
-hl.bind(shiftMod .. " + X", hl.dsp.exec_cmd("uwsm stop"))
-hl.bind(shiftMod .. " + L", hl.dsp.exec_cmd("loginctl lock-session"))
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("uwsm app -- kitty.desktop"))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("uwsm app -- brave-origin.desktop"))
-hl.bind(mainMod .. " + SUPER_L", hl.dsp.global("umi:runner"), { release = true })
-hl.bind(shiftMod .. " + P", hl.dsp.exec_cmd([[grim -g "$(slurp -o)" - | swappy -f -]]))
+local volume = "wpctl set-volume @DEFAULT_SINK@"
+local brightness = "brillo -u 200000"
 
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + S", hl.dsp.layout("togglesplit"))
-hl.bind(shiftMod .. " + F", hl.dsp.window.fullscreen())
+local binds = {
+	{ key = shiftMod .. " + Q", action = hl.dsp.window.close(), group = "Window", description = "Close window" },
+	{
+		key = mainMod .. " + V",
+		action = hl.dsp.window.float({ action = "toggle" }),
+		group = "Window",
+		description = "Toggle floating",
+	},
+	{ key = mainMod .. " + P", action = hl.dsp.window.pseudo(), group = "Window", description = "Toggle pseudo" },
+	{
+		key = shiftMod .. " + F",
+		action = hl.dsp.window.fullscreen(),
+		group = "Window",
+		description = "Toggle fullscreen",
+	},
+	{ key = mainMod .. " + S", action = hl.dsp.layout("togglesplit"), group = "Window", description = "Toggle split" },
+	{
+		key = mainMod .. " + comma",
+		action = hl.dsp.layout("swapcol l"),
+		group = "Window",
+		description = "Swap column left",
+	},
+	{
+		key = mainMod .. " + period",
+		action = hl.dsp.layout("swapcol r"),
+		group = "Window",
+		description = "Swap column right",
+	},
 
-hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
+	{
+		key = mainMod .. " + H",
+		action = hl.dsp.focus({ direction = "left" }),
+		group = "Focus",
+		description = "Focus left",
+	},
+	{
+		key = mainMod .. " + L",
+		action = hl.dsp.focus({ direction = "right" }),
+		group = "Focus",
+		description = "Focus right",
+	},
+	{ key = mainMod .. " + K", action = hl.dsp.focus({ direction = "up" }), group = "Focus", description = "Focus up" },
+	{
+		key = mainMod .. " + J",
+		action = hl.dsp.focus({ direction = "down" }),
+		group = "Focus",
+		description = "Focus down",
+	},
+	{
+		key = mainMod .. " + mouse_down",
+		action = hl.dsp.focus({ workspace = "e+1" }),
+		group = "Focus",
+		description = "Next workspace",
+	},
+	{
+		key = mainMod .. " + mouse_up",
+		action = hl.dsp.focus({ workspace = "e-1" }),
+		group = "Focus",
+		description = "Previous workspace",
+	},
 
-for i = 1, 10 do
-	local key = i % 10
-	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-	hl.bind(shiftMod .. " + " .. key, hl.dsp.window.move({ workspace = i }))
+	{ key = mainMod .. " + Return", action = lib.app("kitty.desktop"), group = "Launch", description = "Terminal" },
+	{ key = mainMod .. " + N", action = lib.app("brave-origin.desktop"), group = "Launch", description = "Browser" },
+	{
+		key = mainMod .. " + SUPER_L",
+		action = hl.dsp.global("umi:runner"),
+		opts = { release = true },
+		group = "Launch",
+		description = "Runner",
+	},
+	{
+		key = shiftMod .. " + P",
+		action = hl.dsp.exec_cmd([[grim -g "$(slurp -o)" - | swappy -f -]]),
+		group = "Launch",
+		description = "Screenshot region",
+	},
+
+	{ key = shiftMod .. " + X", action = hl.dsp.exec_cmd("uwsm stop"), group = "Session", description = "Log out" },
+	{
+		key = shiftMod .. " + L",
+		action = hl.dsp.exec_cmd("loginctl lock-session"),
+		group = "Session",
+		description = "Lock screen",
+	},
+
+	{
+		key = "XF86AudioRaiseVolume",
+		action = hl.dsp.exec_cmd(volume .. " 2%+ --limit 1"),
+		opts = { locked = true, repeating = true },
+		group = "Media",
+		description = "Volume up",
+	},
+	{
+		key = "XF86AudioLowerVolume",
+		action = hl.dsp.exec_cmd(volume .. " 2%-"),
+		opts = { locked = true, repeating = true },
+		group = "Media",
+		description = "Volume down",
+	},
+	{
+		key = "XF86AudioMute",
+		action = hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ toggle"),
+		opts = { locked = true },
+		group = "Media",
+		description = "Mute",
+	},
+	{
+		key = "XF86MonBrightnessUp",
+		action = hl.dsp.exec_cmd(brightness .. " -A 5"),
+		opts = { locked = true, repeating = true },
+		group = "Media",
+		description = "Brightness up",
+	},
+	{
+		key = "XF86MonBrightnessDown",
+		action = hl.dsp.exec_cmd(brightness .. " -U 5"),
+		opts = { locked = true, repeating = true },
+		group = "Media",
+		description = "Brightness down",
+	},
+
+	{
+		key = "F9",
+		action = hl.dsp.pass({ window = "^(discord)$" }),
+		group = "Media",
+		description = "Discord toggle mute",
+	},
+
+	{
+		key = mainMod .. " + mouse:272",
+		action = hl.dsp.window.drag(),
+		opts = { mouse = true },
+		group = "Mouse",
+		description = "Drag window",
+	},
+	{
+		key = mainMod .. " + mouse:273",
+		action = hl.dsp.window.resize(),
+		opts = { mouse = true },
+		group = "Mouse",
+		description = "Resize window",
+	},
+}
+
+for workspace = 1, 10 do
+	local key = workspace % 10
+	binds[#binds + 1] = {
+		key = mainMod .. " + " .. key,
+		action = hl.dsp.focus({ workspace = workspace }),
+		group = "Workspace",
+		description = "Focus workspace " .. workspace,
+	}
+	binds[#binds + 1] = {
+		key = shiftMod .. " + " .. key,
+		action = hl.dsp.window.move({ workspace = workspace }),
+		group = "Workspace",
+		description = "Move window to workspace " .. workspace,
+	}
 end
 
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
+for _, bind in ipairs(binds) do
+	hl.bind(bind.key, bind.action, bind.opts)
+end
 
-hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
-
-hl.bind(shiftMod .. " + M", hl.dsp.layout("swapwithmaster", "auto"))
-
-hl.bind(
-	"XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_SINK@ 2%+ --limit 1"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioLowerVolume",
-	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_SINK@ 2%-"),
-	{ locked = true, repeating = true }
-)
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SINK@ toggle"), { locked = true })
-
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brillo -u 200000 -U 5"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brillo -u 200000 -A 5"), { locked = true, repeating = true })
-
-hl.bind("F9", hl.dsp.pass({ window = "^(discord)$" }))
-
-hl.bind(mainMod .. " + comma", hl.dsp.layout("swapcol", "l"))
-hl.bind(mainMod .. " + period", hl.dsp.layout("swapcol", "r"))
+lib.write_json((os.getenv("HOME") or "") .. "/.local/state/hypr/binds.json", binds)

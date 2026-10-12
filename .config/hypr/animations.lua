@@ -6,10 +6,18 @@ hl.config({
 	},
 })
 
-hl.animation({ leaf = "windows", enabled = true, speed = 7, bezier = "myBezier" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 7, bezier = "default", style = "popin 80%" })
-hl.animation({ leaf = "border", enabled = true, speed = 10, bezier = "default" })
-hl.animation({ leaf = "borderangle", enabled = true, speed = 8, bezier = "default" })
-hl.animation({ leaf = "fade", enabled = true, speed = 7, bezier = "default" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 6, bezier = "default" })
-hl.animation({ leaf = "layersIn", enabled = true, speed = 5, bezier = "default", style = "slide 80%" })
+local animations = {
+	{ leaf = "windows", speed = 7, bezier = "myBezier" },
+	{ leaf = "windowsOut", speed = 7, style = "popin 80%" },
+	{ leaf = "border", speed = 10 },
+	{ leaf = "borderangle", speed = 8 },
+	{ leaf = "fade", speed = 7 },
+	{ leaf = "workspaces", speed = 6 },
+	{ leaf = "layersIn", speed = 5, style = "slide 80%" },
+}
+
+for _, animation in ipairs(animations) do
+	animation.enabled = true
+	animation.bezier = animation.bezier or "default"
+	hl.animation(animation)
+end
