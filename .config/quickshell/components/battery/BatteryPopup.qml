@@ -30,14 +30,40 @@ StyledPopupContent {
 
 
     Rectangle {
+        id: indicator
+
+        readonly property real slot: root.activeProfileIndex * (root.profileItemWidth + root.profileSpacing)
+
+        property bool sliding: false
+        property bool ready: false
+
         width: root.profileItemWidth
         height: root.profileItemWidth
         radius: width / 2
         color: Style.palette.green
         anchors.verticalCenter: parent.verticalCenter
-        x: layout.x + root.activeProfileIndex * (root.profileItemWidth + root.profileSpacing)
+        x: layout.x + indicator.slot
+
+
+        Component.onCompleted: indicator.ready = true
+
+        onSlotChanged: {
+            if (!indicator.ready)
+                return;
+            indicator.sliding = true;
+            settle.restart();
+        }
+
+        Timer {
+            id: settle
+
+            interval: Style.animation.normal + Style.animation.fast
+            onTriggered: indicator.sliding = false
+        }
 
         Behavior on x {
+            enabled: indicator.sliding
+
             NumberAnimation {
                 duration: Style.animation.normal
                 easing.type: Easing.InOutCubic
