@@ -23,6 +23,7 @@ Singleton {
     readonly property string timeToEmpty: formatTimeRemaining(displayDevice.timeToEmpty, false)
     readonly property string timeToFull: formatTimeRemaining(displayDevice.timeToFull, true)
     readonly property int batteryThreshold: Config.batteryThreshold
+    readonly property int batteryCriticalThreshold: Config.batteryCriticalThreshold
 
     readonly property bool deviceReady: displayDevice.ready
 
@@ -52,6 +53,6 @@ Singleton {
         return `${batteryPercent}%`;
     }
 
-    readonly property bool isBatteryLow: batteryPercent <= 20 && !isPluggedIn
-    readonly property bool isBatteryCritical: batteryPercent <= 10 && !isPluggedIn
+    readonly property bool isBatteryLow: batteryPercent <= batteryThreshold && !isPluggedIn
+    readonly property bool isBatteryCritical: batteryPercent <= batteryCriticalThreshold && !isPluggedIn
 }

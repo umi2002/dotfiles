@@ -5,9 +5,12 @@ import QtQuick
 
 QtObject {
     readonly property int batteryThreshold: 20
+    readonly property int batteryCriticalThreshold: 10
     readonly property int cavaBars: 20
     readonly property int nWorkspaces: 10
 
+    readonly property bool notificationSounds: true
+    readonly property string soundTheme: "/usr/share/sounds/ocean/stereo/"
     readonly property int notificationHistoryLimit: 100
     readonly property int storageWriteDebounce: 1000
 

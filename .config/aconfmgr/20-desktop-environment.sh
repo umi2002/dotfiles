@@ -18,6 +18,7 @@ AddPackage slurp                          # Select a region in a Wayland composi
 AddPackage swappy                         # A Wayland native snapshot editing tool
 AddPackage gpu-screen-recorder            # A shadowplay-like screen recorder for Linux
 AddPackage cliphist                       # wayland clipboard manager
+AddPackage ocean-sound-theme              # Ocean Sound Theme for Plasma
 AddPackage upower                         # Abstraction for enumerating power devices, listening to device events and querying history and statistics
 
 # Quickshell

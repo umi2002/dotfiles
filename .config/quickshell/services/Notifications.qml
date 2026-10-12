@@ -15,6 +15,33 @@ Singleton {
 
     signal notificationReceived(var notification)
 
+    readonly property string soundTheme: Config.soundTheme
+
+    function playSound(notification) {
+        if (root.doNotDisturb || !Config.notificationSounds)
+            return;
+
+        const hints = notification.hints ?? ({});
+        if (hints["suppress-sound"])
+            return;
+
+        const file = hints["sound-file"] ?? "";
+        const name = hints["sound-name"] ?? "";
+
+        if (file !== "")
+            soundPlayer.command = ["pw-play", file];
+        else if (name !== "")
+            soundPlayer.command = ["pw-play", root.soundTheme + name + ".oga"];
+        else
+            return;
+
+        soundPlayer.running = true;
+    }
+
+    Process {
+        id: soundPlayer
+    }
+
     property ListModel history: ListModel {}
     readonly property int storageWriteDebounce: Config.storageWriteDebounce
 
@@ -31,6 +58,7 @@ Singleton {
 
         onNotification: notification => {
             notification.tracked = true;
+            root.playSound(notification);
             root.notificationReceived(notification);
             root.history.insert(0, {
                 image: notification.image,

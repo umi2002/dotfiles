@@ -11,6 +11,7 @@ import qs.services
 
 ShellRoot {
     readonly property var powerPolicy: PowerPolicy
+    readonly property var batteryNotifier: BatteryNotifier
 
     Variants {
         model: Quickshell.screens
