@@ -8,6 +8,7 @@ local autostart = {
 }
 
 hl.on("hyprland.start", function()
+	lib.sound("desktop-login")
 	for _, entry in ipairs(autostart) do
 		lib.launch(entry)
 	end

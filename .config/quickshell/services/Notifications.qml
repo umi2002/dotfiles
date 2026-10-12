@@ -17,6 +17,15 @@ Singleton {
 
     readonly property string soundTheme: Config.soundTheme
 
+    readonly property var appSounds: ({
+        "udiskie": {
+            "Device mounted": "device-added",
+            "Device added": "device-added",
+            "Device unmounted": "device-removed",
+            "Device removed": "device-removed"
+        }
+    })
+
     function playSound(notification) {
         if (root.doNotDisturb || !Config.notificationSounds)
             return;
@@ -26,7 +35,7 @@ Singleton {
             return;
 
         const file = hints["sound-file"] ?? "";
-        const name = hints["sound-name"] ?? "";
+        const name = hints["sound-name"] ?? (root.appSounds[notification.appName]?.[notification.summary] ?? "");
 
         if (file !== "")
             soundPlayer.command = ["pw-play", file];

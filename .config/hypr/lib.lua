@@ -42,6 +42,12 @@ function M.launch(entry)
 	hl.exec_cmd("uwsm app -- " .. entry)
 end
 
+M.soundTheme = "/usr/share/sounds/ocean/stereo/"
+
+function M.sound(name)
+	hl.exec_cmd("pw-play " .. M.soundTheme .. name .. ".oga")
+end
+
 local escapes = { ['"'] = '\\"', ["\\"] = "\\\\", ["\n"] = "\\n", ["\t"] = "\\t", ["\r"] = "\\r" }
 
 local function quote(value)
