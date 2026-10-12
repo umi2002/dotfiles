@@ -52,20 +52,20 @@ local binds = {
 
 	{
 		key = mainMod .. " + H",
-		action = hl.dsp.focus({ direction = "left" }),
+		action = hl.dsp.layout("focus l"),
 		group = "Focus",
 		description = "Focus left",
 	},
 	{
 		key = mainMod .. " + L",
-		action = hl.dsp.focus({ direction = "right" }),
+		action = hl.dsp.layout("focus r"),
 		group = "Focus",
 		description = "Focus right",
 	},
-	{ key = mainMod .. " + K", action = hl.dsp.focus({ direction = "up" }), group = "Focus", description = "Focus up" },
+	{ key = mainMod .. " + K", action = hl.dsp.layout("focus u"), group = "Focus", description = "Focus up" },
 	{
 		key = mainMod .. " + J",
-		action = hl.dsp.focus({ direction = "down" }),
+		action = hl.dsp.layout("focus d"),
 		group = "Focus",
 		description = "Focus down",
 	},
