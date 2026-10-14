@@ -18,42 +18,44 @@
 
 (defun load-config-file()
   (interactive)
-  (load-file "~/.emacs.d/init.el"))
+  (load-file (expand-file-name "init.el" user-emacs-directory)))
 
 (with-eval-after-load 'general
   (general-evil-setup)
-  (setq global-map (make-sparse-keymap))
   (general-define-key
    :states 'normal
-   "SPC s" nil))
-
-(with-eval-after-load 'general
+   "SPC s" nil)
   (general-create-definer leader
     :states '(normal visual)
     :keymaps '(global override)
     :prefix "SPC"))
 
 (with-eval-after-load 'general
-  (leader
-    "rr" 'load-config-file)
+  (general-define-key
+   "<escape>" 'keyboard-escape-quit)
+
+  (general-create-definer reload
+    :wrapping leader
+    :infix "r")
+
+  (reload
+    "r" 'load-config-file)
 
   (general-define-key
    :states '(normal visual)
    :keymaps '(global override)
    "J" 'scroll-up-command
-   "K" 'scroll-down-command
-   )
+   "K" 'scroll-down-command)
 
   (general-define-key
    :states '(normal)
    :keymaps '(global override)
    "C-h" 'evil-window-left
-   "C-j" 'evil-window-down 
+   "C-j" 'evil-window-down
    "C-k" 'evil-window-up
    "C-l" 'evil-window-right)
 
   (general-create-definer window
-    :keymaps '(global override)
     :wrapping leader
     :infix "w")
 
@@ -65,11 +67,10 @@
 
   (general-define-key
    :states '(normal)
-   :keymaps '(global)
+   :keymaps '(org-mode-map)
    "RET" 'org-open-at-point)
 
   (general-create-definer buffer
-    :keymaps '(global override)
     :wrapping leader
     :infix "b")
 

@@ -1,6 +1,6 @@
+(setq helm-completion-style 'helm-fuzzy)
 (with-eval-after-load 'helm
-  (helm-mode t)
-  (setq helm-completion-style 'helm-fuzzy))
+  (helm-mode t))
 
 (with-eval-after-load 'helm
   (general-define-key
@@ -11,6 +11,9 @@
 
   (buffer
     "f" 'helm-buffers-list)
+
+  (leader
+    "f" 'helm-find-files)
 
   (general-define-key
    :states '(normal visual)

@@ -1,32 +1,46 @@
-#+TITLE: Visuals Config
+#+TITLE: Visuals config
 #+AUTHOR: umi
-#+OPTIONS: toc:t
 
-* VISUALS CONFIG
+* VISUALS
+** Catppuccin-Theme
+Functions
+#+begin_src emacs-lisp
+  (defun load-catppuccin-theme ()
+    (load-theme 'catppuccin :noconfirm))
+#+end_src
+
+Setup
+#+begin_src emacs-lisp
+  (add-hook 'elpaca-after-init-hook #'load-catppuccin-theme)
+#+end_src
+
 ** Dimmer
+Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'dimmer
     (dimmer-configure-helm)
     (dimmer-mode t))
 #+end_src
 
-** Telephone Line
+** Telephone-Line
+Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'telephone-line
     (telephone-line-mode 1))
 #+end_src
 
 ** Olivetti
+Setup
 #+begin_src emacs-lisp
-  (setq olivetti-body-width 200)
+  (setq olivetti-body-width 0.8)
   (with-eval-after-load 'olivetti
-    (add-hook 'text-mode-hook #'olivetti-mode)
-    (add-hook 'org-mode-hook #'olivetti-mode)
-    (olivetti-mode 1))
+    (add-hook 'text-mode-hook #'olivetti-mode))
 #+end_src
 
 ** Mixed-Pitch
+Setup
 #+begin_src emacs-lisp
+  (setq mixed-pitch-set-height t)
   (with-eval-after-load 'mixed-pitch
     (add-hook 'text-mode-hook #'mixed-pitch-mode))
 #+end_src

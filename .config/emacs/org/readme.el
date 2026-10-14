@@ -1,9 +1,4 @@
-(defun load-org-fonts ()
-  (set-face-attribute 'org-default nil :family "Linux Libertine O" :height 150)
-  (set-face-attribute 'org-block nil :family "FiraMono Nerd Font" :height 100)
-  (set-face-attribute 'org-meta-line nil :family "FiraMono Nerd Font" :height 100))
-
-(add-hook 'org-mode-hook #'load-org-fonts)
+(setq org-directory (file-truename "~/Documents/org"))
 (setq org-startup-with-inline-images t)
 (plist-put org-format-latex-options :scale 1.5)
 
@@ -15,42 +10,19 @@
   (org
     "a" 'org-agenda))
 
-(defun cleanup-org-results ()
-  (when (eq major-mode 'org-mode)
-    (save-excursion
-      (goto-char (point-min))
-      (while (re-search-forward "^#\\+RESULTS:.*\n.*\n\n" nil t)
-	(replace-match "")))))
-
-(defun indent-whole-buffer ()
-  (indent-region (point-min) (point-max)))
-
-(add-hook 'org-mode-hook
-	  (lambda ()
-	    (add-hook 'before-save-hook #'indent-whole-buffer nil t)
-	    (add-hook 'before-save-hook #'cleanup-org-results nil t)))
-
 (with-eval-after-load 'toc-org
-  (if (require 'toc-org nil t)
-      (progn
-	(add-hook 'org-mode-hook 'toc-org-mode))
-    (warn "toc-org not found")))
+  (add-hook 'org-mode-hook 'toc-org-mode))
 
 (with-eval-after-load 'org-modern
   (add-hook 'org-mode-hook #'org-modern-mode)
-  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
+  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda 20))
+
+(setq org-roam-directory (file-truename "~/notes"))
+(with-eval-after-load 'org-roam
+  (org-roam-db-autosync-mode))
 
 (with-eval-after-load 'org-roam
-  (defun org-font ()
-    (when (org-roam-buffer-p)
-      (buffer-face-set :family "DejaVu Sans" :height 150)))
-
-  (add-hook 'org-mode-hook 'org-font)
-  (setq org-roam-directory (file-truename "~/notes"))
-  (org-roam-db-autosync-mode)
-
   (general-create-definer node
-    :keymaps '(global override)
     :wrapping leader
     :infix "n")
 
@@ -59,25 +31,38 @@
     "f" 'org-roam-node-find
     "c" 'org-roam-capture))
 
-(setq org-directory "~/Documents/org")
-(setq org-agenda-files (list "dailies.org" "birthdays.org"))
+(setq org-download-method 'attach)
+(setq org-download-timestamp "%Y%m%d%H%M%S-")
+(setq org-download-screenshot-method "grim -g \"$(slurp)\" %s")
+(setq org-download-image-attr-list '("#+ATTR_ORG: :width 600"))
+
+(with-eval-after-load 'org-download
+  (org
+    "y" 'org-download-clipboard
+    "u" 'org-download-yank
+    "s" 'org-download-screenshot
+    "r" 'org-download-rename-at-point
+    "d" 'org-download-delete))
+
 (defun org-habit-streak-count ()
   (goto-char (point-min))
   (while (not (eobp))
-    ;;on habit line?
     (when (get-text-property (point) 'org-habit-p)
-      (let ((streak 0)
-	    (counter (+ org-habit-graph-column (- org-habit-preceding-days org-habit-following-days))))
-	(move-to-column counter)
-	;;until end of line
-	(while (= (char-after (point)) org-habit-completed-glyph)
-	  (setq streak (+ streak 1))
-	  (setq counter (- counter 1))
-	  (backward-char 1))
-	(end-of-line)
-	(insert (number-to-string streak))))
+      (let ((pos (+ (line-beginning-position) org-habit-graph-column org-habit-preceding-days))
+	      (streak 0))
+	  (unless (eq (char-after pos) org-habit-completed-glyph)
+	    (setq pos (1- pos)))
+	  (while (eq (char-after pos) org-habit-completed-glyph)
+	    (setq streak (+ streak 1))
+	    (setq pos (1- pos)))
+	  (end-of-line)
+	  (insert (number-to-string streak))))
     (forward-line 1)))
-(add-hook 'org-agenda-finalize-hook 'org-habit-streak-count)
+
+(with-eval-after-load 'org
+  (require 'org-habit))
+(setq org-agenda-files (list "dailies.org" "birthdays.org"))
+(add-hook 'org-agenda-finalize-hook 'org-habit-streak-count 10)
 (add-hook 'org-todo-repeat-hook #'org-reset-checkbox-state-subtree)
 
 (with-eval-after-load 'evil
@@ -89,7 +74,6 @@
    :keymaps '(org-agenda-mode-map)
    "h" 'org-agenda-earlier
    "l" 'org-agenda-later
-   "b" 'org-agenda-earlier
    "." 'org-agenda-goto-today
    "t" 'org-agenda-todo
    "r" 'org-agenda-redo
@@ -99,4 +83,5 @@
    "f" 'org-agenda-filter
    "RET" 'org-agenda-goto))
 
-(add-hook 'org-mode-hook 'org-fragtog-mode)
+(with-eval-after-load 'org-fragtog
+  (add-hook 'org-mode-hook 'org-fragtog-mode))

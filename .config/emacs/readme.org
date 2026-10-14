@@ -8,10 +8,7 @@
   - [[#important-programs-to-load-first][IMPORTANT PROGRAMS TO LOAD FIRST]]
   - [[#dired][DIRED]]
   - [[#navigation][NAVIGATION]]
-  - [[#project][PROJECT]]
-  - [[#lsp][LSP]]
   - [[#utils][UTILS]]
-  - [[#git][GIT]]
   - [[#visuals][VISUALS]]
   - [[#org][ORG]]
 
@@ -82,7 +79,7 @@ Enable the Elpaca use-package macro
   (elpaca elpaca-use-package
     ;; Enable use-package :ensure support for Elpaca.
     (elpaca-use-package-mode)
-    (setq elpaca-use-package-by-default t))
+    (setq use-package-always-ensure t))
 #+end_src
 
 Wait for Elpaca to be installed
@@ -116,7 +113,7 @@ Installing Evil-Collection
 #+end_src
 
 *** General
-Installing General 
+Installing General
 #+begin_src emacs-lisp
   (use-package general :demand t)
 #+end_src
@@ -167,73 +164,6 @@ Installing Avy
     user-emacs-directory))
 #+end_src
 
-** PROJECT
-[[file:project/readme.org][Configuration]]
-#+begin_src emacs-lisp
-  (org-babel-load-file
-   (expand-file-name
-    "project/readme.org"
-    user-emacs-directory))
-#+end_src
-
-** LSP
-Installing Lsp-Mode
-#+begin_src emacs-lisp
-  (use-package lsp-mode
-    :commands (lsp lsp-deferred))
-#+end_src
-
-Installing Lsp-UI
-#+begin_src emacs-lisp
-  (use-package lsp-ui)
-#+end_src
-
-Installing Company
-#+begin_src emacs-lisp
-  (use-package company)
-#+end_src
-
-Installing Helm-Lsp
-#+begin_src emacs-lisp
-  (use-package helm-lsp
-    :after (helm lsp-mode))
-#+end_src
-
-Installing Yasnippet
-#+begin_src emacs-lisp
-  (use-package yasnippet)
-#+end_src
-
-Installing Format-All
-#+begin_src emacs-lisp
-  (use-package format-all)
-#+end_src
-
-Installing Flycheck
-#+begin_src emacs-lisp
-  (use-package flycheck)
-#+end_src
-
-Installing Helm-Flycheck
-#+begin_src emacs-lisp
-  (use-package helm-flycheck
-    :after (helm flycheck))
-#+end_src
-
-Installing Flycheck-Inline
-#+begin_src emacs-lisp
-  (use-package flycheck-inline
-    :after flycheck)
-#+end_src
-
-[[file:lsp/readme.org][Configuration]]
-#+begin_src emacs-lisp
-  (org-babel-load-file
-   (expand-file-name
-    "lsp/readme.org"
-    user-emacs-directory))
-#+end_src
-
 ** UTILS
 Installing Evil-Surround
 #+begin_src emacs-lisp
@@ -252,7 +182,7 @@ Installing Evil-Embrace
     :after (evil-surround embrace))
 #+end_src
 
-Intalling Evil-Commentary
+Installing Evil-Commentary
 #+begin_src emacs-lisp
   (use-package evil-commentary
     :after evil)
@@ -262,11 +192,6 @@ Installing Evil-Goggles
 #+begin_src emacs-lisp
   (use-package evil-goggles
     :after evil)
-#+end_src
-
-Installing Vterm
-#+begin_src emacs-lisp
-  (use-package vterm)
 #+end_src
 
 Installing Undo-Tree
@@ -287,35 +212,10 @@ Installing Exec-Path-From-Shell
     user-emacs-directory))
 #+end_src
 
-** GIT
-Installing Transient
-#+begin_src emacs-lisp
-  (use-package transient)
-#+end_src
-
-Installing Magit
-#+begin_src emacs-lisp
-  (use-package magit)
-#+end_src
-
-Installing Git-Gutter
-#+begin_src emacs-lisp
-  (use-package git-gutter)
-#+end_src
-
-[[file:git/readme.org][Configuration]]
-#+begin_src emacs-lisp
-  (org-babel-load-file
-   (expand-file-name
-    "git/readme.org"
-    user-emacs-directory))
-#+end_src
-
 ** VISUALS
 Installing Catppuccin-Theme
 #+begin_src emacs-lisp
-  (use-package catppuccin-theme
-    :config (load-theme 'catppuccin :noconfirm))
+  (use-package catppuccin-theme)
 #+end_src
 
 Installing Dimmer
@@ -331,12 +231,6 @@ Installing Telephone Line
 Installing Olivetti
 #+begin_src emacs-lisp
   (use-package olivetti)
-#+end_src
-
-Installing All-The-Icons
-#+begin_src emacs-lisp
-  (use-package all-the-icons
-    :if (display-graphic-p))
 #+end_src
 
 Installing Mixed-Pitch
@@ -373,7 +267,8 @@ Installing Org-Roam
 
 Installing Org-Download
 #+begin_src emacs-lisp
-  (use-package org-download)
+  (use-package org-download
+    :after org)
 #+end_src
 
 Installing Org-Fragtog

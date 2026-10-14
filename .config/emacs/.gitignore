@@ -7,16 +7,10 @@ auto-save-list
 tramp
 .\#*
 elpaca
-transient
-.lsp-session-*
-projectile*
 !config/elpaca
 .cache
-elpa
 recentf
-projects
 .org-id-locations
-.projectile-cache.eld
 bookmarks
 eln-cache
 org-roam.db

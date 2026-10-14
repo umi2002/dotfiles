@@ -1,14 +1,13 @@
 #+TITLE: Navigation config
 #+AUTHOR: umi
-#+OPTIONS: toc:t
 
-* NAVIGATION CONFIG
+* NAVIGATION
 ** Helm
 Setup
 #+begin_src emacs-lisp
+  (setq helm-completion-style 'helm-fuzzy)
   (with-eval-after-load 'helm
-    (helm-mode t)
-    (setq helm-completion-style 'helm-fuzzy))
+    (helm-mode t))
 #+end_src
 
 Mappings
@@ -23,12 +22,16 @@ Mappings
     (buffer
       "f" 'helm-buffers-list)
 
+    (leader
+      "f" 'helm-find-files)
+
     (general-define-key
      :states '(normal visual)
      "M-x" 'helm-M-x))
 #+end_src
 
-* Helm-Flx
+** Helm-Flx
+Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'helm-flx
     (helm-flx-mode 1))

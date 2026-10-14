@@ -1,17 +1,16 @@
 #+TITLE: Evil config
 #+AUTHOR: umi
-#+OPTIONS: toc:t
 
-* EVIL CONFIG
+* EVIL
 ** Evil
-Setup:
+Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'evil
     (evil-mode)
-    (evil-set-undo-system 'undo-redo))
+    (evil-set-undo-system 'undo-tree))
 #+end_src
 
-** Evil Collection
+** Evil-Collection
 Setup
 #+begin_src emacs-lisp
   (with-eval-after-load 'evil-collection

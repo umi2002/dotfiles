@@ -51,7 +51,7 @@
 (elpaca elpaca-use-package
   ;; Enable use-package :ensure support for Elpaca.
   (elpaca-use-package-mode)
-  (setq elpaca-use-package-by-default t))
+  (setq use-package-always-ensure t))
 
 (elpaca-wait)
 
@@ -92,38 +92,6 @@
   "navigation/readme.org"
   user-emacs-directory))
 
-(org-babel-load-file
- (expand-file-name
-  "project/readme.org"
-  user-emacs-directory))
-
-(use-package lsp-mode
-  :commands (lsp lsp-deferred))
-
-(use-package lsp-ui)
-
-(use-package company)
-
-(use-package helm-lsp
-  :after (helm lsp-mode))
-
-(use-package yasnippet)
-
-(use-package format-all)
-
-(use-package flycheck)
-
-(use-package helm-flycheck
-  :after (helm flycheck))
-
-(use-package flycheck-inline
-  :after flycheck)
-
-(org-babel-load-file
- (expand-file-name
-  "lsp/readme.org"
-  user-emacs-directory))
-
 (use-package evil-surround
   :after evil)
 
@@ -138,8 +106,6 @@
 (use-package evil-goggles
   :after evil)
 
-(use-package vterm)
-
 (use-package undo-tree)
 
 (use-package exec-path-from-shell)
@@ -149,28 +115,13 @@
   "utils/readme.org"
   user-emacs-directory))
 
-(use-package transient)
-
-(use-package magit)
-
-(use-package git-gutter)
-
-(org-babel-load-file
- (expand-file-name
-  "git/readme.org"
-  user-emacs-directory))
-
-(use-package catppuccin-theme
-  :config (load-theme 'catppuccin :noconfirm))
+(use-package catppuccin-theme)
 
 (use-package dimmer)
 
 (use-package telephone-line)
 
 (use-package olivetti)
-
-(use-package all-the-icons
-  :if (display-graphic-p))
 
 (use-package mixed-pitch)
 
@@ -188,7 +139,8 @@
 (use-package org-roam
   :after org)
 
-(use-package org-download)
+(use-package org-download
+  :after org)
 
 (use-package org-fragtog
   :after org)
