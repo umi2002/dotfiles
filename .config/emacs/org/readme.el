@@ -29,7 +29,11 @@
   (node
     "i" 'org-roam-node-insert
     "f" 'org-roam-node-find
-    "c" 'org-roam-capture))
+    "c" 'org-roam-capture
+    "e" 'org-roam-extract-subtree
+    "b" 'org-roam-buffer-toggle
+    "d" 'org-roam-dailies-capture-today
+    "r" 'org-roam-node-random))
 
 (setq org-download-method 'attach)
 (setq org-download-timestamp "%Y%m%d%H%M%S-")
@@ -61,7 +65,6 @@
 
 (with-eval-after-load 'org
   (require 'org-habit))
-(setq org-agenda-files (list "dailies.org" "birthdays.org"))
 (add-hook 'org-agenda-finalize-hook 'org-habit-streak-count 10)
 (add-hook 'org-todo-repeat-hook #'org-reset-checkbox-state-subtree)
 
@@ -82,6 +85,60 @@
    "d" 'org-agenda-day-view
    "f" 'org-agenda-filter
    "RET" 'org-agenda-goto))
+
+(defun gtd-dashboard ()
+  (interactive)
+  (org-agenda nil "g"))
+
+(setq org-agenda-files (list "inbox.org" "projects.org" "someday.org" "habits.org" "birthdays.org"))
+
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "NEXT(n)" "WAITING(w@/!)" "|" "DONE(d)" "CANCELLED(c@)")))
+
+(setq org-log-done 'time)
+(setq org-log-into-drawer t)
+(setq org-enforce-todo-dependencies t)
+
+(setq org-refile-targets
+      `((,(expand-file-name "projects.org" org-directory) :maxlevel . 2)
+        (,(expand-file-name "someday.org" org-directory) :maxlevel . 1)
+        (,(expand-file-name "habits.org" org-directory) :maxlevel . 1)))
+(setq org-refile-use-outline-path 'file)
+(setq org-outline-path-complete-in-steps nil)
+
+(setq org-stuck-projects '("+LEVEL=1-noproject" ("NEXT" "WAITING") nil ""))
+
+(setq org-capture-templates
+      `(("t" "Thought" entry
+         (file ,(expand-file-name "inbox.org" org-directory))
+         "* %?\n  %U")
+        ("a" "Appointment" entry
+         (file ,(expand-file-name "inbox.org" org-directory))
+         "* %?\n  %^T")
+        ("l" "Thought with context" entry
+         (file ,(expand-file-name "inbox.org" org-directory))
+         "* %?\n  %U\n  %a")))
+
+(setq org-agenda-custom-commands
+      `(("g" "GTD"
+         ((agenda ""
+                  ((org-agenda-span 1)
+                   (org-agenda-overriding-header "Today")))
+          (tags "LEVEL=1"
+                ((org-agenda-files (list ,(expand-file-name "inbox.org" org-directory)))
+                 (org-agenda-overriding-header "Inbox")))
+          (todo "NEXT"
+                ((org-agenda-overriding-header "Next actions")))
+          (todo "WAITING"
+                ((org-agenda-overriding-header "Waiting on")))
+          (stuck ""
+                 ((org-agenda-files (list ,(expand-file-name "projects.org" org-directory)))
+                  (org-agenda-overriding-header "Stuck projects")))))))
+
+(with-eval-after-load 'general
+  (org
+    "c" 'org-capture
+    "g" 'gtd-dashboard))
 
 (with-eval-after-load 'org-fragtog
   (add-hook 'org-mode-hook 'org-fragtog-mode))
