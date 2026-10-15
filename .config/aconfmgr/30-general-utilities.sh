@@ -27,6 +27,7 @@ AddPackage bitwarden-cli                 # The command line vault
 AddPackage yadm                          # Yet Another Dotfiles Manager
 AddPackage github-cli                    # The GitHub CLI
 AddPackage ncdu                          # Disk usage analyzer with an ncurses interface
+AddPackage syncthing                     # Open Source Continuous Replication / Cluster Synchronization Thing
 
 # LaTeX
 AddPackage texlive-basic            # TeX Live - Essential programs and files

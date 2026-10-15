@@ -8,7 +8,19 @@
     :infix "o")
 
   (org
-    "a" 'org-agenda))
+    "a" 'org-agenda)
+
+  (localleader
+    :keymaps 'org-mode-map
+    "t" 'org-todo
+    "s" 'org-schedule
+    "d" 'org-deadline
+    "r" 'org-refile
+    "a" 'org-archive-subtree
+    "p" 'org-priority
+    "l" 'org-insert-link
+    "c" 'org-ctrl-c-ctrl-c
+    "x" 'org-cut-subtree))
 
 (with-eval-after-load 'toc-org
   (add-hook 'org-mode-hook 'toc-org-mode))
@@ -84,13 +96,14 @@
    "w" 'org-agenda-week-view
    "d" 'org-agenda-day-view
    "f" 'org-agenda-filter
+   "R" 'org-agenda-refile
    "RET" 'org-agenda-goto))
 
 (defun gtd-dashboard ()
   (interactive)
   (org-agenda nil "g"))
 
-(setq org-agenda-files (list "inbox.org" "projects.org" "someday.org" "habits.org" "birthdays.org"))
+(setq org-agenda-files (list "inbox.org" "projects.org" "someday.org" "habits.org" "birthdays.org" "calendar.org"))
 
 (setq org-todo-keywords
       '((sequence "TODO(t)" "NEXT(n)" "WAITING(w@/!)" "|" "DONE(d)" "CANCELLED(c@)")))
@@ -106,7 +119,9 @@
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 
-(setq org-stuck-projects '("+LEVEL=1-noproject" ("NEXT" "WAITING") nil ""))
+(setq org-agenda-todo-ignore-scheduled 'future)
+(setq org-tags-exclude-from-inheritance '("noproject"))
+(setq org-stuck-projects '("+LEVEL=1-noproject/-DONE" ("NEXT" "WAITING") nil ""))
 
 (setq org-capture-templates
       `(("t" "Thought" entry
