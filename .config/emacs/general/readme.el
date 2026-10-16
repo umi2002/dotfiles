@@ -28,10 +28,7 @@
   (general-create-definer leader
     :states '(normal visual)
     :keymaps '(global override)
-    :prefix "SPC")
-  (general-create-definer localleader
-    :states '(normal visual)
-    :prefix ","))
+    :prefix "SPC"))
 
 (with-eval-after-load 'general
   (general-define-key

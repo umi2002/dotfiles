@@ -10,16 +10,15 @@
   (org
     "a" 'org-agenda)
 
-  (localleader
+  (org
     :keymaps 'org-mode-map
     "t" 'org-todo
     "s" 'org-schedule
     "d" 'org-deadline
     "r" 'org-refile
-    "a" 'org-archive-subtree
+    "A" 'org-archive-subtree
     "p" 'org-priority
     "l" 'org-insert-link
-    "c" 'org-ctrl-c-ctrl-c
     "x" 'org-cut-subtree))
 
 (with-eval-after-load 'toc-org
@@ -59,11 +58,12 @@
 
 (with-eval-after-load 'org-download
   (org
-    "y" 'org-download-clipboard
-    "u" 'org-download-yank
-    "s" 'org-download-screenshot
-    "r" 'org-download-rename-at-point
-    "d" 'org-download-delete))
+    :keymaps 'org-mode-map
+    "i y" 'org-download-clipboard
+    "i u" 'org-download-yank
+    "i s" 'org-download-screenshot
+    "i r" 'org-download-rename-at-point
+    "i d" 'org-download-delete))
 
 (defun org-habit-streak-count ()
   (goto-char (point-min))
