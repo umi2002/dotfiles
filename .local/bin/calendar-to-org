@@ -4,6 +4,7 @@ import os
 import re
 import sys
 import tempfile
+import urllib.error
 import urllib.request
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -189,8 +190,17 @@ def main():
     window_start = now - timedelta(days=DAYS_BACK)
     window_end = now + timedelta(days=DAYS_AHEAD)
 
+    try:
+        document = fetch(calendar_url())
+    except urllib.error.HTTPError as error:
+        sys.exit(f"calendar fetch rejected: {error}")
+    except (urllib.error.URLError, TimeoutError) as error:
+        reason = getattr(error, "reason", error)
+        print(f"calendar unreachable, keeping the previous export: {reason}")
+        return
+
     rows = []
-    for event in parse(fetch(calendar_url())):
+    for event in parse(document):
         for start, end in occurrences(event, window_start, window_end):
             rows.append((start, end, event["summary"], event.get("location", "")))
     rows.sort(key=lambda row: as_datetime(row[0]))
