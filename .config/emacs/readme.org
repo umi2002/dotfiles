@@ -9,6 +9,7 @@
   - [[#dired][DIRED]]
   - [[#navigation][NAVIGATION]]
   - [[#utils][UTILS]]
+  - [[#git][GIT]]
   - [[#visuals][VISUALS]]
   - [[#org][ORG]]
 
@@ -212,6 +213,25 @@ Installing Exec-Path-From-Shell
     user-emacs-directory))
 #+end_src
 
+** GIT
+Installing Magit
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src
+
+Installing Git-Gutter
+#+begin_src emacs-lisp
+  (use-package git-gutter)
+#+end_src
+
+[[file:git/readme.org][Configuration]]
+#+begin_src emacs-lisp
+  (org-babel-load-file
+   (expand-file-name
+    "git/readme.org"
+    user-emacs-directory))
+#+end_src
+
 ** VISUALS
 Installing Catppuccin-Theme
 #+begin_src emacs-lisp
@@ -263,6 +283,12 @@ Installing Org-Roam
 #+begin_src emacs-lisp
   (use-package org-roam
     :after org)
+#+end_src
+
+Installing Org-Roam-UI
+#+begin_src emacs-lisp
+  (use-package org-roam-ui
+    :after org-roam)
 #+end_src
 
 Installing Org-Download

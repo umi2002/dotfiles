@@ -115,6 +115,15 @@
   "utils/readme.org"
   user-emacs-directory))
 
+(use-package magit)
+
+(use-package git-gutter)
+
+(org-babel-load-file
+ (expand-file-name
+  "git/readme.org"
+  user-emacs-directory))
+
 (use-package catppuccin-theme)
 
 (use-package dimmer)
@@ -138,6 +147,9 @@
 
 (use-package org-roam
   :after org)
+
+(use-package org-roam-ui
+  :after org-roam)
 
 (use-package org-download
   :after org)

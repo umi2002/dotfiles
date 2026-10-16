@@ -9,5 +9,7 @@
 (set-face-attribute 'default nil :family "FiraMono Nerd Font" :height 100)
 (set-face-attribute 'fixed-pitch nil :family "FiraMono Nerd Font" :height 100)
 (set-face-attribute 'variable-pitch nil :family "Linux Libertine O" :height 150)
+(setq auto-save-visited-interval 30)
+(auto-save-visited-mode 1)
 (setq scroll-preserve-screen-position t)
 (setq outline-minor-mode-cycle t)

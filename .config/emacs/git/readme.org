@@ -1,0 +1,18 @@
+#+TITLE: Git config
+#+AUTHOR: umi
+
+* GIT
+** Magit
+Mappings
+#+begin_src emacs-lisp
+  (with-eval-after-load 'general
+    (leader
+      "g" 'magit-status))
+#+end_src
+
+** Git-Gutter
+Setup
+#+begin_src emacs-lisp
+  (with-eval-after-load 'git-gutter
+    (global-git-gutter-mode +1))
+#+end_src

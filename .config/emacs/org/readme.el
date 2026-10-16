@@ -30,6 +30,11 @@
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda 20))
 
 (setq org-roam-directory (file-truename "~/notes"))
+(setq org-roam-capture-templates
+      '(("d" "default" plain "%?"
+         :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :permanent:\n")
+         :unnarrowed t)))
 (with-eval-after-load 'org-roam
   (org-roam-db-autosync-mode))
 
@@ -116,6 +121,7 @@
       `((,(expand-file-name "projects.org" org-directory) :maxlevel . 2)
         (,(expand-file-name "someday.org" org-directory) :maxlevel . 1)
         (,(expand-file-name "habits.org" org-directory) :maxlevel . 1)))
+(add-hook 'org-after-refile-insert-hook #'save-buffer)
 (setq org-refile-use-outline-path 'file)
 (setq org-outline-path-complete-in-steps nil)
 
