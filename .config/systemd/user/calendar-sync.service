@@ -1,0 +1,7 @@
+[Unit]
+Description=Google Calendar to org export
+
+[Service]
+Type=oneshot
+EnvironmentFile=%h/.config/desktop_secrets.env
+ExecStart=%h/.local/bin/calendar-to-org

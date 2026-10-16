@@ -1,0 +1,207 @@
+#!/usr/bin/env python3
+
+import os
+import re
+import sys
+import tempfile
+import urllib.request
+from datetime import date, datetime, timedelta
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+from dateutil.rrule import rrulestr
+
+SECRETS = Path.home() / ".config" / "desktop_secrets.env"
+OUTPUT = Path.home() / "Documents" / "org" / "calendar.org"
+DAYS_BACK = 30
+DAYS_AHEAD = 365
+LOCAL = datetime.now().astimezone().tzinfo
+DAY_NAMES = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+
+def calendar_url():
+    url = os.environ.get("CALENDAR")
+    if url:
+        return url
+    if SECRETS.exists():
+        for line in SECRETS.read_text().splitlines():
+            key, separator, value = line.partition("=")
+            if separator and key.strip() == "CALENDAR" and value.strip():
+                return value.strip()
+    sys.exit(f"CALENDAR is not set and not found in {SECRETS}")
+
+
+def fetch(url):
+    with urllib.request.urlopen(url, timeout=30) as response:
+        return response.read().decode("utf-8", "replace")
+
+
+def unfold(text):
+    return re.sub(r"\r?\n[ \t]", "", text)
+
+
+def split_property(line):
+    colon = line.find(":")
+    if colon == -1:
+        return None, {}, None
+    head, value = line[:colon], line[colon + 1:]
+    parts = head.split(";")
+    params = {}
+    for part in parts[1:]:
+        if "=" in part:
+            key, val = part.split("=", 1)
+            params[key.upper()] = val
+    return parts[0].upper(), params, value
+
+
+def to_local_naive(value, params):
+    if params.get("VALUE") == "DATE" or len(value) == 8:
+        return date(int(value[0:4]), int(value[4:6]), int(value[6:8]))
+    stamp = datetime(
+        int(value[0:4]), int(value[4:6]), int(value[6:8]),
+        int(value[9:11]), int(value[11:13]), int(value[13:15]),
+    )
+    if value.endswith("Z"):
+        zone = ZoneInfo("UTC")
+    elif "TZID" in params:
+        try:
+            zone = ZoneInfo(params["TZID"])
+        except Exception:
+            return stamp
+    else:
+        return stamp
+    return stamp.replace(tzinfo=zone).astimezone(LOCAL).replace(tzinfo=None)
+
+
+def localize_until(rule):
+    def replace(match):
+        value = match.group(1)
+        moment = to_local_naive(value, {})
+        if isinstance(moment, date) and not isinstance(moment, datetime):
+            return "UNTIL=" + moment.strftime("%Y%m%d")
+        return "UNTIL=" + moment.strftime("%Y%m%dT%H%M%S")
+    return re.sub(r"UNTIL=([0-9TZ]+)", replace, rule)
+
+
+def parse(text):
+    events = []
+    current = None
+    for line in unfold(text).split("\n"):
+        line = line.rstrip()
+        if line == "BEGIN:VEVENT":
+            current = {"exdates": set(), "rrule": None, "status": ""}
+        elif line == "END:VEVENT":
+            if current and current.get("summary") and current.get("start") is not None:
+                if current["status"] != "CANCELLED":
+                    events.append(current)
+            current = None
+        elif current is not None:
+            name, params, value = split_property(line)
+            if name == "SUMMARY":
+                current["summary"] = unescape(value)
+            elif name == "LOCATION":
+                current["location"] = unescape(value)
+            elif name == "STATUS":
+                current["status"] = value.upper()
+            elif name == "DTSTART":
+                current["start"] = to_local_naive(value, params)
+            elif name == "DTEND":
+                current["end"] = to_local_naive(value, params)
+            elif name == "RRULE":
+                current["rrule"] = value
+            elif name == "EXDATE":
+                for piece in value.split(","):
+                    current["exdates"].add(to_local_naive(piece, params))
+    return events
+
+
+BACKSLASH = chr(92)
+
+
+def unescape(value):
+    value = value.replace(BACKSLASH + "n", " ")
+    value = value.replace(BACKSLASH + ",", ",")
+    value = value.replace(BACKSLASH + ";", ";")
+    return value.replace(BACKSLASH + BACKSLASH, BACKSLASH)
+
+
+def as_datetime(moment):
+    if isinstance(moment, datetime):
+        return moment
+    return datetime(moment.year, moment.month, moment.day)
+
+
+def occurrences(event, window_start, window_end):
+    start = event["start"]
+    all_day = not isinstance(start, datetime)
+    length = timedelta(0)
+    if event.get("end") is not None:
+        length = as_datetime(event["end"]) - as_datetime(start)
+    if not event["rrule"]:
+        if window_start <= as_datetime(start) <= window_end:
+            return [(start, event.get("end"))]
+        return []
+    rule = rrulestr(localize_until(event["rrule"]), dtstart=as_datetime(start))
+    result = []
+    for moment in rule.between(window_start, window_end, inc=True):
+        if moment in event["exdates"] or moment.date() in event["exdates"]:
+            continue
+        if all_day:
+            result.append((moment.date(), (moment + length).date()))
+        else:
+            result.append((moment, moment + length))
+    return result
+
+
+def stamp(moment, with_time):
+    label = DAY_NAMES[moment.weekday()]
+    if with_time:
+        return f"{moment:%Y-%m-%d} {label} {moment:%H:%M}"
+    return f"{moment:%Y-%m-%d} {label}"
+
+
+def timestamp(start, end):
+    timed = isinstance(start, datetime)
+    if not timed:
+        last = end - timedelta(days=1) if end and end > start else start
+        if last <= start:
+            return f"<{stamp(start, False)}>"
+        return f"<{stamp(start, False)}>--<{stamp(last, False)}>"
+    if end is None or end == start:
+        return f"<{stamp(start, True)}>"
+    if end.date() == start.date():
+        return f"<{stamp(start, True)}-{end:%H:%M}>"
+    return f"<{stamp(start, True)}>--<{stamp(end, True)}>"
+
+
+def render(events):
+    lines = ["#+title: Calendar (generated by calendar-to-org)", ""]
+    for start, end, summary, location in events:
+        lines.append(f"* {summary}")
+        lines.append(f"  {timestamp(start, end)}")
+        if any(character.isalnum() for character in location):
+            lines.append(f"  {location.strip()}")
+    return "\n".join(lines) + "\n"
+
+
+def main():
+    now = datetime.now().replace(tzinfo=None)
+    window_start = now - timedelta(days=DAYS_BACK)
+    window_end = now + timedelta(days=DAYS_AHEAD)
+
+    rows = []
+    for event in parse(fetch(calendar_url())):
+        for start, end in occurrences(event, window_start, window_end):
+            rows.append((start, end, event["summary"], event.get("location", "")))
+    rows.sort(key=lambda row: as_datetime(row[0]))
+
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    handle, temporary = tempfile.mkstemp(dir=OUTPUT.parent, prefix=".calendar-")
+    with os.fdopen(handle, "w") as stream:
+        stream.write(render(rows))
+    os.replace(temporary, OUTPUT)
+    print(f"{len(rows)} occurrences -> {OUTPUT}")
+
+
+if __name__ == "__main__":
+    main()
