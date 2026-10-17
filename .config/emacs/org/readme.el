@@ -28,11 +28,20 @@
   (add-hook 'org-mode-hook #'org-modern-mode)
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda 20))
 
+(defun node-find-permanent ()
+  (interactive)
+  (org-roam-node-find nil nil
+                      (lambda (node) (member "permanent" (org-roam-node-tags node)))))
+
 (setq org-roam-directory (file-truename "~/notes"))
 (setq org-roam-capture-templates
-      '(("d" "default" plain "%?"
+      '(("p" "permanent" plain "%?"
          :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                             "#+title: ${title}\n#+filetags: :permanent:\n")
+         :unnarrowed t)
+        ("r" "reference" plain "%?"
+         :target (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                            "#+title: ${title}\n#+filetags: :reference:\n")
          :unnarrowed t)))
 (with-eval-after-load 'org-roam
   (org-roam-db-autosync-mode))
@@ -49,6 +58,7 @@
     "e" 'org-roam-extract-subtree
     "b" 'org-roam-buffer-toggle
     "d" 'org-roam-dailies-capture-today
+    "p" 'node-find-permanent
     "r" 'org-roam-node-random))
 
 (setq org-download-method 'attach)
