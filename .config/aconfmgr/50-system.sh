@@ -85,7 +85,6 @@ CreateLink /etc/systemd/system/sockets.target.wants/docker.socket /usr/lib/syste
 CreateLink /etc/systemd/system/multi-user.target.wants/postgresql.service /usr/lib/systemd/system/postgresql.service
 
 # libvirt
-CopyFile /etc/libvirt/qemu/RDPWindows.xml 600
 CopyFile /etc/libvirt/qemu/networks/default.xml
 CreateLink /etc/libvirt/qemu/networks/autostart/default.xml /etc/libvirt/qemu/networks/default.xml
 CreateLink /etc/systemd/system/multi-user.target.wants/libvirtd.service /usr/lib/systemd/system/libvirtd.service

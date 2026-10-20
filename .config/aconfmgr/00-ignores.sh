@@ -83,6 +83,7 @@ IgnorePath '/etc/audit/*'
 IgnorePath '/etc/texmf/*'
 IgnorePath '/etc/dbeaver/bundles.info'
 IgnorePath '/etc/libvirt/nwfilter/*'
+IgnorePath '/etc/libvirt/qemu/*.xml'
 IgnorePath '*.pacnew'
 IgnorePath '/etc/xml/*'
 
