@@ -28,6 +28,7 @@ AddPackage yadm                          # Yet Another Dotfiles Manager
 AddPackage github-cli                    # The GitHub CLI
 AddPackage ncdu                          # Disk usage analyzer with an ncurses interface
 AddPackage syncthing                     # Open Source Continuous Replication / Cluster Synchronization Thing
+AddPackage android-tools                 # Android platform tools
 
 # LaTeX
 AddPackage texlive-basic            # TeX Live - Essential programs and files
@@ -56,3 +57,5 @@ AddPackage texlive-langfrench       # TeX Live - French
 AddPackage inkscape                 # Professional vector graphics editor
 AddPackage zathura                  # Minimalistic document viewer
 AddPackage zathura-pdf-mupdf        # PDF support for Zathura (MuPDF backend) (Supports PDF, ePub, and OpenXPS)
+AddPackage hunspell-en_us           # US English hunspell dictionaries
+AddPackage hunspell-fr-classical    # French Hunspell dictionary (classical variant)
