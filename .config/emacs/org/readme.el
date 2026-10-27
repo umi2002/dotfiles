@@ -33,6 +33,26 @@
   (org-roam-node-find nil nil
                       (lambda (node) (member "permanent" (org-roam-node-tags node)))))
 
+(defun node-task (task)
+  (interactive
+   (list (read-string "Task: "
+                      (concat "Wiki: " (org-roam-node-title (org-roam-node-at-point t))))))
+  (let* ((node (org-roam-node-at-point t))
+         (link (org-link-make-string (concat "id:" (org-roam-node-id node))
+                                     (org-roam-node-title node)))
+         (file (expand-file-name "projects.org" org-directory))
+         (entry (format "* TODO %s\n  %s\n  %s\n"
+                        task
+                        (format-time-string (org-time-stamp-format t t))
+                        link)))
+    (with-current-buffer (find-file-noselect file)
+      (org-with-wide-buffer
+       (goto-char (org-find-olp (list file "Supplement personal wiki")))
+       (org-end-of-subtree t t)
+       (org-paste-subtree 2 entry))
+      (save-buffer))
+    (message "Filed: %s" task)))
+
 (setq org-roam-directory (file-truename "~/notes"))
 (setq org-roam-capture-templates
       '(("p" "permanent" plain "%?"
@@ -59,6 +79,7 @@
     "b" 'org-roam-buffer-toggle
     "d" 'org-roam-dailies-capture-today
     "p" 'node-find-permanent
+    "t" 'node-task
     "r" 'org-roam-node-random))
 
 (setq org-download-method 'attach)

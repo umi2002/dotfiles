@@ -64,3 +64,27 @@ Setup
     (when (daemonp)
       (exec-path-from-shell-initialize)))
 #+end_src
+
+** Jinx
+Setup
+#+begin_src emacs-lisp
+  (setq jinx-languages "en_US fr_CA")
+  (with-eval-after-load 'jinx
+    (global-jinx-mode))
+#+end_src
+
+Mappings
+#+begin_src emacs-lisp
+  (with-eval-after-load 'jinx
+    (general-create-definer spell
+      :wrapping leader
+      :infix "j")
+
+    (spell
+      "j" 'jinx-next
+      "k" 'jinx-previous
+      "c" 'jinx-correct
+      "a" 'jinx-correct-all
+      "o" 'jinx-occur
+      "l" 'jinx-languages))
+#+end_src

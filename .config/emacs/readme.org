@@ -205,6 +205,11 @@ Installing Exec-Path-From-Shell
   (use-package exec-path-from-shell)
 #+end_src
 
+Installing Jinx
+#+begin_src emacs-lisp
+  (use-package jinx)
+#+end_src
+
 [[file:utils/readme.org][Configuration]]
 #+begin_src emacs-lisp
   (org-babel-load-file

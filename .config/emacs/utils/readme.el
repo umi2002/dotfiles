@@ -30,3 +30,20 @@
 (with-eval-after-load 'exec-path-from-shell
   (when (daemonp)
     (exec-path-from-shell-initialize)))
+
+(setq jinx-languages "en_US fr_CA")
+(with-eval-after-load 'jinx
+  (global-jinx-mode))
+
+(with-eval-after-load 'jinx
+  (general-create-definer spell
+    :wrapping leader
+    :infix "j")
+
+  (spell
+    "j" 'jinx-next
+    "k" 'jinx-previous
+    "c" 'jinx-correct
+    "a" 'jinx-correct-all
+    "o" 'jinx-occur
+    "l" 'jinx-languages))

@@ -110,6 +110,8 @@
 
 (use-package exec-path-from-shell)
 
+(use-package jinx)
+
 (org-babel-load-file
  (expand-file-name
   "utils/readme.org"
