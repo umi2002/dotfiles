@@ -12,7 +12,8 @@ AddPackage --foreign systemd-lock-handler # Logind lock event to systemd target 
 AddPackage xdg-desktop-portal             # Desktop integration portals for sandboxed apps
 AddPackage xdg-desktop-portal-gtk         # A backend implementation for xdg-desktop-portal using GTK
 AddPackage xdg-desktop-portal-hyprland    # xdg-desktop-portal backend for hyprland
-AddPackage kitty                          # A modern, hackable, featureful, OpenGL-based terminal emulator
+AddPackage foot                           # Fast, lightweight, and minimalistic Wayland terminal emulator
+AddPackage foot-terminfo                  # Extra non-standard terminfo files for foot, a Wayland terminal emulator
 AddPackage grim                           # Screenshot utility for Wayland
 AddPackage slurp                          # Select a region in a Wayland compositor
 AddPackage swappy                         # A Wayland native snapshot editing tool

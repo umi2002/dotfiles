@@ -2,7 +2,7 @@ local lib = require("lib")
 
 local workspace_apps = {
 	{ workspace = 1, class = "vesktop" },
-	{ workspace = 2, class = "kitty", follow = true },
+	{ workspace = 2, class = "foot", follow = true },
 	{ workspace = 5, class = "steam_app_.*" },
 	{ workspace = 7, class = "Bitwarden" },
 	{ workspace = 8, class = "eu.betterbird.Betterbird" },
@@ -52,7 +52,7 @@ for monitor, workspaces in pairs(screens) do
 end
 
 if lib.desktop then
-	local dimmed = { "kitty", "eu.betterbird.Betterbird", "Bitwarden", "vesktop", "spotify" }
+	local dimmed = { "foot", "eu.betterbird.Betterbird", "Bitwarden", "vesktop", "spotify" }
 	for _, class in ipairs(dimmed) do
 		hl.window_rule({ name = "opacity-" .. class:gsub("%W", ""), match = { class = class }, opacity = 0.8 })
 	end

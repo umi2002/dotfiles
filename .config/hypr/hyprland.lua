@@ -82,7 +82,7 @@ local binds = {
 		description = "Previous workspace",
 	},
 
-	{ key = mainMod .. " + Return", action = lib.app("kitty.desktop"), group = "Launch", description = "Terminal" },
+	{ key = mainMod .. " + Return", action = lib.app("foot.desktop"), group = "Launch", description = "Terminal" },
 	{ key = mainMod .. " + N", action = lib.app("brave-origin.desktop"), group = "Launch", description = "Browser" },
 	{
 		key = mainMod .. " + SUPER_L",
