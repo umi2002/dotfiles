@@ -16,6 +16,7 @@ alias cdroot='cd "$(git rev-parse --show-toplevel)"'
 alias m-pull="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
 alias m-main="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} checkout main \;"
 alias dc="docker compose"
+alias t='tmux new-session -A -s 0 yazi'
 
 source /usr/share/fzf/key-bindings.bash
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow"
