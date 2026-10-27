@@ -42,6 +42,8 @@ hl.window_rule({
 	center = true,
 })
 
+hl.window_rule({ name = "tile-rdp", match = { class = "^(Microsoft Windows)$" }, tile = true })
+
 local screens = lib.laptop
 		and {
 			["eDP-1"] = { 1 },

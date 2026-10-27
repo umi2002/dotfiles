@@ -58,6 +58,7 @@ AddPackage qalculate-qt                        # Qt frontend for libqalculate
 # Virtualization
 AddPackage libvirt      # API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)
 AddPackage qemu-base    # A basic QEMU setup for headless environments
+AddPackage swtpm        # Libtpms-based TPM emulator with socket, character device, and Linux CUSE interface
 AddPackage virt-install # Command line tool for creating new KVM , Xen, or Linux container guests using the libvirt hypervisor
 AddPackage virt-viewer  # A lightweight interface for interacting with the graphical display of virtualized guest OS.
 AddPackage remmina      # Remote desktop client written in GTK+
