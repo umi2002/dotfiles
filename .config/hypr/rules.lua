@@ -34,6 +34,14 @@ end
 
 hl.window_rule({ name = "render-steamapp", match = { class = "^(steam_app_.*)$" }, render_unfocused = true })
 
+hl.window_rule({
+	name = "calc",
+	match = { class = "^(io.github.Qalculate.qalculate-qt)$" },
+	float = true,
+	size = "600 500",
+	center = true,
+})
+
 local screens = lib.laptop
 		and {
 			["eDP-1"] = { 1 },

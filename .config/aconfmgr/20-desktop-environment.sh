@@ -53,6 +53,7 @@ AddPackage --foreign claude-desktop            # Official Claude AI desktop app 
 AddPackage --foreign github-desktop-bin        # GUI for managing Git and GitHub.
 AddPackage easyeffects                         # Audio Effects for Pipewire applications
 AddPackage lsp-plugins                         # Collection of open-source plugins
+AddPackage qalculate-qt                        # Qt frontend for libqalculate
 
 # Virtualization
 AddPackage libvirt      # API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)
@@ -85,6 +86,9 @@ AddPackage ttf-linux-libertine     # Serif (Libertine) and Sans Serif (Biolinum)
 
 # Cursors
 AddPackage --foreign catppuccin-cursors-mocha # Soothing pastel mouse cursors - Mocha
+
+# Theming
+AddPackage qt6ct # Qt 6 Configuration Utility
 
 # Xorg
 AddPackage xorg-xauth # X.Org authorization settings program
