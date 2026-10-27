@@ -10,9 +10,56 @@ Singleton {
 
     readonly property var frequencies: adapter.frequencies
 
+    readonly property var tabs: ["Apps", "Commands"]
+
+    readonly property var commands: [
+        {
+            name: "Lock",
+            comment: "Lock the session",
+            icon: "system-lock-screen",
+            exec: ["loginctl", "lock-session"]
+        },
+        {
+            name: "Suspend",
+            comment: "Suspend to RAM",
+            icon: "system-suspend",
+            exec: ["systemctl", "suspend"]
+        },
+        {
+            name: "Log out",
+            comment: "Close all apps and exit Hyprland",
+            icon: "system-log-out",
+            exec: ["hyprshutdown", "--no-fork"]
+        },
+        {
+            name: "Reboot",
+            comment: "Close all apps, exit Hyprland and restart",
+            icon: "system-reboot",
+            exec: ["hyprshutdown", "--no-fork", "--post-cmd", "systemctl reboot"]
+        },
+        {
+            name: "Shut down",
+            comment: "Close all apps, exit Hyprland and power off",
+            icon: "system-shutdown",
+            exec: ["hyprshutdown", "--no-fork", "--post-cmd", "systemctl poweroff"]
+        }
+    ]
+
     readonly property var apps: DesktopEntries.applications.values.filter(a => !a.noDisplay).sort((a, b) => (root.frequencies[b.id] ?? 0) - (root.frequencies[a.id] ?? 0) || a.name.localeCompare(b.name))
 
-    function search(query) {
+    function search(query, tab) {
+        return tab === 1 ? root.searchCommands(query) : root.searchApps(query);
+    }
+
+    function searchCommands(query) {
+        const q = query.trim().toLowerCase();
+        if (!q) {
+            return [...root.commands];
+        }
+        return root.commands.filter(c => c.name.toLowerCase().includes(q) || c.comment.toLowerCase().includes(q));
+    }
+
+    function searchApps(query) {
         const q = query.trim().toLowerCase();
         if (!q) {
             return [...root.apps];
@@ -37,6 +84,12 @@ Singleton {
     }
 
     function launch(appEntry) {
+        if (appEntry.exec) {
+            Quickshell.execDetached({
+                command: ["systemd-run", "--user", "--collect", "--quiet", "--"].concat(appEntry.exec)
+            });
+            return;
+        }
         adapter.frequencies = Object.assign({}, adapter.frequencies, {
             [appEntry.id]: (adapter.frequencies[appEntry.id] ?? 0) + 1
         });

@@ -51,14 +51,11 @@ Rectangle {
             verticalAlignment: TextInput.AlignVCenter
             clip: true
 
-            onTextChanged: {
-                root.scriptModel.values = AppSearch.search(text);
-                root.appList.currentIndex = 0;
-            }
+            onTextChanged: root.appList.currentIndex = 0
 
             Text {
                 anchors.fill: parent
-                text: "Search applications..."
+                text: RunnerState.tab === 1 ? "Search commands..." : "Search applications..."
                 color: Style.palette.overlay1
                 font: parent.font
                 verticalAlignment: Text.AlignVCenter
@@ -66,6 +63,17 @@ Rectangle {
             }
 
             Keys.onEscapePressed: RunnerState.visible = false
+            Keys.onTabPressed: event => {
+                RunnerState.tab = (RunnerState.tab + 1) % AppSearch.tabs.length;
+                root.appList.currentIndex = 0;
+                event.accepted = true;
+            }
+            Keys.onBacktabPressed: event => {
+                const count = AppSearch.tabs.length;
+                RunnerState.tab = (RunnerState.tab - 1 + count) % count;
+                root.appList.currentIndex = 0;
+                event.accepted = true;
+            }
             Keys.onDownPressed: root.appList.incrementCurrentIndex()
             Keys.onUpPressed: root.appList.decrementCurrentIndex()
             Keys.onPressed: event => {

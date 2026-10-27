@@ -29,6 +29,7 @@ StyledPopupContent {
 
     onIsExpandedChanged: {
         if (isExpanded) {
+            RunnerState.tab = 0;
             searchBar.focusSearchField();
         }
     }
@@ -42,6 +43,12 @@ StyledPopupContent {
             margins: Style.spacing.normal
         }
         spacing: Style.spacing.normal
+
+        RunnerTabs {
+            Layout.fillWidth: true
+            Layout.bottomMargin: Style.spacing.normal
+            selectedIndex: RunnerState.tab
+        }
 
         RunnerSearchBar {
             id: searchBar
@@ -60,7 +67,7 @@ StyledPopupContent {
 
             model: ScriptModel {
                 id: scriptModel
-                values: AppSearch.search("")
+                values: AppSearch.search(searchBar.text, RunnerState.tab)
             }
 
             highlightFollowsCurrentItem: false

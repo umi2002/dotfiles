@@ -8,6 +8,7 @@ AddPackage hyprland                       # a highly customizable dynamic tiling
 AddPackage hyprpaper                      # a blazing fast wayland wallpaper utility with IPC controls
 AddPackage hyprsunset                     # An application to enable a blue-light filter on Hyprland
 AddPackage hyprpolkitagent                # Simple polkit authentication agent for Hyprland, written in QT/QML
+AddPackage hyprshutdown                   # A graceful shutdown utility for Hyprland
 AddPackage --foreign systemd-lock-handler # Logind lock event to systemd target translation.
 AddPackage xdg-desktop-portal             # Desktop integration portals for sandboxed apps
 AddPackage xdg-desktop-portal-gtk         # A backend implementation for xdg-desktop-portal using GTK
