@@ -42,7 +42,6 @@ AddPackage obs-studio                          # Free, open source software for 
 AddPackage qbittorrent                         # An advanced BitTorrent client programmed in C++, based on Qt toolkit and libtorrent-rasterbar
 AddPackage steam                               # Valve's digital software delivery system
 AddPackage --foreign vesktop                   # A standalone Electron-based Discord app with Vencord & improved Linux support
-AddPackage libreoffice-fresh                   # LibreOffice branch which contains new features and program enhancements
 AddPackage --foreign betterbird-bin            # EN-US // Betterbird is a fine-tuned version of Mozilla Thunderbird, Thunderbird on steroids, if you will.
 AddPackage yazi                                # Blazing fast terminal file manager written in Rust, based on async I/O
 AddPackage emacs                               # The extensible, customizable, self-documenting real-time display editor
@@ -54,6 +53,7 @@ AddPackage --foreign github-desktop-bin        # GUI for managing Git and GitHub
 AddPackage easyeffects                         # Audio Effects for Pipewire applications
 AddPackage lsp-plugins                         # Collection of open-source plugins
 AddPackage qalculate-qt                        # Qt frontend for libqalculate
+AddPackage --foreign onlyoffice-bin            # An office suite that combines text, spreadsheet and presentation editors
 
 # Virtualization
 AddPackage libvirt      # API for controlling virtualization engines (openvz,kvm,qemu,virtualbox,xen,etc)
