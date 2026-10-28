@@ -97,10 +97,6 @@ ShellRoot {
     }
 
     Process {
-        id: dpmsProc
-    }
-
-    Process {
         id: sessionProc
     }
 
@@ -121,12 +117,8 @@ ShellRoot {
         enabled: !shellRoot.externallyInhibited
 
         onIsIdleChanged: {
-            if (isIdle) {
-                sessionProc.exec(["loginctl", "lock-session"]);
-                dpmsProc.exec(["hyprctl", "dispatch", 'hl.dsp.dpms({ action = "disable" })']);
-            } else {
-                dpmsProc.exec(["hyprctl", "dispatch", 'hl.dsp.dpms({ action = "enable" })']);
-            }
+            if (isIdle)
+                sessionProc.exec(["systemctl", "suspend"]);
         }
     }
 
