@@ -29,19 +29,19 @@ Singleton {
             name: "Log out",
             comment: "Close all apps and exit Hyprland",
             icon: "system-log-out",
-            exec: ["hyprshutdown", "--no-fork"]
+            exec: ["sh", "-c", "hyprshutdown --no-fork --no-exit && uwsm stop"]
         },
         {
             name: "Reboot",
             comment: "Close all apps, exit Hyprland and restart",
             icon: "system-reboot",
-            exec: ["hyprshutdown", "--no-fork", "--post-cmd", "systemctl reboot"]
+            exec: ["sh", "-c", "hyprshutdown --no-fork --no-exit && systemctl reboot"]
         },
         {
             name: "Shut down",
             comment: "Close all apps, exit Hyprland and power off",
             icon: "system-shutdown",
-            exec: ["hyprshutdown", "--no-fork", "--post-cmd", "systemctl poweroff"]
+            exec: ["sh", "-c", "hyprshutdown --no-fork --no-exit && systemctl poweroff"]
         }
     ]
 
